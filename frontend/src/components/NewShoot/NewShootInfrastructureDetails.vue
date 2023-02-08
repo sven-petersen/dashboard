@@ -178,9 +178,9 @@ SPDX-License-Identifier: Apache-2.0
 </template>
 
 <script>
-import CloudProfile from '@/components/CloudProfile'
-import WildcardSelect from '@/components/WildcardSelect'
-import SelectSecret from '@/components/SelectSecret'
+import CloudProfile from '@/components/CloudProfile.vue'
+import WildcardSelect from '@/components/WildcardSelect.vue'
+import SelectSecret from '@/components/SelectSecret.vue'
 import { required, requiredIf } from 'vuelidate/lib/validators'
 import { getValidationErrors } from '@/utils'
 import { includesIfAvailable } from '@/utils/validators'

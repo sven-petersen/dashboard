@@ -30,7 +30,7 @@ SPDX-License-Identifier: Apache-2.0
 </template>
 
 <script>
-import ConfirmDialog from '@/components/dialogs/ConfirmDialog'
+import ConfirmDialog from '@/components/dialogs/ConfirmDialog.vue'
 import { mapGetters, mapState, mapActions } from 'vuex'
 import { errorDetailsFromError } from '@/utils/error'
 
@@ -40,7 +40,7 @@ import asyncRef from '@/mixins/asyncRef'
 import get from 'lodash/get'
 import isEqual from 'lodash/isEqual'
 
-const ShootEditor = () => import('@/components/ShootEditor')
+const ShootEditor = () => import('@/components/ShootEditor.vue')
 
 export default {
   name: 'shoot-create-editor',

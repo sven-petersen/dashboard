@@ -83,7 +83,7 @@ import set from 'lodash/set'
 import find from 'lodash/find'
 import isEmpty from 'lodash/isEmpty'
 
-import HibernationScheduleEvent from '@/components/ShootHibernation/HibernationScheduleEvent'
+import HibernationScheduleEvent from '@/components/ShootHibernation/HibernationScheduleEvent.vue'
 import { parsedScheduleEventsFromCrontabBlock, crontabFromParsedScheduleEvents } from '@/utils/hibernationSchedule'
 import { v4 as uuidv4 } from '@/utils/uuid'
 

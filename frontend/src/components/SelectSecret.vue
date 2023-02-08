@@ -58,7 +58,7 @@ import { mapGetters } from 'vuex'
 import { getValidationErrors, isOwnSecret, selfTerminationDaysForSecret } from '@/utils'
 import { required } from 'vuelidate/lib/validators'
 import { requiresCostObjectIfEnabled } from '@/utils/validators'
-import SecretDialogWrapper from '@/components/dialogs/SecretDialogWrapper'
+import SecretDialogWrapper from '@/components/dialogs/SecretDialogWrapper.vue'
 
 export default {
   components: {

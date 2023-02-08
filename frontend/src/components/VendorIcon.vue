@@ -14,6 +14,26 @@ SPDX-License-Identifier: Apache-2.0
 
 <script>
 import startsWith from 'lodash/startsWith'
+import azureIcon from  '@/assets/azure.svg'
+import awsIcon from  '@/assets/aws.svg'
+import gcpIcon from  '@/assets/gcp.svg'
+import openstackIcon from  '@/assets/openstack.svg'
+import alicloudIcon from  '@/assets/alicloud.svg'
+import vsphereIcon from  '@/assets/vsphere.svg'
+import metalIcon from  '@/assets/metal.svg'
+import awsRoute53Icon from  '@/assets/aws-route53.svg'
+import azureDnsIcon from  '@/assets/azure-dns.svg'
+import googleClouddnsIcon from  '@/assets/google-clouddns.svg'
+import alicloudDnsIcon from  '@/assets/alicloud-dns.png'
+import cloudflareDnsIcon from  '@/assets/cloudflare-dns.svg'
+import infobloxDnsIcon from  '@/assets/infoblox-dns.svg'
+import netlifyDnsIcon from  '@/assets/netlify-dns.svg'
+import coreosIcon from  '@/assets/coreos.svg'
+import suseIcon from  '@/assets/suse.svg'
+import ubuntuIcon from  '@/assets/ubuntu.svg'
+import gardenlinuxIcon from  '@/assets/gardenlinux.svg'
+import flatcarIcon from  '@/assets/flatcar.svg'
+import hcloudIcon from  '@/assets/hcloud.svg'
 
 export default {
   props: {
@@ -34,54 +54,54 @@ export default {
       switch (this.value) {
         // infrastructures
         case 'azure':
-          return require('@/assets/azure.svg')
+          return azureIcon
         case 'aws':
-          return require('@/assets/aws.svg')
+          return awsIcon
         case 'gcp':
-          return require('@/assets/gcp.svg')
+          return gcpIcon
         case 'openstack':
-          return require('@/assets/openstack.svg')
+          return openstackIcon
         case 'alicloud':
-          return require('@/assets/alicloud.svg')
+          return alicloudIcon
         case 'vsphere':
-          return require('@/assets/vsphere.svg')
+          return vsphereIcon
         case 'metal':
-          return require('@/assets/metal.svg')
+          return metalIcon
 
         // dns
         case 'aws-route53':
-          return require('@/assets/aws-route53.svg')
+          return awsRoute53Icon
         case 'azure-dns':
         case 'azure-private-dns':
-          return require('@/assets/azure-dns.svg')
+          return azureDnsIcon
         case 'google-clouddns':
-          return require('@/assets/google-clouddns.svg')
+          return googleClouddnsIcon
         case 'openstack-designate':
-          return require('@/assets/openstack.svg')
+          return openstackIcon
         case 'alicloud-dns':
-          return require('@/assets/alicloud-dns.png')
+          return alicloudDnsIcon
         case 'cloudflare-dns':
-          return require('@/assets/cloudflare-dns.svg')
+          return cloudflareDnsIcon
         case 'infoblox-dns':
-          return require('@/assets/infoblox-dns.svg')
+          return infobloxDnsIcon
         case 'netlify-dns':
-          return require('@/assets/netlify-dns.svg')
+          return netlifyDnsIcon
 
         // os
         case 'coreos':
-          return require('@/assets/coreos.svg')
+          return coreosIcon
         case 'suse-jeos':
-          return require('@/assets/suse.svg')
+          return suseIcon
         case 'suse-chost':
-          return require('@/assets/suse.svg')
+          return suseIcon
         case 'ubuntu':
-          return require('@/assets/ubuntu.svg')
+          return ubuntuIcon
         case 'gardenlinux':
-          return require('@/assets/gardenlinux.svg')
+          return gardenlinuxIcon
         case 'flatcar':
-          return require('@/assets/flatcar.svg')
+          return flatcarIcon
         case 'hcloud':
-          return require('@/assets/hcloud.svg')
+          return hcloudIcon
       }
       return undefined
     },
@@ -100,7 +120,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  @import '~vuetify/src/styles/styles.sass';
+  @import 'vuetify/src/styles/styles.sass';
 
   $grey-darken-2: map-get($grey, 'darken-2');
 

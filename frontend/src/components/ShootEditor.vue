@@ -130,9 +130,9 @@ SPDX-License-Identifier: Apache-2.0
 </template>
 
 <script>
-import CopyBtn from '@/components/CopyBtn'
-import GMessage from '@/components/GMessage'
-import GAlert from '@/components/GAlert'
+import CopyBtn from '@/components/CopyBtn.vue'
+import GMessage from '@/components/GMessage.vue'
+import GAlert from '@/components/GAlert.vue'
 import { mapState, mapGetters } from 'vuex'
 import { getShootSchemaDefinition } from '@/utils/api'
 import { ShootEditorCompletions } from '@/utils/shootEditorCompletions'
@@ -542,7 +542,7 @@ export default {
   }
 </style>
 <style lang="scss">
-@import '~vuetify/src/styles/styles.sass';
+  @import 'vuetify/src/styles/styles.sass';
 
   .CodeMirror-hint {
 

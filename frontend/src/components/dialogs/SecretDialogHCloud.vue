@@ -49,7 +49,7 @@ SPDX-License-Identifier: Apache-2.0
 </template>
 
 <script>
-import SecretDialog from '@/components/dialogs/SecretDialog'
+import SecretDialog from '@/components/dialogs/SecretDialog.vue'
 import { required } from 'vuelidate/lib/validators'
 import { getValidationErrors, setDelayedInputFocus } from '@/utils'
 

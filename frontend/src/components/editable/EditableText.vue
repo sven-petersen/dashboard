@@ -79,7 +79,7 @@ SPDX-License-Identifier: Apache-2.0
 </template>
 
 <script>
-import ErrorMessage from './ErrorMessage'
+import ErrorMessage from './ErrorMessage.vue'
 import { setDelayedInputFocus } from '@/utils'
 
 export default {
@@ -220,7 +220,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  @import '~vuetify/src/styles/styles.sass';
+  @import 'vuetify/src/styles/styles.sass';
 
   $green-base: map-get($green, 'base');
 

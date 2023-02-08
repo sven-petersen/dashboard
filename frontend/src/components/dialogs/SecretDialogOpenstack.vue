@@ -161,11 +161,11 @@ SPDX-License-Identifier: Apache-2.0
 
 <script>
 import { mapGetters } from 'vuex'
-import SecretDialog from '@/components/dialogs/SecretDialog'
+import SecretDialog from '@/components/dialogs/SecretDialog.vue'
 import { required, requiredIf } from 'vuelidate/lib/validators'
 import { getValidationErrors, setDelayedInputFocus } from '@/utils'
-import HintColorizer from '@/components/HintColorizer'
-import ExternalLink from '@/components/ExternalLink'
+import HintColorizer from '@/components/HintColorizer.vue'
+import ExternalLink from '@/components/ExternalLink.vue'
 
 const requiredMessage = 'You can\'t leave this empty.'
 const requiredUserMessage = 'Required for technical user authentication'

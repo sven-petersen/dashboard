@@ -47,7 +47,7 @@ SPDX-License-Identifier: Apache-2.0
 
 <script>
 import join from 'lodash/join'
-import InfraIcon from '@/components/VendorIcon'
+import InfraIcon from '@/components/VendorIcon.vue'
 
 export default {
   components: {

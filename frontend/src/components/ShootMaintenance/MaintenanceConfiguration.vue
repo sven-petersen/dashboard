@@ -30,9 +30,9 @@ SPDX-License-Identifier: Apache-2.0
 import get from 'lodash/get'
 import assign from 'lodash/assign'
 
-import ActionButtonDialog from '@/components/dialogs/ActionButtonDialog'
-import MaintenanceComponents from '@/components/ShootMaintenance/MaintenanceComponents'
-import MaintenanceTime from '@/components/ShootMaintenance/MaintenanceTime'
+import ActionButtonDialog from '@/components/dialogs/ActionButtonDialog.vue'
+import MaintenanceComponents from '@/components/ShootMaintenance/MaintenanceComponents.vue'
+import MaintenanceTime from '@/components/ShootMaintenance/MaintenanceTime.vue'
 
 import { updateShootMaintenance } from '@/utils/api'
 import { errorDetailsFromError } from '@/utils/error'

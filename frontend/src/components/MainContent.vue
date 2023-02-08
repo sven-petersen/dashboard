@@ -13,7 +13,7 @@ SPDX-License-Identifier: Apache-2.0
 
 <script>
 import set from 'lodash/set'
-import GAlert from '@/components/GAlert'
+import GAlert from '@/components/GAlert.vue'
 import { mapGetters } from 'vuex'
 
 function setElementStyle (element, key, value) {

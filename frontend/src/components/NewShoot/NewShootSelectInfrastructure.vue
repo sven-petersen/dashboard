@@ -27,7 +27,7 @@ SPDX-License-Identifier: Apache-2.0
 </template>
 
 <script>
-import InfraIcon from '@/components/VendorIcon'
+import InfraIcon from '@/components/VendorIcon.vue'
 import { mapGetters } from 'vuex'
 
 export default {

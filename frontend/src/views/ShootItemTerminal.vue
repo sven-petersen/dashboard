@@ -16,7 +16,7 @@ SPDX-License-Identifier: Apache-2.0
 
 <script>
 import get from 'lodash/get'
-import TerminalSplitpanes from '@/components/TerminalSplitpanes'
+import TerminalSplitpanes from '@/components/TerminalSplitpanes.vue'
 
 export default {
   components: {

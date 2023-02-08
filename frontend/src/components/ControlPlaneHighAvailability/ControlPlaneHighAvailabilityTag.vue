@@ -57,7 +57,7 @@ SPDX-License-Identifier: Apache-2.0
 
 <script>
 
-import GPopper from '@/components/GPopper'
+import GPopper from '@/components/GPopper.vue'
 import { shootItem } from '@/mixins/shootItem'
 import { mapGetters } from 'vuex'
 import some from 'lodash/some'

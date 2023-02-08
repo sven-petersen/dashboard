@@ -21,8 +21,8 @@ SPDX-License-Identifier: Apache-2.0
 
 <script>
 import { mapActions, mapState } from 'vuex'
-import ActionButtonDialog from '@/components/dialogs/ActionButtonDialog'
-import ManageControlPlaneHighAvailability from '@/components/ControlPlaneHighAvailability/ManageControlPlaneHighAvailability'
+import ActionButtonDialog from '@/components/dialogs/ActionButtonDialog.vue'
+import ManageControlPlaneHighAvailability from '@/components/ControlPlaneHighAvailability/ManageControlPlaneHighAvailability.vue'
 import { errorDetailsFromError } from '@/utils/error'
 import { shootItem } from '@/mixins/shootItem'
 

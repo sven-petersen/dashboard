@@ -26,7 +26,7 @@ SPDX-License-Identifier: Apache-2.0
 <script>
 import get from 'lodash/get'
 import { gravatarUrlIdenticon, transformHtml } from '@/utils'
-import TimeString from '@/components/TimeString'
+import TimeString from '@/components/TimeString.vue'
 import ExternalLink from '@/components/ExternalLink.vue'
 import { mapState } from 'vuex'
 
@@ -81,7 +81,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  @import '~vuetify/src/styles/styles.sass';
+  @import 'vuetify/src/styles/styles.sass';
 
   $gh-code-background-color: map-get($grey, 'lighten-4');
   $gh-code-color: map-get($grey, 'darken-4');

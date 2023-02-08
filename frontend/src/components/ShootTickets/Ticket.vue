@@ -36,9 +36,9 @@ SPDX-License-Identifier: Apache-2.0
 <script>
 import get from 'lodash/get'
 import { mapState, mapGetters } from 'vuex'
-import TimeString from '@/components/TimeString'
-import TicketLabel from '@/components/ShootTickets/TicketLabel'
-import TicketComment from '@/components/ShootTickets/TicketComment'
+import TimeString from '@/components/TimeString.vue'
+import TicketLabel from '@/components/ShootTickets/TicketLabel.vue'
+import TicketComment from '@/components/ShootTickets/TicketComment.vue'
 import ExternalLink from '@/components/ExternalLink.vue'
 import sanitizeUrl from '@/mixins/sanitizeUrl'
 

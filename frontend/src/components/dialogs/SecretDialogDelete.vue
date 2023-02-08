@@ -33,7 +33,7 @@ SPDX-License-Identifier: Apache-2.0
 <script>
 import { mapActions } from 'vuex'
 import get from 'lodash/get'
-import GMessage from '@/components/GMessage'
+import GMessage from '@/components/GMessage.vue'
 import { errorDetailsFromError } from '@/utils/error'
 
 export default {

@@ -45,8 +45,8 @@ SPDX-License-Identifier: Apache-2.0
 
 <script>
 
-import GPopper from '@/components/GPopper'
-import VendorIcon from '@/components/VendorIcon'
+import GPopper from '@/components/GPopper.vue'
+import VendorIcon from '@/components/VendorIcon.vue'
 import join from 'lodash/join'
 import get from 'lodash/get'
 import SecretDetailsItemContent from '@/components/SecretDetailsItemContent.vue'

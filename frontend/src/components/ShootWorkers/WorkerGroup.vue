@@ -182,9 +182,9 @@ SPDX-License-Identifier: Apache-2.0
 
 <script>
 
-import GPopper from '@/components/GPopper'
-import VendorIcon from '@/components/VendorIcon'
-import CodeBlock from '@/components/CodeBlock'
+import GPopper from '@/components/GPopper.vue'
+import VendorIcon from '@/components/VendorIcon.vue'
+import CodeBlock from '@/components/CodeBlock.vue'
 import find from 'lodash/find'
 import get from 'lodash/get'
 import { mapGetters } from 'vuex'

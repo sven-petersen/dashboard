@@ -61,10 +61,10 @@ SPDX-License-Identifier: Apache-2.0
 </template>
 
 <script>
-import CopyBtn from '@/components/CopyBtn'
-import CodeBlock from '@/components/CodeBlock'
+import CopyBtn from '@/components/CopyBtn.vue'
+import CodeBlock from '@/components/CodeBlock.vue'
 import GardenloginInfo from '@/components/GardenloginInfo.vue'
-import StaticTokenKubeconfigConfiguration from '@/components/StaticTokenKubeconfigConfiguration'
+import StaticTokenKubeconfigConfiguration from '@/components/StaticTokenKubeconfigConfiguration.vue'
 import download from 'downloadjs'
 import { shootItem } from '@/mixins/shootItem'
 

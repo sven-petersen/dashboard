@@ -76,12 +76,12 @@ SPDX-License-Identifier: Apache-2.0
 </template>
 
 <script>
-import GDialog from '@/components/dialogs/GDialog'
-import TerminalSettings from '@/components/TerminalSettings'
-import TerminalTarget from '@/components/TerminalTarget'
-import TerminalShortcuts from '@/components/TerminalShortcuts'
-import UnverifiedTerminalShortcutsDialog from '@/components/dialogs/UnverifiedTerminalShortcutsDialog'
-import WebterminalServiceAccountDialog from '@/components/dialogs/WebterminalServiceAccountDialog'
+import GDialog from '@/components/dialogs/GDialog.vue'
+import TerminalSettings from '@/components/TerminalSettings.vue'
+import TerminalTarget from '@/components/TerminalTarget.vue'
+import TerminalShortcuts from '@/components/TerminalShortcuts.vue'
+import UnverifiedTerminalShortcutsDialog from '@/components/dialogs/UnverifiedTerminalShortcutsDialog.vue'
+import WebterminalServiceAccountDialog from '@/components/dialogs/WebterminalServiceAccountDialog.vue'
 import { mapGetters } from 'vuex'
 import { getMembers, terminalConfig } from '@/utils/api'
 import { TargetEnum, isShootStatusHibernated } from '@/utils'

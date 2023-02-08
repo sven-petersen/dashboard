@@ -93,8 +93,8 @@ const vuetify = Vue.vuetify
 
 Vue.use(Vuex)
 
-const strict = process.env.NODE_ENV !== 'production'
-const debug = includes(split(process.env.VUE_APP_DEBUG, ','), 'vuex')
+const strict = import.meta.env.NODE_ENV !== 'production'
+const debug = includes(split(import.meta.env.VUE_APP_DEBUG, ','), 'vuex')
 
 // plugins
 const plugins = [

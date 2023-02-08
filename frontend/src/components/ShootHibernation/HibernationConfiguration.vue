@@ -27,7 +27,7 @@ SPDX-License-Identifier: Apache-2.0
 <script>
 import get from 'lodash/get'
 
-import ActionButtonDialog from '@/components/dialogs/ActionButtonDialog'
+import ActionButtonDialog from '@/components/dialogs/ActionButtonDialog.vue'
 
 import { updateShootHibernationSchedules, addShootAnnotation } from '@/utils/api'
 import { errorDetailsFromError } from '@/utils/error'
@@ -35,7 +35,7 @@ import { errorDetailsFromError } from '@/utils/error'
 import shootItem from '@/mixins/shootItem'
 import asyncRef from '@/mixins/asyncRef'
 
-const ManageHibernationSchedule = () => import('@/components/ShootHibernation/ManageHibernationSchedule')
+const ManageHibernationSchedule = () => import('@/components/ShootHibernation/ManageHibernationSchedule.vue')
 
 export default {
   name: 'hibernation-configuration',

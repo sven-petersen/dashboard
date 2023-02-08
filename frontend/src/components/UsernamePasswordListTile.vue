@@ -70,7 +70,7 @@ SPDX-License-Identifier: Apache-2.0
 </template>
 
 <script>
-import CopyBtn from '@/components/CopyBtn'
+import CopyBtn from '@/components/CopyBtn.vue'
 
 export default {
   components: {

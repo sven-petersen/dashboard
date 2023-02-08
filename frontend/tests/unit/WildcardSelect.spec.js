@@ -9,7 +9,7 @@ import Vuetify from 'vuetify'
 import Vuelidate from 'vuelidate'
 
 // Components
-import WildcardSelect from '@/components/WildcardSelect'
+import WildcardSelect from '../../src/components/WildcardSelect.vue'
 
 // Utilities
 import { createLocalVue, shallowMount } from '@vue/test-utils'

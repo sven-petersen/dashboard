@@ -76,9 +76,9 @@ SPDX-License-Identifier: Apache-2.0
 <script>
 
 import { mapGetters } from 'vuex'
-import TerminalShortcut from '@/components/TerminalShortcut'
-import IconBase from '@/components/icons/IconBase'
-import TerminalShortcutIcon from '@/components/icons/TerminalShortcutIcon'
+import TerminalShortcut from '@/components/TerminalShortcut.vue'
+import IconBase from '@/components/icons/IconBase.vue'
+import TerminalShortcutIcon from '@/components/icons/TerminalShortcutIcon.vue'
 import { TargetEnum } from '@/utils'
 import filter from 'lodash/filter'
 import get from 'lodash/get'

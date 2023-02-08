@@ -38,13 +38,13 @@ SPDX-License-Identifier: Apache-2.0
 
 <script>
 
-import GPopper from '@/components/GPopper'
-import K8sExpirationMessage from '@/components/ShootMessages/K8sExpirationMessage'
-import WorkerGroupExpirationMessage from '@/components/ShootMessages/WorkerGroupExpirationMessage'
-import NoHibernationScheduleMessage from '@/components/ShootMessages/NoHibernationScheduleMessage'
-import ClusterExpirationMessage from '@/components/ShootMessages/ClusterExpirationMessage'
-import ConstraintMessage from '@/components/ShootMessages/ConstraintMessage'
-import MaintenanceStatusMessage from '@/components/ShootMessages/MaintenanceStatusMessage'
+import GPopper from '@/components/GPopper.vue'
+import K8sExpirationMessage from '@/components/ShootMessages/K8sExpirationMessage.vue'
+import WorkerGroupExpirationMessage from '@/components/ShootMessages/WorkerGroupExpirationMessage.vue'
+import NoHibernationScheduleMessage from '@/components/ShootMessages/NoHibernationScheduleMessage.vue'
+import ClusterExpirationMessage from '@/components/ShootMessages/ClusterExpirationMessage.vue'
+import ConstraintMessage from '@/components/ShootMessages/ConstraintMessage.vue'
+import MaintenanceStatusMessage from '@/components/ShootMessages/MaintenanceStatusMessage.vue'
 import get from 'lodash/get'
 import map from 'lodash/map'
 import includes from 'lodash/includes'

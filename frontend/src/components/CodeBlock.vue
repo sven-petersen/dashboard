@@ -21,7 +21,7 @@ SPDX-License-Identifier: Apache-2.0
 </template>
 
 <script>
-import CopyBtn from '@/components/CopyBtn'
+import CopyBtn from '@/components/CopyBtn.vue'
 import trim from 'lodash/trim'
 import split from 'lodash/split'
 import replace from 'lodash/replace'
@@ -115,7 +115,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  @import '~vuetify/src/styles/styles.sass';
+  @import 'vuetify/src/styles/styles.sass';
   @import '@/sass/variables.scss';
 
   $grey-lighten-4: map-get($grey, 'lighten-4');

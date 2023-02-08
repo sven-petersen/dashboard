@@ -36,9 +36,9 @@ SPDX-License-Identifier: Apache-2.0
 
 <script>
 
-import GPopper from '@/components/GPopper'
-import GardenctlConfigExample from '@/components/GardenctlConfigExample'
-import ExternalLink from '@/components/ExternalLink'
+import GPopper from '@/components/GPopper.vue'
+import GardenctlConfigExample from '@/components/GardenctlConfigExample.vue'
+import ExternalLink from '@/components/ExternalLink.vue'
 
 export default {
   components: {

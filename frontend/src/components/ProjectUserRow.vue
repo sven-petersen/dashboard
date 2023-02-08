@@ -55,7 +55,7 @@ SPDX-License-Identifier: Apache-2.0
 
 <script>
 import { mapGetters } from 'vuex'
-import MemberAccountRoles from '@/components/MemberAccountRoles'
+import MemberAccountRoles from '@/components/MemberAccountRoles.vue'
 import { mapTableHeader } from '@/utils'
 
 export default {

@@ -44,7 +44,7 @@ SPDX-License-Identifier: Apache-2.0
 
 <script>
 import { mapGetters, mapActions } from 'vuex'
-import GDialog from '@/components/dialogs/GDialog'
+import GDialog from '@/components/dialogs/GDialog.vue'
 import { getInfo } from '@/utils/api'
 import sortBy from 'lodash/sortBy'
 

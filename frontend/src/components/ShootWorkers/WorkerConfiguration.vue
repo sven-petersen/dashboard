@@ -84,8 +84,8 @@ SPDX-License-Identifier: Apache-2.0
 </template>
 
 <script>
-import ActionButtonDialog from '@/components/dialogs/ActionButtonDialog'
-import CodeBlock from '@/components/CodeBlock'
+import ActionButtonDialog from '@/components/dialogs/ActionButtonDialog.vue'
+import CodeBlock from '@/components/CodeBlock.vue'
 import { patchShootProvider } from '@/utils/api'
 import shootItem from '@/mixins/shootItem'
 import asyncRef from '@/mixins/asyncRef'
@@ -93,8 +93,8 @@ import { errorDetailsFromError } from '@/utils/error'
 import { isZonedCluster } from '@/utils'
 import get from 'lodash/get'
 import cloneDeep from 'lodash/cloneDeep'
-const ManageWorkers = () => import('@/components/ShootWorkers/ManageWorkers')
-const ShootEditor = () => import('@/components/ShootEditor')
+const ManageWorkers = () => import('@/components/ShootWorkers/ManageWorkers.vue')
+const ShootEditor = () => import('@/components/ShootEditor.vue')
 
 export default {
   name: 'worker-configuration',

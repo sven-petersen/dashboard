@@ -69,9 +69,9 @@ SPDX-License-Identifier: Apache-2.0
 </template>
 
 <script>
-import RotateCredentials from '@/components/RotateCredentials'
-import TimeString from '@/components/TimeString'
-import ShootMessages from '@/components/ShootMessages/ShootMessages'
+import RotateCredentials from '@/components/RotateCredentials.vue'
+import TimeString from '@/components/TimeString.vue'
+import ShootMessages from '@/components/ShootMessages/ShootMessages.vue'
 import shootStatusCredentialRotation from '@/mixins/shootStatusCredentialRotation'
 import get from 'lodash/get'
 

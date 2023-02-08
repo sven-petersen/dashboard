@@ -67,7 +67,7 @@ SPDX-License-Identifier: Apache-2.0
 </template>
 
 <script>
-import WorkerInputGeneric from '@/components/ShootWorkers/WorkerInputGeneric'
+import WorkerInputGeneric from '@/components/ShootWorkers/WorkerInputGeneric.vue'
 import { mapGetters } from 'vuex'
 import { isZonedCluster } from '@/utils'
 import { findFreeNetworks, getZonesNetworkConfiguration } from '@/utils/createShoot'

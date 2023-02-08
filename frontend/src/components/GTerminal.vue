@@ -210,18 +210,18 @@ import { WebLinksAddon } from 'xterm-addon-web-links'
 
 import { TerminalSession, Spinner } from '@/lib/terminal'
 import { FocusAddon } from '@/lib/xterm-addon-focus'
-import GPopper from '@/components/GPopper'
+import GPopper from '@/components/GPopper.vue'
 
-import DragNDroppableComponent from '@/components/DragNDroppableComponent'
+import DragNDroppableComponent from '@/components/DragNDroppableComponent.vue'
 import { targetText, transformHtml } from '@/utils'
 import { terminalConfig } from '@/utils/api'
 import { isGatewayTimeout } from '@/utils/error'
-import TerminalSettingsDialog from '@/components/dialogs/TerminalSettingsDialog'
-import IconBase from '@/components/icons/IconBase'
-import Connected from '@/components/icons/Connected'
-import Disconnected from '@/components/icons/Disconnected'
-import SplitVertically from '@/components/icons/SplitVertically'
-import SplitHorizontally from '@/components/icons/SplitHorizontally'
+import TerminalSettingsDialog from '@/components/dialogs/TerminalSettingsDialog.vue'
+import IconBase from '@/components/icons/IconBase.vue'
+import Connected from '@/components/icons/Connected.vue'
+import Disconnected from '@/components/icons/Disconnected.vue'
+import SplitVertically from '@/components/icons/SplitVertically.vue'
+import SplitHorizontally from '@/components/icons/SplitHorizontally.vue'
 
 export default {
   name: 'g-terminal',

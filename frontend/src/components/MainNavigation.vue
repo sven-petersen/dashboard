@@ -170,9 +170,9 @@ import head from 'lodash/head'
 import slice from 'lodash/slice'
 import last from 'lodash/last'
 import { emailToDisplayName, setDelayedInputFocus, routes, namespacedRoute, routeName } from '@/utils'
-import ProjectCreateDialog from '@/components/dialogs/ProjectDialog'
-import StaleProjectWarning from '@/components/StaleProjectWarning'
-import NotReadyProjectWarning from '@/components/NotReadyProjectWarning'
+import ProjectCreateDialog from '@/components/dialogs/ProjectDialog.vue'
+import StaleProjectWarning from '@/components/StaleProjectWarning.vue'
+import NotReadyProjectWarning from '@/components/NotReadyProjectWarning.vue'
 
 const initialVisibleProjects = 10
 

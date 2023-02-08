@@ -8,7 +8,7 @@
 import Vuetify from 'vuetify'
 
 // Components
-import HintColorizer from '@/components/HintColorizer'
+import HintColorizer from '../../src/components/HintColorizer.vue'
 
 // Utilities
 import { createLocalVue, mount } from '@vue/test-utils'

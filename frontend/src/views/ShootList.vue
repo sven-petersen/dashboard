@@ -143,13 +143,13 @@ import sortBy from 'lodash/sortBy'
 import startsWith from 'lodash/startsWith'
 import upperCase from 'lodash/upperCase'
 import debounce from 'lodash/debounce'
-import ShootListRow from '@/components/ShootListRow'
-import ShootListProgress from '@/components/ShootListProgress'
-import IconBase from '@/components/icons/IconBase'
-import CertifiedKubernetes from '@/components/icons/CertifiedKubernetes'
+import ShootListRow from '@/components/ShootListRow.vue'
+import ShootListProgress from '@/components/ShootListProgress.vue'
+import IconBase from '@/components/icons/IconBase.vue'
+import CertifiedKubernetes from '@/components/icons/CertifiedKubernetes.vue'
 import TableColumnSelection from '@/components/TableColumnSelection.vue'
 import { mapTableHeader } from '@/utils'
-const ShootAccessCard = () => import('@/components/ShootDetails/ShootAccessCard')
+const ShootAccessCard = () => import('@/components/ShootDetails/ShootAccessCard.vue')
 
 export default {
   name: 'shoot-list',

@@ -136,11 +136,11 @@ SPDX-License-Identifier: Apache-2.0
 
 <script>
 import { mapGetters } from 'vuex'
-import SizeInput from '@/components/ShootWorkers/VolumeSizeInput'
-import MachineType from '@/components/ShootWorkers/MachineType'
-import VolumeType from '@/components/ShootWorkers/VolumeType'
-import MachineImage from '@/components/ShootWorkers/MachineImage'
-import ContainerRuntime from '@/components/ShootWorkers/ContainerRuntime'
+import SizeInput from '@/components/ShootWorkers/VolumeSizeInput.vue'
+import MachineType from '@/components/ShootWorkers/MachineType.vue'
+import VolumeType from '@/components/ShootWorkers/VolumeType.vue'
+import MachineImage from '@/components/ShootWorkers/MachineImage.vue'
+import ContainerRuntime from '@/components/ShootWorkers/ContainerRuntime.vue'
 import isEmpty from 'lodash/isEmpty'
 import filter from 'lodash/filter'
 import map from 'lodash/map'

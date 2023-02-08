@@ -51,11 +51,11 @@ SPDX-License-Identifier: Apache-2.0
 <script>
 
 import { mapGetters } from 'vuex'
-import TerminalShortcuts from '@/components/TerminalShortcuts'
-import IconBase from '@/components/icons/IconBase'
-import TerminalShortcutIcon from '@/components/icons/TerminalShortcutIcon'
-import UnverifiedTerminalShortcutsDialog from '@/components/dialogs/UnverifiedTerminalShortcutsDialog'
-import WebterminalServiceAccountDialog from '@/components/dialogs/WebterminalServiceAccountDialog'
+import TerminalShortcuts from '@/components/TerminalShortcuts.vue'
+import IconBase from '@/components/icons/IconBase.vue'
+import TerminalShortcutIcon from '@/components/icons/TerminalShortcutIcon.vue'
+import UnverifiedTerminalShortcutsDialog from '@/components/dialogs/UnverifiedTerminalShortcutsDialog.vue'
+import WebterminalServiceAccountDialog from '@/components/dialogs/WebterminalServiceAccountDialog.vue'
 import { TargetEnum } from '@/utils'
 import { shootItem } from '@/mixins/shootItem'
 import { getMembers } from '@/utils/api'

@@ -28,7 +28,7 @@ SPDX-License-Identifier: Apache-2.0
 import { mapGetters } from 'vuex'
 import find from 'lodash/find'
 
-import ActionButtonDialog from '@/components/dialogs/ActionButtonDialog'
+import ActionButtonDialog from '@/components/dialogs/ActionButtonDialog.vue'
 
 import { updateShootPurpose } from '@/utils/api'
 import { errorDetailsFromError } from '@/utils/error'
@@ -36,7 +36,7 @@ import { errorDetailsFromError } from '@/utils/error'
 import shootItem from '@/mixins/shootItem'
 import asyncRef from '@/mixins/asyncRef'
 
-const Purpose = () => import('@/components/Purpose')
+const Purpose = () => import('@/components/Purpose.vue')
 
 export default {
   name: 'purpose-configuration',

@@ -97,8 +97,8 @@ SPDX-License-Identifier: Apache-2.0
 </template>
 
 <script>
-import AccountAvatar from '@/components/AccountAvatar'
-import ErrorMessage from './ErrorMessage'
+import AccountAvatar from '@/components/AccountAvatar.vue'
+import ErrorMessage from './ErrorMessage.vue'
 import { setDelayedInputFocus } from '@/utils'
 
 export default {

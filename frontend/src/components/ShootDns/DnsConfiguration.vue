@@ -22,8 +22,8 @@ SPDX-License-Identifier: Apache-2.0
 
 <script>
 import { mapActions, mapGetters } from 'vuex'
-import ActionButtonDialog from '@/components/dialogs/ActionButtonDialog'
-import ManageShootDns from '@/components/ShootDns/ManageDns'
+import ActionButtonDialog from '@/components/dialogs/ActionButtonDialog.vue'
+import ManageShootDns from '@/components/ShootDns/ManageDns.vue'
 import { updateShootDns } from '@/utils/api'
 import { errorDetailsFromError } from '@/utils/error'
 import { shootItem } from '@/mixins/shootItem'

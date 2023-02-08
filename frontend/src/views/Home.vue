@@ -35,7 +35,7 @@ SPDX-License-Identifier: Apache-2.0
 <script>
 import { mapState, mapGetters } from 'vuex'
 import isEmpty from 'lodash/isEmpty'
-import ProjectCreateDialog from '@/components/dialogs/ProjectDialog'
+import ProjectCreateDialog from '@/components/dialogs/ProjectDialog.vue'
 
 export default {
   name: 'profile',

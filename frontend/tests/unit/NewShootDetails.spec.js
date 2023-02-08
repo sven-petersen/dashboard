@@ -11,7 +11,7 @@ import Vuetify from 'vuetify'
 import Vuelidate from 'vuelidate'
 
 // Components
-import NewShootDetails from '@/components/NewShoot/NewShootDetails'
+import NewShootDetails from '../../src/components/NewShoot/NewShootDetails.vue'
 
 // Utilities
 import { createLocalVue, mount } from '@vue/test-utils'

@@ -74,7 +74,7 @@ import { shootItem } from '@/mixins/shootItem'
 import get from 'lodash/get'
 import join from 'lodash/join'
 import { TargetEnum, targetText } from '@/utils'
-import CodeBlock from '@/components/CodeBlock'
+import CodeBlock from '@/components/CodeBlock.vue'
 
 export default {
   props: {

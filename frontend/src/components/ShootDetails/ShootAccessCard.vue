@@ -106,13 +106,13 @@ SPDX-License-Identifier: Apache-2.0
 </template>
 
 <script>
-import UsernamePassword from '@/components/UsernamePasswordListTile'
-import CopyBtn from '@/components/CopyBtn'
-import TerminalListTile from '@/components/TerminalListTile'
-import TerminalShortcutsTile from '@/components/ShootDetails/TerminalShortcutsTile'
-import ShootKubeconfig from '@/components/ShootDetails/ShootKubeconfig'
-import GardenctlCommands from '@/components/ShootDetails/GardenctlCommands'
-import LinkListTile from '@/components/LinkListTile'
+import UsernamePassword from '@/components/UsernamePasswordListTile.vue'
+import CopyBtn from '@/components/CopyBtn.vue'
+import TerminalListTile from '@/components/TerminalListTile.vue'
+import TerminalShortcutsTile from '@/components/ShootDetails/TerminalShortcutsTile.vue'
+import ShootKubeconfig from '@/components/ShootDetails/ShootKubeconfig.vue'
+import GardenctlCommands from '@/components/ShootDetails/GardenctlCommands.vue'
+import LinkListTile from '@/components/LinkListTile.vue'
 import get from 'lodash/get'
 import isEmpty from 'lodash/isEmpty'
 import { shootItem } from '@/mixins/shootItem'

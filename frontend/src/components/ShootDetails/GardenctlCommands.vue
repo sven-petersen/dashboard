@@ -49,8 +49,8 @@ SPDX-License-Identifier: Apache-2.0
 </template>
 
 <script>
-import CopyBtn from '@/components/CopyBtn'
-import CodeBlock from '@/components/CodeBlock'
+import CopyBtn from '@/components/CopyBtn.vue'
+import CodeBlock from '@/components/CodeBlock.vue'
 import GardenctlInfo from '@/components/GardenctlInfo.vue'
 import { shootItem } from '@/mixins/shootItem'
 import { mapState, mapGetters } from 'vuex'

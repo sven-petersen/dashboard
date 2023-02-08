@@ -22,7 +22,7 @@ SPDX-License-Identifier: Apache-2.0
 
 <script>
 
-import TimeString from '@/components/TimeString'
+import TimeString from '@/components/TimeString.vue'
 
 export default {
   components: {

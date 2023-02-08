@@ -109,7 +109,7 @@ import set from 'lodash/set'
 import includes from 'lodash/includes'
 import filter from 'lodash/filter'
 import isEmpty from 'lodash/isEmpty'
-import GMessage from '@/components/GMessage'
+import GMessage from '@/components/GMessage.vue'
 
 const defaultProjectName = ''
 

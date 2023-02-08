@@ -33,7 +33,7 @@ SPDX-License-Identifier: Apache-2.0
 <script>
 import get from 'lodash/get'
 import { parseTemplate } from 'url-template'
-import ExternalLink from '@/components/ExternalLink'
+import ExternalLink from '@/components/ExternalLink.vue'
 import { shootItem } from '@/mixins/shootItem'
 import { mapState } from 'vuex'
 

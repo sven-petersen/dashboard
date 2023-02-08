@@ -25,8 +25,8 @@ SPDX-License-Identifier: Apache-2.0
 </template>
 
 <script>
-import GDialog from '@/components/dialogs/GDialog'
-import TerminalSettings from '@/components/TerminalSettings'
+import GDialog from '@/components/dialogs/GDialog.vue'
+import TerminalSettings from '@/components/TerminalSettings.vue'
 
 export default {
   components: {

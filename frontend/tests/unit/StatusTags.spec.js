@@ -11,7 +11,7 @@ import Vuex from 'vuex'
 import map from 'lodash/map'
 
 // Components
-import StatusTags from '@/components/StatusTags'
+import StatusTags from '../../src/components/StatusTags.vue'
 
 // Utilities
 import { createLocalVue, shallowMount } from '@vue/test-utils'

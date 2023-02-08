@@ -39,7 +39,7 @@ import map from 'lodash/map'
 import template from 'lodash/template'
 import uniq from 'lodash/uniq'
 
-import Ticket from '@/components/ShootTickets/Ticket'
+import Ticket from '@/components/ShootTickets/Ticket.vue'
 import { shootItem } from '@/mixins/shootItem'
 import sanitizeUrl from '@/mixins/sanitizeUrl'
 import moment from '@/utils/moment'

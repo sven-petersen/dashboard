@@ -146,17 +146,17 @@ import cloneDeep from 'lodash/cloneDeep'
 import isEqual from 'lodash/isEqual'
 import unset from 'lodash/unset'
 
-import AccessRestrictions from '@/components/ShootAccessRestrictions/AccessRestrictions'
-import ConfirmDialog from '@/components/dialogs/ConfirmDialog'
-import GMessage from '@/components/GMessage'
-import NewShootDetails from '@/components/NewShoot/NewShootDetails'
-import NewShootInfrastructureDetails from '@/components/NewShoot/NewShootInfrastructureDetails'
-import NewShootSelectInfrastructure from '@/components/NewShoot/NewShootSelectInfrastructure'
-import MaintenanceComponents from '@/components/ShootMaintenance/MaintenanceComponents'
-import MaintenanceTime from '@/components/ShootMaintenance/MaintenanceTime'
-import ManageShootAddons from '@/components/ShootAddons/ManageAddons'
-import ManageShootDns from '@/components/ShootDns/ManageDns'
-import ManageControlPlaneHighAvailability from '@/components/ControlPlaneHighAvailability/ManageControlPlaneHighAvailability'
+import AccessRestrictions from '@/components/ShootAccessRestrictions/AccessRestrictions.vue'
+import ConfirmDialog from '@/components/dialogs/ConfirmDialog.vue'
+import GMessage from '@/components/GMessage.vue'
+import NewShootDetails from '@/components/NewShoot/NewShootDetails.vue'
+import NewShootInfrastructureDetails from '@/components/NewShoot/NewShootInfrastructureDetails.vue'
+import NewShootSelectInfrastructure from '@/components/NewShoot/NewShootSelectInfrastructure.vue'
+import MaintenanceComponents from '@/components/ShootMaintenance/MaintenanceComponents.vue'
+import MaintenanceTime from '@/components/ShootMaintenance/MaintenanceTime.vue'
+import ManageShootAddons from '@/components/ShootAddons/ManageAddons.vue'
+import ManageShootDns from '@/components/ShootDns/ManageDns.vue'
+import ManageControlPlaneHighAvailability from '@/components/ControlPlaneHighAvailability/ManageControlPlaneHighAvailability.vue'
 
 import asyncRef from '@/mixins/asyncRef'
 
@@ -166,8 +166,8 @@ import { getSpecTemplate, getZonesNetworkConfiguration, getControlPlaneZone } fr
 
 import EventEmitter from 'events'
 
-const ManageHibernationSchedule = () => import('@/components/ShootHibernation/ManageHibernationSchedule')
-const ManageWorkers = () => import('@/components/ShootWorkers/ManageWorkers')
+const ManageHibernationSchedule = () => import('@/components/ShootHibernation/ManageHibernationSchedule.vue')
+const ManageWorkers = () => import('@/components/ShootWorkers/ManageWorkers.vue')
 
 export default {
   name: 'create-cluster',

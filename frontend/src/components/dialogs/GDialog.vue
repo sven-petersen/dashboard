@@ -61,7 +61,7 @@ SPDX-License-Identifier: Apache-2.0
 
 <script>
 import { setDelayedInputFocus } from '@/utils'
-import GMessage from '@/components/GMessage'
+import GMessage from '@/components/GMessage.vue'
 import noop from 'lodash/noop'
 import isFunction from 'lodash/isFunction'
 

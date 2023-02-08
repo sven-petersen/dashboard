@@ -50,11 +50,11 @@ SPDX-License-Identifier: Apache-2.0
 <script>
 import { mapGetters } from 'vuex'
 
-import ChangeHibernation from '@/components/ShootHibernation/ChangeHibernation'
-import DeleteCluster from '@/components/DeleteCluster'
-import MaintenanceStart from '@/components/ShootMaintenance/MaintenanceStart'
-import ReconcileStart from '@/components/ReconcileStart'
-import RotateCredentials from '@/components/RotateCredentials'
+import ChangeHibernation from '@/components/ShootHibernation/ChangeHibernation.vue'
+import DeleteCluster from '@/components/DeleteCluster.vue'
+import MaintenanceStart from '@/components/ShootMaintenance/MaintenanceStart.vue'
+import ReconcileStart from '@/components/ReconcileStart.vue'
+import RotateCredentials from '@/components/RotateCredentials.vue'
 import { shootItem } from '@/mixins/shootItem'
 
 export default {

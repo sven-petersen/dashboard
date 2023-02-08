@@ -69,8 +69,8 @@ SPDX-License-Identifier: Apache-2.0
 <script>
 
 import { mapTableHeader } from '@/utils'
-import Vendor from '@/components/Vendor'
-import SecretDetailsItemContent from '@/components/SecretDetailsItemContent'
+import Vendor from '@/components/Vendor.vue'
+import SecretDetailsItemContent from '@/components/SecretDetailsItemContent.vue'
 import { mapGetters } from 'vuex'
 
 export default {

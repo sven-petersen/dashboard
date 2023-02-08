@@ -99,7 +99,7 @@ SPDX-License-Identifier: Apache-2.0
 </template>
 
 <script>
-import TimeString from '@/components/TimeString'
+import TimeString from '@/components/TimeString.vue'
 import { required } from 'vuelidate/lib/validators'
 import isEmpty from 'lodash/isEmpty'
 import { mapGetters } from 'vuex'

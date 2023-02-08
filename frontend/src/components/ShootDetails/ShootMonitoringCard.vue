@@ -58,9 +58,9 @@ SPDX-License-Identifier: Apache-2.0
 </template>
 
 <script>
-import ShootStatus from '@/components/ShootStatus'
-import StatusTags from '@/components/StatusTags'
-import ClusterMetrics from '@/components/ClusterMetrics'
+import ShootStatus from '@/components/ShootStatus.vue'
+import StatusTags from '@/components/StatusTags.vue'
+import ClusterMetrics from '@/components/ClusterMetrics.vue'
 import { shootItem } from '@/mixins/shootItem'
 
 export default {

@@ -88,8 +88,8 @@ SPDX-License-Identifier: Apache-2.0
 </template>
 
 <script>
-import ShootVersionUpdate from '@/components/ShootVersion/ShootVersionUpdate'
-import GDialog from '@/components/dialogs/GDialog'
+import ShootVersionUpdate from '@/components/ShootVersion/ShootVersionUpdate.vue'
+import GDialog from '@/components/dialogs/GDialog.vue'
 import { updateShootVersion } from '@/utils/api'
 import { shootItem } from '@/mixins/shootItem'
 import { errorDetailsFromError } from '@/utils/error'

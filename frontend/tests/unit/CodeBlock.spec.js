@@ -5,7 +5,7 @@
 //
 
 // Components
-import CodeBlock from '@/components/CodeBlock'
+import CodeBlock from '../../src/components/CodeBlock.vue'
 
 // Utilities
 import { createLocalVue, shallowMount } from '@vue/test-utils'

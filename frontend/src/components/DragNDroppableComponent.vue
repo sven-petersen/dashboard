@@ -19,7 +19,7 @@ SPDX-License-Identifier: Apache-2.0
 <script>
 import { mapActions } from 'vuex'
 import { gDraggable } from '@/lib/g-draggable'
-import PositionalDropzone from '@/components/PositionalDropzone'
+import PositionalDropzone from '@/components/PositionalDropzone.vue'
 
 export default {
   name: 'draggable-component',

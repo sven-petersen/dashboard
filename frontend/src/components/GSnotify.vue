@@ -56,7 +56,7 @@ export default {
 }
 </script>
 <style lang="scss">
-  @import "~vue-snotify/styles/material.scss";
+  @import "vue-snotify/styles/material.scss";
 
   $error-color: var(--v-error-base);
   $warning-color: var(--v-warning-base);

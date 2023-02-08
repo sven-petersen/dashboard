@@ -10,7 +10,7 @@ import Vuelidate from 'vuelidate'
 import map from 'lodash/map'
 
 // Components
-import MachineType from '@/components/ShootWorkers/MachineType'
+import MachineType from '../../src/components/ShootWorkers/MachineType.vue'
 
 // Utilities
 import { createLocalVue, mount } from '@vue/test-utils'

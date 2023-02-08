@@ -75,10 +75,10 @@ SPDX-License-Identifier: Apache-2.0
 import join from 'lodash/join'
 import map from 'lodash/map'
 
-import GPopper from '@/components/GPopper'
-import RetryOperation from '@/components/RetryOperation'
-import ShootMessageDetails from '@/components/ShootMessageDetails'
-import ExternalLink from '@/components/ExternalLink'
+import GPopper from '@/components/GPopper.vue'
+import RetryOperation from '@/components/RetryOperation.vue'
+import ShootMessageDetails from '@/components/ShootMessageDetails.vue'
+import ExternalLink from '@/components/ExternalLink.vue'
 
 import { isUserError, objectsFromErrorCodes, errorCodesFromArray } from '@/utils/errorCodes'
 import { shootItem } from '@/mixins/shootItem'

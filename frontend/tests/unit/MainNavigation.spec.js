@@ -9,7 +9,7 @@ import Vuex from 'vuex'
 import Vuetify from 'vuetify'
 
 // Components
-import MainNavigation from '@/components/MainNavigation'
+import MainNavigation from '../../src/components/MainNavigation.vue'
 
 // Utilities
 import { createLocalVue, mount } from '@vue/test-utils'

@@ -100,8 +100,8 @@ SPDX-License-Identifier: Apache-2.0
 </template>
 
 <script>
-import AnsiText from '@/components/AnsiText'
-import TimeString from '@/components/TimeString'
+import AnsiText from '@/components/AnsiText.vue'
+import TimeString from '@/components/TimeString.vue'
 import isEmpty from 'lodash/isEmpty'
 import ExternalLink from '@/components/ExternalLink.vue'
 

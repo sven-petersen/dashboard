@@ -5,7 +5,7 @@
 
 import createPlugin from '@/store/plugins/socketPlugin'
 import { io, mockSocket } from 'socket.io-client'
-jest.mock('socket.io-client', () => {
+vi.mock('socket.io-client', () => {
   const EventEmitter = jest.requireActual('eventemitter3')
   const mockSocket = new EventEmitter()
   Object.assign(mockSocket, {

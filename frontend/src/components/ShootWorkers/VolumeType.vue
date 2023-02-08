@@ -46,7 +46,7 @@ SPDX-License-Identifier: Apache-2.0
 <script>
 
 import { mapGetters } from 'vuex'
-import HintColorizer from '@/components/HintColorizer'
+import HintColorizer from '@/components/HintColorizer.vue'
 import { required, requiredIf, minValue } from 'vuelidate/lib/validators'
 import { getValidationErrors } from '@/utils'
 import { getWorkerProviderConfig } from '@/utils/createShoot'

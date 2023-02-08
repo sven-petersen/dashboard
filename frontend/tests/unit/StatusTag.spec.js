@@ -8,7 +8,7 @@
 import Vuetify from 'vuetify'
 
 // Components
-import StatusTag from '@/components/StatusTag'
+import StatusTag from '../../src/components/StatusTag.vue'
 
 // Utilities
 import { createLocalVue, shallowMount } from '@vue/test-utils'

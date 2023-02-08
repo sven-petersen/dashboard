@@ -68,9 +68,9 @@ SPDX-License-Identifier: Apache-2.0
 
 <script>
 import { shootSubscription } from '@/mixins/shootSubscription'
-import IconBase from '@/components/icons/IconBase'
-import Connected from '@/components/icons/Connected'
-import Disconnected from '@/components/icons/Disconnected'
+import IconBase from '@/components/icons/IconBase.vue'
+import Connected from '@/components/icons/Connected.vue'
+import Disconnected from '@/components/icons/Disconnected.vue'
 
 export default {
   name: 'shoot-subscription-status',

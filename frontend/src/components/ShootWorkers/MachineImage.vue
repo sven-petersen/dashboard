@@ -42,8 +42,8 @@ SPDX-License-Identifier: Apache-2.0
 </template>
 
 <script>
-import VendorIcon from '@/components/VendorIcon'
-import MultiMessage from '@/components/MultiMessage'
+import VendorIcon from '@/components/VendorIcon.vue'
+import MultiMessage from '@/components/MultiMessage.vue'
 import { required } from 'vuelidate/lib/validators'
 import { getValidationErrors, selectedImageIsNotLatest, transformHtml } from '@/utils'
 import pick from 'lodash/pick'

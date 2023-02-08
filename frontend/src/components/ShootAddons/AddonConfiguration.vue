@@ -22,8 +22,8 @@ SPDX-License-Identifier: Apache-2.0
 </template>
 
 <script>
-import ActionButtonDialog from '@/components/dialogs/ActionButtonDialog'
-import ManageShootAddons from '@/components/ShootAddons/ManageAddons'
+import ActionButtonDialog from '@/components/dialogs/ActionButtonDialog.vue'
+import ManageShootAddons from '@/components/ShootAddons/ManageAddons.vue'
 import { updateShootAddons } from '@/utils/api'
 import { errorDetailsFromError } from '@/utils/error'
 import { shootItem } from '@/mixins/shootItem'

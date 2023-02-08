@@ -11,7 +11,7 @@ import Vuetify from 'vuetify'
 import Vuelidate from 'vuelidate'
 
 // Components
-import ShootCredentialRotationCard from '@/components/ShootDetails/ShootCredentialRotationCard'
+import ShootCredentialRotationCard from '../../src/components/ShootDetails/ShootCredentialRotationCard.vue'
 
 // Utilities
 import { createLocalVue, mount } from '@vue/test-utils'

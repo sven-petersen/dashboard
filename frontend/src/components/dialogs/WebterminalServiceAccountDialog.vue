@@ -53,10 +53,10 @@ SPDX-License-Identifier: Apache-2.0
 </template>
 
 <script>
-import GDialog from '@/components/dialogs/GDialog'
-import AccountAvatar from '@/components/AccountAvatar'
-import GMessage from '@/components/GMessage'
-import MemberAccountRoles from '@/components/MemberAccountRoles'
+import GDialog from '@/components/dialogs/GDialog.vue'
+import AccountAvatar from '@/components/AccountAvatar.vue'
+import GMessage from '@/components/GMessage.vue'
+import MemberAccountRoles from '@/components/MemberAccountRoles.vue'
 import { errorDetailsFromError, isConflict } from '@/utils/error'
 import { mapActions } from 'vuex'
 import get from 'lodash/get'

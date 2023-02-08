@@ -27,7 +27,7 @@ SPDX-License-Identifier: Apache-2.0
 
 <script>
 import { mapState } from 'vuex'
-import CodeBlock from '@/components/CodeBlock'
+import CodeBlock from '@/components/CodeBlock.vue'
 
 export default {
   components: {

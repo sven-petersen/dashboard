@@ -32,7 +32,7 @@ import filter from 'lodash/filter'
 
 import { mapGetters } from 'vuex'
 
-import ActionButtonDialog from '@/components/dialogs/ActionButtonDialog'
+import ActionButtonDialog from '@/components/dialogs/ActionButtonDialog.vue'
 
 import { updateShootSeedName } from '@/utils/api'
 import { errorDetailsFromError } from '@/utils/error'

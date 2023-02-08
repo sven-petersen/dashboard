@@ -83,9 +83,9 @@ SPDX-License-Identifier: Apache-2.0
 </template>
 
 <script>
-import SecretDialog from '@/components/dialogs/SecretDialog'
-import CodeBlock from '@/components/CodeBlock'
-import ExternalLink from '@/components/ExternalLink'
+import SecretDialog from '@/components/dialogs/SecretDialog.vue'
+import CodeBlock from '@/components/CodeBlock.vue'
+import ExternalLink from '@/components/ExternalLink.vue'
 import { required, minLength, maxLength } from 'vuelidate/lib/validators'
 import { alphaNumUnderscore, base64 } from '@/utils/validators'
 import { getValidationErrors, setDelayedInputFocus } from '@/utils'

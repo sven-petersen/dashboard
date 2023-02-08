@@ -79,15 +79,15 @@ import join from 'lodash/join'
 import filter from 'lodash/filter'
 import { required, maxLength } from 'vuelidate/lib/validators'
 
-import HintColorizer from '@/components/HintColorizer'
+import HintColorizer from '@/components/HintColorizer.vue'
 
 import asyncRef from '@/mixins/asyncRef'
 
 import { getValidationErrors, transformHtml, setDelayedInputFocus } from '@/utils'
 import { resourceName, noStartEndHyphen, noConsecutiveHyphen } from '@/utils/validators'
-import StaticTokenKubeconfigSwitch from '@/components/StaticTokenKubeconfigSwitch'
+import StaticTokenKubeconfigSwitch from '@/components/StaticTokenKubeconfigSwitch.vue'
 
-const Purpose = () => import('@/components/Purpose')
+const Purpose = () => import('@/components/Purpose.vue')
 
 const validationErrors = {
   name: {

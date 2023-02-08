@@ -110,9 +110,9 @@ SPDX-License-Identifier: Apache-2.0
 
 <script>
 import { mapState, mapGetters } from 'vuex'
-import TimeString from '@/components/TimeString'
-import AccountAvatar from '@/components/AccountAvatar'
-import MemberAccountRoles from '@/components/MemberAccountRoles'
+import TimeString from '@/components/TimeString.vue'
+import AccountAvatar from '@/components/AccountAvatar.vue'
+import MemberAccountRoles from '@/components/MemberAccountRoles.vue'
 import {
   isForeignServiceAccount,
   parseServiceAccountUsername,

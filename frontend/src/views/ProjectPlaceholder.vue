@@ -10,7 +10,7 @@ SPDX-License-Identifier: Apache-2.0
 <script>
 import { mapState, mapGetters } from 'vuex'
 import includes from 'lodash/includes'
-import ProjectError from '@/views/ProjectError'
+import ProjectError from '@/views/ProjectError.vue'
 
 export default {
   components: {

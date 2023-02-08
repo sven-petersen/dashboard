@@ -120,8 +120,8 @@ import get from 'lodash/get'
 import head from 'lodash/head'
 import find from 'lodash/find'
 
-import SelectSecret from '@/components/SelectSecret'
-import VendorIcon from '@/components/VendorIcon'
+import SelectSecret from '@/components/SelectSecret.vue'
+import VendorIcon from '@/components/VendorIcon.vue'
 import { getValidationErrors } from '@/utils'
 
 const validations = {

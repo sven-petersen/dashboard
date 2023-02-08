@@ -64,8 +64,8 @@ import get from 'lodash/get'
 import isEmpty from 'lodash/isEmpty'
 import filter from 'lodash/filter'
 
-import GPopper from '@/components/GPopper'
-import ShootMessageDetails from '@/components/ShootMessageDetails'
+import GPopper from '@/components/GPopper.vue'
+import ShootMessageDetails from '@/components/ShootMessageDetails.vue'
 
 import { isUserError, objectsFromErrorCodes } from '@/utils/errorCodes'
 

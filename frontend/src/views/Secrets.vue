@@ -182,11 +182,11 @@ import {
   mapTableHeader
 } from '@/utils'
 import get from 'lodash/get'
-import SecretDialogWrapper from '@/components/dialogs/SecretDialogWrapper'
+import SecretDialogWrapper from '@/components/dialogs/SecretDialogWrapper.vue'
 import TableColumnSelection from '@/components/TableColumnSelection.vue'
 import SecretRowInfra from '@/components/SecretRowInfra.vue'
 import SecretRowDns from '@/components/SecretRowDns.vue'
-import InfraIcon from '@/components/VendorIcon'
+import InfraIcon from '@/components/VendorIcon.vue'
 import isEmpty from 'lodash/isEmpty'
 import map from 'lodash/map'
 import filter from 'lodash/filter'

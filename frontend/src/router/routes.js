@@ -28,30 +28,30 @@ import {
 } from './breadcrumbs'
 
 /* Layouts */
-import Login from '@/views/Login'
-import Default from '@/views/Default'
+import Login from '@/views/Login.vue'
+import Default from '@/views/Default.vue'
 
 /* Pages */
 
-import NotFound from '@/views/NotFound'
-import Error from '@/views/Error'
+import NotFound from '@/views/NotFound.vue'
+import Error from '@/views/Error.vue'
 
-import ProjectPlaceholder from '@/views/ProjectPlaceholder'
-import NewShootEditor from '@/views/NewShootEditor'
-import ShootItemPlaceholder from '@/views/ShootItemPlaceholder'
-import ShootItemEditor from '@/views/ShootItemEditor'
-import Account from '@/views/Account'
-import Settings from '@/views/Settings'
+import ProjectPlaceholder from '@/views/ProjectPlaceholder.vue'
+import NewShootEditor from '@/views/NewShootEditor.vue'
+import ShootItemPlaceholder from '@/views/ShootItemPlaceholder.vue'
+import ShootItemEditor from '@/views/ShootItemEditor.vue'
+import Account from '@/views/Account.vue'
+import Settings from '@/views/Settings.vue'
 
-const Members = () => import('@/views/Members')
-const Home = () => import('@/views/Home')
-const Secrets = () => import('@/views/Secrets')
-const Administration = () => import('@/views/Administration')
+const Members = () => import('@/views/Members.vue')
+const Home = () => import('@/views/Home.vue')
+const Secrets = () => import('@/views/Secrets.vue')
+const Administration = () => import('@/views/Administration.vue')
 
-const NewShoot = () => import('@/views/NewShoot')
-const ShootList = () => import('@/views/ShootList')
-const ShootItem = () => import('@/views/ShootItem')
-const ShootItemTerminal = () => import('@/views/ShootItemTerminal')
+const NewShoot = () => import('@/views/NewShoot.vue')
+const ShootList = () => import('@/views/ShootList.vue')
+const ShootItem = () => import('@/views/ShootItem.vue')
+const ShootItemTerminal = () => import('@/views/ShootItemTerminal.vue')
 
 const PlaceholderComponent = {
   render (createElement) {

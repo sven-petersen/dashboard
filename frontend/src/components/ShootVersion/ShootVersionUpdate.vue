@@ -47,7 +47,7 @@ import head from 'lodash/head'
 import get from 'lodash/get'
 import join from 'lodash/join'
 import semver from 'semver'
-import HintColorizer from '@/components/HintColorizer'
+import HintColorizer from '@/components/HintColorizer.vue'
 
 export default {
   name: 'shoot-version-update',

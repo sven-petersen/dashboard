@@ -54,7 +54,7 @@ SPDX-License-Identifier: Apache-2.0
 </template>
 
 <script>
-import CredentialTile from '@/components/CredentialTile'
+import CredentialTile from '@/components/CredentialTile.vue'
 import { shootItem } from '@/mixins/shootItem'
 
 export default {

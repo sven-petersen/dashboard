@@ -23,8 +23,8 @@ SPDX-License-Identifier: Apache-2.0
 </template>
 
 <script>
-import ActionButtonDialog from '@/components/dialogs/ActionButtonDialog'
-import AccessRestrictions from '@/components/ShootAccessRestrictions/AccessRestrictions'
+import ActionButtonDialog from '@/components/dialogs/ActionButtonDialog.vue'
+import AccessRestrictions from '@/components/ShootAccessRestrictions/AccessRestrictions.vue'
 import isEmpty from 'lodash/isEmpty'
 import cloneDeep from 'lodash/cloneDeep'
 import { replaceShoot } from '@/utils/api'

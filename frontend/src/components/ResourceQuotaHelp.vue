@@ -34,7 +34,7 @@ SPDX-License-Identifier: Apache-2.0
 </template>
 
 <script>
-import GDialog from '@/components/dialogs/GDialog'
+import GDialog from '@/components/dialogs/GDialog.vue'
 import { transformHtml } from '@/utils'
 import { mapGetters } from 'vuex'
 

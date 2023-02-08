@@ -45,8 +45,8 @@ SPDX-License-Identifier: Apache-2.0
 </template>
 
 <script>
-import AccountAvatar from '@/components/AccountAvatar'
-import ActionButtonDialog from '@/components/dialogs/ActionButtonDialog'
+import AccountAvatar from '@/components/AccountAvatar.vue'
+import ActionButtonDialog from '@/components/dialogs/ActionButtonDialog.vue'
 import { mapActions } from 'vuex'
 import { errorDetailsFromError } from '@/utils/error'
 import { shootItem } from '@/mixins/shootItem'

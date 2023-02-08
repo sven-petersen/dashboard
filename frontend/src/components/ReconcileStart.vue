@@ -28,7 +28,7 @@ SPDX-License-Identifier: Apache-2.0
 </template>
 
 <script>
-import ActionButtonDialog from '@/components/dialogs/ActionButtonDialog'
+import ActionButtonDialog from '@/components/dialogs/ActionButtonDialog.vue'
 import { addShootAnnotation } from '@/utils/api'
 import { SnotifyPosition } from 'vue-snotify'
 import get from 'lodash/get'

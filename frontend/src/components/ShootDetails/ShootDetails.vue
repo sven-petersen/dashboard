@@ -34,18 +34,18 @@ import filter from 'lodash/filter'
 import get from 'lodash/get'
 import map from 'lodash/map'
 
-import ShootDetailsCard from '@/components/ShootDetails/ShootDetailsCard'
-import CustomFieldsCard from '@/components/ShootDetails/CustomFieldsCard'
-import ShootExternalToolsCard from '@/components/ShootDetails/ShootExternalToolsCard'
-import ShootInfrastructureCard from '@/components/ShootDetails/ShootInfrastructureCard'
-import ShootLifecycleCard from '@/components/ShootDetails/ShootLifecycleCard'
-import ShootMonitoringCard from '@/components/ShootDetails/ShootMonitoringCard'
-import ShootCredentialRotationCard from '@/components/ShootDetails/ShootCredentialRotationCard'
-import TicketsCard from '@/components/TicketsCard'
+import ShootDetailsCard from '@/components/ShootDetails/ShootDetailsCard.vue'
+import CustomFieldsCard from '@/components/ShootDetails/CustomFieldsCard.vue'
+import ShootExternalToolsCard from '@/components/ShootDetails/ShootExternalToolsCard.vue'
+import ShootInfrastructureCard from '@/components/ShootDetails/ShootInfrastructureCard.vue'
+import ShootLifecycleCard from '@/components/ShootDetails/ShootLifecycleCard.vue'
+import ShootMonitoringCard from '@/components/ShootDetails/ShootMonitoringCard.vue'
+import ShootCredentialRotationCard from '@/components/ShootDetails/ShootCredentialRotationCard.vue'
+import TicketsCard from '@/components/TicketsCard.vue'
 
 import { shootItem } from '@/mixins/shootItem'
 
-const ShootAccessCard = () => import('@/components/ShootDetails/ShootAccessCard')
+const ShootAccessCard = () => import('@/components/ShootDetails/ShootAccessCard.vue')
 
 export default {
   name: 'shoot-details',

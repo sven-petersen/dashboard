@@ -11,8 +11,8 @@ SPDX-License-Identifier: Apache-2.0
 import get from 'lodash/get'
 import includes from 'lodash/includes'
 import { mapState, mapGetters, mapActions } from 'vuex'
-import ShootItemLoading from '@/views/ShootItemLoading'
-import ShootItemError from '@/views/ShootItemError'
+import ShootItemLoading from '@/views/ShootItemLoading.vue'
+import ShootItemError from '@/views/ShootItemError.vue'
 
 export default {
   components: {

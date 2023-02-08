@@ -160,9 +160,9 @@ SPDX-License-Identifier: Apache-2.0
 <script>
 import { mapState, mapGetters, mapActions } from 'vuex'
 import get from 'lodash/get'
-import Breadcrumb from '@/components/Breadcrumb'
-import InfoDialog from '@/components/dialogs/InfoDialog'
-import ShootSubscriptionStatus from '@/components/ShootSubscriptionStatus'
+import Breadcrumb from '@/components/Breadcrumb.vue'
+import InfoDialog from '@/components/dialogs/InfoDialog.vue'
+import ShootSubscriptionStatus from '@/components/ShootSubscriptionStatus.vue'
 
 export default {
   name: 'toolbar-background',

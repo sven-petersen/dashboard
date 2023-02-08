@@ -21,8 +21,8 @@ SPDX-License-Identifier: Apache-2.0
 </template>
 
 <script>
-import ActionButtonDialog from '@/components/dialogs/ActionButtonDialog'
-import StaticTokenKubeconfigSwitch from '@/components/StaticTokenKubeconfigSwitch'
+import ActionButtonDialog from '@/components/dialogs/ActionButtonDialog.vue'
+import StaticTokenKubeconfigSwitch from '@/components/StaticTokenKubeconfigSwitch.vue'
 import { updateShootEnableStaticTokenKubeconfig } from '@/utils/api'
 import { errorDetailsFromError } from '@/utils/error'
 import shootItem from '@/mixins/shootItem'

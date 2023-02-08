@@ -93,8 +93,8 @@ SPDX-License-Identifier: Apache-2.0
 import { mapState, mapGetters, mapActions, mapMutations } from 'vuex'
 import { requiredIf } from 'vuelidate/lib/validators'
 
-import DnsProviderRow from '@/components/ShootDns/DnsProviderRow'
-import VendorIcon from '@/components/VendorIcon'
+import DnsProviderRow from '@/components/ShootDns/DnsProviderRow.vue'
+import VendorIcon from '@/components/VendorIcon.vue'
 import { getValidationErrors } from '@/utils'
 import { nilUnless } from '@/utils/validators'
 

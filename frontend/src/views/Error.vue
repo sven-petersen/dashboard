@@ -13,7 +13,7 @@ SPDX-License-Identifier: Apache-2.0
 </template>
 
 <script>
-import GError from '@/components/GError'
+import GError from '@/components/GError.vue'
 import get from 'lodash/get'
 
 export default {

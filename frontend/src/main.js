@@ -4,10 +4,6 @@
 // SPDX-License-Identifier: Apache-2.0
 //
 
-// Polyfills
-import 'core-js/stable'
-import 'regenerator-runtime/runtime'
-
 // Import Plugins
 import '@/plugins'
 

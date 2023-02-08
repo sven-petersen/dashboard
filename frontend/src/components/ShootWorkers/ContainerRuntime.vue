@@ -38,7 +38,7 @@ SPDX-License-Identifier: Apache-2.0
 </template>
 
 <script>
-import HintColorizer from '@/components/HintColorizer'
+import HintColorizer from '@/components/HintColorizer.vue'
 import { getValidationErrors } from '@/utils'
 import { required } from 'vuelidate/lib/validators'
 import find from 'lodash/find'

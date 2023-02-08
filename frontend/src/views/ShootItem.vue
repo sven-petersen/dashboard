@@ -24,10 +24,10 @@ SPDX-License-Identifier: Apache-2.0
 import { mapGetters } from 'vuex'
 import get from 'lodash/get'
 
-import ShootDetails from '@/components/ShootDetails/ShootDetails'
+import ShootDetails from '@/components/ShootDetails/ShootDetails.vue'
 
-import PositionalDropzone from '@/components/PositionalDropzone'
-import TerminalSplitpanes from '@/components/TerminalSplitpanes'
+import PositionalDropzone from '@/components/PositionalDropzone.vue'
+import TerminalSplitpanes from '@/components/TerminalSplitpanes.vue'
 
 import { PositionEnum } from '@/lib/g-symbol-tree'
 
