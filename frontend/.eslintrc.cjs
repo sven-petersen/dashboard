@@ -13,7 +13,7 @@ module.exports = {
     vi: true
   },
   extends: [
-    'plugin:vue/essential',
+    'plugin:vue/vue3-essential',
     'plugin:vuetify/base',
     '@vue/standard'
   ],

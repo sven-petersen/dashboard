@@ -42,9 +42,9 @@ SPDX-License-Identifier: Apache-2.0
               About
             </v-btn>
           </v-card-actions>
-          <template v-for="(item, index) in helpMenuItems">
-            <v-divider :key="`d-${index}`"></v-divider>
-            <v-card-actions :key="index" class="px-3">
+          <template :key="index" v-for="(item, index) in helpMenuItems">
+            <v-divider></v-divider>
+            <v-card-actions class="px-3">
               <v-btn block text color="primary" class="justify-start" :href="item.url" :target="helpTarget(item)" :title="item.title">
                 <v-icon color="primary" class="mr-3">{{item.icon}}</v-icon>
                 {{item.title}}

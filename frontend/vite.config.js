@@ -7,8 +7,9 @@ import path from 'path'
 import zlib from 'zlib'
 
 import { defineConfig } from 'vite'
-import { createVuePlugin as vue } from 'vite-plugin-vue2'
+import vue from '@vitejs/plugin-vue'
 import Components from 'unplugin-vue-components/vite'
+// TODO: migrate to vite-plugin-vuetify instead of unplugin-vue-components
 import { VuetifyResolver } from 'unplugin-vue-components/resolvers'
 import viteCompression from 'vite-plugin-compression'
 import { visualizer } from 'rollup-plugin-visualizer'
@@ -21,10 +22,18 @@ const KiB = 1024
 export default defineConfig(({ command }) => {
   const config = {
     plugins: [
+      vue({
+        template: {
+          compilerOptions: {
+            compatConfig: {
+              MODE: 2 // TODO: set mode to 3
+            }
+          }
+        }
+      }),
       Components({
         resolvers: [VuetifyResolver()]
-      }),
-      vue()
+      })
     ],
     define: {
       // Fix for vuelidate@0.7.7 which uses "process.env" which is not supported by vite.
@@ -34,7 +43,8 @@ export default defineConfig(({ command }) => {
     },
     resolve: {
       alias: {
-        '@': path.resolve(__dirname, './src')
+        '@': path.resolve(__dirname, './src/'),
+        vue: '@vue/compat/dist/vue.runtime.esm-bundler.js'
       }
     },
     server: {
