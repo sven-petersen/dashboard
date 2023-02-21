@@ -5,13 +5,12 @@ import { defineConfig } from 'vite'
 import { createVuePlugin as vue } from 'vite-plugin-vue2'
 import Components from 'unplugin-vue-components/vite'
 import { VuetifyResolver } from 'unplugin-vue-components/resolvers'
-import viteCompression from 'vite-plugin-compression';
-import { visualizer } from "rollup-plugin-visualizer";
+import viteCompression from 'vite-plugin-compression'
+import { visualizer } from 'rollup-plugin-visualizer'
 
 const proxyTarget = 'http://localhost:3030'
 
 const KiB = 1024
-const MiB = 1024 * KiB
 
 // https://vitejs.dev/config/
 export default defineConfig(({ command }) => {
@@ -20,7 +19,7 @@ export default defineConfig(({ command }) => {
       Components({
         resolvers: [VuetifyResolver()]
       }),
-      vue(),
+      vue()
     ],
     define: {
       // Fix for vuelidate@0.7.7 which uses "process.env" which is not supported by vite.
@@ -30,7 +29,7 @@ export default defineConfig(({ command }) => {
     },
     resolve: {
       alias: {
-        '@': path.resolve(__dirname, './src'),
+        '@': path.resolve(__dirname, './src')
       }
     },
     server: {
