@@ -18,6 +18,7 @@ SPDX-License-Identifier: Apache-2.0
       <v-list-item-title class="comment-header toolbar-background toolbar-title--text">
         <external-link :url="htmlUrl" class="inherit-color toolbar-title--text"><span class="font-weight-bold toolbar-title--text">{{login}}</span> commented <time-string :date-time="createdAt" mode="past" content-class="toolbar-title--text"></time-string></external-link>
       </v-list-item-title>
+      <!-- eslint-disable-next-line vue/no-v-text-v-html-on-component -->
       <v-list-item-subtitle class="wrap-text comment-body" v-html="commentHtml"></v-list-item-subtitle>
     </v-list-item-content>
     </v-list-item>

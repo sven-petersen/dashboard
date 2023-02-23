@@ -130,6 +130,7 @@ SPDX-License-Identifier: Apache-2.0
           </v-list-item-icon>
           <v-list-item-content>
             <v-list-item-subtitle>{{slaTitle}}</v-list-item-subtitle>
+            <!-- eslint-disable-next-line vue/no-v-text-v-html-on-component -->
             <v-list-item-title class="pt-1 markdown" v-html="slaDescriptionHtml"/>
           </v-list-item-content>
         </v-list-item>
