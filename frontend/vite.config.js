@@ -26,7 +26,7 @@ export default defineConfig(({ command }) => {
         template: {
           compilerOptions: {
             compatConfig: {
-              MODE: 2 // TODO: set mode to 3
+              MODE: 3
             }
           }
         }
