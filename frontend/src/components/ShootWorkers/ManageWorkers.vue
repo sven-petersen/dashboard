@@ -34,7 +34,7 @@ SPDX-License-Identifier: Apache-2.0
               outlined
               icon
               color="grey"
-              @click.native.stop="onRemoveWorker(index)">
+              @click.stop="onRemoveWorker(index)">
               <v-icon>mdi-close</v-icon>
             </v-btn>
           </template>

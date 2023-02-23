@@ -16,7 +16,7 @@ SPDX-License-Identifier: Apache-2.0
                 text
                 class="text-left primary--text"
                 :disabled="!canCreateProject"
-                @click.native.stop="projectDialog = true"
+                @click.stop="projectDialog = true"
               >
                 <v-icon>mdi-plus</v-icon>
                 <span class="ml-2">{{createProjectBtnText}}</span>

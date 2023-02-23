@@ -217,7 +217,7 @@ SPDX-License-Identifier: Apache-2.0
                     <v-tooltip v-if="canDeleteProject" top>
                       <template v-slot:activator="{ on }">
                         <div v-on="on">
-                          <v-btn color="action-button" :disabled="isDeleteButtonDisabled" icon @click.native.stop="showDialog">
+                          <v-btn color="action-button" :disabled="isDeleteButtonDisabled" icon @click.stop="showDialog">
                             <v-icon>mdi-delete</v-icon>
                           </v-btn>
                         </div>

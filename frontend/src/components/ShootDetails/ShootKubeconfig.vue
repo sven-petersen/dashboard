@@ -27,7 +27,7 @@ SPDX-License-Identifier: Apache-2.0
       <v-list-item-action class="mx-0" v-if="isKubeconfigAvailable">
         <v-tooltip top>
           <template v-slot:activator="{ on }">
-            <v-btn v-on="on" icon @click.native.stop="onDownload" color="action-button">
+            <v-btn v-on="on" icon @click.stop="onDownload" color="action-button">
               <v-icon>mdi-download</v-icon>
             </v-btn>
           </template>
@@ -40,7 +40,7 @@ SPDX-License-Identifier: Apache-2.0
       <v-list-item-action class="mx-0" v-if="isKubeconfigAvailable">
         <v-tooltip top>
           <template v-slot:activator="{ on }">
-            <v-btn v-on="on" icon @click.native.stop="toggleKubeconfig" color="action-button">
+            <v-btn v-on="on" icon @click.stop="toggleKubeconfig" color="action-button">
               <v-icon>{{kubeconfigVisibilityIcon}}</v-icon>
             </v-btn>
           </template>

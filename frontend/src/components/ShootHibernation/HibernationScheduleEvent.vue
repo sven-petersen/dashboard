@@ -71,7 +71,7 @@ SPDX-License-Identifier: Apache-2.0
         outlined
         icon
         color="grey"
-        @click.native.stop="removeScheduleEvent">
+        @click.stop="removeScheduleEvent">
         <v-icon>mdi-close</v-icon>
       </v-btn>
     </v-col>

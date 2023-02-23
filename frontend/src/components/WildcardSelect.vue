@@ -25,7 +25,7 @@ SPDX-License-Identifier: Apache-2.0
       <template v-slot:selection="{ item }">
         <v-text-field
           v-if="wildcardSelectedValue.startsWithWildcard || wildcardSelectedValue.customWildcard"
-          @click.native.stop
+          @click.stop
           outlined
           dense
           class="mb-1 mr-1 text-field"
@@ -39,7 +39,7 @@ SPDX-License-Identifier: Apache-2.0
         <span>{{item.value}}</span>
         <v-text-field
           v-if="wildcardSelectedValue.endsWithWildcard"
-          @click.native.stop
+          @click.stop
           @input="onInput"
           outlined
           dense

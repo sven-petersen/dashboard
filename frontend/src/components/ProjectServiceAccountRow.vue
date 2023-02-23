@@ -54,7 +54,7 @@ SPDX-License-Identifier: Apache-2.0
         <div v-if="!foreign && canCreateTokenRequest" class="ml-1">
           <v-tooltip top>
             <template v-slot:activator="{ on }">
-              <v-btn v-on="on" color="action-button" icon @click.native.stop="onDownload" :disabled="orphaned">
+              <v-btn v-on="on" color="action-button" icon @click.stop="onDownload" :disabled="orphaned">
                 <v-icon>mdi-download</v-icon>
               </v-btn>
             </template>
@@ -84,7 +84,7 @@ SPDX-License-Identifier: Apache-2.0
         <div v-if="canManageServiceAccountMembers" class="ml-1">
           <v-tooltip top>
             <template v-slot:activator="{ on }">
-              <v-btn v-on="on" color="action-button" icon @click.native.stop="onEdit">
+              <v-btn v-on="on" color="action-button" icon @click.stop="onEdit">
                 <v-icon>mdi-pencil</v-icon>
               </v-btn>
             </template>
@@ -95,7 +95,7 @@ SPDX-License-Identifier: Apache-2.0
           <v-tooltip top>
             <template v-slot:activator="{ on }">
                <div v-on="on">
-                <v-btn icon color="action-button" @click.native.stop="onDelete" :disabled="!canDelete">
+                <v-btn icon color="action-button" @click.stop="onDelete" :disabled="!canDelete">
                   <v-icon>{{ foreign || orphaned ? 'mdi-close' : 'mdi-delete' }}</v-icon>
                 </v-btn>
                </div>

@@ -120,7 +120,7 @@ SPDX-License-Identifier: Apache-2.0
           <v-card-title class="toolbar-background toolbar-title--text">
             <div class="text-h5">Cluster Access <code class="toolbar-background lighten-1 toolbar-title--text">{{currentName}}</code></div>
             <v-spacer></v-spacer>
-            <v-btn icon class="grey--text text--lighten-4" @click.native="hideDialog">
+            <v-btn icon class="grey--text text--lighten-4" @click="hideDialog">
               <v-icon color="toolbar-title">mdi-close</v-icon>
             </v-btn>
           </v-card-title>

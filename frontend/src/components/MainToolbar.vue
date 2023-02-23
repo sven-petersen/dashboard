@@ -6,7 +6,7 @@ SPDX-License-Identifier: Apache-2.0
 
 <template>
   <v-app-bar app tile fixed>
-    <v-app-bar-nav-icon v-if="!sidebar" @click.native.stop="setSidebar(!sidebar)"></v-app-bar-nav-icon>
+    <v-app-bar-nav-icon v-if="!sidebar" @click.stop="setSidebar(!sidebar)"></v-app-bar-nav-icon>
     <breadcrumb></breadcrumb>
     <v-spacer></v-spacer>
     <div class="text-center mr-2">
@@ -95,7 +95,7 @@ SPDX-License-Identifier: Apache-2.0
               <div class="text-h6">{{displayName}}</div>
               <div class="text-caption">{{username}}</div>
               <div class="text-caption" v-if="isAdmin">Operator</div>
-              <v-btn-toggle v-model="colorSchemeIndex" borderless mandatory @click.native.stop class="mt-3">
+              <v-btn-toggle v-model="colorSchemeIndex" borderless mandatory @click.stop class="mt-3">
                 <v-tooltip top>
                   <template v-slot:activator="{ on }">
                     <v-btn small v-on="on">
@@ -138,7 +138,7 @@ SPDX-License-Identifier: Apache-2.0
           </v-card-actions>
           <v-divider></v-divider>
           <v-card-actions class="px-3">
-            <v-btn block text color="pink" class="justify-start" @click.native.stop="handleLogout" title="Logout">
+            <v-btn block text color="pink" class="justify-start" @click.stop="handleLogout" title="Logout">
               <v-icon class="mr-3">mdi-exit-to-app</v-icon>
               Logout
             </v-btn>

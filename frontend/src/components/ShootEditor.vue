@@ -84,7 +84,7 @@ SPDX-License-Identifier: Apache-2.0
         <div class="px-2">
           <copy-btn
             :clipboard-text="getContent()"
-            @click.native.stop="focus"
+            @click.stop="focus"
             tooltip-text='Copy'
             :user-feedback="false"
             @copy="onCopy"

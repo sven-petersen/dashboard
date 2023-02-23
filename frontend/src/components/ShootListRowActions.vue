@@ -16,7 +16,7 @@ SPDX-License-Identifier: Apache-2.0
         Cluster Actions
       </v-tooltip>
     </template>
-    <v-list subheader dense class="actionMenuItem" @click.native.capture="actionMenu=false">
+    <v-list subheader dense class="actionMenuItem" @click.capture="actionMenu=false">
       <v-list-item>
         <v-list-item-content>
           <change-hibernation :shoot-item="shootItem" text></change-hibernation>

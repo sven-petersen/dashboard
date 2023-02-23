@@ -10,7 +10,7 @@ SPDX-License-Identifier: Apache-2.0
       v-for="infrastructureKind in sortedCloudProviderKindList"
       class="select_infra_card cursor-pointer"
       :class="{ 'select_infra_card_active elevation-8' : infrastructureKind == selectedInfrastructure }"
-      @click.native.stop="selectInfrastructure(infrastructureKind)"
+      @click.stop="selectInfrastructure(infrastructureKind)"
       :key="infrastructureKind"
       hover
       >

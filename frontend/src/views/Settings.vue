@@ -16,7 +16,7 @@ SPDX-License-Identifier: Apache-2.0
             <v-row>
               <v-col cols="12">
                 <legend class="text-body-2 text--secondary">Color Scheme</legend>
-                <v-btn-toggle v-model="colorSchemeIndex" mandatory dense @click.native.stop class="pt-1">
+                <v-btn-toggle v-model="colorSchemeIndex" mandatory dense @click.stop class="pt-1">
                   <v-tooltip top>
                     <template v-slot:activator="{ on }">
                       <v-btn small v-on="on">

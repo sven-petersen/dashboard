@@ -49,7 +49,7 @@ SPDX-License-Identifier: Apache-2.0
     </v-snackbar>
     <drag-n-droppable-component :uuid="uuid">
       <template v-slot:handle>
-        <v-system-bar dark class="systemBarTop" :class="backgroundClass" @click.native="focus">
+        <v-system-bar dark class="systemBarTop" :class="backgroundClass" @click="focus">
           <v-btn icon small color="grey lighten-1" class="text-none systemBarButton mx-1 g-ignore-drag" @click="deleteTerminal">
             <v-icon class="mr-0" small>mdi-close</v-icon>
           </v-btn>

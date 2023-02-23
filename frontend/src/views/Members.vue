@@ -35,7 +35,7 @@ SPDX-License-Identifier: Apache-2.0
         </v-tooltip>
         <v-tooltip top v-if="canManageMembers" >
           <template v-slot:activator="{ on }">
-            <v-btn v-on="on" icon @click.native.stop="openUserAddDialog">
+            <v-btn v-on="on" icon @click.stop="openUserAddDialog">
               <v-icon color="toolbar-title">mdi-plus</v-icon>
             </v-btn>
           </template>
@@ -43,7 +43,7 @@ SPDX-License-Identifier: Apache-2.0
         </v-tooltip>
         <v-tooltip top v-if="canManageMembers" >
           <template v-slot:activator="{ on }">
-            <v-btn v-on="on" color="toolbar-title" icon @click.native.stop="openUserHelpDialog">
+            <v-btn v-on="on" color="toolbar-title" icon @click.stop="openUserHelpDialog">
               <v-icon color="toolbar-title">mdi-help-circle-outline</v-icon>
             </v-btn>
           </template>
@@ -106,7 +106,7 @@ SPDX-License-Identifier: Apache-2.0
         ></v-text-field>
         <v-tooltip top v-if="canManageServiceAccountMembers && canCreateServiceAccounts" >
           <template v-slot:activator="{ on }">
-            <v-btn v-on="on" icon @click.native.stop="openServiceAccountAddDialog">
+            <v-btn v-on="on" icon @click.stop="openServiceAccountAddDialog">
               <v-icon color="toolbar-title">mdi-plus</v-icon>
             </v-btn>
           </template>
@@ -114,7 +114,7 @@ SPDX-License-Identifier: Apache-2.0
         </v-tooltip>
         <v-tooltip top>
           <template v-slot:activator="{ on }">
-            <v-btn v-on="on" icon @click.native.stop="openServiceAccountHelpDialog">
+            <v-btn v-on="on" icon @click.stop="openServiceAccountHelpDialog">
               <v-icon color="toolbar-title">mdi-help-circle-outline</v-icon>
             </v-btn>
           </template>
@@ -170,7 +170,7 @@ SPDX-License-Identifier: Apache-2.0
         <v-card-title class="toolbar-background toolbar-title--text">
           <div class="text-h5">Kubeconfig <code class="toolbar-background lighten-1 toolbar-title--text">{{currentServiceAccountDisplayName}}</code></div>
           <v-spacer></v-spacer>
-          <v-btn icon @click.native="kubeconfigDialog = false">
+          <v-btn icon @click="kubeconfigDialog = false">
             <v-icon color="toolbar-title">mdi-close</v-icon>
           </v-btn>
         </v-card-title>

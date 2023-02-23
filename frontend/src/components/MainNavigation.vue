@@ -14,7 +14,7 @@ SPDX-License-Identifier: Apache-2.0
     >
       <div class="teaser">
         <div class="content center main-background darken-2">
-          <v-btn @click.native.stop="setSidebar(!isActive)" icon class="float-right main-navigation-title--text ma-2">
+          <v-btn @click.stop="setSidebar(!isActive)" icon class="float-right main-navigation-title--text ma-2">
             <v-icon>mdi-chevron-double-left</v-icon>
           </v-btn>
           <a href="/">
@@ -82,7 +82,7 @@ SPDX-License-Identifier: Apache-2.0
               </v-card-title>
               <v-divider></v-divider>
             </template>
-            <v-list flat class="project-list" ref="projectList" @scroll.native="handleProjectListScroll">
+            <v-list flat class="project-list" ref="projectList" @scroll="handleProjectListScroll">
               <v-list-item
                 v-for="project in visibleProjectList"
                 @click="onProjectClick($event, project)"

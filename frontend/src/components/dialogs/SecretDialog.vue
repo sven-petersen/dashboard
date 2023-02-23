@@ -67,8 +67,8 @@ SPDX-License-Identifier: Apache-2.0
       <v-divider></v-divider>
       <v-card-actions>
         <v-spacer></v-spacer>
-        <v-btn text @click.native="cancel">Cancel</v-btn>
-        <v-btn text @click.native="submit" color="primary" :disabled="!valid">{{submitButtonText}}</v-btn>
+        <v-btn text @click="cancel">Cancel</v-btn>
+        <v-btn text @click="submit" color="primary" :disabled="!valid">{{submitButtonText}}</v-btn>
       </v-card-actions>
     </v-card>
   </v-dialog>
