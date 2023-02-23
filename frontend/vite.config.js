@@ -3,7 +3,7 @@
 //
 // SPDX-License-Identifier: Apache-2.0
 
-import path from 'path'
+import { fileURLToPath, URL } from 'node:url'
 import zlib from 'zlib'
 
 import { defineConfig } from 'vite'
@@ -39,13 +39,25 @@ export default defineConfig(({ command }) => {
       // Fix for vuelidate@0.7.7 which uses "process.env" which is not supported by vite.
       // Never versions of vuelidate should work with vite but this requires migrating
       // to vuelidate@2.0.0.
-      'process.env.BUILD': '"web"'
+      // 'process.env.BUILD': '"web"',
+      'process.env': {BUILD: 'web'},
     },
     resolve: {
       alias: {
-        '@': path.resolve(__dirname, './src/'),
-        vue: '@vue/compat/dist/vue.runtime.esm-bundler.js'
-      }
+        '@': fileURLToPath(new URL('./src', import.meta.url)),
+        // vue: '@vue/compat/dist/vue.runtime.esm-bundler.js'
+        vue: '@vue/compat' // TODO: remove after migration to vue 3
+      },
+      dedupe: [ '@vue/compat' ], // TODO: remove after migration to vue 3
+      extensions: [
+        '.js',
+        '.json',
+        '.jsx',
+        '.mjs',
+        '.ts',
+        '.tsx',
+        '.vue'
+      ]
     },
     server: {
       port: 8080,

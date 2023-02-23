@@ -13,9 +13,9 @@ SPDX-License-Identifier: Apache-2.0
           <v-col cols="12" sm="8" md="4" lg="4">
             <v-card class="elevation-1">
               <v-card-title class="pa-0">
-                <div class="layout column align-center main-background darken-1 pa-3 pt-6">
+                <div class="layout column align-center main-background primary-darken-1 pa-3 pt-6">
                   <img src="/static/assets/logo.svg" alt="Login to Gardener" width="180" height="180">
-                  <span class="flex my-4 primary--text text-h5 font-weight-light">Universal Kubernetes at Scale</span>
+                  <span class="flex my-4 text-primary text-h5 font-weight-light">Universal Kubernetes at Scale</span>
                 </div>
                 <v-tabs
                   v-show="!loading"
@@ -33,16 +33,17 @@ SPDX-License-Identifier: Apache-2.0
                 </v-tabs>
               </v-card-title>
               <v-card-text class="login-form d-flex align-center justify-center py-0">
-                <v-skeleton-loader
+                <!-- FIXME: v-skeleton-loader does not exist in Vuetify3 (yet?) -->
+                <!-- <v-skeleton-loader
                   v-show="loading"
                   width="100%"
                   type="card"
-                ></v-skeleton-loader>
-                <v-tabs-items v-show="!loading" v-model="loginType">
-                    <v-tab-item id="oidc">
+                ></v-skeleton-loader> -->
+                <v-window v-show="!loading" v-model="loginType">
+                    <v-window-item id="oidc">
                       <div class="text-subtitle-1 text-center">Press Login to be redirected to configured<br> OpenID Connect Provider.</div>
-                    </v-tab-item >
-                    <v-tab-item id="token">
+                    </v-window-item >
+                    <v-window-item id="token">
                       <div class="text-subtitle-1 text-center pt-3">Enter a bearer token trusted by the Kubernetes API server and press Login.</div>
                       <v-text-field
                         ref="token"
@@ -50,13 +51,13 @@ SPDX-License-Identifier: Apache-2.0
                         color="primary"
                         :append-icon="showToken ? 'mdi-eye' : 'mdi-eye-off'"
                         :type="showToken ? 'text' : 'password'"
-                        outlined
+                        variant="outlined"
                         label="Token"
                         @click:append="showToken = !showToken"
                         required>
                       </v-text-field>
-                    </v-tab-item>
-                  </v-tabs-items>
+                    </v-window-item>
+                  </v-window>
               </v-card-text>
               <v-card-actions v-show="!loading" class="bt-2 pb-4">
                 <div class="d-flex justify-center flex-grow-1">
@@ -68,7 +69,7 @@ SPDX-License-Identifier: Apache-2.0
         </v-row>
       </v-container>
       <div v-if="landingPageUrl" class="footer text-caption">
-        <span class="primary--text">Discover what our service is about at the <a :href="landingPageUrl" target="_blank" rel="noopener">Gardener Landing Page</a></span>
+        <span class="text-primary">Discover what our service is about at the <a :href="landingPageUrl" target="_blank" rel="noopener">Gardener Landing Page</a></span>
       </div>
     </v-main>
     <g-snotify></g-snotify>
@@ -76,7 +77,6 @@ SPDX-License-Identifier: Apache-2.0
 </template>
 
 <script>
-import Vue from 'vue'
 import { mapGetters } from 'vuex'
 import { SnotifyPosition } from 'vue-snotify'
 import get from 'lodash/get'
@@ -124,7 +124,11 @@ export default {
     }
   },
   beforeRouteEnter (to, from, next) {
-    const guard = async ({ api, auth, localStorage, logger }) => {
+    // FIXME: The Vue global object no longer exists/holds the api auth etc.
+    //   Also, in the beforeRouteEnter, we do not have access to the component
+    //   instance (no "this") or a way to get the "app"-instance.
+    //   So this logic below needs to be rewritten or placed somewhere else.
+    const guard = async (/* { api, auth, localStorage, logger } */) => {
       let err
       if (/^#.+/.test(to.hash)) {
         const searchParams = new URLSearchParams(to.hash.substring(1))
@@ -132,23 +136,24 @@ export default {
           err = new Error(searchParams.get('error'))
         }
       }
-      let cfg
-      try {
-        const { data } = await api.getLoginConfiguration()
-        cfg = data
-      } catch (err) {
-        logger.error('Failed to fetch login configuration: %s', err.message)
-        cfg = {
-          loginTypes: ['token'] // at least allow the token login
-        }
+      // let cfg
+      // try {
+      //   const { data } = await api.getLoginConfiguration()
+      //   cfg = data
+      // } catch (err) {
+      // logger.error('Failed to fetch login configuration: %s', err.message)
+      const cfg = {
+        // loginTypes: ['token'] // at least allow the token login
+        loginTypes: ['token', 'oidc'] // FIXME: temporary fix to allow login during migration
       }
-      const primaryLoginType = getPrimaryLoginType(cfg)
-      const autoLoginEnabled = localStorage.getItem('global/auto-login') === 'enabled'
-      if (!err && primaryLoginType === 'oidc' && autoLoginEnabled) {
-        const redirectPath = get(to.query, 'redirectPath', '/')
-        auth.signinWithOidc(redirectPath)
-        return next(false)
-      }
+      // }
+      // const primaryLoginType = getPrimaryLoginType(cfg)
+      // const autoLoginEnabled = localStorage.getItem('global/auto-login') === 'enabled'
+      // if (!err && primaryLoginType === 'oidc' && autoLoginEnabled) {
+      //   const redirectPath = get(to.query, 'redirectPath', '/')
+      //   auth.signinWithOidc(redirectPath)
+      //   return next(false)
+      // }
       next(vm => {
         Object.assign(vm.cfg, cfg)
         if (err) {
@@ -159,7 +164,7 @@ export default {
         }
       })
     }
-    guard(Vue)
+    guard(/* Vue */)
   },
   methods: {
     handleLogin () {

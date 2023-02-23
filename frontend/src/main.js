@@ -4,11 +4,18 @@
 // SPDX-License-Identifier: Apache-2.0
 //
 
-// Import Plugins
-import '@/plugins'
+// Components
+import App from '@/App.vue'
+import '@/sass/main.scss'
 
-// Create App
-import vuetify from '@/plugins/vuetify'
-import { createApp } from '@/app'
+// Composables
+import { createApp } from 'vue'
 
-createApp(vuetify).$mount('#app')
+// Plugins
+import { registerPlugins } from '@/plugins'
+
+const app = createApp(App)
+
+registerPlugins(app)
+
+app.mount('#app')

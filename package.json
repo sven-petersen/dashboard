@@ -20,6 +20,9 @@
     "Sutter, Peter <peter.sutter@sap.com>"
   ],
   "dependenciesMeta": {
+    "@vue/compat@3.2.47": {
+      "unplugged": true
+    },
     "deasync": {
       "built": false
     },
