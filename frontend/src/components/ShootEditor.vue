@@ -529,7 +529,7 @@ export default {
   .position-relative {
     position: relative !important;
   }
-  ::v-deep .cm-tab {
+  :deep(.cm-tab) {
      background: url('../assets/tab.png');
      background-position: right;
      background-repeat: no-repeat;

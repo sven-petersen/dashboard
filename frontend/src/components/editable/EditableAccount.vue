@@ -240,7 +240,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  ::v-deep .v-text-field .v-input__append-outer {
+  :deep(.v-text-field .v-input__append-outer) {
     margin: 6px 8px 6px 0;
     align-self: baseline;
   }

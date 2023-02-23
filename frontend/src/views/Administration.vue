@@ -647,7 +647,8 @@ export default {
 
 <style lang="scss" scoped>
   .markdown {
-    ::v-deep > p {
+    /*  TODO: this was "::v-deep > p" before. Check if the new version below, after compile, is actually equivalent */
+    :deep(> p) {
       margin: 0px;
     }
   }

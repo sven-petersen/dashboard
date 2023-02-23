@@ -74,7 +74,7 @@ export default {
   white-space: normal;
 }
 
-.g-subtitle ::v-deep  p {
+.g-subtitle :deep(p) {
   margin-bottom: 4px;
 }
 

@@ -591,11 +591,11 @@ export default {
     padding: 12px;
   }
 
-  ::v-deep .v-list-item--disabled {
+  :deep(.v-list-item--disabled) {
     opacity:0.5;
   }
 
-  ::v-deep .v-chip--disabled {
+  :deep(.v-chip--disabled) {
     opacity: 1;
   }
 </style>

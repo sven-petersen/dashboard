@@ -59,7 +59,7 @@ export default {
     margin: 1px;
   }
 
-  .purpose-tag ::v-deep .v-chip__content {
+  .purpose-tag :deep(.v-chip__content) {
     margin: -4px;
   }
 

@@ -168,7 +168,7 @@ export default {
 
 <style lang="scss" scoped>
 
-  ::v-deep .popper {
+  :deep(.popper) {
     text-align: initial;
   }
 

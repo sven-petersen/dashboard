@@ -356,7 +356,7 @@ export default {
     overflow-y: auto;
   }
 
-  ::v-deep .v-card {
+  :deep(.v-card) {
     .v-card__text {
       padding: 0px;
     }

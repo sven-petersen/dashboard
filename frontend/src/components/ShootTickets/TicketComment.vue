@@ -110,7 +110,7 @@ export default {
     /* does not work with firefox */
     word-break: break-word;
 
-    ::v-deep pre {
+    :deep(pre) {
       padding: 8px;
       border-radius: 3px;
       white-space: pre;
@@ -130,7 +130,7 @@ export default {
       }
     }
 
-    ::v-deep code {
+    :deep(code) {
       padding: .2em .4em;
       border-radius: 3px;
       font-weight: normal;
@@ -138,42 +138,45 @@ export default {
       background-color: $gh-code-background-color;
     }
 
-    ::v-deep img {
+    :deep(img) {
       max-width: 100%;
     }
 
-    ::v-deep > h1 {
+    /*  TODO: this was "::v-deep > h1" before. Check if the new version below, after compile, is actually equivalent.
+     *  Also check this for h2 - h6 below
+     */
+    :deep(> h1) {
       font-size: 21px;
       font-weight: 600;
     }
 
-    ::v-deep > h2 {
+    :deep(> h2) {
       font-size: 17.5px;
       font-weight: 600;
     }
 
-    ::v-deep > h3 {
+    :deep(> h3) {
       font-size: 14px;
       font-weight: 600;
     }
 
-    ::v-deep > h4 {
+    :deep(> h4) {
       font-size: 12.25px;
       font-weight: 600;
     }
 
-    ::v-deep > h5 {
+    :deep(> h5) {
       font-size: 11.9px;
       font-weight: 600;
     }
 
-    ::v-deep > h6 {
+    :deep(> h6) {
       font-size: 11.5px;
       font-weight: 600;
     }
   }
 
-  ::v-deep .flex {
+  :deep(.flex) {
     width: 200px;
   }
 
