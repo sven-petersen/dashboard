@@ -68,7 +68,7 @@ SPDX-License-Identifier: Apache-2.0
         :headers="visibleUserAccountTableHeaders"
         :items="userList"
         :footer-props="{ 'items-per-page-options': [5,10,20] }"
-        :options.sync="userAccountTableOptions"
+        v-model:options="userAccountTableOptions"
         must-sort
         :custom-sort="sortAccounts"
         :search="userFilter"
@@ -139,7 +139,7 @@ SPDX-License-Identifier: Apache-2.0
         :headers="visibleServiceAccountTableHeaders"
         :items="serviceAccountList"
         :footer-props="{ 'items-per-page-options': [5,10,20] }"
-        :options.sync="serviceAccountTableOptions"
+        v-model:options="serviceAccountTableOptions"
         must-sort
         :custom-sort="sortAccounts"
         :search="serviceAccountFilter"

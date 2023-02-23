@@ -34,8 +34,8 @@ SPDX-License-Identifier: Apache-2.0
     <g-dialog
       :confirm-button-text="confirmButtonText"
       :confirm-disabled="!valid"
-      :error-message.sync="errorMessage"
-      :detailed-error-message.sync="detailedErrorMessage"
+      v-model:error-message="errorMessage"
+      v-model:detailed-error-message="detailedErrorMessage"
       :width="width"
       :max-height="maxHeight"
       :confirm-value="confirmValue"

@@ -23,8 +23,8 @@ SPDX-License-Identifier: Apache-2.0
       <g-message
         color="error"
         class="ma-0"
-        :message.sync="errorMessageInternal"
-        :detailed-message.sync="detailedErrorMessageInternal"
+        v-model:message="errorMessageInternal"
+        v-model:detailed-message="detailedErrorMessageInternal"
         tile
       ></g-message>
     </div>

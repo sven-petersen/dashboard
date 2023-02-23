@@ -49,7 +49,7 @@ SPDX-License-Identifier: Apache-2.0
               :disabled="readonly"
               :dns-provider-kind="type"
               v-model="secret"
-              :valid.sync="secretValid">
+              v-model:valid="secretValid">
             </select-secret>
           </div>
           <div class="regular-input">

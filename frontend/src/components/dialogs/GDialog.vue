@@ -26,7 +26,7 @@ SPDX-License-Identifier: Apache-2.0
         </v-card-text>
       </div>
       <slot name="errorMessage"></slot>
-      <g-message color="error" class="mt-4" :message.sync="message" :detailed-message.sync="detailedMessage"></g-message>
+      <g-message color="error" class="mt-4" v-model:message="message" v-model:detailed-message="detailedMessage"></g-message>
       <v-divider></v-divider>
       <v-card-actions>
         <v-spacer></v-spacer>

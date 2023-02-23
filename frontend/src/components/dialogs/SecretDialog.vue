@@ -49,7 +49,7 @@ SPDX-License-Identifier: Apache-2.0
             </div>
 
             <slot name="secret-slot"></slot>
-            <g-message color="error" :message.sync="errorMessage" :detailed-message.sync="detailedErrorMessage"></g-message>
+            <g-message color="error" v-model:message="errorMessage" v-model:detailed-message="detailedErrorMessage"></g-message>
           </div>
           <v-slide-x-reverse-transition>
             <div v-if="helpVisible" class="pa-3 ml-3 help" :style="helpStyle">

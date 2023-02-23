@@ -17,7 +17,7 @@ SPDX-License-Identifier: Apache-2.0
       @input="$v.internalValue.$touch()"
       @blur="$v.internalValue.$touch()"
       v-model="internalValue"
-      :search-input.sync="internalSearch"
+      v-model:search-input="internalSearch"
       :filter="filter"
       label="Machine Type"
       :hint="hint"

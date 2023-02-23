@@ -356,8 +356,8 @@ SPDX-License-Identifier: Apache-2.0
     </v-row>
 
     <g-dialog
-      :error-message.sync="errorMessage"
-      :detailed-error-message.sync="detailedErrorMessage"
+      v-model:error-message="errorMessage"
+      v-model:detailed-error-message="detailedErrorMessage"
       ref="gDialog"
       width="600">
       <template v-slot:caption>

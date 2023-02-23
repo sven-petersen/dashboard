@@ -34,7 +34,7 @@ SPDX-License-Identifier: Apache-2.0
         <machine-type
           :machine-types="machineTypes"
           v-model="machineTypeValue"
-          :valid.sync="internalMachineTypeValid"
+          v-model:valid="internalMachineTypeValid"
         ></machine-type>
       </div>
       <div class="regularInput">

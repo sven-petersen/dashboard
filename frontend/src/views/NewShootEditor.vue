@@ -8,8 +8,8 @@ SPDX-License-Identifier: Apache-2.0
   <div class="fill-height">
     <shoot-editor
       alert-banner-identifier="newShootEditorWarning"
-      :error-message.sync="errorMessage"
-      :detailed-error-message.sync="detailedErrorMessage"
+      v-model:error-message="errorMessage"
+      v-model:detailed-error-message="detailedErrorMessage"
       :shoot-item="newShootResource"
       ref="shootEditor"
       v-on="$shootEditor.hooks"

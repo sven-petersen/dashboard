@@ -92,9 +92,9 @@ SPDX-License-Identifier: Apache-2.0
       <v-data-table
         :headers="visibleHeaders"
         :items="items"
-        :options.sync="options"
-        :sort-by.sync="sortByInternal"
-        :sort-desc.sync="sortDescInternal"
+        v-model:options="options"
+        v-model:sort-by="sortByInternal"
+        v-model:sort-desc="sortDescInternal"
         :loading="loading || !connected"
         :footer-props="{ 'items-per-page-options': [5,10,20] }"
         :search="shootSearch"

@@ -74,7 +74,7 @@ SPDX-License-Identifier: Apache-2.0
           >
             The service account does not exist anymore and will be re-created if you update the roles.
           </v-alert>
-          <g-message color="error" :message.sync="errorMessage" :detailed-message.sync="detailedErrorMessage"></g-message>
+          <g-message color="error" v-model:message="errorMessage" v-model:detailed-message="detailedErrorMessage"></g-message>
         </v-container>
       </v-card-text>
       <v-divider></v-divider>

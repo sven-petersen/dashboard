@@ -74,7 +74,7 @@ SPDX-License-Identifier: Apache-2.0
         :headers="visibleInfraSecretTableHeaders"
         :items="infrastructureSecretItems"
         :footer-props="{ 'items-per-page-options': [5,10,20] }"
-        :options.sync="infraSecretTableOptions"
+        v-model:options="infraSecretTableOptions"
         must-sort
         :search="infraSecretFilter"
       >
@@ -152,7 +152,7 @@ SPDX-License-Identifier: Apache-2.0
         :headers="visibleDnsSecretTableHeaders"
         :items="dnsSecretItems"
         :footer-props="{ 'items-per-page-options': [5,10,20] }"
-        :options.sync="dnsSecretTableOptions"
+        v-model:options="dnsSecretTableOptions"
         must-sort
         :search="dnsSecretFilter"
       >

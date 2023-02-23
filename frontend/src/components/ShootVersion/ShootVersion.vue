@@ -42,8 +42,8 @@ SPDX-License-Identifier: Apache-2.0
       :confirm-value="confirm"
       confirm-button-text="Update"
       :confirm-disabled="selectedVersionInvalid"
-      :error-message.sync="updateErrorMessage"
-      :detailed-error-message.sync="updateDetailedErrorMessage"
+      v-model:error-message="updateErrorMessage"
+      v-model:detailed-error-message="updateDetailedErrorMessage"
       ref="gDialog"
       width="450"
       >
