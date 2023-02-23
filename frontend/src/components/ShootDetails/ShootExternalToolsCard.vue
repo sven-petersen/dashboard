@@ -10,9 +10,9 @@ SPDX-License-Identifier: Apache-2.0
       <v-toolbar-title class="text-subtitle-1">External Tools</v-toolbar-title>
     </v-toolbar>
     <v-list>
-      <template v-for="({ title, url, icon }, index) in items">
-        <v-divider v-if="index" :key="index" inset class="my-2"></v-divider>
-        <v-list-item :key="title">
+      <template v-for="({ title, url, icon }, index) in items" :key="title">
+        <v-divider v-if="index" inset class="my-2"></v-divider>
+        <v-list-item>
           <v-list-item-icon>
             <v-icon color="primary">{{icon || 'link'}}</v-icon>
           </v-list-item-icon>

@@ -10,9 +10,9 @@ SPDX-License-Identifier: Apache-2.0
       <v-toolbar-title class="text-subtitle-1">Custom Fields</v-toolbar-title>
     </v-toolbar>
     <v-list>
-      <template v-for="(customField, index) in customFields" >
+      <template v-for="(customField, index) in customFields" :key="customField.key">
         <v-divider v-if="index !== 0" inset :key="`${customField.key}-divider`"></v-divider>
-        <v-list-item :key="customField.key">
+        <v-list-item>
           <v-list-item-icon>
             <v-icon color="primary" v-if="customField.icon">{{customField.icon}}</v-icon>
           </v-list-item-icon>

@@ -6,9 +6,9 @@ SPDX-License-Identifier: Apache-2.0
 
 <template>
   <div class="wrapper">
-    <template v-for="({ type, hint, className }, index) in hints">
-      <div v-if="type === 'html'" v-html="hint" :class="className" :key="index" />
-      <div v-else v-text="hint" :class="className" :key="index" />
+    <template v-for="({ type, hint, className }, index) in hints" :key="index">
+      <div v-if="type === 'html'" v-html="hint" :class="className" />
+      <div v-else v-text="hint" :class="className" />
     </template>
   </div>
 </template>

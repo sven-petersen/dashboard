@@ -6,8 +6,8 @@ SPDX-License-Identifier: Apache-2.0
 
 <template>
   <v-list>
-    <template v-for="({ title, subtitle, value, displayValue }, index) in commands">
-      <v-list-item :key="title">
+    <template v-for="({ title, subtitle, value, displayValue }, index) in commands" :key="title">
+      <v-list-item>
         <v-list-item-icon>
           <v-icon v-if="index === 0" color="primary">mdi-console-line</v-icon>
         </v-list-item-icon>

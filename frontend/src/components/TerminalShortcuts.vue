@@ -7,11 +7,10 @@ SPDX-License-Identifier: Apache-2.0
 <template>
   <div>
     <template v-if="projectShortcuts.length || shortcuts.length">
-      <template v-for="shortcut in projectShortcuts">
+      <template v-for="shortcut in projectShortcuts" :key="`project-shortcut-${shortcut.id}`">
         <terminal-shortcut
           :shoot-item="shootItem"
           :shortcut="shortcut"
-          :key="`project-shortcut-${shortcut.id}`"
           :popper-boundaries-selector="popperBoundariesSelector"
           @add-terminal-shortcut="onAddTerminalShortcut"
         >
@@ -42,11 +41,10 @@ SPDX-License-Identifier: Apache-2.0
           </template>
         </terminal-shortcut>
       </template>
-      <template v-for="shortcut in shortcuts">
+      <template v-for="shortcut in shortcuts" :key="`g-shortcut-${shortcut.id}`">
         <terminal-shortcut
           :shoot-item="shootItem"
           :shortcut="shortcut"
-          :key="`g-shortcut-${shortcut.id}`"
           :popper-boundaries-selector="popperBoundariesSelector"
           @add-terminal-shortcut="onAddTerminalShortcut"
         >
