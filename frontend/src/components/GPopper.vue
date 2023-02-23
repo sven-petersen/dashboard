@@ -121,7 +121,7 @@ export default {
      */
     this.$bus.on('esc-pressed', this.closePopper)
   },
-  beforeDestroy () {
+  beforeUnmount () {
     this.$bus.off('esc-pressed', this.closePopper)
   }
 }

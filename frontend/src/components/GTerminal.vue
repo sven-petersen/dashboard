@@ -495,7 +495,7 @@ export default {
     this.spinner = new Spinner(term)
     this.connect()
   },
-  beforeDestroy () {
+  beforeUnmount () {
     this.cancelConnectAndClose()
     if (this.term) {
       this.term.dispose()

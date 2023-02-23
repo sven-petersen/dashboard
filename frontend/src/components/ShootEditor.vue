@@ -516,7 +516,7 @@ export default {
       this.$instance.setOption('theme', value)
     }
   },
-  beforeDestroy () {
+  beforeUnmount () {
     this.destroyInstance()
   }
 }

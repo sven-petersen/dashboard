@@ -130,7 +130,7 @@ export default {
     })
     this.load(this.$route)
   },
-  beforeDestroy () {
+  beforeUnmount () {
     this.unsubscribe()
   }
 }

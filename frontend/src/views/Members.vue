@@ -694,7 +694,7 @@ export default {
   created () {
     this.$bus.on('esc-pressed', this.closeDialogs)
   },
-  beforeDestroy () {
+  beforeUnmount () {
     this.$bus.off('esc-pressed', this.closeDialogs)
   },
   beforeRouteEnter (to, from, next) {
