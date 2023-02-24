@@ -8,7 +8,7 @@ SPDX-License-Identifier: Apache-2.0
   <v-menu
     v-model="value"
     :close-on-content-click="false"
-    :close-on-click="true"
+    :persistent="!(true)"
     offset-y
     nudge-bottom="8"
   >
@@ -38,7 +38,7 @@ SPDX-License-Identifier: Apache-2.0
       </div>
     </template>
     <v-card>
-      <v-alert dense text border="left" min-width="360" :color="color" class="pr-1 ma-0">
+      <v-alert dense text border="start" min-width="360" :color="color" class="pr-1 ma-0">
         <v-row no-gutters>
           <v-col align-self="center" class="grow mr-3">
             <div class="text-body-2">
@@ -50,7 +50,7 @@ SPDX-License-Identifier: Apache-2.0
           </v-col>
           <template v-if="action">
             <v-col align-self="center" class="shrink">
-              <v-btn text :color="color" @click="retry">
+              <v-btn variant="text" :color="color" @click="retry">
                 {{action}}
               </v-btn>
             </v-col>

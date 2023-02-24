@@ -23,7 +23,7 @@ SPDX-License-Identifier: Apache-2.0
           ref="apiUrl"
           label="API URL"
           :error-messages="getErrorMessages('apiUrl')"
-          @input="$v.apiUrl.$touch()"
+          @update:model-value="$v.apiUrl.$touch()"
           @blur="$v.apiUrl.$touch()"
         ></v-text-field>
       </div>
@@ -36,7 +36,7 @@ SPDX-License-Identifier: Apache-2.0
           :type="hideSecret ? 'password' : 'text'"
           @click:append="() => (hideSecret = !hideSecret)"
           :error-messages="getErrorMessages('apiHmac')"
-          @input="$v.apiHmac.$touch()"
+          @update:model-value="$v.apiHmac.$touch()"
           @blur="$v.apiHmac.$touch()"
         ></v-text-field>
       </div>

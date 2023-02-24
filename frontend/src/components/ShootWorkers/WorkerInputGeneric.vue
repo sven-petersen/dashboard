@@ -12,7 +12,7 @@ SPDX-License-Identifier: Apache-2.0
         <v-text-field
           color="primary"
           :error-messages="getErrorMessages('worker.name')"
-          @input="onInputName"
+          @update:model-value="onInputName"
           @blur="$v.worker.name.$touch()"
           v-model="worker.name"
           counter="15"
@@ -80,7 +80,7 @@ SPDX-License-Identifier: Apache-2.0
           min="0"
           color="primary"
           :error-messages="getErrorMessages('worker.minimum')"
-          @input="onInputminimum"
+          @update:model-value="onInputminimum"
           @blur="$v.worker.minimum.$touch()"
           type="number"
           v-model="innerMin"
@@ -91,7 +91,7 @@ SPDX-License-Identifier: Apache-2.0
           min="0"
           color="primary"
           :error-messages="getErrorMessages('worker.maximum')"
-          @input="onInputmaximum"
+          @update:model-value="onInputmaximum"
           @blur="$v.worker.maximum.$touch()"
           type="number"
           v-model="innerMax"
@@ -103,7 +103,7 @@ SPDX-License-Identifier: Apache-2.0
           min="0"
           color="primary"
           :error-messages="getErrorMessages('worker.maxSurge')"
-          @input="onInputMaxSurge"
+          @update:model-value="onInputMaxSurge"
           @blur="$v.worker.maxSurge.$touch()"
           v-model="maxSurge"
           label="Max. Surge"></v-text-field>
@@ -117,11 +117,11 @@ SPDX-License-Identifier: Apache-2.0
           :items="zoneItems"
           :error-messages="getErrorMessages('selectedZones')"
           v-model="selectedZones"
-          @input="onInputZones"
+          @update:model-value="onInputZones"
           @blur="$v.selectedZones.$touch()"
           multiple
           chips
-          deletable-chips
+          closable-chips
           small-chips
           :hint="zoneHint"
           persistent-hint

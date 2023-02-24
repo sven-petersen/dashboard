@@ -20,14 +20,14 @@ SPDX-License-Identifier: Apache-2.0
           label="Search"
           hide-details
           flat
-          solo
+          variant="solo"
           clearable
           v-model="infraSecretFilter"
           @keyup.esc="infraSecretFilter=''"
         ></v-text-field>
-        <v-menu v-if="canCreateSecrets" :nudge-bottom="20" :nudge-right="20" left v-model="createInfraSecretMenu" absolute>
+        <v-menu v-if="canCreateSecrets" :nudge-bottom="20" :nudge-right="20" location="left" v-model="createInfraSecretMenu" absolute>
           <template v-slot:activator="{ on: menu }">
-            <v-tooltip top>
+            <v-tooltip location="top">
               <template v-slot:activator="{ on: tooltip }">
                 <v-btn v-on="{ ...menu, ...tooltip}" icon>
                   <v-icon color="toolbar-title">mdi-plus</v-icon>
@@ -42,7 +42,7 @@ SPDX-License-Identifier: Apache-2.0
               <v-list-item-action>
                 <infra-icon :value="infrastructure" :size="24"></infra-icon>
               </v-list-item-action>
-              <v-list-item-content class="primary--text">
+              <v-list-item-content class="text-primary">
                 <v-list-item-title>
                   {{infrastructure}}
                 </v-list-item-title>
@@ -78,14 +78,14 @@ SPDX-License-Identifier: Apache-2.0
         must-sort
         :search="infraSecretFilter"
       >
-        <template v-slot:item="{ item }">
+        <template #item="{ item }">
           <secret-row-infra
             :item="item"
             :headers="infraSecretTableHeaders"
             :key="`${item.cloudProfileName}/${item.name}`"
             @delete="onRemoveSecret"
             @update="onUpdateSecret"
-          ></secret-row-infra>
+          />
         </template>
       </v-data-table>
     </v-card>
@@ -104,14 +104,14 @@ SPDX-License-Identifier: Apache-2.0
           label="Search"
           hide-details
           flat
-          solo
+          variant="solo"
           clearable
           v-model="dnsSecretFilter"
           @keyup.esc="dnsSecretFilter=''"
         ></v-text-field>
-        <v-menu v-if="canCreateSecrets" :nudge-bottom="20" :nudge-right="20" left v-model="createDnsSecretMenu" absolute>
+        <v-menu v-if="canCreateSecrets" :nudge-bottom="20" :nudge-right="20" location="left" v-model="createDnsSecretMenu" absolute>
           <template v-slot:activator="{ on: menu }">
-            <v-tooltip top>
+            <v-tooltip location="top">
               <template v-slot:activator="{ on: tooltip }">
                 <v-btn v-on="{ ...menu, ...tooltip}" icon>
                   <v-icon color="toolbar-title">mdi-plus</v-icon>
@@ -126,7 +126,7 @@ SPDX-License-Identifier: Apache-2.0
               <v-list-item-action>
                  <infra-icon :value="dnsProvider" :size="24"></infra-icon>
               </v-list-item-action>
-              <v-list-item-content class="primary--text">
+              <v-list-item-content class="text-primary">
                 <v-list-item-title>
                     {{dnsProvider}}
                 </v-list-item-title>
@@ -142,7 +142,7 @@ SPDX-License-Identifier: Apache-2.0
       </v-toolbar>
 
       <v-card-text v-if="!dnsSecretItems.length">
-        <div class="text-h6 grey--text text--darken-1 my-4">Add DNS Secrets to your project</div>
+        <div class="text-h6 text-grey-darken-1 my-4">Add DNS Secrets to your project</div>
         <p class="text-body-1">
           Before you can use your DNS Provider account for your cluster, you need to configure the credentials here.
         </p>

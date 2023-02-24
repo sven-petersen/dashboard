@@ -5,7 +5,7 @@ SPDX-License-Identifier: Apache-2.0
 -->
 
 <template>
-  <v-tooltip top :disabled="noTooltip">
+  <v-tooltip location="top" :disabled="noTooltip">
     <template v-slot:activator="{ on }">
       <span v-on="on" :class="contentClass">{{relDateTimeString}}</span>
     </template>

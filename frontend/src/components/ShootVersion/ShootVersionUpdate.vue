@@ -21,7 +21,7 @@ SPDX-License-Identifier: Apache-2.0
         placeholder="Please select version..."
       >
         <template v-slot:item="{ item }">
-          <v-tooltip top :disabled="!item.notNextMinor">
+          <v-tooltip location="top" :disabled="!item.notNextMinor">
             <template v-slot:activator="{ on }">
               <v-list-item-content v-on="on">
                 <v-list-item-title :class="{'text--disabled': item.notNextMinor}">{{item.text}}</v-list-item-title>
@@ -35,7 +35,7 @@ SPDX-License-Identifier: Apache-2.0
         </template>
       </v-select>
     </hint-colorizer>
-    <v-alert type="warning" outlined v-if="currentK8sVersion.expirationDate && !selectedItem">Current Kubernetes version expires on: {{currentK8sVersion.expirationDateString}}. Kubernetes update will be enforced after that date.</v-alert>
+    <v-alert type="warning" variant="outlined" v-if="currentK8sVersion.expirationDate && !selectedItem">Current Kubernetes version expires on: {{currentK8sVersion.expirationDateString}}. Kubernetes update will be enforced after that date.</v-alert>
   </div>
 </template>
 

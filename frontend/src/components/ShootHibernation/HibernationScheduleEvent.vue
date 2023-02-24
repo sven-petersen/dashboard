@@ -15,7 +15,7 @@ SPDX-License-Identifier: Apache-2.0
           v-model="selectedDays"
           ref="selectedDays"
           @blur="touchIfNothingFocused"
-          @input="onInputSelectedDays"
+          @update:model-value="onInputSelectedDays"
           :items="weekdays"
           return-object
           :error-messages="getErrorMessages('selectedDays')"
@@ -23,7 +23,7 @@ SPDX-License-Identifier: Apache-2.0
           label="Weekdays on which this rule shall be active"
           multiple
           small-chips
-          deletable-chips
+          closable-chips
         ></v-select>
         </v-col>
         <v-col cols="2">
@@ -33,7 +33,7 @@ SPDX-License-Identifier: Apache-2.0
             v-model="wakeUpTime"
             ref="wakeUpTime"
             @blur="touchIfNothingFocused"
-            @input="onInputWakeUpTime"
+            @update:model-value="onInputWakeUpTime"
             :error-messages="getErrorMessages('wakeUpTime')"
             type="time"
             clearable
@@ -46,7 +46,7 @@ SPDX-License-Identifier: Apache-2.0
             v-model="hibernateTime"
             ref="hibernateTime"
             @blur="touchIfNothingFocused"
-            @input="onInputHibernateTime"
+            @update:model-value="onInputHibernateTime"
             :error-messages="getErrorMessages('hibernateTime')"
             type="time"
             clearable
@@ -58,7 +58,7 @@ SPDX-License-Identifier: Apache-2.0
             label="Location"
             :items="locations"
             v-model="selectedLocation"
-            @input="onInputSelectedLocation"
+            @update:model-value="onInputSelectedLocation"
             append-icon="mdi-map-marker-outline"
             >
           </v-autocomplete>
@@ -67,8 +67,8 @@ SPDX-License-Identifier: Apache-2.0
     </v-col>
     <v-col cols="1">
       <v-btn
-        small
-        outlined
+        size="small"
+        variant="outlined"
         icon
         color="grey"
         @click.stop="removeScheduleEvent">

@@ -13,13 +13,13 @@ SPDX-License-Identifier: Apache-2.0
       <v-list-item-content class="py-0">
         <v-list-item-title>
           {{shortcut.title}}
-          <v-tooltip v-if="isUnverified" top max-width="400px">
+          <v-tooltip v-if="isUnverified" location="top" max-width="400px">
             <template v-slot:activator="{ on }">
               <v-chip
                 v-on="on"
                 small
                 class="my-0 ml-2 enablePointerEvents"
-                outlined
+                variant="outlined"
                 color="warning">
                 Unverified
               </v-chip>
@@ -32,7 +32,7 @@ SPDX-License-Identifier: Apache-2.0
         </v-list-item-subtitle>
       </v-list-item-content>
       <v-list-item-action v-if="!readOnly" class="mx-0">
-        <v-tooltip top>
+        <v-tooltip location="top">
           <template v-slot:activator="{ on }">
             <div v-on="on">
               <v-btn icon @click.stop="addTerminalShortcut(shortcut)" :disabled="disabled" class="enablePointerEvents" color="action-button">
@@ -49,7 +49,7 @@ SPDX-License-Identifier: Apache-2.0
         </v-tooltip>
       </v-list-item-action>
       <v-list-item-action class="mx-0">
-        <v-tooltip top>
+        <v-tooltip location="top">
           <template v-slot:activator="{ on }">
             <v-btn v-on="on" icon @click.stop="expansionPanel = !expansionPanel" class="enablePointerEvents" color="action-button">
               <v-icon>{{visibilityIconShortcut}}</v-icon>

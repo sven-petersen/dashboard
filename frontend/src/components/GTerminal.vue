@@ -10,7 +10,7 @@ SPDX-License-Identifier: Apache-2.0
       v-model="snackbarTop"
       :timeout="-1"
       :absolute="true"
-      :top="true"
+      :location="true && 'top'"
       multi-line
     >
       <div>{{ snackbarText }}</div>
@@ -23,15 +23,15 @@ SPDX-License-Identifier: Apache-2.0
       >
         {{snackbarDetailsText}}
         <template v-slot:popperRef>
-          <v-btn text small color="primary">
+          <v-btn variant="text" size="small" color="primary">
             Details
           </v-btn>
         </template>
       </g-popper>
-      <v-btn text color="primary" @click="retry">
+      <v-btn variant="text" color="primary" @click="retry">
         Retry
       </v-btn>
-      <v-btn text color="primary" @click="hideSnackbarAndClose">
+      <v-btn variant="text" color="primary" @click="hideSnackbarAndClose">
         Close
       </v-btn>
     </v-snackbar>
@@ -39,25 +39,25 @@ SPDX-License-Identifier: Apache-2.0
       v-model="errorSnackbarBottom"
       :timeout="-1"
       :absolute="true"
-      :bottom="true"
+      :location="true && 'bottom'"
       color="error"
     >
       {{ snackbarText }}
-      <v-btn text @click="hideSnackbarAndClose">
+      <v-btn variant="text" @click="hideSnackbarAndClose">
         Close
       </v-btn>
     </v-snackbar>
     <drag-n-droppable-component :uuid="uuid">
       <template v-slot:handle>
         <v-system-bar dark class="systemBarTop" :class="backgroundClass" @click="focus">
-          <v-btn icon small color="grey lighten-1" class="text-none systemBarButton mx-1 g-ignore-drag" @click="deleteTerminal">
-            <v-icon class="mr-0" small>mdi-close</v-icon>
+          <v-btn icon size="small" color="grey-lighten-1" class="text-none systemBarButton mx-1 g-ignore-drag" @click="deleteTerminal">
+            <v-icon class="mr-0" size="small">mdi-close</v-icon>
           </v-btn>
           <v-spacer></v-spacer>
           <v-icon class="pr-2">mdi-console</v-icon>
           <span>{{terminalTitle}}</span>
           <v-spacer></v-spacer>
-          <v-tooltip v-if="terminalSession.imageHelpText" top class="g-ignore-drag">
+          <v-tooltip v-if="terminalSession.imageHelpText" location="top" class="g-ignore-drag">
             <template v-slot:activator="{ on: tooltip }">
               <!-- g-popper boundaries-selector: The id must not start with a digit. QuerySelector method uses CSS3 selectors for querying the DOM and CSS3 doesn't support ID selectors that start with a digit -->
               <g-popper
@@ -68,8 +68,8 @@ SPDX-License-Identifier: Apache-2.0
               >
                 <span v-html="imageHelpHtml"></span>
                 <template v-slot:popperRef>
-                  <v-btn v-on="tooltip" v-if="terminalSession.imageHelpText" icon small color="grey lighten-1" class="text-none systemBarButton mx-1 g-ignore-drag">
-                    <v-icon class="mr-0" small>mdi-help-circle-outline</v-icon>
+                  <v-btn v-on="tooltip" v-if="terminalSession.imageHelpText" icon size="small" color="grey-lighten-1" class="text-none systemBarButton mx-1 g-ignore-drag">
+                    <v-icon class="mr-0" size="small">mdi-help-circle-outline</v-icon>
                   </v-btn>
                 </template>
               </g-popper>
@@ -77,19 +77,19 @@ SPDX-License-Identifier: Apache-2.0
             Help
           </v-tooltip>
           <v-menu
-            bottom
+            location="bottom"
             offset-y
             dark
             min-width="400px"
           >
             <template v-slot:activator="{ on: menu }">
-              <v-btn v-on="menu" icon small color="grey lighten-1" class="text-none systemBarButton mx-1 g-ignore-drag">
-                <v-icon class="mr-0" small>mdi-menu</v-icon>
+              <v-btn v-on="menu" icon size="small" color="grey-lighten-1" class="text-none systemBarButton mx-1 g-ignore-drag">
+                <v-icon class="mr-0" size="small">mdi-menu</v-icon>
               </v-btn>
             </template>
-            <v-card tile>
+            <v-card rounded="0">
               <v-card-actions>
-                <v-btn small block text class="justify-start" @click="split('horizontal')">
+                <v-btn size="small" block variant="text" class="justify-start" @click="split('horizontal')">
                   <icon-base width="16" height="16" view-box="0 -2 20 20" class="mr-2">
                     <split-vertically></split-vertically>
                   </icon-base>
@@ -99,7 +99,7 @@ SPDX-License-Identifier: Apache-2.0
                 </v-btn>
               </v-card-actions>
               <v-card-actions>
-                <v-btn small block text class="justify-start" @click="split('vertical')">
+                <v-btn size="small" block variant="text" class="justify-start" @click="split('vertical')">
                   <icon-base width="16" height="16" view-box="0 -2 20 20" class="mr-2">
                     <split-horizontally></split-horizontally>
                   </icon-base>
@@ -110,8 +110,8 @@ SPDX-License-Identifier: Apache-2.0
               </v-card-actions>
               <v-divider class="mt-1 mb-1"></v-divider>
               <v-card-actions>
-                <v-btn small block text class="justify-start" @click="configure('settingsBtn')" :loading="loading.settingsBtn">
-                  <v-icon small class="mr-2">mdi-cog</v-icon>
+                <v-btn size="small" block variant="text" class="justify-start" @click="configure('settingsBtn')" :loading="loading.settingsBtn">
+                  <v-icon size="small" class="mr-2">mdi-cog</v-icon>
                   Settings
                 </v-btn>
               </v-card-actions>
@@ -124,28 +124,28 @@ SPDX-License-Identifier: Apache-2.0
         <v-system-bar dark class="systemBarBottom" :class="backgroundClass">
           <v-menu
             v-model="connectionMenu"
-            top
+            location="top"
             offset-y
             dark
           >
             <template v-slot:activator="{ on: menu }">
-              <v-tooltip :disabled="connectionMenu" top style="min-width: 110px">
+              <v-tooltip :disabled="connectionMenu" location="top" style="min-width: 110px">
                 <template v-slot:activator="{ on: tooltip }">
-                  <v-btn v-on="{ ...tooltip, ...menu }" small text color="grey lighten-1" class="text-none systemBarButton">
+                  <v-btn v-on="{ ...tooltip, ...menu }" size="small" variant="text" color="grey-lighten-1" class="text-none systemBarButton">
                     <icon-base width="18" height="18" view-box="-2 -2 30 30" icon-color="#bdbdbd" class="mr-2">
                       <connected v-if="terminalSession.connectionState === TerminalSession.CONNECTED"></connected>
                       <disconnected v-else></disconnected>
                     </icon-base>
-                    <span class="text-none grey--text text--lighten-1" style="font-size: 13px">{{connectionStateText}}</span>
+                    <span class="text-none text-grey-lighten-1" style="font-size: 13px">{{connectionStateText}}</span>
                   </v-btn>
                 </template>
                 {{terminalSession.detailedConnectionStateText || connectionStateText}}
               </v-tooltip>
             </template>
-            <v-card tile>
+            <v-card rounded="0">
               <v-card-actions v-if="terminalSession.connectionState === TerminalSession.DISCONNECTED">
-                <v-btn small text class="action-button" @click="retry()">
-                  <v-icon small left>mdi-reload</v-icon>
+                <v-btn size="small" variant="text" class="action-button" @click="retry()">
+                  <v-icon size="small" start>mdi-reload</v-icon>
                   Reconnect
                 </v-btn>
               </v-card-actions>
@@ -155,9 +155,9 @@ SPDX-License-Identifier: Apache-2.0
             </v-card>
           </v-menu>
 
-          <v-tooltip v-if="imageShortText" top>
+          <v-tooltip v-if="imageShortText" location="top">
             <template v-slot:activator="{ on: tooltip }">
-              <v-btn v-on="tooltip" text @click="configure('imageBtn')" :loading="loading.imageBtn" color="grey lighten-1" class="text-none systemBarButton">
+              <v-btn v-on="tooltip" variant="text" @click="configure('imageBtn')" :loading="loading.imageBtn" color="grey-lighten-1" class="text-none systemBarButton">
                 <v-icon class="mr-2">mdi-layers-triple-outline</v-icon>
                 <span>{{imageShortText}}</span>
               </v-btn>
@@ -165,9 +165,9 @@ SPDX-License-Identifier: Apache-2.0
             Image: {{terminalSession.container.image}}
           </v-tooltip>
 
-          <v-tooltip v-if="privilegedMode !== undefined && target === 'shoot'" top>
+          <v-tooltip v-if="privilegedMode !== undefined && target === 'shoot'" location="top">
             <template v-slot:activator="{ on: tooltip }">
-              <v-btn v-on="tooltip" small text @click="configure('secContextBtn')" :loading="loading.secContextBtn" color="grey lighten-1" class="text-none systemBarButton">
+              <v-btn v-on="tooltip" size="small" variant="text" @click="configure('secContextBtn')" :loading="loading.secContextBtn" color="grey-lighten-1" class="text-none systemBarButton">
                 <v-icon class="mr-2">mdi-shield-account</v-icon>
                 <span>{{privilegedModeText}}</span>
               </v-btn>
@@ -177,9 +177,9 @@ SPDX-License-Identifier: Apache-2.0
             <strong>Host Network:</strong> {{terminalSession.hostNetwork}}
           </v-tooltip>
 
-          <v-tooltip v-if="terminalSession.node && target === 'shoot'" top>
+          <v-tooltip v-if="terminalSession.node && target === 'shoot'" location="top">
             <template v-slot:activator="{ on: tooltip }">
-              <v-btn v-on="tooltip" small text @click="configure('nodeBtn')" :loading="loading.nodeBtn" color="grey lighten-1" class="text-none systemBarButton">
+              <v-btn v-on="tooltip" size="small" variant="text" @click="configure('nodeBtn')" :loading="loading.nodeBtn" color="grey-lighten-1" class="text-none systemBarButton">
                 <v-icon :size="14" class="mr-2">mdi-server</v-icon>
                 <span>{{terminalSession.node}}</span>
               </v-btn>

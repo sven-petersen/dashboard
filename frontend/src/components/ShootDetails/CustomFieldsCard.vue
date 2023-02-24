@@ -19,7 +19,7 @@ SPDX-License-Identifier: Apache-2.0
           <v-list-item-content>
             <v-list-item-subtitle>{{customField.name}}</v-list-item-subtitle>
             <v-list-item-title class="pt-1">
-              <v-tooltip top v-if="customField.tooltip">
+              <v-tooltip location="top" v-if="customField.tooltip">
                 <template v-slot:activator="{ on }">
                   <span v-on="on">{{customField.value}}</span>
                 </template>

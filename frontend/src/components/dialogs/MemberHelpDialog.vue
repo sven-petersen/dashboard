@@ -8,25 +8,25 @@ SPDX-License-Identifier: Apache-2.0
   <v-dialog v-model="visible" max-width="650">
     <v-card :class="cardClass">
       <v-card-title class="toolbar-background">
-        <v-icon large class="toolbar-title--text">mdi-account-plus</v-icon>
+        <v-icon size="large" class="toolbar-title--text">mdi-account-plus</v-icon>
         <span class="text-h5 ml-5 toolbar-title--text">{{ title}}</span>
       </v-card-title>
       <v-card-text>
         <template v-if="isUserDialog">
-          <div class="text-h6 grey--text text--darken-1 my-4">Add users to your project.</div>
+          <div class="text-h6 text-grey-darken-1 my-4">Add users to your project.</div>
           <p class="text-body-1">
             Adding users to your project allows you to collaborate across your team.
             Access to resources within your project can be configured by assigning roles.
           </p>
         </template>
         <template v-if="isServiceDialog">
-          <div class="text-h6 grey--text text--darken-1 my-4">Add service accounts to your project.</div>
+          <div class="text-h6 text-grey-darken-1 my-4">Add service accounts to your project.</div>
           <p class="text-body-1">
             Adding service accounts to your project allows you to automate processes in your project.
             Access to resources within your project can be configured by assigning roles.
           </p>
         </template>
-         <div class="text-h6 grey--text text--darken-1 my-4">Assign roles to your members.</div>
+         <div class="text-h6 text-grey-darken-1 my-4">Assign roles to your members.</div>
           <p class="text-body-1">
             Add roles to your members to gain access to resources of this project. Currently supported built-in roles are:
             <ul>
@@ -51,7 +51,7 @@ SPDX-License-Identifier: Apache-2.0
       <v-divider></v-divider>
       <v-card-actions>
         <v-spacer></v-spacer>
-        <v-btn text @click.stop="hide" class="primary--text" tabindex="2">Ok</v-btn>
+        <v-btn variant="text" @click.stop="hide" class="text-primary" tabindex="2">Ok</v-btn>
       </v-card-actions>
     </v-card>
   </v-dialog>

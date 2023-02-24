@@ -20,12 +20,12 @@ SPDX-License-Identifier: Apache-2.0
           label="Search"
           hide-details
           flat
-          solo
+          variant="solo"
           clearable
           v-model="userFilter"
           @keyup.esc="userFilter=''"
         ></v-text-field>
-        <v-tooltip top v-if="allEmails" >
+        <v-tooltip location="top" v-if="allEmails" >
           <template v-slot:activator="{ on }">
             <v-btn v-on="on" icon :href="`mailto:${allEmails}`">
               <v-icon color="toolbar-title">mdi-email-outline</v-icon>
@@ -33,7 +33,7 @@ SPDX-License-Identifier: Apache-2.0
           </template>
           <span>Mail to all Members</span>
         </v-tooltip>
-        <v-tooltip top v-if="canManageMembers" >
+        <v-tooltip location="top" v-if="canManageMembers" >
           <template v-slot:activator="{ on }">
             <v-btn v-on="on" icon @click.stop="openUserAddDialog">
               <v-icon color="toolbar-title">mdi-plus</v-icon>
@@ -41,7 +41,7 @@ SPDX-License-Identifier: Apache-2.0
           </template>
           <span>Add Member</span>
         </v-tooltip>
-        <v-tooltip top v-if="canManageMembers" >
+        <v-tooltip location="top" v-if="canManageMembers" >
           <template v-slot:activator="{ on }">
             <v-btn v-on="on" color="toolbar-title" icon @click.stop="openUserHelpDialog">
               <v-icon color="toolbar-title">mdi-help-circle-outline</v-icon>
@@ -57,7 +57,7 @@ SPDX-License-Identifier: Apache-2.0
       </v-toolbar>
 
       <v-card-text v-if="!userList.length">
-        <div class="text-h6 grey--text text--darken-1 my-4">Add users to your project.</div>
+        <div class="text-h6 text-grey-darken-1 my-4">Add users to your project.</div>
         <p class="text-body-1">
           Adding users to your project allows you to collaborate across your team.
           Access to resources within your project can be configured by assigning roles.
@@ -99,12 +99,12 @@ SPDX-License-Identifier: Apache-2.0
           label="Search"
           hide-details
           flat
-          solo
+          variant="solo"
           clearable
           v-model="serviceAccountFilter"
           @keyup.esc="serviceAccountFilter=''"
         ></v-text-field>
-        <v-tooltip top v-if="canManageServiceAccountMembers && canCreateServiceAccounts" >
+        <v-tooltip location="top" v-if="canManageServiceAccountMembers && canCreateServiceAccounts" >
           <template v-slot:activator="{ on }">
             <v-btn v-on="on" icon @click.stop="openServiceAccountAddDialog">
               <v-icon color="toolbar-title">mdi-plus</v-icon>
@@ -112,7 +112,7 @@ SPDX-License-Identifier: Apache-2.0
           </template>
           <span>Create Service Account</span>
         </v-tooltip>
-        <v-tooltip top>
+        <v-tooltip location="top">
           <template v-slot:activator="{ on }">
             <v-btn v-on="on" icon @click.stop="openServiceAccountHelpDialog">
               <v-icon color="toolbar-title">mdi-help-circle-outline</v-icon>
@@ -128,7 +128,7 @@ SPDX-License-Identifier: Apache-2.0
       </v-toolbar>
 
       <v-card-text v-if="!serviceAccountList.length">
-        <div class="text-h6 grey--text text--darken-1 my-4">Add service accounts to your project.</div>
+        <div class="text-h6 text-grey-darken-1 my-4">Add service accounts to your project.</div>
         <p class="text-body-1">
           Adding service accounts to your project allows you to automate processes in your project.
           Access to resources within your project can be configured by assigning roles.

@@ -40,15 +40,15 @@ SPDX-License-Identifier: Apache-2.0
           hide-details
           v-model="userInput"
           type="text"
-          outlined
+          variant="outlined"
           color="primary"
           dense>
         </v-text-field>
-        <v-btn text @click="resolveAction(false)" v-if="cancelButtonText.length">{{cancelButtonText}}</v-btn>
-        <v-tooltip top :disabled="valid">
+        <v-btn variant="text" @click="resolveAction(false)" v-if="cancelButtonText.length">{{cancelButtonText}}</v-btn>
+        <v-tooltip location="top" :disabled="valid">
           <template v-slot:activator="{ on }">
             <div v-on="on">
-              <v-btn text @click="resolveAction(true)" :disabled="!valid" class="toolbar-background--text">{{confirmButtonText}}</v-btn>
+              <v-btn variant="text" @click="resolveAction(true)" :disabled="!valid" class="toolbar-background--text">{{confirmButtonText}}</v-btn>
             </div>
           </template>
           <span v-if="confirmDisabled">There are input errors that you need to resolve</span>

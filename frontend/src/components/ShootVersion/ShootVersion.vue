@@ -6,22 +6,22 @@ SPDX-License-Identifier: Apache-2.0
 
 <template>
   <div>
-    <v-tooltip top>
+    <v-tooltip location="top">
       <template v-slot:activator="{ on: tooltip }">
         <div v-on="tooltip">
           <v-btn
             v-if="chip"
             class="update_btn"
             :class="buttonInactive"
-            small
+            size="small"
             rounded
             @click="showUpdateDialog"
-            :outlined="!k8sPatchAvailable"
+            :variant="!k8sPatchAvailable && 'outlined'"
             :ripple="canUpdate"
-            depressed
+            variant="flat"
             color="primary"
           >
-            <v-icon small v-if="availableK8sUpdates">mdi-menu-up</v-icon>
+            <v-icon size="small" v-if="availableK8sUpdates">mdi-menu-up</v-icon>
             {{shootK8sVersion}}
           </v-btn>
           <v-btn
@@ -74,13 +74,13 @@ SPDX-License-Identifier: Apache-2.0
           <p>
             Type <strong>{{shootName}}</strong> below and confirm to upgrade the Kubernetes version of your cluster.<br /><br />
           </p>
-          <em class="warning--text">This action cannot be undone.</em>
+          <em class="text-warning">This action cannot be undone.</em>
         </template>
         <template v-if="!selectedVersionInvalid && selectedVersionType === 'patch'">
           <p>
             Applying a patch to your cluster will increase the Kubernetes version which can lead to unexpected side effects.
           </p>
-          <em class="warning--text">This action cannot be undone.</em>
+          <em class="text-warning">This action cannot be undone.</em>
         </template>
       </template>
     </g-dialog>

@@ -63,12 +63,12 @@ SPDX-License-Identifier: Apache-2.0
       <v-expand-transition appear>
         <v-alert
           type="warning"
-          outlined
-          tile
+          variant="outlined"
+          rounded="0"
           prominent
           v-if="networkConfiguration.length"
-          dismissible
-          @input="setNetworkConfiguration(undefined)"
+          closable
+          @update:model-value="setNetworkConfiguration(undefined)"
           class="mx-1">
           <span>Adding addtional zones will extend the zone network configuration by adding new networks to your cluster:</span>
           <code-block

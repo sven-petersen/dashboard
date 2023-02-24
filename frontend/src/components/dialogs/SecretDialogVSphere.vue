@@ -23,7 +23,7 @@ SPDX-License-Identifier: Apache-2.0
         ref="vsphereUsername"
         label="vSphere Username"
         :error-messages="getErrorMessages('vsphereUsername')"
-        @input="$v.vsphereUsername.$touch()"
+        @update:model-value="$v.vsphereUsername.$touch()"
         @blur="$v.vsphereUsername.$touch()"
         ></v-text-field>
       </div>
@@ -36,7 +36,7 @@ SPDX-License-Identifier: Apache-2.0
           :append-icon="hideVspherePassword ? 'mdi-eye' : 'mdi-eye-off'"
           :type="hideVspherePassword ? 'password' : 'text'"
           @click:append="() => (hideVspherePassword = !hideVspherePassword)"
-          @input="$v.vspherePassword.$touch()"
+          @update:model-value="$v.vspherePassword.$touch()"
           @blur="$v.vspherePassword.$touch()"
         ></v-text-field>
       </div>
@@ -46,7 +46,7 @@ SPDX-License-Identifier: Apache-2.0
         v-model="nsxtUsername"
         label="NSX-T Username"
         :error-messages="getErrorMessages('nsxtUsername')"
-        @input="$v.nsxtUsername.$touch()"
+        @update:model-value="$v.nsxtUsername.$touch()"
         @blur="$v.nsxtUsername.$touch()"
         ></v-text-field>
       </div>
@@ -59,7 +59,7 @@ SPDX-License-Identifier: Apache-2.0
           :append-icon="hideNsxtPassword ? 'mdi-eye' : 'mdi-eye-off'"
           :type="hideNsxtPassword ? 'password' : 'text'"
           @click:append="() => (hideNsxtPassword = !hideNsxtPassword)"
-          @input="$v.nsxtPassword.$touch()"
+          @update:model-value="$v.nsxtPassword.$touch()"
           @blur="$v.nsxtPassword.$touch()"
         ></v-text-field>
       </div>

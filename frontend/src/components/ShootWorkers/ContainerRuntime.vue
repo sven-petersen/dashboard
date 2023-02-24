@@ -13,7 +13,7 @@ SPDX-License-Identifier: Apache-2.0
         item-color="primary"
         :items="criItems"
         :error-messages="getErrorMessages('criName')"
-        @input="onInputCriName"
+        @update:model-value="onInputCriName"
         @blur="$v.criName.$touch()"
         v-model="criName"
         label="Container Runtime"
@@ -32,7 +32,7 @@ SPDX-License-Identifier: Apache-2.0
       multiple
       chips
       small-chips
-      deletable-chips
+      closable-chips
     ></v-select>
   </div>
 </template>

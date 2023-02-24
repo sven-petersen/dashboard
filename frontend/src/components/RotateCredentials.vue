@@ -22,8 +22,8 @@ SPDX-License-Identifier: Apache-2.0
       <v-row >
         <v-col>
           <div class="py-4 text-h5 pt-0 pb-3">{{componentTexts.heading}}</div>
-          <v-alert v-if="mode === 'START'" type="info" outlined dense>Note: This rotation operation is split into two steps. This step will <strong>prepare</strong> the rotation.</v-alert>
-          <v-alert v-if="mode === 'COMPLETE'" type="info" outlined dense>Note: This rotation operation is split into two steps. This step will <strong>complete</strong> the rotation.</v-alert>
+          <v-alert v-if="mode === 'START'" type="info" variant="outlined" dense>Note: This rotation operation is split into two steps. This step will <strong>prepare</strong> the rotation.</v-alert>
+          <v-alert v-if="mode === 'COMPLETE'" type="info" variant="outlined" dense>Note: This rotation operation is split into two steps. This step will <strong>complete</strong> the rotation.</v-alert>
           <strong>Actions performed in this step</strong>
           <ul>
             <li

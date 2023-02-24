@@ -13,7 +13,7 @@ SPDX-License-Identifier: Apache-2.0
       hint="Image to be used for the Container"
       persistent-hint
       :error-messages="getErrorMessages('selectedContainerImage')"
-      @input="$v.selectedContainerImage.$touch()"
+      @update:model-value="$v.selectedContainerImage.$touch()"
       @blur="$v.selectedContainerImage.$touch()"
     >
     </v-text-field>
@@ -89,7 +89,7 @@ SPDX-License-Identifier: Apache-2.0
         :value="true"
         type="info"
         color="primary"
-        outlined
+        variant="outlined"
       >
         <strong>Terminal will be running in an untrusted environment!</strong><br>
         Do not enter credentials or sensitive data within the terminal session that cluster owners should not have access to, as the terminal will be running on one of the worker nodes.

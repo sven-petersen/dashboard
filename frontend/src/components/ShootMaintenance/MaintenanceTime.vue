@@ -12,7 +12,7 @@ SPDX-License-Identifier: Apache-2.0
         label="Maintenance Start Time"
         v-model="maintenanceBegin"
         :error-messages="getErrorMessages('maintenanceBegin')"
-        @input="onInputmaintenanceBegin"
+        @update:model-value="onInputmaintenanceBegin"
         @blur="$v.maintenanceBegin.$touch()"
         type="time"
         persistent-hint
@@ -25,7 +25,7 @@ SPDX-License-Identifier: Apache-2.0
         label="Timezone"
         v-model="maintenanceTimezone"
         :error-messages="getErrorMessages('maintenanceTimezone')"
-        @input="onInputmaintenanceTimezone"
+        @update:model-value="onInputmaintenanceTimezone"
         @blur="$v.maintenanceTimezone.$touch()"
       ></v-text-field>
     </v-col>

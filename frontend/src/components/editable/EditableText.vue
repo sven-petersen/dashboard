@@ -12,10 +12,10 @@ SPDX-License-Identifier: Apache-2.0
     <v-menu
       v-else
       ref="menu"
-      :close-on-click="true"
+      :persistent="!(true)"
       :close-on-content-click="false"
       origin="top left"
-      left
+      location="left"
       transition="slide-x-reverse-transition"
       :max-width="contentWidth"
       v-model="isActive"
@@ -50,7 +50,7 @@ SPDX-License-Identifier: Apache-2.0
           autocomplete="off"
           v-model="internalValue"
           @update:error="value => error = value"
-          solo
+          variant="solo"
           flat
           single-line
           hide-details="auto"
@@ -60,7 +60,7 @@ SPDX-License-Identifier: Apache-2.0
           :color="color"
         >
           <template v-slot:append>
-            <v-tooltip top>
+            <v-tooltip location="top">
               <template v-slot:activator="{ on }">
                 <v-btn v-on="on" :disabled="error" icon color="success" @click="onSave">
                   <v-icon>mdi-check</v-icon>

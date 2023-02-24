@@ -30,7 +30,7 @@ SPDX-License-Identifier: Apache-2.0
                   v-model.trim="name"
                   label="Secret Name"
                   :error-messages="getErrorMessages('name')"
-                  @input="$v.name.$touch()"
+                  @update:model-value="$v.name.$touch()"
                   @blur="$v.name.$touch()"
                 ></v-text-field>
               </template>
@@ -58,17 +58,17 @@ SPDX-License-Identifier: Apache-2.0
           </v-slide-x-reverse-transition>
        </div>
       </v-card-text>
-      <v-alert :value="!isCreateMode && relatedShootCount > 0" type="warning" tile>
+      <v-alert :value="!isCreateMode && relatedShootCount > 0" type="warning" rounded="0">
         This secret is used by {{relatedShootCount}} clusters. The new secret should be part of the same account as the one that gets replaced.
       </v-alert>
-       <v-alert :value="!isCreateMode && relatedShootCount > 0" type="warning" tile>
+       <v-alert :value="!isCreateMode && relatedShootCount > 0" type="warning" rounded="0">
         Clusters will only start using the new secret after they got reconciled. Therefore, wait until all clusters using the secret are reconciled before you disable the old secret in your infrastructure account. Otherwise the clusters will no longer function.
       </v-alert>
       <v-divider></v-divider>
       <v-card-actions>
         <v-spacer></v-spacer>
-        <v-btn text @click="cancel">Cancel</v-btn>
-        <v-btn text @click="submit" color="primary" :disabled="!valid">{{submitButtonText}}</v-btn>
+        <v-btn variant="text" @click="cancel">Cancel</v-btn>
+        <v-btn variant="text" @click="submit" color="primary" :disabled="!valid">{{submitButtonText}}</v-btn>
       </v-card-actions>
     </v-card>
   </v-dialog>

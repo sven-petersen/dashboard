@@ -45,7 +45,7 @@ SPDX-License-Identifier: Apache-2.0
             class="ml-1" />
           </v-list-item-title>
           <v-list-item-subtitle>
-            <v-tooltip top>
+            <v-tooltip location="top">
               <template v-slot:activator="{ on }">
                 <div class="d-flex align-center pt-1" v-on="on">
                   <shoot-messages :shoot-item="shootItem" filter="maintenance-constraint" small class="mr-1" />

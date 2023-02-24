@@ -22,22 +22,22 @@ SPDX-License-Identifier: Apache-2.0
         transition="slide-y-transition"
       >
         <template v-slot:activator="{ on: menu }">
-          <v-tooltip left open-delay="500">
+          <v-tooltip location="left" open-delay="500">
             <template v-slot:activator="{ on: tooltip }">
               <v-btn v-on="{ ...tooltip, ...menu }" icon color="primary">
-                <v-icon medium>mdi-help-circle-outline</v-icon>
+                <v-icon size="medium">mdi-help-circle-outline</v-icon>
               </v-btn>
             </template>
             <span>Info</span>
           </v-tooltip>
         </template>
-        <v-card tile width="300px">
+        <v-card rounded="0" width="300px">
           <v-card-title primary-title>
             <div class="content text-h6 mb-2">Gardener</div>
           </v-card-title>
           <v-divider></v-divider>
           <v-card-actions class="px-3">
-            <v-btn block text color="primary" class="justify-start" @click="infoDialog=true" title="About">
+            <v-btn block variant="text" color="primary" class="justify-start" @click="infoDialog=true" title="About">
               <v-icon color="primary" class="mr-3">mdi-information-outline</v-icon>
               About
             </v-btn>
@@ -45,7 +45,7 @@ SPDX-License-Identifier: Apache-2.0
           <template :key="index" v-for="(item, index) in helpMenuItems">
             <v-divider></v-divider>
             <v-card-actions class="px-3">
-              <v-btn block text color="primary" class="justify-start" :href="item.url" :target="helpTarget(item)" :title="item.title">
+              <v-btn block variant="text" color="primary" class="justify-start" :href="item.url" :target="helpTarget(item)" :title="item.title">
                 <v-icon color="primary" class="mr-3">{{item.icon}}</v-icon>
                 {{item.title}}
                 <v-icon color="primary" class="link-icon">mdi-open-in-new</v-icon>
@@ -65,7 +65,7 @@ SPDX-License-Identifier: Apache-2.0
         transition="slide-y-transition"
       >
         <template v-slot:activator="{ on: menu }">
-          <v-tooltip left open-delay="500">
+          <v-tooltip location="left" open-delay="500">
             <template v-slot:activator="{ on: tooltip }">
               <v-badge v-if="isAdmin" color="primary" bottom overlap icon="mdi-account-supervisor">
                 <v-avatar v-on="{ ...menu, ...tooltip }" size="40px" class="cursor-pointer">
@@ -89,32 +89,32 @@ SPDX-License-Identifier: Apache-2.0
           </v-tooltip>
         </template>
 
-        <v-card tile>
+        <v-card rounded="0">
           <v-card-title primary-title>
             <div class="content">
               <div class="text-h6">{{displayName}}</div>
               <div class="text-caption">{{username}}</div>
               <div class="text-caption" v-if="isAdmin">Operator</div>
               <v-btn-toggle v-model="colorSchemeIndex" borderless mandatory @click.stop class="mt-3">
-                <v-tooltip top>
+                <v-tooltip location="top">
                   <template v-slot:activator="{ on }">
-                    <v-btn small v-on="on">
+                    <v-btn size="small" v-on="on">
                       <v-icon color="primary">mdi-white-balance-sunny</v-icon>
                     </v-btn>
                   </template>
                   <span>Light Mode</span>
                 </v-tooltip>
-                <v-tooltip top>
+                <v-tooltip location="top">
                   <template v-slot:activator="{ on }">
-                    <v-btn small v-on="on">
+                    <v-btn size="small" v-on="on">
                       <v-icon color="primary">mdi-weather-night</v-icon>
                     </v-btn>
                   </template>
                   <span>Dark Mode</span>
                 </v-tooltip>
-                <v-tooltip top>
+                <v-tooltip location="top">
                   <template v-slot:activator="{ on }">
-                    <v-btn small v-on="on">
+                    <v-btn size="small" v-on="on">
                       <v-icon color="primary">mdi-brightness-auto</v-icon>
                     </v-btn>
                   </template>
@@ -125,20 +125,20 @@ SPDX-License-Identifier: Apache-2.0
           </v-card-title>
           <v-divider></v-divider>
           <v-card-actions class="px-3">
-            <v-btn block text color="primary" class="justify-start" :to="accountLink" title="My Account">
+            <v-btn block variant="text" color="primary" class="justify-start" :to="accountLink" title="My Account">
               <v-icon class="mr-3">mdi-account-circle</v-icon>
               My Account
             </v-btn>
           </v-card-actions>
           <v-card-actions class="px-3 pt-1">
-            <v-btn block text color="secondary" class="justify-start" :to="settingsLink" title="Setting">
+            <v-btn block variant="text" color="secondary" class="justify-start" :to="settingsLink" title="Setting">
               <v-icon class="mr-3">mdi-cog</v-icon>
               Settings
             </v-btn>
           </v-card-actions>
           <v-divider></v-divider>
           <v-card-actions class="px-3">
-            <v-btn block text color="pink" class="justify-start" @click.stop="handleLogout" title="Logout">
+            <v-btn block variant="text" color="pink" class="justify-start" @click.stop="handleLogout" title="Logout">
               <v-icon class="mr-3">mdi-exit-to-app</v-icon>
               Logout
             </v-btn>

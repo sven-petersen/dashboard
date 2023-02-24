@@ -25,7 +25,7 @@ SPDX-License-Identifier: Apache-2.0
         <gardenlogin-info></gardenlogin-info>
       </v-list-item-action>
       <v-list-item-action class="mx-0" v-if="isKubeconfigAvailable">
-        <v-tooltip top>
+        <v-tooltip location="top">
           <template v-slot:activator="{ on }">
             <v-btn v-on="on" icon @click.stop="onDownload" color="action-button">
               <v-icon>mdi-download</v-icon>
@@ -38,7 +38,7 @@ SPDX-License-Identifier: Apache-2.0
         <copy-btn :clipboard-text="kubeconfig"></copy-btn>
       </v-list-item-action>
       <v-list-item-action class="mx-0" v-if="isKubeconfigAvailable">
-        <v-tooltip top>
+        <v-tooltip location="top">
           <template v-slot:activator="{ on }">
             <v-btn v-on="on" icon @click.stop="toggleKubeconfig" color="action-button">
               <v-icon>{{kubeconfigVisibilityIcon}}</v-icon>

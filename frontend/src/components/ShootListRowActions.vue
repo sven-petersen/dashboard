@@ -5,9 +5,9 @@ SPDX-License-Identifier: Apache-2.0
 -->
 
 <template>
-  <v-menu :nudge-bottom="20" left v-model="actionMenu" absolute :close-on-content-click="false" v-if="canPatchShoots">
+  <v-menu :nudge-bottom="20" location="left" v-model="actionMenu" absolute :close-on-content-click="false" v-if="canPatchShoots">
     <template v-slot:activator="{ on: menu }">
-      <v-tooltip top>
+      <v-tooltip location="top">
         <template v-slot:activator="{ on: tooltip }">
           <v-btn v-on="{ ...menu, ...tooltip}" icon class="action-button--text">
             <v-icon class="cursor-pointer">mdi-dots-vertical</v-icon>

@@ -5,31 +5,31 @@ SPDX-License-Identifier: Apache-2.0
 -->
 
 <template>
-  <v-expand-transition appear>
-    <v-alert :color="color" :tile="tile" :dark="dark" dismissible v-model="alertVisible">
-      <div class="text-subtitle-1">
-        {{message}}
-        <v-btn dark outlined small v-if="!!detailedMessage" @click="detailedMessageVisible = !detailedMessageVisible">
-          Details
-        </v-btn>
+  <v-alert :color="color" :rounded="tile && '0'" closable v-model="alertVisible">
+    <div class="text-subtitle-1">
+      {{message}}
+      <v-btn variant="outlined" size="small" v-if="!!detailedMessage" @click="detailedMessageVisible = !detailedMessageVisible">
+        Details
+      </v-btn>
+    </div>
+    <transition name="fade">
+      <div v-if="!!detailedMessageVisible">
+        <code>{{detailedMessage}}</code>
       </div>
-      <transition name="fade">
-        <div v-if="!!detailedMessageVisible">
-          <code>{{detailedMessage}}</code>
-        </div>
-      </transition>
-    </v-alert>
-  </v-expand-transition>
+    </transition>
+  </v-alert>
 </template>
 
 <script>
 export default {
   props: {
     message: {
-      type: String
+      type: String,
+      default: ''
     },
     detailedMessage: {
-      type: String
+      type: String,
+      default: ''
     },
     color: {
       type: String,

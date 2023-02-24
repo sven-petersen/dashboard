@@ -15,10 +15,10 @@ SPDX-License-Identifier: Apache-2.0
     <v-menu
         v-else
         ref="menu"
-        :close-on-click="true"
+        :persistent="!(true)"
         :close-on-content-click="false"
         origin="top left"
-        left
+        location="left"
         transition="slide-x-reverse-transition"
         :max-width="contentWidth"
         v-model="isActive"
@@ -43,7 +43,7 @@ SPDX-License-Identifier: Apache-2.0
             </v-col>
           </v-row>
         </template>
-        <v-card tile>
+        <v-card rounded="0">
           <slot name="info"></slot>
           <v-autocomplete
             :items="items"
@@ -54,7 +54,7 @@ SPDX-License-Identifier: Apache-2.0
             hide-selected
             v-model="internalValue"
             @update:error="value => error = value"
-            solo
+            variant="solo"
             chips
             flat
             single-line
@@ -73,7 +73,7 @@ SPDX-License-Identifier: Apache-2.0
               </v-list-item-content>
             </template>
             <template v-slot:append-outer>
-              <v-tooltip top>
+              <v-tooltip location="top">
                 <template v-slot:activator="{ on }">
                   <v-btn
                     v-on="on"

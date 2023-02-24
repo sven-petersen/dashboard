@@ -12,7 +12,7 @@ SPDX-License-Identifier: Apache-2.0
   >
     <template v-slot:popperRef>
       <v-btn icon>
-        <v-tooltip top>
+        <v-tooltip location="top">
           <template v-slot:activator="{ on }">
             <v-icon v-on="on" color="action-button">mdi-information-outline</v-icon>
           </template>
@@ -20,7 +20,7 @@ SPDX-License-Identifier: Apache-2.0
         </v-tooltip>
       </v-btn>
     </template>
-      <div class="text-h6 grey--text text--darken-1 mb-4">Gardenlogin</div>
+      <div class="text-h6 text-grey-darken-1 mb-4">Gardenlogin</div>
       <p>
         <span class="font-family-monospace">gardenlogin</span> is a kubectl credential plugin. It will transparently handle the
         authentication for the downloaded <span class="font-family-monospace">kubeconfig</span>.

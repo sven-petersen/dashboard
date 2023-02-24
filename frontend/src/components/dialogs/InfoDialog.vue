@@ -21,7 +21,7 @@ SPDX-License-Identifier: Apache-2.0
         </div>
       </div>
       <v-divider class="my-3"></v-divider>
-      <div class="grey--text text--darken-1">
+      <div class="text-grey-darken-1">
         <div class="font-weight-bold">Version Information</div>
         <div v-if="!!dashboardVersion">Dashboard<span class="ml-1 font-weight-bold">{{dashboardVersion}}</span></div>
         <template v-if="isAdmin">

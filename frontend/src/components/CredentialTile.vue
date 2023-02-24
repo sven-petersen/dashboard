@@ -11,15 +11,15 @@ SPDX-License-Identifier: Apache-2.0
     </v-list-item-icon>
     <v-list-item-content :class="{'py-0 my-0' : dense}">
       <v-list-item-title class="d-flex align-center">
-        <v-tooltip top>
+        <v-tooltip location="top">
           <template v-slot:activator="{ on }">
             <span v-on="on">{{title}}</span>
           </template>
           {{titleTooltip}}
         </v-tooltip>
-        <v-tooltip top>
+        <v-tooltip location="top">
           <template v-slot:activator="{ on }">
-            <v-chip v-on="on" v-if="showChip" :color="phaseColor" label x-small class="ml-2" outlined>{{phaseCaption}}</v-chip>
+            <v-chip v-on="on" v-if="showChip" :color="phaseColor" label x-small class="ml-2" variant="outlined">{{phaseCaption}}</v-chip>
           </template>
           <template v-if="phaseType === 'Prepared'">
             <template v-if="phase && phase.incomplete">

@@ -12,15 +12,15 @@ SPDX-License-Identifier: Apache-2.0
         <v-list-item-content>
           <v-list-item-title class="d-flex">
             <span class="text-subtitle-1">{{item.displayName}}</span>
-            <v-tooltip top v-if="foreign">
+            <v-tooltip location="top" v-if="foreign">
               <template v-slot:activator="{ on }">
-                <v-icon v-on="on" small class="ml-1">mdi-account-arrow-left</v-icon>
+                <v-icon v-on="on" size="small" class="ml-1">mdi-account-arrow-left</v-icon>
               </template>
               <span>Service Account invited from namespace {{serviceAccountNamespace}}</span>
             </v-tooltip>
-            <v-tooltip top v-if="orphaned">
+            <v-tooltip location="top" v-if="orphaned">
               <template v-slot:activator="{ on }">
-                <v-icon v-on="on" small class="ml-1" color="warning">mdi-alert-circle-outline</v-icon>
+                <v-icon v-on="on" size="small" class="ml-1" color="warning">mdi-alert-circle-outline</v-icon>
               </template>
               <span>Associated Service Account does not exists</span>
             </v-tooltip>
@@ -52,7 +52,7 @@ SPDX-License-Identifier: Apache-2.0
     <td v-if="selectedHeaders.actions">
       <div class="d-flex flex-row justify-end mr-n2">
         <div v-if="!foreign && canCreateTokenRequest" class="ml-1">
-          <v-tooltip top>
+          <v-tooltip location="top">
             <template v-slot:activator="{ on }">
               <v-btn v-on="on" color="action-button" icon @click.stop="onDownload" :disabled="orphaned">
                 <v-icon>mdi-download</v-icon>
@@ -62,7 +62,7 @@ SPDX-License-Identifier: Apache-2.0
           </v-tooltip>
         </div>
         <div v-if="!foreign && canCreateTokenRequest" class="ml-1">
-          <v-tooltip top>
+          <v-tooltip location="top">
             <template v-slot:activator="{ on }">
               <v-btn v-on="on" color="action-button" icon @click="onKubeconfig" :disabled="orphaned">
                 <v-icon>mdi-eye</v-icon>
@@ -72,7 +72,7 @@ SPDX-License-Identifier: Apache-2.0
           </v-tooltip>
         </div>
         <div v-if="!foreign && canDeleteServiceAccounts && canCreateServiceAccounts" class="ml-1">
-          <v-tooltip top>
+          <v-tooltip location="top">
             <template v-slot:activator="{ on }">
               <v-btn v-on="on" color="action-button"  icon @click="onResetServiceAccount">
                 <v-icon>mdi-refresh</v-icon>
@@ -82,7 +82,7 @@ SPDX-License-Identifier: Apache-2.0
           </v-tooltip>
         </div>
         <div v-if="canManageServiceAccountMembers" class="ml-1">
-          <v-tooltip top>
+          <v-tooltip location="top">
             <template v-slot:activator="{ on }">
               <v-btn v-on="on" color="action-button" icon @click.stop="onEdit">
                 <v-icon>mdi-pencil</v-icon>
@@ -92,7 +92,7 @@ SPDX-License-Identifier: Apache-2.0
           </v-tooltip>
         </div>
         <div v-if="canManageServiceAccountMembers && canDeleteServiceAccounts" class="ml-1">
-          <v-tooltip top>
+          <v-tooltip location="top">
             <template v-slot:activator="{ on }">
                <div v-on="on">
                 <v-btn icon color="action-button" @click.stop="onDelete" :disabled="!canDelete">

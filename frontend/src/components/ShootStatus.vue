@@ -10,18 +10,18 @@ SPDX-License-Identifier: Apache-2.0
       <g-popper :title="toolbarTitle" :toolbar-color="color" :popper-key="popperKeyWithType" :placement="popperPlacement">
         <template v-slot:popperRef>
           <div class="d-flex align-center">
-            <v-tooltip top>
+            <v-tooltip location="top">
               <template v-slot:activator="{ on }">
                 <v-btn v-if="isUserError" icon v-on="on">
                   <v-icon color="error">mdi-account-alert</v-icon>
                 </v-btn>
                 <v-btn icon v-on="on">
-                  <v-progress-circular v-if="showProgress" :size="27" :width="3" :value="shootLastOperation.progress" :color="color" :rotate="-90">
-                    <v-icon v-if="isShootStatusHibernated" small :color="color">mdi-sleep</v-icon>
-                    <v-icon v-else-if="isShootLastOperationTypeDelete" small :color="color">mdi-delete</v-icon>
-                    <v-icon v-else-if="isShootMarkedForDeletion" small :color="color">mdi-delete-clock</v-icon>
-                    <v-icon v-else-if="isTypeCreate" small :color="color">mdi-plus</v-icon>
-                    <v-icon v-else-if="isTypeReconcile && !isError" small :color="color">mdi-check</v-icon>
+                  <v-progress-circular v-if="showProgress" :size="27" :width="3" :model-value="shootLastOperation.progress" :color="color" :rotate="-90">
+                    <v-icon v-if="isShootStatusHibernated" size="small" :color="color">mdi-sleep</v-icon>
+                    <v-icon v-else-if="isShootLastOperationTypeDelete" size="small" :color="color">mdi-delete</v-icon>
+                    <v-icon v-else-if="isShootMarkedForDeletion" size="small" :color="color">mdi-delete-clock</v-icon>
+                    <v-icon v-else-if="isTypeCreate" size="small" :color="color">mdi-plus</v-icon>
+                    <v-icon v-else-if="isTypeReconcile && !isError" size="small" :color="color">mdi-check</v-icon>
                     <span v-else-if="isError" small>!</span>
                     <template v-else>{{shootLastOperation.progress}}</template>
                   </v-progress-circular>
@@ -39,14 +39,14 @@ SPDX-License-Identifier: Apache-2.0
                 <span class="font-weight-bold">{{tooltip.title}}</span>
                 <span v-if="tooltip.progress" class="ml-1">({{tooltip.progress}}%)</span>
                 <div v-for="({ shortDescription, userError }) in tooltip.errorCodeObjects" :key="shortDescription">
-                  <v-icon v-if="userError" class="mr-1" color="white" small>{{ userError ? 'mdi-account-alert' : 'mdi-alert' }}</v-icon>
+                  <v-icon v-if="userError" class="mr-1" color="white" size="small">{{ userError ? 'mdi-account-alert' : 'mdi-alert' }}</v-icon>
                   <span class="font-weight-bold text--lighten-2">{{shortDescription}}</span>
                 </div>
               </div>
             </v-tooltip>
           </div>
         </template>
-        <template slot="card">
+        <template v-slot:card>
           <shoot-message-details
             :status-title="statusTitle"
             :last-message="lastMessage"
@@ -64,8 +64,8 @@ SPDX-License-Identifier: Apache-2.0
     </div>
     <template v-if="showStatusText">
       <div v-for="({ description, link }) in tooltip.errorCodeObjects" :key="description">
-        <div class="font-weight-bold error--text wrap-text">{{description}}</div>
-        <div v-if="link"><external-link :url="link.url" class="font-weight-bold error--text">{{link.text}}</external-link></div>
+        <div class="font-weight-bold text-error wrap-text">{{description}}</div>
+        <div v-if="link"><external-link :url="link.url" class="font-weight-bold text-error">{{link.text}}</external-link></div>
       </div>
     </template>
   </div>

@@ -83,7 +83,7 @@ SPDX-License-Identifier: Apache-2.0
         </div>
       </template>
       <template v-if="cell.header.value === 'issueSince'">
-        <v-tooltip top>
+        <v-tooltip location="top">
           <template v-slot:activator="{ on }">
             <div v-on="on">
               <time-string :date-time="shootIssueSinceTimestamp" mode="past" withoutPrefixOrSuffix></time-string>
@@ -110,7 +110,7 @@ SPDX-License-Identifier: Apache-2.0
       </template>
       <template v-if="cell.header.customField">
         <template v-if="cell.value">
-          <v-tooltip top v-if="cell.header.tooltip">
+          <v-tooltip location="top" v-if="cell.header.tooltip">
             <template v-slot:activator="{ on }">
               <span v-on="on">{{cell.value}}</span>
             </template>
@@ -118,16 +118,16 @@ SPDX-License-Identifier: Apache-2.0
           </v-tooltip>
           <span v-else>{{cell.value}}</span>
         </template>
-        <span class="grey--text" v-else-if="cell.header.defaultValue">
+        <span class="text-grey" v-else-if="cell.header.defaultValue">
           {{cell.header.defaultValue}}
         </span>
       </template>
       <template v-if="cell.header.value === 'actions'">
         <v-row class="fill-height" align="center" justify="end">
-          <v-tooltip top v-if="canGetSecrets">
+          <v-tooltip location="top" v-if="canGetSecrets">
             <template v-slot:activator="{ on }">
               <div v-on="on">
-                <v-btn small icon class="action-button--text" :disabled="isClusterAccessDialogDisabled" @click="showDialog('access')">
+                <v-btn size="small" icon class="action-button--text" :disabled="isClusterAccessDialogDisabled" @click="showDialog('access')">
                   <v-icon size="22">mdi-key</v-icon>
                 </v-btn>
               </div>
@@ -137,7 +137,7 @@ SPDX-License-Identifier: Apache-2.0
           <shoot-list-row-actions :shoot-item="shootItem"></shoot-list-row-actions>
         </v-row>
       </template>
-      <v-tooltip top v-if="isStaleShoot">
+      <v-tooltip location="top" v-if="isStaleShoot">
         <template v-slot:activator="{ on }">
           <div class="stale-overlay" v-on="on"></div>
         </template>

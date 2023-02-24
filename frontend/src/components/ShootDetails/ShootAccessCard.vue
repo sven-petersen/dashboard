@@ -54,9 +54,9 @@ SPDX-License-Identifier: Apache-2.0
             Kubectl will make Dashboard available at:
           </v-list-item-subtitle>
           <v-list-item-title>
-            <v-tooltip v-if="isShootStatusHibernated" top>
+            <v-tooltip v-if="isShootStatusHibernated" location="top">
               <template v-slot:activator="{ on }">
-                <span v-on="on" class="grey--text">{{dashboardUrlText}}</span>
+                <span v-on="on" class="text-grey">{{dashboardUrlText}}</span>
               </template>
               Dashboard is not running for hibernated clusters
             </v-tooltip>
@@ -76,7 +76,7 @@ SPDX-License-Identifier: Apache-2.0
           <copy-btn :clipboard-text="token"></copy-btn>
         </v-list-item-action>
         <v-list-item-action class="mx-0">
-          <v-tooltip top>
+          <v-tooltip location="top">
             <template v-slot:activator="{ on }">
               <v-btn v-on="on" icon @click.stop="showToken = !showToken" color="action-button">
                 <v-icon>{{visibilityIcon}}</v-icon>

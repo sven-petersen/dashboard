@@ -23,7 +23,7 @@ SPDX-License-Identifier: Apache-2.0
         ref="infobloxUsername"
         label="Infoblox Username"
         :error-messages="getErrorMessages('infobloxUsername')"
-        @input="$v.infobloxUsername.$touch()"
+        @update:model-value="$v.infobloxUsername.$touch()"
         @blur="$v.infobloxUsername.$touch()"
         ></v-text-field>
       </div>
@@ -36,7 +36,7 @@ SPDX-License-Identifier: Apache-2.0
           :append-icon="hideInfobloxPassword ? 'mdi-eye' : 'mdi-eye-off'"
           :type="hideInfobloxPassword ? 'password' : 'text'"
           @click:append="() => (hideInfobloxPassword = !hideInfobloxPassword)"
-          @input="$v.infobloxPassword.$touch()"
+          @update:model-value="$v.infobloxPassword.$touch()"
           @blur="$v.infobloxPassword.$touch()"
         ></v-text-field>
       </div>

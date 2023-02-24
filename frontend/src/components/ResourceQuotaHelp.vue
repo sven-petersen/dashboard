@@ -6,7 +6,7 @@ SPDX-License-Identifier: Apache-2.0
 
 <template>
   <div v-if="resourceQuotaHelpText">
-    <v-tooltip top>
+    <v-tooltip location="top">
       <template v-slot:activator="{ on }">
         <v-btn
           v-on="on"

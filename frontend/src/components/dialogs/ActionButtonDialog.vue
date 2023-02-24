@@ -6,13 +6,13 @@ SPDX-License-Identifier: Apache-2.0
 
 <template>
   <div v-if="canPatchShoots">
-    <v-tooltip top max-width="600px" :disabled="disableToolTip">
+    <v-tooltip location="top" max-width="600px" :disabled="disableToolTip">
       <template v-slot:activator="{ on }">
         <div v-on="on">
           <v-btn
             :icon="isIconButton"
-            :text="isTextButton"
-            :small="smallIcon"
+            :variant="isTextButton && 'text'"
+            :size="smallIcon && 'small'"
             :color="iconColor"
             :loading="loading"
             :disabled="isShootMarkedForDeletion || isShootActionsDisabledForPurpose || disabled"
@@ -21,7 +21,7 @@ SPDX-License-Identifier: Apache-2.0
             class="text-none font-weight-regular pa-0"
           >
             <div>
-              <v-icon :medium="!smallIcon">{{icon}}</v-icon>
+              <v-icon :size="!smallIcon && 'medium'">{{icon}}</v-icon>
             </div>
             <div v-if="isTextButton" class="ml-3 d-flex flex-grow-1">
               {{buttonText}}

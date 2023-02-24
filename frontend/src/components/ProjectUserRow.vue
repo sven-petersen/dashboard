@@ -26,7 +26,7 @@ SPDX-License-Identifier: Apache-2.0
     <td v-if="selectedHeaders.actions">
       <div class="d-flex flex-row justify-end mr-n2">
         <div v-if="canManageMembers" class="ml-1">
-          <v-tooltip top>
+          <v-tooltip location="top">
             <template v-slot:activator="{ on }">
               <v-btn v-on="on" color="action-button"  icon @click.stop="onEdit">
                 <v-icon>mdi-pencil</v-icon>
@@ -36,7 +36,7 @@ SPDX-License-Identifier: Apache-2.0
           </v-tooltip>
         </div>
         <div v-if="canManageMembers" class="ml-1">
-          <v-tooltip top>
+          <v-tooltip location="top">
             <template v-slot:activator="{ on }">
               <div v-on="on">
                 <v-btn :disabled="item.isOwner" icon color="action-button" @click.stop="onDelete">

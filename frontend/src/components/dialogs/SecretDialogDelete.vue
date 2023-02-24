@@ -8,14 +8,14 @@ SPDX-License-Identifier: Apache-2.0
   <v-dialog v-model="visible" max-width="800">
     <v-card>
       <v-card-title class="toolbar-background">
-        <v-icon x-large class="toolbar-title--text icon">mdi-alert-outline</v-icon>
+        <v-icon size="x-large" class="toolbar-title--text icon">mdi-alert-outline</v-icon>
         <span class="text-h5 ml-5 toolbar-title--text">Confirm Delete</span>
       </v-card-title>
       <v-card-text>
         <v-container fluid>
           <span class="text-subtitle-1">
             Are you sure to delete the secret <span class="font-weight-bold">{{name}}</span>?<br/>
-            <span class="error--text font-weight-bold">The operation can not be undone.</span>
+            <span class="text-error font-weight-bold">The operation can not be undone.</span>
           </span>
         </v-container>
         <g-message color="error" v-model:message="errorMessage" v-model:detailed-message="detailedErrorMessage"></g-message>
@@ -23,8 +23,8 @@ SPDX-License-Identifier: Apache-2.0
       <v-divider></v-divider>
       <v-card-actions>
         <v-spacer></v-spacer>
-        <v-btn text @click="hide">Cancel</v-btn>
-        <v-btn text @click="onDeleteSecret" color="toolbar-background">Delete Secret</v-btn>
+        <v-btn variant="text" @click="hide">Cancel</v-btn>
+        <v-btn variant="text" @click="onDeleteSecret" color="toolbar-background">Delete Secret</v-btn>
       </v-card-actions>
     </v-card>
   </v-dialog>

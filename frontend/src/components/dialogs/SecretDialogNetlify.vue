@@ -25,7 +25,7 @@ SPDX-License-Identifier: Apache-2.0
           :append-icon="hideApiToken ? 'mdi-eye' : 'mdi-eye-off'"
           :type="hideApiToken ? 'password' : 'text'"
           @click:append="() => (hideApiToken = !hideApiToken)"
-          @input="$v.apiToken.$touch()"
+          @update:model-value="$v.apiToken.$touch()"
           @blur="$v.apiToken.$touch()"
         ></v-text-field>
       </div>

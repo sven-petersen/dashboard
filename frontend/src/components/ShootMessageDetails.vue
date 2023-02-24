@@ -90,7 +90,7 @@ SPDX-License-Identifier: Apache-2.0
                     <div v-if="link"><external-link :url="link.url" class="inherit-color font-weight-bold">{{link.text}}</external-link></div>
                 </span>
               </v-alert>
-              <ansi-text class="error--text" :text="lastErrorDescription.description"></ansi-text>
+              <ansi-text class="text-error" :text="lastErrorDescription.description"></ansi-text>
             </div>
           </v-list-item-title>
         </v-list-item-content>

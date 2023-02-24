@@ -20,11 +20,11 @@ SPDX-License-Identifier: Apache-2.0
         <v-textarea
           ref="serviceAccountKey"
           color="primary"
-          filled
+          variant="filled"
           v-model="serviceAccountKey"
           label="Service Account Key"
           :error-messages="getErrorMessages('serviceAccountKey')"
-          @input="$v.serviceAccountKey.$touch()"
+          @update:model-value="$v.serviceAccountKey.$touch()"
           @blur="$v.serviceAccountKey.$touch()"
           hint="Enter or drop a service account key in JSON format"
           persistent-hint

@@ -11,18 +11,18 @@ SPDX-License-Identifier: Apache-2.0
         <icon-base width="44" height="60" view-box="0 0 298 403" class="mr-2" icon-color="toolbar-title">
           <certified-kubernetes></certified-kubernetes>
         </icon-base>
-        <v-toolbar-title class="white--text">
+        <v-toolbar-title class="text-white">
           <div class="text-h5 toolbar-title--text">Kubernetes Clusters</div>
           <div class="text-subtitle-1 toolbar-title--text">{{headlineSubtitle}}</div>
         </v-toolbar-title>
         <v-spacer></v-spacer>
-        <v-tooltip bottom>
+        <v-tooltip location="bottom">
           <template v-slot:activator="{ on }">
             <div v-on="on">
               <v-badge
                 class="mr-5"
                 bordered
-                color="primary lighten-3"
+                color="primary-lighten-3"
                 :content="numberOfNewItemsSinceFreeze"
                 :value="numberOfNewItemsSinceFreeze > 0"
                 overlap
@@ -31,7 +31,7 @@ SPDX-License-Identifier: Apache-2.0
                   v-model="focusModeInternal"
                   v-if="!projectScope && isAdmin"
                   class="mr-3"
-                  color="primary lighten-3"
+                  color="primary-lighten-3"
                   hide-details>
                   <template v-slot:label>
                     <span class="text-subtitle-1 toolbar-title--text">Focus</span>
@@ -52,7 +52,7 @@ SPDX-License-Identifier: Apache-2.0
             <span class="font-weight-bold">{{numberOfNewItemsSinceFreeze}}</span> new clusters were added to the list since you enabled focus mode.
           </template>
         </v-tooltip>
-        <v-tooltip top v-if="shootSearch || items.length > 3">
+        <v-tooltip location="top" v-if="shootSearch || items.length > 3">
           <template v-slot:activator="{ on }">
             <v-text-field
               v-on="on"
@@ -62,8 +62,8 @@ SPDX-License-Identifier: Apache-2.0
               clearable
               hide-details
               flat
-              solo
-              @input="onInputSearch"
+              variant="solo"
+              @update:model-value="onInputSearch"
               @keyup.esc="shootSearch=''"
               class="mr-3"
             ></v-text-field>
@@ -72,7 +72,7 @@ SPDX-License-Identifier: Apache-2.0
           <span class="font-weight-bold">Use quotes</span> for exact words or phrases: <v-chip label color="primary" small>"my-shoot"</v-chip> <v-chip label color="primary" small>"John Doe"</v-chip><br />
           <span class="font-weight-bold">Use minus sign</span> to exclude words that you don't want: <v-chip label color="primary" small>-myproject</v-chip> <v-chip label color="primary" small>-"Jane Doe"</v-chip><br />
         </v-tooltip>
-        <v-tooltip top v-if="canCreateShoots && projectScope">
+        <v-tooltip location="top" v-if="canCreateShoots && projectScope">
           <template v-slot:activator="{ on }">
              <v-btn v-on="on" icon :to="{ name: 'NewShoot', params: {  namespace } }">
                <v-icon color="toolbar-title">mdi-plus</v-icon>
@@ -120,7 +120,7 @@ SPDX-License-Identifier: Apache-2.0
           <v-card-title class="toolbar-background toolbar-title--text">
             <div class="text-h5">Cluster Access <code class="toolbar-background lighten-1 toolbar-title--text">{{currentName}}</code></div>
             <v-spacer></v-spacer>
-            <v-btn icon class="grey--text text--lighten-4" @click="hideDialog">
+            <v-btn icon class="text-grey-lighten-4" @click="hideDialog">
               <v-icon color="toolbar-title">mdi-close</v-icon>
             </v-btn>
           </v-card-title>

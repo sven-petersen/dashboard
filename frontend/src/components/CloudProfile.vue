@@ -9,14 +9,14 @@ SPDX-License-Identifier: Apache-2.0
     <template v-if="createMode">
       <v-select
       :items="cloudProfiles"
-      :value="value"
+      :model-value="value"
       item-value="metadata.name"
-      item-text="metadata.displayName"
+      item-title="metadata.displayName"
       label="Cloud Profile"
       :error-messages="getErrorMessages('value')"
       color="primary"
       item-color="primary"
-      @input="onInput"
+      @update:model-value="onInput"
       @blur="$v.value.$touch()"
       ></v-select>
     </template>

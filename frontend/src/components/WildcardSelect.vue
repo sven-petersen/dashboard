@@ -17,7 +17,7 @@ SPDX-License-Identifier: Apache-2.0
       return-object
       v-model="wildcardSelectedValue"
       :error-messages="getErrorMessages('wildcardSelectedValue')"
-      @input="onInput"
+      @update:model-value="onInput"
       @blur="$v.wildcardSelectedValue.$touch()"
       :hint="wildcardSelectHint"
       persistent-hint
@@ -26,11 +26,11 @@ SPDX-License-Identifier: Apache-2.0
         <v-text-field
           v-if="wildcardSelectedValue.startsWithWildcard || wildcardSelectedValue.customWildcard"
           @click.stop
-          outlined
+          variant="outlined"
           dense
           class="mb-1 mr-1 text-field"
           flat
-          solo
+          variant="solo"
           color="primary"
           hide-details
           v-model="wildcardVariablePartPrefix"
@@ -40,12 +40,12 @@ SPDX-License-Identifier: Apache-2.0
         <v-text-field
           v-if="wildcardSelectedValue.endsWithWildcard"
           @click.stop
-          @input="onInput"
-          outlined
+          @update:model-value="onInput"
+          variant="outlined"
           dense
           class="mb-1 ml-1 text-field"
           flat
-          solo
+          variant="solo"
           color="primary"
           hide-details
           v-model="wildcardVariablePartSuffix"

@@ -133,7 +133,7 @@ SPDX-License-Identifier: Apache-2.0
         <v-list-item-content>
           <v-list-item-subtitle>
             Shoot Domain
-            <v-chip label x-small color="primary" outlined class="ml-2">{{customDomainChipText}}</v-chip>
+            <v-chip label x-small color="primary" variant="outlined" class="ml-2">{{customDomainChipText}}</v-chip>
           </v-list-item-subtitle>
           <v-list-item-title class="pt-1">
             {{shootDomain}}
@@ -193,17 +193,17 @@ SPDX-License-Identifier: Apache-2.0
                 v-for="{ name } in shootLoadbalancerClasses"
                 :key="name"
                 :disabled="name !== defaultLoadbalancerClass"
-                top
+                location="top"
               >
                 <template v-slot:activator="{ on }">
                   <v-chip
                     v-on="on"
                     small
                     class="mr-2"
-                    outlined
+                    variant="outlined"
                     color="primary">
                     {{name}}
-                    <v-icon v-if="name === defaultLoadbalancerClass" small>mdi-star</v-icon>
+                    <v-icon v-if="name === defaultLoadbalancerClass" size="small">mdi-star</v-icon>
                   </v-chip>
                 </template>
                 <span>Default Load Balancer Class</span>

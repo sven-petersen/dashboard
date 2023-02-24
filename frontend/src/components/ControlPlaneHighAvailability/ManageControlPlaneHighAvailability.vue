@@ -6,7 +6,7 @@ SPDX-License-Identifier: Apache-2.0
 
 <template>
   <div>
-    <v-tooltip top :disabled="controlPlaneFailureToleranceTypeChangeAllowed" max-width="400px">
+    <v-tooltip location="top" :disabled="controlPlaneFailureToleranceTypeChangeAllowed" max-width="400px">
       <template v-slot:activator="{ on }">
         <div v-on="on">
           <v-checkbox
@@ -26,7 +26,7 @@ SPDX-License-Identifier: Apache-2.0
     <v-expand-transition :appear="animateOnAppear" v-else>
       <div>
         Control plane failure tolerance type <code>{{controlPlaneFailureToleranceType}}</code> configured
-        <v-alert type="info" v-if="controlPlaneFailureToleranceType === 'node' && !zoneSupported" dense outlined>
+        <v-alert type="info" v-if="controlPlaneFailureToleranceType === 'node' && !zoneSupported" dense variant="outlined">
           <template v-if="clusterIsNew">
             <template v-if="seedName">
               The configured seed <code>{{ seedName }}</code> is not <code>multi-zonal</code>.
@@ -40,7 +40,7 @@ SPDX-License-Identifier: Apache-2.0
           </template>
           Therefore failure tolerance type <code>zone</code> is not supported for this cluster.
         </v-alert>
-        <v-alert type="info" v-if="controlPlaneFailureToleranceTypeChangeAllowed" dense outlined>
+        <v-alert type="info" v-if="controlPlaneFailureToleranceTypeChangeAllowed" dense variant="outlined">
           It is not possible to disable or change control plane high availability later.
         </v-alert>
       </div>

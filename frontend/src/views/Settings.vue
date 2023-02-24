@@ -17,26 +17,26 @@ SPDX-License-Identifier: Apache-2.0
               <v-col cols="12">
                 <legend class="text-body-2 text--secondary">Color Scheme</legend>
                 <v-btn-toggle v-model="colorSchemeIndex" mandatory dense @click.stop class="pt-1">
-                  <v-tooltip top>
+                  <v-tooltip location="top">
                     <template v-slot:activator="{ on }">
-                      <v-btn small v-on="on">
-                        <v-icon small color="primary">mdi-white-balance-sunny</v-icon>
+                      <v-btn size="small" v-on="on">
+                        <v-icon size="small" color="primary">mdi-white-balance-sunny</v-icon>
                       </v-btn>
                     </template>
                     <span>Light Mode</span>
                   </v-tooltip>
-                  <v-tooltip top>
+                  <v-tooltip location="top">
                     <template v-slot:activator="{ on }">
-                      <v-btn small v-on="on">
-                        <v-icon small color="primary">mdi-weather-night</v-icon>
+                      <v-btn size="small" v-on="on">
+                        <v-icon size="small" color="primary">mdi-weather-night</v-icon>
                       </v-btn>
                     </template>
                     <span>Dark Mode</span>
                   </v-tooltip>
-                  <v-tooltip top>
+                  <v-tooltip location="top">
                     <template v-slot:activator="{ on }">
-                      <v-btn small v-on="on">
-                        <v-icon small color="primary">mdi-brightness-auto</v-icon>
+                      <v-btn size="small" v-on="on">
+                        <v-icon size="small" color="primary">mdi-brightness-auto</v-icon>
                       </v-btn>
                     </template>
                     <span>Automatically choose theme based on your system settings</span>
@@ -48,10 +48,10 @@ SPDX-License-Identifier: Apache-2.0
                 <v-btn-toggle lebel="Log Level" v-model="logLevelIndex" dense class="pt-1">
                   <v-btn v-for="{ value, text, icon, color } in logLevels"
                     :key="value"
-                    small
+                    size="small"
                     class="text-lowercase text-caption"
                   >
-                    <v-icon small class="mr-1" :color="color">{{icon}}</v-icon>
+                    <v-icon size="small" class="mr-1" :color="color">{{icon}}</v-icon>
                     {{ text }}
                   </v-btn>
                 </v-btn-toggle>

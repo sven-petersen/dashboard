@@ -12,7 +12,7 @@ SPDX-License-Identifier: Apache-2.0
     <v-list-item-content :class="contentClass">
       <v-list-item-subtitle>{{appTitle}}</v-list-item-subtitle>
       <v-list-item-title class="pt-1">
-        <v-tooltip v-if="isShootStatusHibernated" top>
+        <v-tooltip v-if="isShootStatusHibernated" location="top">
           <template v-slot:activator="{ on }">
             <span v-on="on">{{urlText}}</span>
           </template>

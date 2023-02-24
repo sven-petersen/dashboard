@@ -15,24 +15,24 @@ SPDX-License-Identifier: Apache-2.0
       :disabled="!condition.message">
       <template v-slot:popperRef>
         <div>
-          <v-tooltip top max-width="400px" :disabled="tooltipDisabled">
+          <v-tooltip location="top" max-width="400px" :disabled="tooltipDisabled">
             <template v-slot:activator="{ on }">
               <v-chip
                 v-on="on"
                 class="status-tag"
                 :class="{ 'cursor-pointer': condition.message }"
-                :outlined="!isError"
+                :variant="!isError && 'outlined'"
                 :text-color="textColor"
                 small
                 :color="color">
-                <v-icon v-if="chipIcon" x-small left class="chip-icon">{{chipIcon}}</v-icon>
+                <v-icon v-if="chipIcon" size="x-small" start class="chip-icon">{{chipIcon}}</v-icon>
                 {{chipText}}
               </v-chip>
             </template>
             <div class="font-weight-bold">{{chipTooltip.title}}</div>
             <div>Status: {{chipTooltip.status}}</div>
             <div v-for="({ shortDescription }) in chipTooltip.userErrorCodeObjects" :key="shortDescription">
-              <v-icon class="mr-1" color="white" small>mdi-account-alert</v-icon>
+              <v-icon class="mr-1" color="white" size="small">mdi-account-alert</v-icon>
               <span class="font-weight-bold text--lighten-2">{{shortDescription}}</span>
             </div>
             <template v-if="chipTooltip.description">
@@ -44,7 +44,7 @@ SPDX-License-Identifier: Apache-2.0
           </v-tooltip>
         </div>
       </template>
-      <template slot="card">
+      <template v-slot:card>
         <shoot-message-details
           :status-title="chipStatus"
           :last-message="nonErrorMessage"

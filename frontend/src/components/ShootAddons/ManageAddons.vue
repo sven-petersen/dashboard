@@ -5,7 +5,7 @@ SPDX-License-Identifier: Apache-2.0
 -->
 
 <template>
-  <v-list two-line>
+  <v-list lines="two">
     <v-list-item v-for="addonDefinition in addonDefinitionList" :key="addonDefinition.name">
       <v-list-item-action class="align-self-start">
         <v-checkbox

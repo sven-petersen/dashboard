@@ -22,7 +22,7 @@ SPDX-License-Identifier: Apache-2.0
           v-model="authURL"
           label="Auth URL"
           :error-messages="getErrorMessages('authURL')"
-          @input="$v.authURL.$touch()"
+          @update:model-value="$v.authURL.$touch()"
           @blur="$v.authURL.$touch()"
         ></v-text-field>
       </div>
@@ -33,7 +33,7 @@ SPDX-License-Identifier: Apache-2.0
           ref="domainName"
           label="Domain Name"
           :error-messages="getErrorMessages('domainName')"
-          @input="$v.domainName.$touch()"
+          @update:model-value="$v.domainName.$touch()"
           @blur="$v.domainName.$touch()"
         ></v-text-field>
       </div>
@@ -43,7 +43,7 @@ SPDX-License-Identifier: Apache-2.0
           v-model="tenantName"
           label="Project / Tenant Name"
           :error-messages="getErrorMessages('tenantName')"
-          @input="$v.tenantName.$touch()"
+          @update:model-value="$v.tenantName.$touch()"
           @blur="$v.tenantName.$touch()"
         ></v-text-field>
       </div>
@@ -73,7 +73,7 @@ SPDX-License-Identifier: Apache-2.0
             v-model="applicationCredentialID"
             label="ID"
             :error-messages="getErrorMessages('applicationCredentialID')"
-            @input="$v.applicationCredentialID.$touch()"
+            @update:model-value="$v.applicationCredentialID.$touch()"
             @blur="$v.applicationCredentialID.$touch()"
             ></v-text-field>
           </div>
@@ -83,7 +83,7 @@ SPDX-License-Identifier: Apache-2.0
             v-model="applicationCredentialName"
             label="Name"
             :error-messages="getErrorMessages('applicationCredentialName')"
-            @input="$v.applicationCredentialName.$touch()"
+            @update:model-value="$v.applicationCredentialName.$touch()"
             @blur="$v.applicationCredentialName.$touch()"
             ></v-text-field>
           </div>
@@ -96,7 +96,7 @@ SPDX-License-Identifier: Apache-2.0
               :append-icon="hideApplicationCredentialSecret ? 'mdi-eye' : 'mdi-eye-off'"
               :type="hideApplicationCredentialSecret ? 'password' : 'text'"
               @click:append="() => (hideApplicationCredentialSecret = !hideApplicationCredentialSecret)"
-              @input="$v.applicationCredentialSecret.$touch()"
+              @update:model-value="$v.applicationCredentialSecret.$touch()"
               @blur="$v.applicationCredentialSecret.$touch()"
             ></v-text-field>
           </div>
@@ -109,7 +109,7 @@ SPDX-License-Identifier: Apache-2.0
               v-model="username"
               label="Technical User"
               :error-messages="getErrorMessages('username')"
-              @input="$v.username.$touch()"
+              @update:model-value="$v.username.$touch()"
               @blur="$v.username.$touch()"
               hint="Do not use personalized login credentials. Instead, use credentials of a technical user"
               ></v-text-field>
@@ -125,7 +125,7 @@ SPDX-License-Identifier: Apache-2.0
                 :append-icon="hideSecret ? 'mdi-eye' : 'mdi-eye-off'"
                 :type="hideSecret ? 'password' : 'text'"
                 @click:append="() => (hideSecret = !hideSecret)"
-                @input="$v.password.$touch()"
+                @update:model-value="$v.password.$touch()"
                 @blur="$v.password.$touch()"
                 hint="Do not use personalized login credentials. Instead, use credentials of a technical user"
               ></v-text-field>

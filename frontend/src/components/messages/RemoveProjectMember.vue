@@ -14,7 +14,7 @@ SPDX-License-Identifier: Apache-2.0
       Do you want to remove the user <em>{{memberName}}</em> from the project <em>{{projectName}}</em>?
     </template>
     <template v-else>
-      Do you want to remove <span class="error--text font-weight-bold">yourself</span>
+      Do you want to remove <span class="text-error font-weight-bold">yourself</span>
       from the project <em>{{projectName}}</em>?
     </template>
   </div>

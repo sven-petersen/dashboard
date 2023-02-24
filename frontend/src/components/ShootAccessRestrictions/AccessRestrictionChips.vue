@@ -8,7 +8,7 @@ SPDX-License-Identifier: Apache-2.0
   <div>
     <div v-for="{ key, title, description, options } in selectedAccessRestrictions" :key="key" class="d-flex">
       <v-tooltip
-        top
+        location="top"
         :disabled="!description"
         max-width="600px"
       >
@@ -16,7 +16,7 @@ SPDX-License-Identifier: Apache-2.0
           <v-chip
             v-on="on"
             small
-            outlined
+            variant="outlined"
             color="primary"
             class="mr-2 my-0"
           >{{title}}</v-chip>
@@ -26,7 +26,7 @@ SPDX-License-Identifier: Apache-2.0
       <v-tooltip
         v-for="{ key: optionsKey, title, description } in options"
         :key="`${key}_${optionsKey}`"
-        top
+        location="top"
         :disabled="!description"
         max-width="600px"
       >
@@ -34,7 +34,7 @@ SPDX-License-Identifier: Apache-2.0
           <v-chip
             v-on="on"
             small
-            outlined
+            variant="outlined"
             color="primary"
             class="mr-2"
           >{{title}}</v-chip>

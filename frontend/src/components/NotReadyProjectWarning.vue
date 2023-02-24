@@ -5,11 +5,11 @@ SPDX-License-Identifier: Apache-2.0
 -->
 
 <template>
-  <v-tooltip top v-if="projectDetails.phase !== 'Ready'">
+  <v-tooltip location="top" v-if="projectDetails.phase !== 'Ready'">
     <template v-slot:activator="{ on }">
-      <v-icon v-if="projectDetails.phase === 'Terminating'" :small="small" v-on="on" color="primary" class="ml-1">mdi-delete-sweep</v-icon>
-      <v-icon v-else-if="projectDetails.phase === 'Pending'" :small="small" v-on="on" color="primary" class="ml-1">mdi-plus-circle-outline</v-icon>
-      <v-icon v-else :small="small" v-on="on" color="warning" class="ml-1">mdi-alert-circle-outline</v-icon>
+      <v-icon v-if="projectDetails.phase === 'Terminating'" :size="small && 'small'" v-on="on" color="primary" class="ml-1">mdi-delete-sweep</v-icon>
+      <v-icon v-else-if="projectDetails.phase === 'Pending'" :size="small && 'small'" v-on="on" color="primary" class="ml-1">mdi-plus-circle-outline</v-icon>
+      <v-icon v-else :size="small && 'small'" v-on="on" color="warning" class="ml-1">mdi-alert-circle-outline</v-icon>
     </template>
     <div>
       The project phase is <v-chip color="primary" label x-small class="px-1">{{projectDetails.phase}}</v-chip>

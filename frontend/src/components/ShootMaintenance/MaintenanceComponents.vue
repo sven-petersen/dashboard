@@ -7,7 +7,7 @@ SPDX-License-Identifier: Apache-2.0
 <template>
   <div>
     <div class="text-subtitle-1 pt-4 ml-3">{{title}}</div>
-    <v-list class="pt-0" two-line>
+    <v-list class="pt-0" lines="two">
       <v-list-item v-if="selectable || osUpdates">
         <v-list-item-action>
           <v-checkbox v-if="selectable" color="primary" v-model="osUpdates"></v-checkbox>

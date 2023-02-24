@@ -6,9 +6,9 @@ SPDX-License-Identifier: Apache-2.0
 
 <template>
   <div>
-    <v-tooltip top v-for="({ displayName, notEditable, tooltip }, index) in roleDisplayNames" :key="displayName" :disabled="!tooltip">
+    <v-tooltip location="top" v-for="({ displayName, notEditable, tooltip }, index) in roleDisplayNames" :key="displayName" :disabled="!tooltip">
       <template v-slot:activator="{ on }">
-        <v-chip v-on="on" :disabled="notEditable" small color="action-button" outlined :class="{'ml-3': index > 0}">
+        <v-chip v-on="on" :disabled="notEditable" small color="action-button" variant="outlined" :class="{'ml-3': index > 0}">
           {{displayName}}
         </v-chip>
       </template>

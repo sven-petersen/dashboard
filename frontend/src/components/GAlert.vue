@@ -11,8 +11,8 @@ SPDX-License-Identifier: Apache-2.0
     v-model="alertVisible"
     :color="color"
     :transition="transition"
-    @input="closeBanner"
-    dismissible
+    @update:model-value="closeBanner"
+    closable
   >
     <div v-if="message" class="alert-banner-message" v-html="messageHtml"></div>
     <slot v-else name="message"></slot>

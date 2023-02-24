@@ -7,7 +7,7 @@ SPDX-License-Identifier: Apache-2.0
 <template>
   <div>
     <!-- do not wrap v-row with tooltip component as this breaks expand (appear) animation -->
-    <v-tooltip top :disabled="!readonly" open-delay="0" :activator="$refs.dnsrow">
+    <v-tooltip location="top" :disabled="!readonly" open-delay="0" :activator="$refs.dnsrow">
       <span class="font-weight-bold">You cannot edit this DNS Provider</span><br />
       SecretBinding for secret {{secretName}} not found in poject namespace
     </v-tooltip>
@@ -101,8 +101,8 @@ SPDX-License-Identifier: Apache-2.0
       <v-col cols="1">
         <v-btn
           :disabled="readonly || primaryReadonly"
-          small
-          outlined
+          size="small"
+          variant="outlined"
           icon
           color="grey"
           @click="onDelete">

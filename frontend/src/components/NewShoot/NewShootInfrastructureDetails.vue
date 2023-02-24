@@ -36,7 +36,7 @@ SPDX-License-Identifier: Apache-2.0
           persistent-hint
           v-model="region"
           :error-messages="getErrorMessages('region')"
-          @input="onInputRegion"
+          @update:model-value="onInputRegion"
           @blur="$v.region.$touch()"
           ></v-select>
       </v-col>
@@ -49,7 +49,7 @@ SPDX-License-Identifier: Apache-2.0
           persistent-hint
           v-model="networkingType"
           :error-messages="getErrorMessages('networkingType')"
-          @input="$v.networkingType.$touch()"
+          @update:model-value="$v.networkingType.$touch()"
           @blur="$v.networkingType.$touch()"
           ></v-select>
       </v-col>
@@ -70,7 +70,7 @@ SPDX-License-Identifier: Apache-2.0
           :items="allLoadBalancerProviderNames"
           v-model="loadBalancerProviderName"
           :error-messages="getErrorMessages('loadBalancerProviderName')"
-          @input="onInputLoadBalancerProviderName"
+          @update:model-value="onInputLoadBalancerProviderName"
           @blur="$v.loadBalancerProviderName.$touch()"
           persistent-hint
           ></v-select>
@@ -84,7 +84,7 @@ SPDX-License-Identifier: Apache-2.0
             label="Project ID"
             v-model="projectID"
             :error-messages="getErrorMessages('projectID')"
-            @input="onInputProjectID"
+            @update:model-value="onInputProjectID"
             @blur="$v.projectID.$touch()"
             hint="Clusters with same Project ID share IP ranges to allow load balancing accross multiple partitions"
             persistent-hint
@@ -98,7 +98,7 @@ SPDX-License-Identifier: Apache-2.0
             :items="partitionIDs"
             v-model="partitionID"
             :error-messages="getErrorMessages('partitionID')"
-            @input="onInputPartitionID"
+            @update:model-value="onInputPartitionID"
             @blur="$v.partitionID.$touch()"
             hint="Partion ID equals zone on other infrastructures"
             persistent-hint
@@ -112,7 +112,7 @@ SPDX-License-Identifier: Apache-2.0
             :items="firewallImages"
             v-model="firewallImage"
             :error-messages="getErrorMessages('firewallImage')"
-            @input="onInputFirewallImage"
+            @update:model-value="onInputFirewallImage"
             @blur="$v.firewallImage.$touch()"
           ></v-select>
         </v-col>
@@ -124,7 +124,7 @@ SPDX-License-Identifier: Apache-2.0
             :items="firewallSizes"
             v-model="firewallSize"
             :error-messages="getErrorMessages('firewallSize')"
-            @input="onInputFirewallSize"
+            @update:model-value="onInputFirewallSize"
             @blur="$v.firewallImage.$touch()"
           ></v-select>
         </v-col>
@@ -136,11 +136,11 @@ SPDX-License-Identifier: Apache-2.0
             :items="allFirewallNetworks"
             v-model="firewallNetworks"
             :error-messages="getErrorMessages('firewallNetworks')"
-            @input="onInputFirewallNetworks"
+            @update:model-value="onInputFirewallNetworks"
             @blur="$v.firewallNetworks.$touch()"
             chips
             small-chips
-            deletable-chips
+            closable-chips
             multiple
           ></v-select>
         </v-col>
@@ -154,12 +154,12 @@ SPDX-License-Identifier: Apache-2.0
             :items="allLoadBalancerClasses"
             v-model="loadBalancerClassNames"
             :error-messages="getErrorMessages('loadBalancerClassNames')"
-            @input="onInputLoadBalancerClassNames"
+            @update:model-value="onInputLoadBalancerClassNames"
             @blur="$v.loadBalancerClassNames.$touch()"
             attach
             chips
             small-chips
-            deletable-chips
+            closable-chips
             multiple
           >
             <template v-slot:item="{ item }">

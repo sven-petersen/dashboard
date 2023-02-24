@@ -14,7 +14,7 @@ SPDX-License-Identifier: Apache-2.0
       <v-list-item-subtitle class="pt-1">{{description}}</v-list-item-subtitle>
     </v-list-item-content>
     <v-list-item-action>
-      <v-tooltip top>
+      <v-tooltip location="top">
         <template v-slot:activator="{ on }">
           <div v-on="on">
             <v-btn icon :to=to :disabled="disabled" color="action-button">

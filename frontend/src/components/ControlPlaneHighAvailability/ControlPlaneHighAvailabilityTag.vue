@@ -13,7 +13,7 @@ SPDX-License-Identifier: Apache-2.0
   >
     <template v-slot:popperRef>
       <v-chip
-        outlined
+        variant="outlined"
         :small="!xSmall"
         :x-small="xSmall"
         :color="color"
@@ -22,7 +22,7 @@ SPDX-License-Identifier: Apache-2.0
         {{shootControlPlaneHighAvailabilityFailureTolerance}}
       </v-chip>
     </template>
-    <template slot="card">
+    <template v-slot:card>
       <v-list class="text-left" style="max-width: 600px;">
         <v-list-item>
           <v-list-item-icon>

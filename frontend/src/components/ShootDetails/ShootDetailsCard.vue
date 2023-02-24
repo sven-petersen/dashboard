@@ -168,7 +168,7 @@ SPDX-License-Identifier: Apache-2.0
               <v-chip v-for="(name, index) in this.shootAddonNames"
                 :key="index"
                 small
-                outlined
+                variant="outlined"
                 color="primary"
                 class="mr-2"
               >

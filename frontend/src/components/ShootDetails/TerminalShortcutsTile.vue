@@ -17,7 +17,7 @@ SPDX-License-Identifier: Apache-2.0
         <v-list-item-subtitle>Launch preconfigured terminals for frequently used views</v-list-item-subtitle>
       </v-list-item-content>
       <v-list-item-action class="mx-0">
-        <v-tooltip top>
+        <v-tooltip location="top">
           <template v-slot:activator="{ on }">
             <v-btn color="action-button" v-on="on" icon @click.stop="expansionPanel = !expansionPanel">
               <v-icon>{{expansionPanelIcon}}</v-icon>

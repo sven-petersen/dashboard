@@ -9,7 +9,7 @@ SPDX-License-Identifier: Apache-2.0
     absolute
     :indeterminate="indeterminate"
     :color="color"
-    :value="value"
+    :model-value="value"
     :striped="striped"
   >
   </v-progress-linear>

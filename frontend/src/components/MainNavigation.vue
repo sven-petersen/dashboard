@@ -20,7 +20,7 @@ SPDX-License-Identifier: Apache-2.0
           <a href="/">
             <img src="/static/assets/logo.svg" class="logo" alt="gardener logo">
             <h1 class="main-navigation-title--text">Gardener <span class="version">{{version}}</span></h1>
-            <h2 class="primary--text">Universal Kubernetes at Scale</h2>
+            <h2 class="text-primary">Universal Kubernetes at Scale</h2>
           </a>
         </div>
       </div>
@@ -53,7 +53,7 @@ SPDX-License-Identifier: Apache-2.0
                 <not-ready-project-warning :project="selectedProject" small></not-ready-project-warning>
               </template>
               <v-spacer></v-spacer>
-              <v-icon right>{{projectMenuIcon}}</v-icon>
+              <v-icon end>{{projectMenuIcon}}</v-icon>
             </v-btn>
           </template>
 
@@ -63,7 +63,7 @@ SPDX-License-Identifier: Apache-2.0
                 <v-text-field
                   clearable
                   label="Filter projects"
-                  solo
+                  variant="solo"
                   flat
                   single-line
                   hide-details
@@ -73,7 +73,7 @@ SPDX-License-Identifier: Apache-2.0
                   ref="projectFilter"
                   @keyup.esc="projectFilter = ''"
                   @keyup.enter="navigateToHighlightedProject"
-                  @input="onInputProjectFilter"
+                  @update:model-value="onInputProjectFilter"
                   @keydown.down="highlightProjectWithKeys('down')"
                   @keydown.up="highlightProjectWithKeys('up')"
                   autofocus
@@ -105,13 +105,13 @@ SPDX-License-Identifier: Apache-2.0
               </v-list-item>
             </v-list>
             <v-card-actions>
-              <v-tooltip top :disabled="canCreateProject" style="width: 100%">
+              <v-tooltip location="top" :disabled="canCreateProject" style="width: 100%">
                 <template v-slot:activator="{ on }">
                   <div v-on="on">
                     <v-btn
-                      text
+                      variant="text"
                       block
-                      class="project-add text-left primary--text"
+                      class="project-add text-left text-primary"
                       :disabled="!canCreateProject"
                       @click.stop="openProjectDialog"
                     >
@@ -129,7 +129,7 @@ SPDX-License-Identifier: Apache-2.0
       <v-list ref="mainMenu" class="main-menu" flat>
         <v-list-item :to="{name: 'Home'}" exact v-if="hasNoProjects">
           <v-list-item-action>
-            <v-icon small color="main-navigation-title">mdi-home-outline</v-icon>
+            <v-icon size="small" color="main-navigation-title">mdi-home-outline</v-icon>
           </v-list-item-action>
           <v-list-item-content>
             <v-list-item-title class="text-subtitle-1 main-navigation-title--text">Home</v-list-item-title>
@@ -139,7 +139,7 @@ SPDX-License-Identifier: Apache-2.0
           <template v-for="(route, index) in routes">
             <v-list-item v-if="!route.meta.menu.hidden" :to="namespacedRoute(route)" :key="index" active-class="active-item">
               <v-list-item-action>
-                <v-icon small color="main-navigation-title">{{route.meta.menu.icon}}</v-icon>
+                <v-icon size="small" color="main-navigation-title">{{route.meta.menu.icon}}</v-icon>
               </v-list-item-action>
               <v-list-item-content>
                 <v-list-item-title class="text-subtitle-1 main-navigation-title--text" >{{route.meta.menu.title}}</v-list-item-title>

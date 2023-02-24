@@ -94,7 +94,7 @@ SPDX-License-Identifier: Apache-2.0
                   <v-list-item-subtitle class="line-clamp-2">Personalized command line interface access (requires <span class="font-family-monospace">kubelogin</span> kubectl plugin)</v-list-item-subtitle>
                 </v-list-item-content>
                 <v-list-item-action class="mx-0">
-                  <v-tooltip top>
+                  <v-tooltip location="top">
                     <template v-slot:activator="{ on }">
                       <v-btn v-on="on" icon @click.stop="onDownload" color="action-button">
                         <v-icon>mdi-download</v-icon>
@@ -107,7 +107,7 @@ SPDX-License-Identifier: Apache-2.0
                   <copy-btn :clipboard-text="kubeconfigYaml" tooltip-text="Copy kubeconfig to clipboard"></copy-btn>
                 </v-list-item-action>
                 <v-list-item-action class="mx-0">
-                  <v-tooltip top>
+                  <v-tooltip location="top">
                     <template v-slot:activator="{ on }">
                       <v-btn v-on="on" icon @click.stop="kubeconfigExpansionPanel = !kubeconfigExpansionPanel" color="action-button">
                         <v-icon>{{kubeconfigExpansionPanelIcon}}</v-icon>

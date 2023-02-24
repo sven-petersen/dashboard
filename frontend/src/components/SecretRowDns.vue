@@ -9,9 +9,9 @@ SPDX-License-Identifier: Apache-2.0
     <td v-if="selectedHeaders.name">
       <div class="d-flex">
         {{item.name}}
-        <v-tooltip v-if="!item.isOwnSecret" top>
+        <v-tooltip v-if="!item.isOwnSecret" location="top">
           <template v-slot:activator="{ on }">
-            <v-icon v-on="on" small class="mx-1">mdi-account-arrow-left</v-icon>
+            <v-icon v-on="on" size="small" class="mx-1">mdi-account-arrow-left</v-icon>
           </template>
           <span>Secret shared by {{item.secretNamespace}}</span>
         </v-tooltip>
@@ -37,7 +37,7 @@ SPDX-License-Identifier: Apache-2.0
     </td>
     <td v-if="selectedHeaders.actions">
       <div class="d-flex flex-row justify-end">
-        <v-tooltip top v-if="canPatchSecrets">
+        <v-tooltip location="top" v-if="canPatchSecrets">
           <template v-slot:activator="{ on }">
             <div v-on="on">
               <v-btn :disabled="!item.isOwnSecret || !item.isSupportedCloudProvider" icon @click="onUpdate">
@@ -49,11 +49,11 @@ SPDX-License-Identifier: Apache-2.0
           <span v-else-if="!item.isSupportedCloudProvider">This DNS Provider is currently not supported by the dashboard</span>
           <span v-else>Edit Secret</span>
         </v-tooltip>
-        <v-tooltip top v-if="canDeleteSecrets">
+        <v-tooltip location="top" v-if="canDeleteSecrets">
           <template v-slot:activator="{ on }">
             <div v-on="on">
               <v-btn :disabled="item.relatedShootCount > 0 || !item.isOwnSecret" icon @click="onDelete">
-                <v-icon class="error--text">mdi-delete</v-icon>
+                <v-icon class="text-error">mdi-delete</v-icon>
               </v-btn>
             </div>
           </template>

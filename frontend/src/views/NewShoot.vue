@@ -127,7 +127,7 @@ SPDX-License-Identifier: Apache-2.0
     <v-divider></v-divider>
     <div class="d-flex align-center justify-end toolbar">
       <v-divider vertical></v-divider>
-      <v-btn text @click.stop="createClicked()" :disabled="!valid" color="primary">Create</v-btn>
+      <v-btn variant="text" @click.stop="createClicked()" :disabled="!valid" color="primary">Create</v-btn>
     </div>
     <confirm-dialog ref="confirmDialog"></confirm-dialog>
   </div>

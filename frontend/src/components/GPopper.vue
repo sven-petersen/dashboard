@@ -20,7 +20,7 @@ SPDX-License-Identifier: Apache-2.0
         <v-toolbar ref="toolbar" :height="30" :color="toolbarColor" flat>
           <v-toolbar-title class="text-subtitle-1 toolbar-title--text">{{title}}</v-toolbar-title>
           <v-spacer></v-spacer>
-          <v-btn small icon @click.stop="closePopper">
+          <v-btn size="small" icon @click.stop="closePopper">
             <v-icon color="toolbar-title" class="text-subtitle-1">mdi-close</v-icon>
           </v-btn>
         </v-toolbar>
@@ -31,7 +31,7 @@ SPDX-License-Identifier: Apache-2.0
       </v-card>
     </div>
     <!-- Using old slot syntax. Corresponding issue: https://github.com/RobinCK/vue-popper/issues/88 -->
-    <template slot="reference">
+    <template v-slot:reference>
       <slot name="popperRef"></slot>
     </template>
   </popper>

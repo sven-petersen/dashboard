@@ -5,9 +5,9 @@ SPDX-License-Identifier: Apache-2.0
 -->
 
 <template>
-  <v-menu :nudge-bottom="20" :nudge-right="20" max-height="80%" left v-model="columnSelectionMenu" absolute>
+  <v-menu :nudge-bottom="20" :nudge-right="20" max-height="80%" location="left" v-model="columnSelectionMenu" absolute>
     <template v-slot:activator="{ on: menu }">
-      <v-tooltip top>
+      <v-tooltip location="top">
         <template v-slot:activator="{ on: tooltip }">
           <v-btn v-on="{ ...menu, ...tooltip}" icon>
             <v-icon color="toolbar-title">mdi-dots-vertical</v-icon>
@@ -22,9 +22,9 @@ SPDX-License-Identifier: Apache-2.0
         <v-list-item-action>
           <v-icon :color="checkboxColor(header.selected)" v-text="checkboxIcon(header.selected)"/>
         </v-list-item-action>
-        <v-list-item-content class="primary--text">
+        <v-list-item-content class="text-primary">
           <v-list-item-title>
-            <v-tooltip v-if="header.customField" top>
+            <v-tooltip v-if="header.customField" location="top">
               <template v-slot:activator="{ on: tooltip }">
                 <div v-on="tooltip">
                   <v-badge
@@ -45,9 +45,9 @@ SPDX-License-Identifier: Apache-2.0
       </v-list-item>
       <v-list-item>
         <v-list-item-content>
-          <v-tooltip top style="width: 100%">
+          <v-tooltip location="top" style="width: 100%">
             <template v-slot:activator="{ on }">
-              <v-btn v-on="on" block text class="text-center primary--text" @click.stop="onReset">
+              <v-btn v-on="on" block variant="text" class="text-center text-primary" @click.stop="onReset">
                 Reset
               </v-btn>
             </template>
@@ -58,7 +58,7 @@ SPDX-License-Identifier: Apache-2.0
     </v-list>
     <v-list subheader dense v-if="filters && filters.length">
       <v-subheader>Filter Table</v-subheader>
-      <v-tooltip top :disabled="!filterTooltip">
+      <v-tooltip location="top" :disabled="!filterTooltip">
         <template v-slot:activator="{ on }">
           <div v-on="on">
             <v-list-item
@@ -70,12 +70,12 @@ SPDX-License-Identifier: Apache-2.0
               <v-list-item-action>
                 <v-icon :color="checkboxColor(filter.selected)" v-text="checkboxIcon(filter.selected)"/>
               </v-list-item-action>
-              <v-list-item-content class="primary--text">
+              <v-list-item-content class="text-primary">
                 <v-list-item-title>
                   {{filter.text}}
-                  <v-tooltip top v-if="filter.helpTooltip">
+                  <v-tooltip location="top" v-if="filter.helpTooltip">
                     <template v-slot:activator="{ on }">
-                      <v-icon v-on="on" small>mdi-help-circle-outline</v-icon>
+                      <v-icon v-on="on" size="small">mdi-help-circle-outline</v-icon>
                     </template>
                     <div :key="line" v-for="line in filter.helpTooltip">{{line}}</div>
                   </v-tooltip>

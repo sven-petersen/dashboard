@@ -6,7 +6,7 @@ SPDX-License-Identifier: Apache-2.0
 <template>
   <v-container fluid class="fill-height text-center">
     <v-row align="center" justify="center">
-        <v-card tile flat class="title-background">
+        <v-card rounded="0" flat class="title-background">
           <v-card-title class="text-subtitle-1">
             Loading cluster {{$route.params.name}}
           </v-card-title>

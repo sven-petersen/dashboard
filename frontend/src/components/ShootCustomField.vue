@@ -15,9 +15,9 @@ SPDX-License-Identifier: Apache-2.0
       <v-chip
         small
         class="cursor-pointer my-0 ml-0"
-        outlined
+        variant="outlined"
         :color="color">
-        <v-icon v-if="icon" small class="pr-1">{{icon}}</v-icon>{{name}}
+        <v-icon v-if="icon" size="small" class="pr-1">{{icon}}</v-icon>{{name}}
       </v-chip>
     </template>
     <v-list class="pa-0">

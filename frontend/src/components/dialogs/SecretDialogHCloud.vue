@@ -23,7 +23,7 @@ SPDX-License-Identifier: Apache-2.0
         ref="hcloudToken"
         label="Hetzner Cloud Token"
         :error-messages="getErrorMessages('hcloudToken')"
-        @input="$v.hcloudToken.$touch()"
+        @update:model-value="$v.hcloudToken.$touch()"
         @blur="$v.hcloudToken.$touch()"
         ></v-text-field>
       </div>

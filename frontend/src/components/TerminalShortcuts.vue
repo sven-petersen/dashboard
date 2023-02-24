@@ -15,7 +15,7 @@ SPDX-License-Identifier: Apache-2.0
           @add-terminal-shortcut="onAddTerminalShortcut"
         >
           <template v-slot:icon>
-            <v-tooltip top>
+            <v-tooltip location="top">
               <template v-slot:activator="{ on: tooltip }">
                 <span v-on="tooltip" >
                   <v-badge
@@ -49,7 +49,7 @@ SPDX-License-Identifier: Apache-2.0
           @add-terminal-shortcut="onAddTerminalShortcut"
         >
           <template v-slot:icon>
-            <v-tooltip top>
+            <v-tooltip location="top">
               <template v-slot:activator="{ on: tooltip }">
                 <span v-on="tooltip" >
                   <icon-base width="24" height="23" icon-color="primary" view-box="-4 0 56 54">

@@ -12,10 +12,10 @@ SPDX-License-Identifier: Apache-2.0
     :popper-key="`shoot_warning_${shootName}_${shootNamespace}`"
   >
     <template v-slot:popperRef>
-      <v-btn icon :x-small="small">
-        <v-tooltip top>
+      <v-btn icon :size="small && 'x-small'">
+        <v-tooltip location="top">
           <template v-slot:activator="{ on }">
-            <v-icon v-on="on" :color="overallColor" :small="small">{{icon}}</v-icon>
+            <v-icon v-on="on" :color="overallColor" :size="small && 'small'">{{icon}}</v-icon>
           </template>
           <span>{{tooltip}}</span>
         </v-tooltip>

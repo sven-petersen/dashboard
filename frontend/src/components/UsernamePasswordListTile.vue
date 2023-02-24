@@ -41,7 +41,7 @@ SPDX-License-Identifier: Apache-2.0
           <copy-btn :clipboard-text="password"></copy-btn>
         </v-list-item-action>
         <v-list-item-action class="mx-0">
-          <v-tooltip top>
+          <v-tooltip location="top">
             <template v-slot:activator="{ on }">
               <v-btn v-on="on" icon @click.stop="showPassword = !showPassword" color="action-button">
                 <v-icon>{{visibilityIcon}}</v-icon>

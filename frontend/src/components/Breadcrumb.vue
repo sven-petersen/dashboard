@@ -7,7 +7,7 @@ SPDX-License-Identifier: Apache-2.0
 <template>
   <v-breadcrumbs :items="breadcrumbItems" class="pl-0">
     <template v-slot:divider>
-      <v-icon large>mdi-chevron-right</v-icon>
+      <v-icon size="large">mdi-chevron-right</v-icon>
     </template>
     <template v-slot:item="{ item }">
       <router-link v-if="item.to" :to="item.to" class="text-decoration-none">

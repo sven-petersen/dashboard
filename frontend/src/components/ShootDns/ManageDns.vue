@@ -25,7 +25,7 @@ SPDX-License-Identifier: Apache-2.0
             item-color="primary"
             v-model="primaryProvider"
             @blur="$v.primaryProvider.$touch()"
-            @input="$v.primaryProvider.$touch()"
+            @update:model-value="$v.primaryProvider.$touch()"
             :items="dnsProvidersWithPrimarySupport"
             :error-messages="getErrorMessages('primaryProvider')"
             label="Primary DNS Provider"
@@ -69,17 +69,17 @@ SPDX-License-Identifier: Apache-2.0
       <v-row key="addProvider" class="list-item pt-2">
         <v-col>
           <v-btn
-            small
+            size="small"
             @click="addDnsProvider"
-            outlined
+            variant="outlined"
             fab
             icon
             color="primary">
-            <v-icon class="primary--text">mdi-plus</v-icon>
+            <v-icon class="text-primary">mdi-plus</v-icon>
           </v-btn>
           <v-btn
             @click="addDnsProvider"
-            text
+            variant="text"
             color="primary">
             Add DNS Provider
           </v-btn>

@@ -57,7 +57,7 @@ SPDX-License-Identifier: Apache-2.0
                       <v-list-item-title class="d-flex align-center pt-1">
                         <span v-if="staleAutoDeleteTimestamp">
                           This is a <span class="font-weight-bold">stale</span> project. Gardener will auto delete this project on
-                          <v-tooltip right>
+                          <v-tooltip location="right">
                             <template v-slot:activator="{ on }">
                               <span class="font-weight-bold" v-on="on">{{staleAutoDeleteDate}}</span>
                             </template>
@@ -111,7 +111,7 @@ SPDX-License-Identifier: Apache-2.0
                   <v-list-item-content>
                     <v-list-item-subtitle>Created At</v-list-item-subtitle>
                     <v-list-item-title>
-                      <v-tooltip right>
+                      <v-tooltip location="right">
                         <template v-slot:activator="{ on }">
                           <span v-on="on" class="text-subtitle-1">{{createdAt}}</span>
                         </template>
@@ -214,7 +214,7 @@ SPDX-License-Identifier: Apache-2.0
                     <v-list-item-title>Delete Project</v-list-item-title>
                   </v-list-item-content>
                   <v-list-item-action>
-                    <v-tooltip v-if="canDeleteProject" top>
+                    <v-tooltip v-if="canDeleteProject" location="top">
                       <template v-slot:activator="{ on }">
                         <div v-on="on">
                           <v-btn color="action-button" :disabled="isDeleteButtonDisabled" icon @click.stop="showDialog">
@@ -250,7 +250,7 @@ SPDX-License-Identifier: Apache-2.0
                         :save="updateCostObject"
                       >
                         <template v-if="costObjectDescriptionHtml" v-slot:info>
-                          <v-alert icon="mdi-information-outline" dense text tile :color="color" class="mb-0" >
+                          <v-alert icon="mdi-information-outline" dense text rounded="0" :color="color" class="mb-0" >
                             <div class="alertBannerMessage" v-html="costObjectDescriptionHtml"></div>
                           </v-alert>
                         </template>
@@ -319,7 +319,7 @@ SPDX-License-Identifier: Apache-2.0
                       :key="resourceQuota.key"
                     >
                       <td>
-                        <v-tooltip top>
+                        <v-tooltip location="top">
                           <template v-slot:activator="{ on }">
                             <span v-on="on">{{ resourceQuota.caption }}</span>
                           </template>
@@ -327,9 +327,9 @@ SPDX-License-Identifier: Apache-2.0
                         </v-tooltip>
                       </td>
                       <td class="text-center">
-                        <v-tooltip top>
+                        <v-tooltip location="top">
                           <template v-slot:activator="{ on }">
-                            <v-progress-linear v-on="on" :value="resourceQuota.percentage" :color="resourceQuota.progressColor"></v-progress-linear>
+                            <v-progress-linear v-on="on" :model-value="resourceQuota.percentage" :color="resourceQuota.progressColor"></v-progress-linear>
                           </template>
                           {{ resourceQuota.percentage }}%
                         </v-tooltip>
@@ -366,7 +366,7 @@ SPDX-License-Identifier: Apache-2.0
       <template v-slot:message>
         Are you sure to delete the project <span class="font-weight-bold">{{projectName}}</span>?
         <br />
-        <span class="error--text font-weight-bold">The operation can not be undone.</span>
+        <span class="text-error font-weight-bold">The operation can not be undone.</span>
       </template>
     </g-dialog>
 

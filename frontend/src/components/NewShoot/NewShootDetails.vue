@@ -15,7 +15,7 @@ SPDX-License-Identifier: Apache-2.0
           :counter="maxShootNameLength"
           v-model="name"
           :error-messages="getErrorMessages('name')"
-          @input="onInputName"
+          @update:model-value="onInputName"
           @blur="$v.name.$touch()"
           hint="Maximum name length depends on project name"
           ></v-text-field>
@@ -26,12 +26,12 @@ SPDX-License-Identifier: Apache-2.0
             color="primary"
             item-color="primary"
             label="Kubernetes Version"
-            item-text="version"
+            item-title="version"
             item-value="version"
             :items="sortedKubernetesVersionsList"
             v-model="kubernetesVersion"
             :error-messages="getErrorMessages('kubernetesVersion')"
-            @input="onInputKubernetesVersion"
+            @update:model-value="onInputKubernetesVersion"
             @blur="$v.kubernetesVersion.$touch()"
             :hint="versionHint"
             persistent-hint

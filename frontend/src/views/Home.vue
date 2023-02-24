@@ -9,12 +9,12 @@ SPDX-License-Identifier: Apache-2.0
     <v-card class="mt-2">
       <v-card-text>
         <h3>Let's get started</h3>
-        <v-tooltip top :disabled="canCreateProject">
+        <v-tooltip location="top" :disabled="canCreateProject">
           <template v-slot:activator="{ on }">
             <div v-on="on">
               <v-btn
-                text
-                class="text-left primary--text"
+                variant="text"
+                class="text-left text-primary"
                 :disabled="!canCreateProject"
                 @click.stop="projectDialog = true"
               >

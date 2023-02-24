@@ -5,7 +5,7 @@ SPDX-License-Identifier: Apache-2.0
 -->
 
 <template>
-  <v-tooltip top :disabled="!isShootLastOperationTypeControlPlaneMigrating">
+  <v-tooltip location="top" :disabled="!isShootLastOperationTypeControlPlaneMigrating">
     <template v-slot:activator="{ on }">
       <div v-on="on">
         <v-progress-circular v-if="isShootLastOperationTypeControlPlaneMigrating" indeterminate size=12 width=2 class="mr-1"></v-progress-circular>

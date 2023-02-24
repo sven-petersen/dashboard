@@ -8,7 +8,7 @@ SPDX-License-Identifier: Apache-2.0
   <v-dialog v-model="visible" max-width="650" persistent>
     <v-card>
       <v-card-title class="toolbar-background">
-        <v-icon large class="toolbar-title--text">mdi-account-plus</v-icon>
+        <v-icon size="large" class="toolbar-title--text">mdi-account-plus</v-icon>
         <span class="text-h5 ml-5 toolbar-title--text">{{title}}</span>
       </v-card-title>
       <v-card-text>
@@ -22,7 +22,7 @@ SPDX-License-Identifier: Apache-2.0
                 :label="nameLabel"
                 v-model.trim="internalName"
                 :error-messages="getErrorMessages('internalName')"
-                @input="$v.$touch()"
+                @update:model-value="$v.$touch()"
                 @keyup.enter="submitAddMember()"
                 :hint="nameHint"
                 persistent-hint
@@ -37,17 +37,17 @@ SPDX-License-Identifier: Apache-2.0
                 :items="roleItems"
                 multiple
                 small-chips
-                item-text="displayName"
+                item-title="displayName"
                 item-value="name"
                 v-model="internalRoles"
                 :error-messages="getErrorMessages('internalRoles')"
-                @input="$v.internalRoles.$touch()"
+                @update:model-value="$v.internalRoles.$touch()"
                 :hint="rolesHint"
                 persistent-hint
                 tabindex="2"
                 >
                 <template v-slot:selection="{ item, index }">
-                  <v-chip small color="primary" outlined close @update:active="internalRoles.splice(index, 1); $v.internalRoles.$touch()">
+                  <v-chip small color="primary" variant="outlined" closable @update:model-value="internalRoles.splice(index, 1); $v.internalRoles.$touch()">
                     <span>{{ item.displayName }}</span>
                   </v-chip>
                 </template>
@@ -70,7 +70,7 @@ SPDX-License-Identifier: Apache-2.0
             :value="true"
             type="info"
             color="primary"
-            outlined
+            variant="outlined"
           >
             The service account does not exist anymore and will be re-created if you update the roles.
           </v-alert>
@@ -80,9 +80,9 @@ SPDX-License-Identifier: Apache-2.0
       <v-divider></v-divider>
       <v-card-actions>
         <v-spacer></v-spacer>
-        <v-btn text @click.stop="cancel" tabindex="5">Cancel</v-btn>
-        <v-btn v-if="isUpdateDialog" text @click.stop="submitUpdateMember" :disabled="!valid" class="primary--text" tabindex="4">Update</v-btn>
-        <v-btn v-else text @click.stop="submitAddMember" :disabled="!valid" class="primary--text" tabindex="4">{{addMemberButtonText}}</v-btn>
+        <v-btn variant="text" @click.stop="cancel" tabindex="5">Cancel</v-btn>
+        <v-btn v-if="isUpdateDialog" variant="text" @click.stop="submitUpdateMember" :disabled="!valid" class="text-primary" tabindex="4">Update</v-btn>
+        <v-btn v-else variant="text" @click.stop="submitAddMember" :disabled="!valid" class="text-primary" tabindex="4">{{addMemberButtonText}}</v-btn>
       </v-card-actions>
     </v-card>
   </v-dialog>

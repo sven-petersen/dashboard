@@ -7,7 +7,7 @@ SPDX-License-Identifier: Apache-2.0
 <template>
   <span v-if="title">{{ titleText }}</span>
   <!-- we make the tooltip background transparent so that it does not conflict with the cards background -->
-  <v-tooltip v-else top color="rgba(0, 0, 0, 1)" content-class="tooltip">
+  <v-tooltip v-else location="top" color="rgba(0, 0, 0, 1)" content-class="tooltip">
     <template v-slot:activator="{ on }">
       <div class="d-flex align-center" v-on="on">
         <infra-icon :value="cloudProviderKind" class="mr-2"></infra-icon>

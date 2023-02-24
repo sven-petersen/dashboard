@@ -13,7 +13,7 @@ SPDX-License-Identifier: Apache-2.0
       <v-chip
         small
         class="cursor-pointer my-0 ml-0"
-        outlined
+        variant="outlined"
         color="primary">
           <vendor-icon :value="machineImageIcon" :size="20"></vendor-icon>
           {{workerGroup.name}}
@@ -45,7 +45,7 @@ SPDX-License-Identifier: Apache-2.0
           <v-container class="pa-2">
             <v-row dense>
               <v-col cols="6">
-                <v-card outlined>
+                <v-card variant="outlined">
                   <v-system-bar>
                     <v-icon class="mr-2">mdi-server</v-icon>Machine
                   </v-system-bar>
@@ -61,7 +61,7 @@ SPDX-License-Identifier: Apache-2.0
                       </v-col>
                       <v-col cols="12" v-if="workerGroup.zones && workerGroup.zones.length">
                         <legend class="text-caption">Zones</legend>
-                        <v-chip small label outlined class="px-1 mr-1" v-for="zone in workerGroup.zones" :key="zone">{{zone}}</v-chip>
+                        <v-chip small label variant="outlined" class="px-1 mr-1" v-for="zone in workerGroup.zones" :key="zone">{{zone}}</v-chip>
                       </v-col>
                       <template v-if="machineType">
                         <v-col>
@@ -80,7 +80,7 @@ SPDX-License-Identifier: Apache-2.0
                     </v-row>
                   </v-card-text>
                 </v-card>
-                <v-card outlined class="mt-2">
+                <v-card variant="outlined" class="mt-2">
                   <v-system-bar>
                     <v-icon class="mr-2">mdi-harddisk</v-icon>Volume
                   </v-system-bar>
@@ -103,7 +103,7 @@ SPDX-License-Identifier: Apache-2.0
                 </v-card>
               </v-col>
               <v-col cols="6">
-                <v-card outlined>
+                <v-card variant="outlined">
                   <v-system-bar>
                     <v-icon class="mr-2">mdi-disc</v-icon>Image
                   </v-system-bar>
@@ -118,15 +118,15 @@ SPDX-License-Identifier: Apache-2.0
                         <span class="text--primary">{{workerGroup.machine.image.version}}</span>
                       </v-col>
                       <v-col cols="12" v-if="!machineImage">
-                        <v-icon small class="mr-1" color="warning">mdi-alert</v-icon>Image not found in cloud profile
+                        <v-icon size="small" class="mr-1" color="warning">mdi-alert</v-icon>Image not found in cloud profile
                       </v-col>
                       <v-col cols="12" v-else-if="machineImage.expirationDate">
-                        <v-icon small class="mr-1" color="warning">mdi-alert</v-icon>Image expires on {{machineImage.expirationDateString}}
+                        <v-icon size="small" class="mr-1" color="warning">mdi-alert</v-icon>Image expires on {{machineImage.expirationDateString}}
                       </v-col>
                     </v-row>
                   </v-card-text>
                 </v-card>
-                <v-card outlined class="mt-2">
+                <v-card variant="outlined" class="mt-2">
                   <v-system-bar>
                     <v-icon class="mr-2">mdi-chart-line-variant</v-icon>Autoscaler
                   </v-system-bar>
@@ -151,7 +151,7 @@ SPDX-License-Identifier: Apache-2.0
                     </v-row>
                   </v-card-text>
                 </v-card>
-                <v-card outlined class="mt-2">
+                <v-card variant="outlined" class="mt-2">
                   <v-system-bar>
                     <v-icon class="mr-2">mdi-oci</v-icon>Container Runtime
                   </v-system-bar>
@@ -163,7 +163,7 @@ SPDX-License-Identifier: Apache-2.0
                       </v-col>
                       <v-col cols="12" v-if="machineCri.containerRuntimes && machineCri.containerRuntimes.length">
                         <legend class="text-caption">Additional OCI Runtimes</legend>
-                        <v-chip small label outlined class="px-1 mr-1" v-for="containerRuntime in machineCri.containerRuntimes" :key="containerRuntime.type">{{containerRuntime.type}}</v-chip>
+                        <v-chip small label variant="outlined" class="px-1 mr-1" v-for="containerRuntime in machineCri.containerRuntimes" :key="containerRuntime.type">{{containerRuntime.type}}</v-chip>
                       </v-col>
                     </v-row>
                   </v-card-text>

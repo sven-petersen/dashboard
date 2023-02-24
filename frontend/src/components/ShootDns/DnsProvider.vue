@@ -13,11 +13,11 @@ SPDX-License-Identifier: Apache-2.0
       <v-chip
         small
         color="primary"
-        outlined
+        variant="outlined"
         class="cursor-pointer my-0 ml-0">
           <vendor-icon :value="type" :size="20"></vendor-icon>
           <span class="px-1">{{secretName}}</span>
-          <v-icon v-if="primary" small>mdi-star</v-icon>
+          <v-icon v-if="primary" size="small">mdi-star</v-icon>
       </v-chip>
     </template>
     <v-list class="pa-0">

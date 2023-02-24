@@ -12,12 +12,12 @@ SPDX-License-Identifier: Apache-2.0
       item-color="primary"
       label="Purpose"
       :items="purposes"
-      item-text="purpose"
+      item-title="purpose"
       item-value="purpose"
       v-model="internalPurpose"
       persistent-hint
       :error-messages="getErrorMessages('internalPurpose')"
-      @input="onInputPurpose"
+      @update:model-value="onInputPurpose"
       @blur="$v.internalPurpose.$touch()">
       <template v-slot:item="{ item }">
         <v-list-item-content>

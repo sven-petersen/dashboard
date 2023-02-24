@@ -30,8 +30,8 @@ SPDX-License-Identifier: Apache-2.0
           @removed-zones="onRemovedZones">
           <template v-slot:action>
             <v-btn v-show="index > 0 || internalWorkers.length > 1"
-              small
-              outlined
+              size="small"
+              variant="outlined"
               icon
               color="grey"
               @click.stop="onRemoveWorker(index)">
@@ -45,20 +45,20 @@ SPDX-License-Identifier: Apache-2.0
       <v-col>
         <v-btn
           :disabled="!(allMachineTypes.length > 0)"
-          small
+          size="small"
           @click="addWorker"
-          outlined
+          variant="outlined"
           fab
           icon
           class="ml-1"
           color="primary">
-          <v-icon class="primary--text">mdi-plus</v-icon>
+          <v-icon class="text-primary">mdi-plus</v-icon>
         </v-btn>
         <v-btn
           :disabled="!(allMachineTypes.length > 0)"
           @click="addWorker"
-          text
-          class="primary--text">
+          variant="text"
+          class="text-primary">
           Add Worker Group
         </v-btn>
       </v-col>

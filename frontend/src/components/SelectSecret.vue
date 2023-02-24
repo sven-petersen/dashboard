@@ -17,7 +17,7 @@ SPDX-License-Identifier: Apache-2.0
       return-object
       v-model="secret"
       :error-messages="getErrorMessages('secret')"
-      @input="$v.secret.$touch()"
+      @update:model-value="$v.secret.$touch()"
       @blur="$v.secret.$touch()"
       persistent-hint
       :hint="secretHint"
@@ -32,7 +32,7 @@ SPDX-License-Identifier: Apache-2.0
       </template>
       <template v-slot:append-item>
         <v-divider class="mb-2"></v-divider>
-        <v-btn text @click="openSecretDialog" class="mx-2 primary--text">
+        <v-btn variant="text" @click="openSecretDialog" class="mx-2 text-primary">
           <v-icon class="mr-2">mdi-plus</v-icon>
           Add new Secret
         </v-btn>

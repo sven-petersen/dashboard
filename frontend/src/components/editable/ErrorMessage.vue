@@ -11,11 +11,11 @@ SPDX-License-Identifier: Apache-2.0
     </template>
     <v-alert
       v-else
-      @input="onInput"
+      @update:model-value="onInput"
       text dense
-      dismissible
+      closable
       close-label="Dismiss error"
-      border="left"
+      border="start"
       color="error"
       class="pl-2 mb-1"
     >
@@ -26,7 +26,7 @@ SPDX-License-Identifier: Apache-2.0
         :class="{ 'alert-expansion-panel--active': expanded }"
       >
         <v-col class="shrink">
-          <v-btn icon small color="error" @click="expanded = !expanded">
+          <v-btn icon size="small" color="error" @click="expanded = !expanded">
             <v-icon size="18">mdi-chevron-down</v-icon>
           </v-btn>
         </v-col>
