@@ -4,7 +4,11 @@
 // SPDX-License-Identifier: Apache-2.0
 //
 
-import Vue from 'vue'
+// FIXME: https://github.com/alfhen/vue-cookie seems to be Vue2 only
 import VueCookie from 'vue-cookie'
 
-Vue.use(VueCookie)
+export default {
+  install (app) {
+    app.use(VueCookie)
+  }
+}

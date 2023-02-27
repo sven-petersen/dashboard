@@ -4,12 +4,11 @@
 // SPDX-License-Identifier: Apache-2.0
 //
 
-import Vue from 'vue'
-const yaml = import(/* webpackPrefetch: true */ 'js-yaml')
+const yaml = import('js-yaml')
 
-const VueYaml = {
-  install (Vue) {
-    const value = {
+export default {
+  install (app) {
+    const yamlFacade = {
       dump (obj) {
         return yaml.then(({ dump }) => dump(obj, {
           skipInvalid: true
@@ -19,9 +18,8 @@ const VueYaml = {
         return yaml.then(({ load }) => load(data))
       }
     }
-    Object.defineProperty(Vue, 'yaml', { value })
-    Object.defineProperty(Vue.prototype, '$yaml', { value })
+
+    app.config.globalProperties.$yaml = yamlFacade
+    app.provide('api', api)
   }
 }
-
-Vue.use(VueYaml)

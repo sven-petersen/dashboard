@@ -5,14 +5,26 @@
 //
 
 import './styles'
-import './vuelidate'
-import './shortkey'
-import './snotify'
-import './cookie'
-import './bus'
-import './localStorage'
-import './logger'
-import './auth'
-import './api'
-import './yaml'
-import './utils'
+// import vuelidate from './vuelidate'
+// import shortkey from './shortkey'
+// import snotify from './snotify'
+// import cookie from './cookie'
+import bus from './bus'
+import localStorage from './localStorage'
+import logger from './logger'
+// import auth from './auth'
+import api from './api'
+// import yaml from './yaml'
+// import './utils'
+import vuetify from './vuetify'
+import createRouter from '../router'
+
+export function registerPlugins (app) {
+  app
+    .use(bus)
+    .use(localStorage)
+    .use(logger)
+    .use(api)
+    .use(vuetify)
+    .use(createRouter(/* store */))
+}

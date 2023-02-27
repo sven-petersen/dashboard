@@ -4,16 +4,12 @@
 // SPDX-License-Identifier: Apache-2.0
 //
 
-import Vue from 'vue'
 import EventEmitter from 'events'
 
-const VueBus = {
-  install (Vue) {
+export default {
+  install (app) {
     const bus = new EventEmitter()
-    Object.defineProperty(Vue.prototype, '$bus', {
-      value: bus
-    })
+    app.config.globalProperties.$bus = bus
+    app.provide('bus', bus)
   }
 }
-
-Vue.use(VueBus)

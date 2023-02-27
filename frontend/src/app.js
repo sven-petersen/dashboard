@@ -35,7 +35,6 @@ export function createApp (plugins) {
     }
   })
 
-  plugins.forEach((p) => p.install(app))
-  debugger
+  plugins.forEach((p) => app.use(p))
   return app
 }

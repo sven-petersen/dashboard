@@ -4,12 +4,10 @@
 // SPDX-License-Identifier: Apache-2.0
 //
 
-import Vue from 'vue'
-
 import api, { interceptors } from '@/utils/api'
 import { createAbortError } from '@/utils/errors'
 
-const VueApi = {
+export default {
   registerRequestInterceptor (auth) {
     this.unregister = interceptors.register({
       async requestFulfilled (...args) {
@@ -25,11 +23,9 @@ const VueApi = {
       }
     })
   },
-  install (Vue) {
-    this.registerRequestInterceptor(Vue.auth)
-    Object.defineProperty(Vue, 'api', { value: api })
-    Object.defineProperty(Vue.prototype, '$api', { value: api })
+  install (app) {
+    this.registerRequestInterceptor(app.config.globalProperties.$auth)
+    app.config.globalProperties.$api = api
+    app.provide('api', api)
   }
 }
-
-Vue.use(VueApi)

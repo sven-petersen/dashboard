@@ -8,6 +8,8 @@ import createStorageWrapper from '@/utils/storage'
 
 export default {
   install (app) {
-    app.config.globalProperties.localStorage = createStorageWrapper(window.localStorage)
+    const wrappedStorage = createStorageWrapper(window.localStorage)
+    app.config.globalProperties.$localStorage = wrappedStorage
+    app.provide('localStorage', wrappedStorage)
   }
 }

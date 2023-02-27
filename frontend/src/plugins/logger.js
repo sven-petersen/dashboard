@@ -8,7 +8,9 @@ import createLogger from '@/utils/logger'
 
 export default {
   install (app) {
-    const { localStorage } = app.config.globalProperties
-    app.config.globalProperties.logger = createLogger(localStorage)
+    const { $localStorage } = app.config.globalProperties
+    const logger = createLogger($localStorage)
+    app.config.globalProperties.$logger = logger
+    app.provide('logger', logger)
   }
 }

@@ -4,16 +4,12 @@
 // SPDX-License-Identifier: Apache-2.0
 //
 
-import Vue from 'vue'
-
 import { UserManager } from '@/utils/auth'
 
-const VueAuth = {
-  install (Vue) {
+export default {
+  install (app) {
     const auth = new UserManager()
-    Object.defineProperty(Vue, 'auth', { value: auth })
-    Object.defineProperty(Vue.prototype, '$auth', { value: auth })
+    app.config.globalProperties.$auth = auth
+    app.provide('auth', auth)
   }
 }
-
-Vue.use(VueAuth)

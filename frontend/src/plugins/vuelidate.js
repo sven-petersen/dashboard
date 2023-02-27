@@ -4,7 +4,10 @@
 // SPDX-License-Identifier: Apache-2.0
 //
 
-import Vue from 'vue'
 import Vuelidate from 'vuelidate'
 
-Vue.use(Vuelidate)
+export default {
+  install (app) {
+    app.use(Vuelidate)
+  }
+}

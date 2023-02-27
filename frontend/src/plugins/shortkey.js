@@ -4,7 +4,11 @@
 // SPDX-License-Identifier: Apache-2.0
 //
 
-import Vue from 'vue'
+// FIXME: https://github.com/fgr-araujo/vue-shortkey only supports Vue2
 import ShortKey from 'vue-shortkey'
 
-Vue.use(ShortKey)
+export default {
+  install (app) {
+    app.use(ShortKey)
+  }
+}

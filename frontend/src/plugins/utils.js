@@ -4,20 +4,18 @@
 // SPDX-License-Identifier: Apache-2.0
 //
 
-import Vue from 'vue'
+import { createApp } from 'vue'
 
 function renderComponent (name, props) {
-  return new Vue({
+  return createApp({
     render (h) {
       return h(name, { props })
     }
-  }).$mount().$el
+  }).mount().$el
 }
 
-const VueUtils = {
-  install (Vue) {
-    Object.defineProperty(Vue.prototype, '$renderComponent', { value: renderComponent })
+export default {
+  install (app) {
+    app.config.globalProperties.$renderComponent = renderComponent
   }
 }
-
-Vue.use(VueUtils)
