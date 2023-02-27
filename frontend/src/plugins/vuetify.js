@@ -4,18 +4,33 @@
 // SPDX-License-Identifier: Apache-2.0
 //
 
-import Vue from 'vue'
-import Vuetify from 'vuetify/lib'
+// import Vue from 'vue'
+import { createVuetify } from 'vuetify'
 import theme from './vuetify.theme.js'
 
-Vue.use(Vuetify)
+// const vuetify = createVuetify({
+//   icons: {
+//     iconfont: 'mdi'
+//   },
+//   theme
+// })
 
-const vuetify = new Vuetify({
-  icons: {
-    iconfont: 'mdi'
-  },
-  theme
-})
-Object.defineProperty(Vue, 'vuetify', { value: vuetify })
+// Vue.use(vuetify)
 
-export default vuetify
+// Object.defineProperty(Vue, 'vuetify', { value: vuetify })
+
+// export default vuetify
+
+export default {
+  install (app) {
+    const vuetify = createVuetify({
+      icons: {
+        iconfont: 'mdi'
+      },
+      theme
+    })
+
+    app.config.globalProperties.vuetify = vuetify
+    app.use(vuetify)
+  }
+}

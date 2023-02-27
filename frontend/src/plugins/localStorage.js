@@ -4,16 +4,10 @@
 // SPDX-License-Identifier: Apache-2.0
 //
 
-import Vue from 'vue'
-
 import createStorageWrapper from '@/utils/storage'
 
-const VueStorage = {
-  install (Vue) {
-    const localStorage = createStorageWrapper(window.localStorage)
-    Object.defineProperty(Vue, 'localStorage', { value: localStorage })
-    Object.defineProperty(Vue.prototype, '$localStorage', { value: localStorage })
+export default {
+  install (app) {
+    app.config.globalProperties.localStorage = createStorageWrapper(window.localStorage)
   }
 }
-
-Vue.use(VueStorage)

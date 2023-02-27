@@ -1,0 +1,30 @@
+/*
+ *  SPDX-FileCopyrightText: 2023 SAP SE or an SAP affiliate company and Gardener contributors
+ *
+ *  SPDX-License-Identifier: Apache-2.0
+ */
+
+/**
+ * Configures SASS variables and Vuetify overwrites. Also see vite.config.js where this
+ * file is referenced in the vuetify plugin config.
+ */
+
+// https://next.vuetifyjs.com/features/sass-variables/`
+// TODO: there is a bug when using the syntax below which may be resolved in the future
+//   https://github.com/vuetifyjs/vuetify/issues/16593 .
+//  Instead one shall use "@use 'vuetify/lib/styles/main.sass'..." instead
+// @use 'vuetify' with (
+//   $color-pack: true,
+//   $utilities: false,
+// );
+
+// https://vuetifyjs.com/en/features/sass-variables/#usage-in-templates
+// The parameters ($color-pack,...) are described here:
+//   https://github.com/vuetifyjs/vuetify/tree/master/packages/docs/src/pages/en/styles
+@forward 'vuetify/settings' with (
+// @forward 'vuetify/lib/styles/main.sass' with (
+  $color-pack: true !default,
+  $utilities: false !default,
+);
+
+@forward '@/sass/variables.scss';

@@ -115,8 +115,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  @import 'vuetify/src/styles/styles.sass';
-  @import '@/sass/variables.scss';
+  /* @use 'vuetify/src/styles/styles.sass' as *; */
+  /* @use 'vuetify/lib/styles/main.sass' as * with (
+    $color-pack: true,
+    $utilities: false,
+  ); */
+  @use '@/sass/settings.scss' as *;
 
   $grey-lighten-4: map-get($grey, 'lighten-4');
 

@@ -141,9 +141,12 @@ SPDX-License-Identifier: Apache-2.0
                       <v-tab-item class="pa-4">
                         <v-row>
                           <v-col cols="12">
+                            <!-- TODO: v-select used the no longer existing item-color=primary attr.
+                                This changed the color of the selected item. Check if this can be achieved somehow with Vuetify3
+                                or if we e.g. also want to display a "check"-icon similiar to the project selection on the left menu.
+                            -->
                             <v-select
                               color="primary"
-                              item-color="primary"
                               v-model="projectName"
                               :items="projectNames"
                               label="Project"
@@ -152,9 +155,12 @@ SPDX-License-Identifier: Apache-2.0
                             ></v-select>
                           </v-col>
                           <v-col cols="12">
+                            <!-- TODO: v-select used the no longer existing item-color=primary attr.
+                                  This changed the color of the selected item. Check if this can be achieved somehow with Vuetify3
+                                  or if we e.g. also want to display a "check"-icon similiar to the project selection on the left menu.
+                            -->
                             <v-select
                               color="primary"
-                              item-color="primary"
                               v-model="grantType"
                               :items="grantTypes"
                               label="Grant Type"

@@ -5,15 +5,19 @@ SPDX-License-Identifier: Apache-2.0
 -->
 
 <template>
+    <!-- TODO: v-navigation-drawer used the no longer existing "fixed" attr. There is no such prop in vuetify 3.
+          Removed for now but need to check if the behavior is still as desired. "fixed" applied a CSS position: fixed.
+    -->
+    <!-- TODO: v-navigation-drawer used the no longer existing "app" attr. There is no such prop in vuetify 3.
+          Removed for now but need to check if the behavior is still as desired.
+    -->
     <v-navigation-drawer
       v-model="isActive"
-      fixed
-      app
       :mobile-breakpoint="400"
       color="main-background"
     >
       <div class="teaser">
-        <div class="content center main-background darken-2">
+        <div class="content center main-background primary-darken-2">
           <v-btn @click.stop="setSidebar(!isActive)" icon class="float-right main-navigation-title--text ma-2">
             <v-icon>mdi-chevron-double-left</v-icon>
           </v-btn>
@@ -25,12 +29,15 @@ SPDX-License-Identifier: Apache-2.0
         </div>
       </div>
       <template v-if="projectList.length">
+        <!-- TODO: v-menu used the no longer existing "allow-overflow" attr.
+               Removed for now but need to check if the behavior is still as desired.
+        -->
+        <!-- TODO: v-menu used the no longer existing "offset-y" attr.
+               The new default behavior however seems to make this offset-y obsolete.
+        -->
         <v-menu
           attach
-          offset-y
-          left
-          bottom
-          allow-overflow
+          location="left bottom"
           open-on-click
           :close-on-content-click="false"
           content-class="project-menu"
@@ -59,12 +66,14 @@ SPDX-License-Identifier: Apache-2.0
 
           <v-card>
             <template v-if="projectList.length > 3">
+              <!-- TODO: v-card-title used the no longer existing "flat" attr.
+               This attr seems to be cosmetical. Check how it looks without it in Vue3
+              -->
               <v-card-title class="pa-0">
                 <v-text-field
                   clearable
                   label="Filter projects"
                   variant="solo"
-                  flat
                   single-line
                   hide-details
                   prepend-icon="mdi-magnify"
@@ -82,7 +91,7 @@ SPDX-License-Identifier: Apache-2.0
               </v-card-title>
               <v-divider></v-divider>
             </template>
-            <v-list flat class="project-list" ref="projectList" @scroll="handleProjectListScroll">
+            <v-list variant="flat" class="project-list" ref="projectList" @scroll="handleProjectListScroll">
               <v-list-item
                 v-for="project in visibleProjectList"
                 @click="onProjectClick($event, project)"
@@ -91,17 +100,21 @@ SPDX-License-Identifier: Apache-2.0
                 :key="project.metadata.name"
                 :data-g-project-name="project.metadata.name"
               >
-                <v-list-item-avatar>
-                  <v-icon v-if="project.metadata.name === selectedProjectName" color="primary">mdi-check</v-icon>
-                </v-list-item-avatar>
-                <v-list-item-content>
-                  <v-list-item-title class="project-name">{{project.metadata.name}}</v-list-item-title>
-                  <v-list-item-subtitle class="project-owner">{{getProjectOwner(project)}}</v-list-item-subtitle>
-                </v-list-item-content>
-                <v-list-item-action>
+                <template v-slot:prepend>
+                  <v-icon color="primary">
+                    {{ project.metadata.name === selectedProjectName ? 'mdi-check' : ''}}
+                  </v-icon>
+                </template>
+                <template v-slot:title>
+                  <div class="project-name">{{project.metadata.name}}</div>
+                </template>
+                <template v-slot:subtitle>
+                  <div class="project-owner">{{getProjectOwner(project)}}</div>
+                </template>
+                <template v-slot:append>
                   <stale-project-warning :project="project" small></stale-project-warning>
                   <not-ready-project-warning :project="project" small></not-ready-project-warning>
-                </v-list-item-action>
+                </template>
               </v-list-item>
             </v-list>
             <v-card-actions>
@@ -126,24 +139,24 @@ SPDX-License-Identifier: Apache-2.0
           </v-card>
         </v-menu>
       </template>
-      <v-list ref="mainMenu" class="main-menu" flat>
+      <v-list ref="mainMenu" class="main-menu" variant="flat">
         <v-list-item :to="{name: 'Home'}" exact v-if="hasNoProjects">
-          <v-list-item-action>
+          <template v-slot:title>
+            <div class="text-subtitle-1 main-navigation-title--text">Home</div>
+          </template>
+          <template v-slot:append>
             <v-icon size="small" color="main-navigation-title">mdi-home-outline</v-icon>
-          </v-list-item-action>
-          <v-list-item-content>
-            <v-list-item-title class="text-subtitle-1 main-navigation-title--text">Home</v-list-item-title>
-          </v-list-item-content>
+          </template>
         </v-list-item>
         <template v-if="namespace">
           <template v-for="(route, index) in routes">
             <v-list-item v-if="!route.meta.menu.hidden" :to="namespacedRoute(route)" :key="index" active-class="active-item">
-              <v-list-item-action>
+              <template v-slot:title>
+                <div class="text-subtitle-1 main-navigation-title--text" >{{route.meta.menu.title}}</div>
+              </template>
+              <template v-slot:append>
                 <v-icon size="small" color="main-navigation-title">{{route.meta.menu.icon}}</v-icon>
-              </v-list-item-action>
-              <v-list-item-content>
-                <v-list-item-title class="text-subtitle-1 main-navigation-title--text" >{{route.meta.menu.title}}</v-list-item-title>
-              </v-list-item-content>
+              </template>
             </v-list-item>
           </template>
         </template>

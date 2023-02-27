@@ -77,6 +77,7 @@ SPDX-License-Identifier: Apache-2.0
 </template>
 
 <script>
+import { getCurrentInstance } from 'vue'
 import { mapGetters } from 'vuex'
 import { SnotifyPosition } from 'vue-snotify'
 import get from 'lodash/get'
@@ -124,11 +125,7 @@ export default {
     }
   },
   beforeRouteEnter (to, from, next) {
-    // FIXME: The Vue global object no longer exists/holds the api auth etc.
-    //   Also, in the beforeRouteEnter, we do not have access to the component
-    //   instance (no "this") or a way to get the "app"-instance.
-    //   So this logic below needs to be rewritten or placed somewhere else.
-    const guard = async (/* { api, auth, localStorage, logger } */) => {
+    const guard = async ({ api, auth, localStorage, logger }) => {
       let err
       if (/^#.+/.test(to.hash)) {
         const searchParams = new URLSearchParams(to.hash.substring(1))
@@ -136,24 +133,23 @@ export default {
           err = new Error(searchParams.get('error'))
         }
       }
-      // let cfg
-      // try {
-      //   const { data } = await api.getLoginConfiguration()
-      //   cfg = data
-      // } catch (err) {
-      // logger.error('Failed to fetch login configuration: %s', err.message)
-      const cfg = {
-        // loginTypes: ['token'] // at least allow the token login
-        loginTypes: ['token', 'oidc'] // FIXME: temporary fix to allow login during migration
+      let cfg
+      try {
+        const { data } = await api.getLoginConfiguration()
+        cfg = data
+      } catch (err) {
+        logger.error('Failed to fetch login configuration: %s', err.message)
+        cfg = {
+          loginTypes: ['token'] // at least allow the token login
+        }
       }
-      // }
-      // const primaryLoginType = getPrimaryLoginType(cfg)
-      // const autoLoginEnabled = localStorage.getItem('global/auto-login') === 'enabled'
-      // if (!err && primaryLoginType === 'oidc' && autoLoginEnabled) {
-      //   const redirectPath = get(to.query, 'redirectPath', '/')
-      //   auth.signinWithOidc(redirectPath)
-      //   return next(false)
-      // }
+      const primaryLoginType = getPrimaryLoginType(cfg)
+      const autoLoginEnabled = localStorage.getItem('global/auto-login') === 'enabled'
+      if (!err && primaryLoginType === 'oidc' && autoLoginEnabled) {
+        const redirectPath = get(to.query, 'redirectPath', '/')
+        auth.signinWithOidc(redirectPath)
+        return next(false)
+      }
       next(vm => {
         Object.assign(vm.cfg, cfg)
         if (err) {
@@ -164,7 +160,9 @@ export default {
         }
       })
     }
-    guard(/* Vue */)
+    // FIXME: There no longer is a global Vue object. Also there is no trivial way I have found so far
+    //  to get access to the "app"-instance which now holds all the things like localStorage, logger etc.
+    guard(Vue)
   },
   methods: {
     handleLogin () {

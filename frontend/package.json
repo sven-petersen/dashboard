@@ -23,7 +23,7 @@
   },
   "scripts": {
     "fix-vue-compat": "unzip -nq ../.yarn/cache/@vue-compat-npm-3.2.47*.zip -d ../.yarn/cache/",
-    "dev": "vite",
+    "dev": "yarn fix-vue-compat && vite",
     "build": "vite build",
     "serve": "vite preview",
     "lint": "eslint . --ext .vue,.js,.cjs,.mjs --ignore-path .gitignore .",
@@ -61,7 +61,7 @@
     "vue": "3.2.47",
     "vue-cookie": "^1.1.4",
     "vue-popperjs": "^2.3.0",
-    "vue-router": "^4",
+    "vue-router": "^3.5.4",
     "vue-shortkey": "^3.1.7",
     "vue-snotify": "^3.2.1",
     "vuelidate": "^0.7.7",
@@ -72,7 +72,7 @@
     "xterm-addon-web-links": "^0.5.1"
   },
   "devDependencies": {
-    "@vitejs/plugin-vue": "^3.0.3",
+    "@vitejs/plugin-vue": "^4.0.0",
     "@vitest/coverage-c8": "^0.28.4",
     "@vue/compiler-sfc": "3.2.47",
     "@vue/test-utils": "^2.3.0",
@@ -90,10 +90,11 @@
     "rollup-plugin-visualizer": "^5.9.0",
     "sass": "^1.59.3",
     "unplugin-vue-components": "^0.23.0",
-    "vite": "3.2.5",
+    "vite": "^4.1.1",
     "vite-plugin-compression": "^0.5.1",
     "vite-plugin-vuetify": "^1.0.2",
-    "vitest": "^0.28.4"
+    "vitest": "^0.28.4",
+    "vuetify-loader": "^1.7.3"
   },
   "packageManager": "yarn@3.2.1",
   "engines": {

@@ -4,17 +4,11 @@
 // SPDX-License-Identifier: Apache-2.0
 //
 
-import Vue from 'vue'
-
 import createLogger from '@/utils/logger'
 
-const VueStorage = {
-  install (Vue) {
-    const storage = Vue.localStorage
-    const logger = createLogger(storage)
-    Object.defineProperty(Vue, 'logger', { value: logger })
-    Object.defineProperty(Vue.prototype, '$logger', { value: logger })
+export default {
+  install (app) {
+    const { localStorage } = app.config.globalProperties
+    app.config.globalProperties.logger = createLogger(localStorage)
   }
 }
-
-Vue.use(VueStorage)
