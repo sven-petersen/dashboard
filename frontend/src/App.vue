@@ -4,19 +4,20 @@ SPDX-FileCopyrightText: 2021 SAP SE or an SAP affiliate company and Gardener con
 SPDX-License-Identifier: Apache-2.0
  -->
 <template>
-  <div class="hello">
+  <!-- <div class="hello">
     App.vue
-  </div>
+  </div> -->
   <router-view />
 </template>
 
 <script setup>
-  import { onMounted } from 'vue'
+  import { onMounted, inject } from 'vue'
+  const bus = inject('bus')
 
   onMounted(() => {
     window.addEventListener('keyup', ({ key }) => {
       if (key === 'Escape' || key === 'Esc') {
-        this.$bus.emit('esc-pressed')
+        bus.emit('esc-pressed')
       }
     })
   })

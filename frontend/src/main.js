@@ -5,10 +5,12 @@
 //
 
 // Components
+import { configureCompat } from '@vue/compat'
 import App from '@/App.vue'
 import '@/sass/main.scss'
 
 // Composables
+configureCompat({MODE: 3})
 import { createApp } from 'vue'
 
 // Plugins

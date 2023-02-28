@@ -34,6 +34,7 @@
     "**/.yarn": true,
     "**/dist": true
   },
+  "editor.formatOnSave": false,
   "eslint.nodePath": ".yarn/sdks",
   "files.exclude": {
     ".pnp.*": true,

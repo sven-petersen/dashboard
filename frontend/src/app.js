@@ -4,37 +4,17 @@
 // SPDX-License-Identifier: Apache-2.0
 //
 
-import { createApp as createVueApp, h } from 'vue'
+import { createApp as createVueApp } from 'vue'
+import App from './App.vue'
 // import store from '@/store'
-import createRouter from '@/router'
-
-const App = {
-  name: 'app',
-  created () {
-    // provide the keyboard events for dialogs. Dialogs can't catch keyboard events
-    // if any input element of the dialog didn't have the focus.
-    window.addEventListener('keyup', ({ key }) => {
-      if (key === 'Escape' || key === 'Esc') {
-        this.$bus.emit('esc-pressed')
-      }
-    })
-  },
-  render () {
-    return h('router-view')
-  }
-}
-
-export { App }
+import router from '@/router'
 
 export function createApp (plugins) {
-  const app = createVueApp({
-    // store,
-    router: createRouter(/* store */),
-    render () {
-      return h(App)
-    }
-  })
+  // const router = createRouter(/* store */)
+  const app = createVueApp(App)
 
   plugins.forEach((p) => app.use(p))
+  app.use(router)
+
   return app
 }

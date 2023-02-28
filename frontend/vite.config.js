@@ -3,15 +3,15 @@
 //
 // SPDX-License-Identifier: Apache-2.0
 
-import path from 'path'
+import { fileURLToPath, URL } from 'node:url'
 import zlib from 'zlib'
 
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
-import Components from 'unplugin-vue-components/vite'
-import { Vuetify3Resolver } from 'unplugin-vue-components/resolvers'
-import viteCompression from 'vite-plugin-compression'
 import vuetify from 'vite-plugin-vuetify'
+// import Components from 'unplugin-vue-components/vite'
+// import { Vuetify3Resolver } from 'unplugin-vue-components/resolvers'
+import viteCompression from 'vite-plugin-compression'
 import { visualizer } from 'rollup-plugin-visualizer'
 
 const proxyTarget = 'http://localhost:3030'
@@ -33,23 +33,26 @@ export default defineConfig(({ command }) => {
       }),
       // TODO: needed? If so get it to work
       vuetify({
+        // autoImport: true,
         styles: { configFile: 'src/sass/settings.scss' }
       }),
-      Components({
-        resolvers: [Vuetify3Resolver()]
-      })
+      // Components({
+      //   resolvers: [Vuetify3Resolver()]
+      // })
     ],
     define: {
       // Fix for vuelidate@0.7.7 which uses "process.env" which is not supported by vite.
       // Never versions of vuelidate should work with vite but this requires migrating
       // to vuelidate@2.0.0.
-      'process.env.BUILD': '"web"'
+      'process.env.BUILD': '"web"',
     },
     resolve: {
       alias: {
-        '@': path.resolve(__dirname, './src/'),
-        vue: '@vue/compat/dist/vue.runtime.esm-bundler.js'
+        '@': fileURLToPath(new URL('./src', import.meta.url)),
+        // vue: '@vue/compat' // TODO: remove after migration to vue 3
+        vue: '@vue/compat/dist/vue.runtime.esm-bundler.js' // TODO: remove after migration to vue 3
       },
+      dedupe: [ '@vue/compat/dist/vue.runtime.esm-bundler.js', '@vue/compat', 'vue' ], // TODO: remove after migration to vue 3
       extensions: [
         '.js',
         '.json',
