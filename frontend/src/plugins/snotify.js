@@ -4,7 +4,11 @@
 // SPDX-License-Identifier: Apache-2.0
 //
 
-import Vue from 'vue'
 import Snotify from 'vue-snotify'
 
-Vue.use(Snotify)
+export default {
+  install (app) {
+    app.use(Snotify)
+  }
+}
+

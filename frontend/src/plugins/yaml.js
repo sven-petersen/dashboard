@@ -20,6 +20,6 @@ export default {
     }
 
     app.config.globalProperties.$yaml = yamlFacade
-    app.provide('api', api)
+    app.provide('yaml', yamlFacade)
   }
 }

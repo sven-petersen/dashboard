@@ -15,7 +15,7 @@ import logger from './logger'
 import auth from './auth'
 import api from './api'
 import store from './store'
-// import yaml from './yaml'
+import yaml from './yaml'
 // import './utils'
 import vuetify from './vuetify'
 import createRouter from '../router'
@@ -23,11 +23,18 @@ import createRouter from '../router'
 export function registerPlugins (app) {
   app
     .use(bus)
+    .use(yaml)
     .use(localStorage)
     .use(logger)
     .use(vuetify)
     .use(auth)
-    .use(store)
     .use(api)
-    .use(createRouter(/* store */))
+    .use(store)
+    // .use(snotify) // requires compat GLOBAL_MOUNT and FILTERS
+
+  app.use(createRouter({
+    store: app.config.globalProperties.$store,
+    logger: app.config.globalProperties.$store,
+    auth: app.config.globalProperties.$auth,
+  }))
 }

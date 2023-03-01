@@ -4,31 +4,23 @@
 // SPDX-License-Identifier: Apache-2.0
 //
 
-import Vue from 'vue'
-import Router from 'vue-router'
+import { createRouter as createVueRouter, createWebHistory } from 'vue-router'
 
 import createRoutes from './routes'
 import createGuards from './guards'
 
-Vue.use(Router)
-
-const userManager = Vue.auth
-const localStorage = Vue.localStorage
-const logger = Vue.logger
-
-export default function createRouter (store) {
-  const zeroPoint = { x: 0, y: 0 } // TODO: change x,y to top,left after upgrading to router v4
+export default function createRouter ({ store, logger, auth }) {
+  const zeroPoint = { left: 0, top: 0 }
 
   const routerOptions = {
-    mode: 'history',
-    base: import.meta.env.BASE_URL,
+    history: createWebHistory(import.meta.env.BASE_URL),
     scrollBehavior (to, from, savedPosition) {
       return savedPosition || zeroPoint
     },
     routes: createRoutes(store)
   }
 
-  /* automatic signout when token expires */
+  // automatic signout when token expires
   let timeoutID
   store.watch((state, getters) => getters.userExpiresAt, expirationTime => {
     if (timeoutID) {
@@ -40,7 +32,7 @@ export default function createRouter (store) {
         const delay = Math.min(2147483647, expirationTime - currentTime) // setTimeout delay must not exceed 32-bit signed integer
         timeoutID = setTimeout(() => {
           logger.info('Session is expiring --> Redirecting to logout page')
-          userManager.signout()
+          auth.signout()
         }, delay)
       } else {
         logger.error('Expiration time of a new token is not expected to be in the past')
@@ -48,11 +40,11 @@ export default function createRouter (store) {
     }
   })
 
-  /* router */
-  const router = new Router(routerOptions)
+  // router
+  const router = createVueRouter(routerOptions)
 
-  /* navigation guards */
-  const guards = createGuards(store, userManager, localStorage, logger)
+  // navigation guards
+  const guards = createGuards(store, auth, localStorage, logger)
   for (const guard of guards.beforeEach) {
     router.beforeEach(guard)
   }
@@ -60,7 +52,7 @@ export default function createRouter (store) {
     router.afterEach(guard)
   }
 
-  /* router error */
+  // router error
   router.onError(err => {
     logger.error('Router error:', err)
     store.commit('SET_LOADING', false)
