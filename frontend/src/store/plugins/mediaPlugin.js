@@ -15,7 +15,7 @@ export default function (vuetify) {
 
     const colorScheme = (state, getters) => getters.colorScheme
     const setDarkTheme = value => {
-      vuetify.framework.theme.dark = value === 'dark'
+      vuetify.theme.name.value = value
     }
     setDarkTheme(store.getters.colorScheme)
     store.watch(colorScheme, setDarkTheme)

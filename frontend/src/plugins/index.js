@@ -12,8 +12,9 @@ import './styles'
 import bus from './bus'
 import localStorage from './localStorage'
 import logger from './logger'
-// import auth from './auth'
+import auth from './auth'
 import api from './api'
+import store from './store'
 // import yaml from './yaml'
 // import './utils'
 import vuetify from './vuetify'
@@ -24,7 +25,9 @@ export function registerPlugins (app) {
     .use(bus)
     .use(localStorage)
     .use(logger)
-    .use(api)
     .use(vuetify)
+    .use(auth)
+    .use(store)
+    .use(api)
     .use(createRouter(/* store */))
 }

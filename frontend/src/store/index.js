@@ -5,8 +5,7 @@
 //
 
 import Vue from 'vue'
-import Vuex from 'vuex'
-import createLogger from 'vuex/dist/logger'
+import { createStore as createVuexStore, createLogger } from 'vuex' // TODO: after updating vuex
 
 import {
   gravatarUrlGeneric,
@@ -91,8 +90,6 @@ const userManager = Vue.auth
 const logger = Vue.logger
 const vuetify = Vue.vuetify
 
-Vue.use(Vuex)
-
 // FIXME: re-enable strict mode!
 //  there seem to be places that modify state not using actions. Strict
 //  mode errors in that case causing the application not to start at all.
@@ -100,19 +97,6 @@ Vue.use(Vuex)
 //  after migration "magically works" again.
 const strict = false // import.meta.env.NODE_ENV !== 'production'
 const debug = includes(split(import.meta.env.VUE_APP_DEBUG, ','), 'vuex')
-
-// plugins
-const plugins = [
-  createSocketPlugin(userManager, logger)
-]
-// localStorage can be undefined in some unit tests
-if (localStorage) {
-  plugins.push(createStoragePlugin(localStorage))
-}
-plugins.push(createMediaPlugin(vuetify))
-if (debug) {
-  plugins.push(createLogger())
-}
 
 // initial state
 const state = {
@@ -1628,17 +1612,11 @@ const modules = {
   socket
 }
 
-const store = new Vuex.Store({
-  state,
-  getters,
-  actions,
-  mutations,
-  modules,
-  strict,
-  plugins
-})
-
-export default store
+// TODO: clean this up
+//   we define and export globals but actually with vue3/vuex4 we rather have
+//   everything defined "per app instance" (also compare createStore func below
+//   with the old "new Vuex.Store" style)
+const plugins = []
 
 export {
   state,
@@ -1649,4 +1627,30 @@ export {
   plugins,
   mapAccessRestrictionForInput,
   firstItemMatchingVersionClassification
+}
+
+export const createStore = (app) => {
+  const { $logger, $localStorage, $vuetify, $auth } = app.config.globalProperties;
+  // plugins
+  plugins.push(createSocketPlugin($auth, $logger))
+  // localStorage can be undefined in some unit tests
+  if (localStorage) {
+    plugins.push(createStoragePlugin($localStorage))
+  }
+  plugins.push(createMediaPlugin($vuetify))
+  if (debug) {
+    plugins.push(createLogger())
+  }
+
+  const store = createVuexStore({
+    state,
+    getters,
+    actions,
+    mutations,
+    modules,
+    strict,
+    plugins
+  })
+
+  return store
 }

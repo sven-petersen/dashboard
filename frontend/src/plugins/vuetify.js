@@ -10,9 +10,17 @@ import theme from './vuetify.theme.js'
 import '@mdi/font/css/materialdesignicons.css'
 import 'vuetify/styles'
 
-export default createVuetify({
+const vuetify = createVuetify({
   icons: {
     iconfont: 'mdi'
   },
   theme
 })
+
+export default {
+  install (app) {
+    app.use(vuetify)
+    app.config.globalProperties.$vuetify = vuetify
+    app.provide('vuetify', vuetify)
+  }
+}
