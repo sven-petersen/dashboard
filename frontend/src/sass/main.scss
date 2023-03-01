@@ -4,6 +4,9 @@
  *  SPDX-License-Identifier: Apache-2.0
  */
 
+@forward 'vuetify/lib/styles/main.sass';
+
+
 /** Gardener Styles */
 [data-app] {
   .v-main > .container {
