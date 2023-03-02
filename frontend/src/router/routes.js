@@ -34,7 +34,7 @@ import Login from '@/views/Login.vue'
 /* Pages */
 
 // import NotFound from '@/views/NotFound.vue'
-// import Error from '@/views/Error.vue'
+import Error from '@/views/Error.vue'
 
 // import ProjectPlaceholder from '@/views/ProjectPlaceholder.vue'
 // import NewShootEditor from '@/views/NewShootEditor.vue'
@@ -61,8 +61,8 @@ import Login from '@/views/Login.vue'
 
 export default function routes (context) {
   return [
-    loginRoute(context, '/login')
-    // errorRoute(context, '/error'),
+    loginRoute(context, '/login'),
+    errorRoute(context, '/error'),
     // defaultHierarchy(context, '/')
   ]
 }
@@ -177,16 +177,16 @@ function loginRoute (context, path) {
   }
 }
 
-// function errorRoute (context, path) {
-//   return {
-//     path,
-//     name: 'Error',
-//     component: Error,
-//     meta: {
-//       public: true
-//     }
-//   }
-// }
+function errorRoute (context, path) {
+  return {
+    path,
+    name: 'Error',
+    component: Error,
+    meta: {
+      public: true
+    }
+  }
+}
 
 // function homeRoute ({ getters, dispatch }, path) {
 //   return {

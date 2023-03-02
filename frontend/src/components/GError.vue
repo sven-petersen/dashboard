@@ -4,13 +4,24 @@ SPDX-FileCopyrightText: 2021 SAP SE or an SAP affiliate company and Gardener con
 SPDX-License-Identifier: Apache-2.0
  -->
 <template>
-  <v-container fluid class="fill-height text-center">
+  <v-container
+    fluid
+    class="fill-height text-center"
+  >
     <v-row align="center">
       <v-col>
-        <h1>{{code}}</h1>
-        <h2>{{text}}</h2>
-        <p v-if="message">{{message}}</p>
-        <v-btn color="primary" @click="onClick" class="mt-12">{{buttonText}}</v-btn>
+        <h1>{{ code }}</h1>
+        <h2>{{ text }}</h2>
+        <p v-if="message">
+          {{ message }}
+        </p>
+        <v-btn
+          color="primary"
+          class="mt-12"
+          @click="onClick"
+        >
+          {{ buttonText }}
+        </v-btn>
       </v-col>
     </v-row>
   </v-container>
@@ -18,6 +29,11 @@ SPDX-License-Identifier: Apache-2.0
 
 <script>
 export default {
+  beforeRouteEnter (to, from, next) {
+    next(vm => {
+      vm.fromRoute = from
+    })
+  },
   props: {
     code: {
       type: [String, Number],
@@ -28,13 +44,17 @@ export default {
       default: 'Unexpected Error :('
     },
     message: {
-      type: String
+      type: String,
+      default: null
     },
     buttonText: {
       type: String,
       default: 'Get me out of here'
     }
   },
+  emits: [
+    'click'
+  ],
   data () {
     return {
       fromRoute: undefined
@@ -44,11 +64,6 @@ export default {
     onClick () {
       this.$emit('click', this.fromRoute)
     }
-  },
-  beforeRouteEnter (to, from, next) {
-    next(vm => {
-      vm.fromRoute = from
-    })
   }
 }
 </script>

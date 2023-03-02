@@ -34,7 +34,7 @@ export function registerPlugins (app) {
 
   app.use(createRouter({
     store: app.config.globalProperties.$store,
-    logger: app.config.globalProperties.$store,
+    logger: app.config.globalProperties.$logger,
     auth: app.config.globalProperties.$auth,
   }))
 }

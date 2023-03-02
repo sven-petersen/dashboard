@@ -307,5 +307,6 @@ export default {
 
   .title-text {
     white-space: normal;
+    word-break: break-word;
   }
 </style>

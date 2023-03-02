@@ -14,7 +14,7 @@ module.exports = {
     vi: true
   },
   extends: [
-    'plugin:vue/vue3-recommended',
+    // 'plugin:vue/vue3-recommended',
     'plugin:vue/vue3-essential',
     'plugin:vuetify/base',
     'eslint:recommended'

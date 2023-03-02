@@ -23,9 +23,9 @@
   },
   "scripts": {
     "fix-vue-compat": "unzip -nq ../.yarn/cache/@vue-compat-npm-3.2.47*.zip -d ../.yarn/cache/",
-    "dev": "vite",
+    "serve": "vite",
     "build": "vite build",
-    "serve": "vite preview",
+    "preview": "vite preview",
     "lint": "eslint . --ext .vue,.js,.cjs,.mjs --ignore-path .gitignore .",
     "test": "vitest run",
     "test-coverage": "vitest run --coverage"
