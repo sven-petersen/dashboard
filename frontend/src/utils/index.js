@@ -114,11 +114,11 @@ export function setInputFocus (vm, fieldName, { noSelect = false } = {}) {
     if (noSelect) {
       fieldRef.focus()
     } else {
-      const inputRef = fieldRef.$refs.input
       vm.$nextTick(() => {
+        const ref = vm.$refs[fieldName]
         // Ensure that the input field has been rendered
-        inputRef.focus()
-        inputRef.select()
+        ref.focus()
+        ref.select()
       })
     }
   }
