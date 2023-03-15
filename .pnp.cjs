@@ -1519,6 +1519,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["jest", "virtual:f3f18773c1f2811e8d448670abfc3fed18cdffc11b444f7cbc3548ae5868e74f3c4ee449327c1fc9c24ce0732ee02505411a07539789bec8257188d17bbada1f#npm:27.5.1"],\
             ["jest-fetch-mock", "npm:3.0.3"],\
             ["jest-serializer-vue", "npm:2.0.2"],\
+            ["js-cookie", "npm:3.0.1"],\
             ["js-yaml", "npm:4.1.0"],\
             ["jsdom", "virtual:de61dda1fdc8c2e15645eceb5924b32afed20b1ee1ccde843e51821bfdf40c99c23e9e1db13c2f28ac01c98a08e94c4231443d16968abdef812d0f219d528205#npm:21.1.0"],\
             ["jwt-decode", "npm:3.1.2"],\
@@ -1542,7 +1543,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["vite-plugin-vuetify", "virtual:8d919ffb8fd728f827df3f6a566e8e923223ffcec68f7450d83bbbc2dc25d6b8c987e111cbab484b209f253bdf2f2e00663b01a986262c44511128466462a76f#npm:1.0.2"],\
             ["vitest", "virtual:8d919ffb8fd728f827df3f6a566e8e923223ffcec68f7450d83bbbc2dc25d6b8c987e111cbab484b209f253bdf2f2e00663b01a986262c44511128466462a76f#npm:0.28.4"],\
             ["vue", "npm:3.2.47"],\
-            ["vue-cookie", "npm:1.1.4"],\
             ["vue-popperjs", "npm:2.3.0"],\
             ["vue-router", "virtual:8d919ffb8fd728f827df3f6a566e8e923223ffcec68f7450d83bbbc2dc25d6b8c987e111cbab484b209f253bdf2f2e00663b01a986262c44511128466462a76f#npm:4.1.6"],\
             ["vue-shortkey", "npm:3.1.7"],\
@@ -8431,6 +8431,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD"\
         }]\
       ]],\
+      ["js-cookie", [\
+        ["npm:3.0.1", {\
+          "packageLocation": "./.yarn/cache/js-cookie-npm-3.0.1-04c7177de1-bb48de67e2.zip/node_modules/js-cookie/",\
+          "packageDependencies": [\
+            ["js-cookie", "npm:3.0.1"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
       ["js-sdsl", [\
         ["npm:4.3.0", {\
           "packageLocation": "./.yarn/cache/js-sdsl-npm-4.3.0-4f51b3ddb2-ce908257cf.zip/node_modules/js-sdsl/",\
@@ -11597,15 +11606,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD"\
         }]\
       ]],\
-      ["tiny-cookie", [\
-        ["npm:1.0.1", {\
-          "packageLocation": "./.yarn/cache/tiny-cookie-npm-1.0.1-11f3312ab1-b96796365b.zip/node_modules/tiny-cookie/",\
-          "packageDependencies": [\
-            ["tiny-cookie", "npm:1.0.1"]\
-          ],\
-          "linkType": "HARD"\
-        }]\
-      ]],\
       ["tiny-lru", [\
         ["npm:10.3.0", {\
           "packageLocation": "./.yarn/cache/tiny-lru-npm-10.3.0-2b3c6f3352-cf5ae030c7.zip/node_modules/tiny-lru/",\
@@ -12504,16 +12504,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@vue/runtime-dom", "npm:3.2.47"],\
             ["@vue/server-renderer", "virtual:487db916e160a571ff50687ed972004ec0078aa76b7fedf7bdabfd607dfed3ba7b2d1f51e99387f885501b4dbb11471c0ce20d647adb7ae38656bbc259642ae8#npm:3.2.47"],\
             ["@vue/shared", "npm:3.2.47"]\
-          ],\
-          "linkType": "HARD"\
-        }]\
-      ]],\
-      ["vue-cookie", [\
-        ["npm:1.1.4", {\
-          "packageLocation": "./.yarn/cache/vue-cookie-npm-1.1.4-dec29cc001-37187971ee.zip/node_modules/vue-cookie/",\
-          "packageDependencies": [\
-            ["vue-cookie", "npm:1.1.4"],\
-            ["tiny-cookie", "npm:1.0.1"]\
           ],\
           "linkType": "HARD"\
         }]\

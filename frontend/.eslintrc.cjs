@@ -1,6 +1,8 @@
-// SPDX-FileCopyrightText: 2021 SAP SE or an SAP affiliate company and Gardener contributors
+//
+// SPDX-FileCopyrightText: 2023 SAP SE or an SAP affiliate company and Gardener contributors
 //
 // SPDX-License-Identifier: Apache-2.0
+//
 /* eslint-env node */
 
 const development = process.env.NODE_ENV === 'development'
@@ -8,7 +10,10 @@ const development = process.env.NODE_ENV === 'development'
 module.exports = {
   root: true,
   env: {
-    'jest/globals': true
+    'jest/globals': true,
+  },
+  parserOptions: {
+    ecmaVersion: '2022'
   },
   globals: {
     vi: true

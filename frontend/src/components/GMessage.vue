@@ -5,6 +5,8 @@ SPDX-License-Identifier: Apache-2.0
 -->
 
 <template>
+  <!-- TODO: previously there were a "dark"-attributes on v-alert and v-btn.
+      check if the theme-provider behaves identical -->
   <v-alert :color="color" :rounded="tile && '0'" closable v-model="alertVisible">
     <div class="text-subtitle-1">
       {{message}}
@@ -15,9 +17,10 @@ SPDX-License-Identifier: Apache-2.0
     <transition name="fade">
       <div v-if="!!detailedMessageVisible">
         <code>{{detailedMessage}}</code>
-      </div>
-    </transition>
-  </v-alert>
+        </div>
+      </transition>
+    </v-alert>
+  </v-theme-provider>
 </template>
 
 <script>
@@ -43,6 +46,10 @@ export default {
       default: true
     }
   },
+  emits: [
+    'update:message',
+    'update:detailed-message'
+  ],
   data () {
     return {
       detailedMessageVisible: false

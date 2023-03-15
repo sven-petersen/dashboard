@@ -8,7 +8,7 @@ import './styles'
 // import vuelidate from './vuelidate'
 // import shortkey from './shortkey'
 // import snotify from './snotify'
-// import cookie from './cookie'
+import cookie from './cookie'
 import bus from './bus'
 import localStorage from './localStorage'
 import logger from './logger'
@@ -25,6 +25,7 @@ export function registerPlugins (app) {
     .use(bus)
     .use(yaml)
     .use(localStorage)
+    .use(cookie)
     .use(logger)
     .use(vuetify)
     .use(auth)

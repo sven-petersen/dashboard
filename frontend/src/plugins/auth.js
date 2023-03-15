@@ -8,7 +8,8 @@ import { UserManager } from '@/utils/auth'
 
 export default {
   install (app) {
-    const auth = new UserManager()
+    const { $logger: logger, $cookie: cookie } = app.config.globalProperties;
+    const auth = new UserManager({ logger, cookie })
     app.config.globalProperties.$auth = auth
     app.provide('auth', auth)
   }

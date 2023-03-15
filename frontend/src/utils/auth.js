@@ -15,8 +15,6 @@ import {
   isClockSkewError
 } from './errors'
 
-const logger = Vue.logger
-
 const COOKIE_HEADER_PAYLOAD = 'gHdrPyl'
 const CLOCK_TOLERANCE = 15
 
@@ -53,9 +51,9 @@ function isSessionExpired (user = {}) {
   return typeof t === 'number' && t < CLOCK_TOLERANCE
 }
 
-function decodeCookie () {
+function decodeCookie (cookie) {
   try {
-    const value = Vue.cookie.get(COOKIE_HEADER_PAYLOAD)
+    const value = cookie.get(COOKIE_HEADER_PAYLOAD)
     if (value) {
       return decode(value)
     }
@@ -63,11 +61,7 @@ function decodeCookie () {
   return null
 }
 
-function deleteCookie () {
-  Vue.cookie.delete(COOKIE_HEADER_PAYLOAD)
-}
-
-async function createTokenRefreshRequest () {
+async function createTokenRefreshRequest (cookie) {
   const timestamp = Math.floor(Date.now() / 1000)
   const response = await fetch('/auth/token', {
     method: 'POST',
@@ -82,7 +76,7 @@ async function createTokenRefreshRequest () {
 
   const statusCode = response.status
   if (statusCode >= 200 && statusCode < 300) {
-    const user = decodeCookie()
+    const user = decodeCookie(cookie)
     if (!user) {
       throw createNoUserError()
     }
@@ -123,16 +117,20 @@ async function createTokenRefreshRequest () {
 export class UserManager {
   #refreshTokenPromise
 
-  constructor () {
+  constructor ({ logger, cookie }) {
     this.origin = window.location.origin
+    this.logger = logger
+    this.cookie = cookie
   }
 
   getUser () {
-    return decodeCookie()
+    // TODO: passing this.cookie through feels bad. Maybe we find a better way for the utils
+    //   to get access to the cookie plugin (@/plugins/cookie.js).
+    return decodeCookie(this.cookie)
   }
 
   removeUser () {
-    deleteCookie()
+    this.cookie.delete(COOKIE_HEADER_PAYLOAD)
   }
 
   signout (err) {
@@ -163,29 +161,29 @@ export class UserManager {
 
   async refreshToken () {
     try {
-      let user = decodeCookie()
+      let user = decodeCookie(this.cookie)
       if (!user) {
         throw createNoUserError()
       }
       if (!isRefreshRequired(user)) {
         return
       }
-      logger.debug('Acquiring token refresh lock (%s)', user.rti)
+      this.logger.debug('Acquiring token refresh lock (%s)', user.rti)
       await navigator.locks.request('token-refresh-request', async () => {
-        user = decodeCookie()
+        user = decodeCookie(this.cookie)
         if (!user) {
           throw createNoUserError()
         }
         if (!isRefreshRequired(user)) {
           return
         }
-        logger.debug('Refreshing token (%s)', user.rti)
+        this.logger.debug('Refreshing token (%s)', user.rti)
         const oldUser = user
         user = await createTokenRefreshRequest()
-        logger.debug('Token has been refreshed (%s <- %s)', user.rti, oldUser.rti)
+        this.logger.debug('Token has been refreshed (%s <- %s)', user.rti, oldUser.rti)
       })
     } catch (err) {
-      logger.error('Token refresh failed: %s - %s', err.name, err.message)
+      this.logger.error('Token refresh failed: %s - %s', err.name, err.message)
       let frameRequestCallback
       if (isNoUserError(err)) {
         frameRequestCallback = () => this.signin()

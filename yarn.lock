@@ -967,6 +967,7 @@ __metadata:
     jest: ^27.5.1
     jest-fetch-mock: ^3.0.3
     jest-serializer-vue: ^2.0.2
+    js-cookie: ^3.0.1
     js-yaml: ^4.1.0
     jsdom: ^21.1.0
     jwt-decode: ^3.1.2
@@ -990,7 +991,6 @@ __metadata:
     vite-plugin-vuetify: ^1.0.2
     vitest: ^0.28.4
     vue: 3.2.47
-    vue-cookie: ^1.1.4
     vue-popperjs: ^2.3.0
     vue-router: ^4
     vue-shortkey: ^3.1.7
@@ -6847,6 +6847,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"js-cookie@npm:^3.0.1":
+  version: 3.0.1
+  resolution: "js-cookie@npm:3.0.1"
+  checksum: bb48de67e2a6bd1ae3dfd6b2d5a167c33dd0c5a37e909206161eb0358c98f17cb55acd55827a58e9eea3630d89444e7479f7938ef4420dda443218b8c434a4c3
+  languageName: node
+  linkType: hard
+
 "js-sdsl@npm:^4.1.4":
   version: 4.3.0
   resolution: "js-sdsl@npm:4.3.0"
@@ -9693,13 +9700,6 @@ resolve@^1.20.0:
   languageName: node
   linkType: hard
 
-"tiny-cookie@npm:^1.0":
-  version: 1.0.1
-  resolution: "tiny-cookie@npm:1.0.1"
-  checksum: b96796365b9d9300b2f4cce552db93bd94ffb0e0470025495626d3cc5fffbe0592013b8a205020b0c1311964c3cd4445ff889f0a0a2b667655b88dc567568184
-  languageName: node
-  linkType: hard
-
 "tiny-lru@npm:^10.0.0":
   version: 10.3.0
   resolution: "tiny-lru@npm:10.3.0"
@@ -10353,15 +10353,6 @@ resolve@^1.20.0:
   version: 3.17.3
   resolution: "vscode-languageserver-types@npm:3.17.3"
   checksum: fbc8221297261f659a6482875ff2a419dc9d55965dc53745797da569ff9f819cd832e6f2699017baadd946548bbfe212e3f6971f3d960f12dc0ee9c629dacc07
-  languageName: node
-  linkType: hard
-
-"vue-cookie@npm:^1.1.4":
-  version: 1.1.4
-  resolution: "vue-cookie@npm:1.1.4"
-  dependencies:
-    tiny-cookie: ^1.0
-  checksum: 37187971ee697744322abc3097e752992f97b18b112960d830d8ea133173c0f2c4b8d346a16fdb3a4590e61d195a189086c12c3e12d458c2ae7f0ae781700cc2
   languageName: node
   linkType: hard
 
