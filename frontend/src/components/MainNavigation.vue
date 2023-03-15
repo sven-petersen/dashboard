@@ -5,167 +5,166 @@ SPDX-License-Identifier: Apache-2.0
 -->
 
 <template>
-    <!-- TODO: v-navigation-drawer used the no longer existing "fixed" attr. There is no such prop in vuetify 3.
-          Removed for now but need to check if the behavior is still as desired. "fixed" applied a CSS position: fixed.
-    -->
-    <!-- TODO: v-navigation-drawer used the no longer existing "app" attr. There is no such prop in vuetify 3.
-          Removed for now but need to check if the behavior is still as desired.
-    -->
-    <v-navigation-drawer
-      v-model="isActive"
-      :mobile-breakpoint="400"
-      color="main-background"
-    >
-      <div class="teaser">
-        <div class="content center main-background primary-darken-2">
-          <v-btn @click.stop="setSidebar(!isActive)" icon class="float-right main-navigation-title--text ma-2">
-            <v-icon>mdi-chevron-double-left</v-icon>
-          </v-btn>
-          <a href="/">
-            <img src="/static/assets/logo.svg" class="logo" alt="gardener logo">
-            <h1 class="main-navigation-title--text">Gardener <span class="version">{{version}}</span></h1>
-            <h2 class="text-primary">Universal Kubernetes at Scale</h2>
-          </a>
-        </div>
+  <!-- TODO: v-navigation-drawer used the no longer existing "fixed" attr. There is no such prop in vuetify 3.
+        Removed for now but need to check if the behavior is still as desired. "fixed" applied a CSS position: fixed.
+  -->
+  <!-- TODO: v-navigation-drawer used the no longer existing "app" attr. There is no such prop in vuetify 3.
+        Removed for now but need to check if the behavior is still as desired.
+  -->
+  <v-navigation-drawer
+    v-model="isActive"
+    :mobile-breakpoint="400"
+    color="main-background"
+  >
+    <div class="teaser">
+      <div class="content center bg-main-background-darken-2">
+        <v-btn @click.stop="setSidebar(!isActive)" icon variant="text" class="float-right text-main-navigation-title ma-2">
+          <v-icon>mdi-chevron-double-left</v-icon>
+        </v-btn>
+        <a href="/">
+          <img src="/static/assets/logo.svg" class="logo" alt="gardener logo">
+          <h1 class="text-main-navigation-title">Gardener <span class="version">{{version}}</span></h1>
+          <h2 class="text-primary">Universal Kubernetes at Scale</h2>
+        </a>
       </div>
-      <template v-if="projectList.length">
-        <!-- TODO: v-menu used the no longer existing "allow-overflow" attr.
-               Removed for now but need to check if the behavior is still as desired.
-        -->
-        <!-- TODO: v-menu used the no longer existing "offset-y" attr.
-               The new default behavior however seems to make this offset-y obsolete.
-        -->
-        <v-menu
-          attach
-          location="left bottom"
-          open-on-click
-          :close-on-content-click="false"
-          content-class="project-menu"
-          v-model="projectMenu"
-        >
-          <template v-slot:activator="{ on }">
-            <v-btn
-              color="main-background darken-1"
-              v-on="on"
-              block
-              class="project-selector elevation-4 main-navigation-title--text"
-              @keydown.down="highlightProjectWithKeys('down')"
-              @keydown.up="highlightProjectWithKeys('up')"
-              @keyup.enter="navigateToHighlightedProject"
-            >
-              <v-icon class="pr-6">mdi-grid-large</v-icon>
-              <span class="ml-2" :class="{ placeholder: !selectedProject }" >{{selectedProjectName}}</span>
-              <template v-if="selectedProject">
-                <stale-project-warning :project="selectedProject" small></stale-project-warning>
-                <not-ready-project-warning :project="selectedProject" small></not-ready-project-warning>
-              </template>
-              <v-spacer></v-spacer>
-              <v-icon end>{{projectMenuIcon}}</v-icon>
-            </v-btn>
-          </template>
-
-          <v-card>
-            <template v-if="projectList.length > 3">
-              <!-- TODO: v-card-title used the no longer existing "flat" attr.
-               This attr seems to be cosmetical. Check how it looks without it in Vue3
-              -->
-              <v-card-title class="pa-0">
-                <v-text-field
-                  clearable
-                  label="Filter projects"
-                  variant="solo"
-                  single-line
-                  hide-details
-                  prepend-icon="mdi-magnify"
-                  class="pl-4 mt-0 pt-0 project-filter"
-                  v-model="projectFilter"
-                  ref="projectFilter"
-                  @keyup.esc="projectFilter = ''"
-                  @keyup.enter="navigateToHighlightedProject"
-                  @update:model-value="onInputProjectFilter"
-                  @keydown.down="highlightProjectWithKeys('down')"
-                  @keydown.up="highlightProjectWithKeys('up')"
-                  autofocus
-                >
-                </v-text-field>
-              </v-card-title>
-              <v-divider></v-divider>
+    </div>
+    <template v-if="projectList.length">
+      <!-- TODO: v-menu used the no longer existing "allow-overflow" attr.
+              Removed for now but need to check if the behavior is still as desired.
+      -->
+      <!-- TODO: v-menu used the no longer existing "offset-y" attr.
+              The new default behavior however seems to make this offset-y obsolete.
+      -->
+      <v-menu
+        attach
+        location="left bottom"
+        open-on-click
+        :close-on-content-click="false"
+        content-class="project-menu"
+        v-model="projectMenu"
+      >
+        <template v-slot:activator="{ on }">
+          <v-btn
+            color="main-background-darken-1"
+            v-on="on"
+            block
+            class="project-selector elevation-4 main-navigation-title--text"
+            @keydown.down="highlightProjectWithKeys('down')"
+            @keydown.up="highlightProjectWithKeys('up')"
+            @keyup.enter="navigateToHighlightedProject"
+          >
+            <v-icon class="pr-6">mdi-grid-large</v-icon>
+            <span class="ml-2" :class="{ placeholder: !selectedProject }" >{{selectedProjectName}}</span>
+            <template v-if="selectedProject">
+              <stale-project-warning :project="selectedProject" small></stale-project-warning>
+              <not-ready-project-warning :project="selectedProject" small></not-ready-project-warning>
             </template>
-            <v-list variant="flat" class="project-list" ref="projectList" @scroll="handleProjectListScroll">
-              <v-list-item
-                v-for="project in visibleProjectList"
-                @click="onProjectClick($event, project)"
-                class="project-list-tile"
-                :class="{'highlighted-item' : isHighlightedProject(project)}"
-                :key="project.metadata.name"
-                :data-g-project-name="project.metadata.name"
+            <v-spacer></v-spacer>
+            <v-icon end>{{projectMenuIcon}}</v-icon>
+          </v-btn>
+        </template>
+
+        <v-card>
+          <template v-if="projectList.length > 3">
+            <!-- TODO: v-card-title used the no longer existing "flat" attr.
+              This attr seems to be cosmetical. Check how it looks without it in Vue3
+            -->
+            <v-card-title class="pa-0">
+              <v-text-field
+                clearable
+                label="Filter projects"
+                variant="solo"
+                single-line
+                hide-details
+                prepend-icon="mdi-magnify"
+                class="pl-4 mt-0 pt-0 project-filter"
+                v-model="projectFilter"
+                ref="projectFilter"
+                @keyup.esc="projectFilter = ''"
+                @keyup.enter="navigateToHighlightedProject"
+                @update:model-value="onInputProjectFilter"
+                @keydown.down="highlightProjectWithKeys('down')"
+                @keydown.up="highlightProjectWithKeys('up')"
+                autofocus
               >
-                <template v-slot:prepend>
-                  <v-icon color="primary">
-                    {{ project.metadata.name === selectedProjectName ? 'mdi-check' : ''}}
-                  </v-icon>
-                </template>
-                <template v-slot:title>
-                  <div class="project-name">{{project.metadata.name}}</div>
-                </template>
-                <template v-slot:subtitle>
-                  <div class="project-owner">{{getProjectOwner(project)}}</div>
-                </template>
-                <template v-slot:append>
-                  <stale-project-warning :project="project" small></stale-project-warning>
-                  <not-ready-project-warning :project="project" small></not-ready-project-warning>
-                </template>
-              </v-list-item>
-            </v-list>
-            <v-card-actions>
-              <v-tooltip location="top" :disabled="canCreateProject" style="width: 100%">
-                <template v-slot:activator="{ on }">
-                  <div v-on="on">
-                    <v-btn
-                      variant="text"
-                      block
-                      class="project-add text-left text-primary"
-                      :disabled="!canCreateProject"
-                      @click.stop="openProjectDialog"
-                    >
-                      <v-icon>mdi-plus</v-icon>
-                      <span class="ml-2">Create Project</span>
-                    </v-btn>
-                  </div>
-                </template>
-                <span>You are not authorized to create projects</span>
-              </v-tooltip>
-            </v-card-actions>
-          </v-card>
-        </v-menu>
-      </template>
-      <v-list ref="mainMenu" class="main-menu" variant="flat">
-        <v-list-item :to="{name: 'Home'}" exact v-if="hasNoProjects">
-          <template v-slot:title>
-            <div class="text-subtitle-1 main-navigation-title--text">Home</div>
+              </v-text-field>
+            </v-card-title>
+            <v-divider></v-divider>
           </template>
-          <template v-slot:append>
-            <v-icon size="small" color="main-navigation-title">mdi-home-outline</v-icon>
-          </template>
-        </v-list-item>
-        <template v-if="namespace">
-          <template v-for="(route, index) in routes">
-            <v-list-item v-if="!route.meta.menu.hidden" :to="namespacedRoute(route)" :key="index" active-class="active-item">
+          <v-list variant="flat" class="project-list" ref="projectList" @scroll="handleProjectListScroll">
+            <v-list-item
+              v-for="project in visibleProjectList"
+              @click="onProjectClick($event, project)"
+              class="project-list-tile"
+              :class="{'highlighted-item' : isHighlightedProject(project)}"
+              :key="project.metadata.name"
+              :data-g-project-name="project.metadata.name"
+            >
+              <template v-slot:prepend>
+                <v-icon color="primary">
+                  {{ project.metadata.name === selectedProjectName ? 'mdi-check' : ''}}
+                </v-icon>
+              </template>
               <template v-slot:title>
-                <div class="text-subtitle-1 main-navigation-title--text" >{{route.meta.menu.title}}</div>
+                <div class="project-name">{{project.metadata.name}}</div>
+              </template>
+              <template v-slot:subtitle>
+                <div class="project-owner">{{getProjectOwner(project)}}</div>
               </template>
               <template v-slot:append>
-                <v-icon size="small" color="main-navigation-title">{{route.meta.menu.icon}}</v-icon>
+                <stale-project-warning :project="project" small></stale-project-warning>
+                <not-ready-project-warning :project="project" small></not-ready-project-warning>
               </template>
             </v-list-item>
-          </template>
+          </v-list>
+          <v-card-actions>
+            <v-tooltip location="top" :disabled="canCreateProject" style="width: 100%">
+              <template v-slot:activator="{ on }">
+                <div v-on="on">
+                  <v-btn
+                    variant="text"
+                    block
+                    class="project-add text-left text-primary"
+                    :disabled="!canCreateProject"
+                    @click.stop="openProjectDialog"
+                  >
+                    <v-icon>mdi-plus</v-icon>
+                    <span class="ml-2">Create Project</span>
+                  </v-btn>
+                </div>
+              </template>
+              <span>You are not authorized to create projects</span>
+            </v-tooltip>
+          </v-card-actions>
+        </v-card>
+      </v-menu>
+    </template>
+    <v-list ref="mainMenu" class="main-menu" variant="flat">
+      <v-list-item :to="{name: 'Home'}" exact v-if="hasNoProjects">
+        <template v-slot:title>
+          <div class="text-subtitle-1 main-navigation-title--text">Home</div>
         </template>
-      </v-list>
+        <template v-slot:append>
+          <v-icon size="small" color="main-navigation-title">mdi-home-outline</v-icon>
+        </template>
+      </v-list-item>
+      <template v-if="namespace">
+        <template v-for="(route, index) in routes">
+          <v-list-item v-if="!route.meta.menu.hidden" :to="namespacedRoute(route)" :key="index" active-class="active-item">
+            <template v-slot:title>
+              <div class="text-subtitle-1 main-navigation-title--text" >{{route.meta.menu.title}}</div>
+            </template>
+            <template v-slot:append>
+              <v-icon size="small" color="main-navigation-title">{{route.meta.menu.icon}}</v-icon>
+            </template>
+          </v-list-item>
+        </template>
+      </template>
+    </v-list>
 
-      <project-create-dialog v-model="projectDialog"></project-create-dialog>
+    <project-create-dialog v-model="projectDialog"></project-create-dialog>
 
-    </v-navigation-drawer>
-
+  </v-navigation-drawer>
 </template>
 
 <script>
@@ -216,7 +215,7 @@ export default {
       'projectList'
     ]),
     version () {
-      return get(this.cfg, 'appVersion', process.env.VUE_APP_VERSION)
+      return get(this.cfg, 'appVersion', import.meta.env.VUE_APP_VERSION)
     },
     isActive: {
       get () {

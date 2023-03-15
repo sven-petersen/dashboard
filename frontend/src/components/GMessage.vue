@@ -7,16 +7,17 @@ SPDX-License-Identifier: Apache-2.0
 <template>
   <!-- TODO: previously there were a "dark"-attributes on v-alert and v-btn.
       check if the theme-provider behaves identical -->
-  <v-alert :color="color" :rounded="tile && '0'" closable v-model="alertVisible">
-    <div class="text-subtitle-1">
-      {{message}}
-      <v-btn variant="outlined" size="small" v-if="!!detailedMessage" @click="detailedMessageVisible = !detailedMessageVisible">
-        Details
-      </v-btn>
-    </div>
-    <transition name="fade">
-      <div v-if="!!detailedMessageVisible">
-        <code>{{detailedMessage}}</code>
+  <v-theme-provider theme="dark">
+    <v-alert :color="color" :rounded="tile && '0'" closable v-model="alertVisible">
+      <div class="text-subtitle-1">
+        {{message}}
+        <v-btn variant="outlined" size="small" v-if="!!detailedMessage" @click="detailedMessageVisible = !detailedMessageVisible">
+          Details
+        </v-btn>
+      </div>
+      <transition name="fade">
+        <div v-if="!!detailedMessageVisible">
+          <code>{{detailedMessage}}</code>
         </div>
       </transition>
     </v-alert>
