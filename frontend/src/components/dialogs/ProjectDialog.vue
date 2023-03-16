@@ -8,7 +8,7 @@ SPDX-License-Identifier: Apache-2.0
   <v-dialog v-model="visible" persistent scrollable max-width="600">
     <v-card>
       <v-card-title class="toolbar-background">
-        <v-icon large class="toolbar-title--text">mdi-cube</v-icon>
+        <v-icon size="large" class="toolbar-title--text">mdi-cube</v-icon>
         <span class="text-h5 ml-5 toolbar-title--text">Create Project</span>
       </v-card-title>
       <v-card-text class="dialog-content">
@@ -22,7 +22,7 @@ SPDX-License-Identifier: Apache-2.0
                   label="Name"
                   v-model.trim="projectName"
                   :error-messages="getFieldValidationErrors('projectName')"
-                  @input="$v.projectName.$touch()"
+                  @update:model-value="$v.projectName.$touch()"
                   @blur="$v.projectName.$touch()"
                   counter="10"
                   ></v-text-field>
@@ -37,11 +37,11 @@ SPDX-License-Identifier: Apache-2.0
                   :label="costObjectTitle"
                   v-model="costObject"
                   :error-messages="getFieldValidationErrors('costObject')"
-                  @input="$v.costObject.$touch()"
+                  @update:model-value="$v.costObject.$touch()"
                   @blur="$v.costObject.$touch()"
                   >
                 </v-text-field>
-                <v-alert v-if="!!costObjectDescriptionHtml" dense type="info" outlined color="primary">
+                <v-alert v-if="!!costObjectDescriptionHtml" dense type="info" variant="outlined" color="primary">
                   <div class="alert-banner-message" v-html="costObjectDescriptionHtml"></div>
                 </v-alert>
               </v-col>
@@ -69,7 +69,7 @@ SPDX-License-Identifier: Apache-2.0
             <g-message color="error" v-model:message="errorMessage" v-model:detailed-message="detailedErrorMessage"></g-message>
           </v-container>
         </form>
-        <v-snackbar :value="loading" bottom right absolute :timeout="-1">
+        <v-snackbar :model-value="loading" location="bottom right" absolute :timeout="-1">
           <span>Creating project ...</span>
         </v-snackbar>
       </v-card-text>
@@ -77,14 +77,14 @@ SPDX-License-Identifier: Apache-2.0
       <v-card-actions>
         <v-spacer></v-spacer>
         <v-btn
-          text
+          variant="text"
           :disabled="loading"
           @click.stop="cancel"
         >
           Cancel
         </v-btn>
         <v-btn
-          text
+          variant="text"
           :loading="loading"
           :disabled="!valid || loading"
           @click.stop="submit"

@@ -10,7 +10,7 @@ SPDX-License-Identifier: Apache-2.0
       <v-icon :size="small && 'small'" v-on="on" :color="color" class="ml-1" v-if="staleAutoDeleteTimestamp">mdi-delete-clock</v-icon>
       <v-icon :size="small && 'small'" v-on="on" :color="color" class="ml-1" v-else>mdi-clock-alert-outline</v-icon>
     </template>
-     <span v-if="staleAutoDeleteTimestamp">
+    <span v-if="staleAutoDeleteTimestamp">
       This is a <span class="font-weight-bold">stale</span> project. Gardener will auto delete this project <time-string :date-time="staleAutoDeleteTimestamp" mode="future" no-tooltip content-class="font-weight-bold"></time-string>
     </span>
     <span v-else>
@@ -30,7 +30,8 @@ export default {
   },
   props: {
     project: {
-      type: Object
+      type: Object,
+      default: null
     },
     small: {
       type: Boolean
