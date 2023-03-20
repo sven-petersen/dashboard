@@ -996,7 +996,7 @@ __metadata:
     vue-shortkey: ^3.1.7
     vue-snotify: ^3.2.1
     vuelidate: ^0.7.7
-    vuetify: 3.1.6
+    vuetify: ^3.1.10
     vuex: ^4.1.0
     xterm: ^4.19.0
     xterm-addon-fit: ^0.5.0
@@ -10433,9 +10433,9 @@ resolve@^1.20.0:
   languageName: node
   linkType: hard
 
-"vuetify@npm:3.1.6":
-  version: 3.1.6
-  resolution: "vuetify@npm:3.1.6"
+"vuetify@npm:^3.1.10":
+  version: 3.1.10
+  resolution: "vuetify@npm:3.1.10"
   peerDependencies:
     vite-plugin-vuetify: ^1.0.0-alpha.12
     vue: ^3.2.0
@@ -10448,7 +10448,7 @@ resolve@^1.20.0:
       optional: true
     webpack-plugin-vuetify:
       optional: true
-  checksum: 0f1feba2024921bdded7db33d4ca83457dcdeeb78f5ba2290ac5b9c045d48bc60065838302b5e3c7be865cfe3608c85724b760530993f2a218bed7a078f32155
+  checksum: 5ce05c5ef86024d637a10814e7883b4dcdfbfe6d649bcec88889b907add9f1a2b66b0f4247fd8f7c368240331f62d96f5d45f8652f573e5454c48e5896a2f955
   languageName: node
   linkType: hard
 
