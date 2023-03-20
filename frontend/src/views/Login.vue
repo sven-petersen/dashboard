@@ -271,6 +271,7 @@ export default {
         this.showSnotifyLoginError(err.message)
       }
     },
+    // FIXME: snotify does not work (yet) under Vue3. If an error is displayed the Login view will not properly render
     showSnotifyLoginError (message) {
       const config = {
         position: SnotifyPosition.rightBottom,

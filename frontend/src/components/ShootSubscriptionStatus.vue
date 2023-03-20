@@ -9,11 +9,10 @@ SPDX-License-Identifier: Apache-2.0
     v-model="value"
     :close-on-content-click="false"
     :persistent="!(true)"
-    offset-y
-    nudge-bottom="8"
+    :offset="[12, 0]"
   >
-    <template v-slot:activator="{ on, attrs }">
-      <div v-bind="attrs" v-on="on">
+    <template v-slot:activator="{ props }">
+      <div v-bind="props">
       <v-progress-circular
         v-if="btnLoading"
         indeterminate
@@ -49,14 +48,14 @@ SPDX-License-Identifier: Apache-2.0
             </div>
           </v-col>
           <template v-if="action">
-            <v-col align-self="center" class="shrink">
+            <v-col align-self="center" class="shrink flex-grow-0">
               <v-btn variant="text" :color="color" @click="retry">
                 {{action}}
               </v-btn>
             </v-col>
           </template>
-          <v-col align-self="center" class="shrink">
-            <v-btn icon :color="color" @click="close">
+          <v-col align-self="center" class="shrink flex-grow-0 mr-2">
+            <v-btn icon size="small" variant="flat" :color="color" @click="close">
               <v-icon>mdi-close</v-icon>
             </v-btn>
           </v-col>
