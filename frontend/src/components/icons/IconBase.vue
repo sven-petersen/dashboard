@@ -11,7 +11,6 @@ SPDX-License-Identifier: Apache-2.0
     :height="height"
     :viewBox="viewBox"
     :aria-labelledby="iconName"
-    role="presentation"
   >
     <title
       :id="iconName"
@@ -55,7 +54,7 @@ export default {
       if (isHtmlColorCode(iconColor)) {
         return iconColor
       }
-      return this.$vuetify.theme.currentTheme[iconColor]
+      return this.$vuetify.theme.current.colors[iconColor]
     }
   }
 }
