@@ -32,23 +32,29 @@ SPDX-License-Identifier: Apache-2.0
       <!-- TODO: v-menu used the no longer existing "allow-overflow" attr.
               Removed for now but need to check if the behavior is still as desired.
       -->
-      <!-- TODO: v-menu used the no longer existing "offset-y" attr.
-              The new default behavior however seems to make this offset-y obsolete.
+      <!-- TODO: When placing the menu "bottom left" there is a small margin on the left.
+            Also the positioning is not consistent when opening it multiple times. There seem to be GitHub issues for
+            the vuetify "v-menu" component where the popover placement in a RTL layout is also broken. Eventually the
+            placement of the dropdown in general is buggy as of now: https://github.com/vuetifyjs/vuetify/issues/16797
       -->
       <v-menu
-        attach
-        location="left bottom"
+        :attach="true"
+        location="bottom"
         open-on-click
         :close-on-content-click="false"
         content-class="project-menu"
         v-model="projectMenu"
       >
-        <template v-slot:activator="{ on }">
+        <template v-slot:activator="{ props }">
+          <!-- TODO: under vuetfiy2 the button stretched across the whole available width (using flex: 1 0 auto on the span.v-btn__content).
+                Now the button content shrinks to width it actually needs. This probably will cause misalignment of the icons in the dropdown
+                and the menu items in the v-card>v-list below.
+          -->
           <v-btn
             color="main-background-darken-1"
-            v-on="on"
+            v-bind="props"
             block
-            class="project-selector elevation-4 main-navigation-title--text"
+            class="project-selector elevation-4 text-main-navigation-title"
             @keydown.down="highlightProjectWithKeys('down')"
             @keydown.up="highlightProjectWithKeys('up')"
             @keyup.enter="navigateToHighlightedProject"
@@ -67,7 +73,7 @@ SPDX-License-Identifier: Apache-2.0
         <v-card>
           <template v-if="projectList.length > 3">
             <!-- TODO: v-card-title used the no longer existing "flat" attr.
-              This attr seems to be cosmetical. Check how it looks without it in Vue3
+              This attr is cosmetical. Check how it looks without it in Vue3
             -->
             <v-card-title class="pa-0">
               <v-text-field
@@ -94,6 +100,7 @@ SPDX-License-Identifier: Apache-2.0
           <v-list variant="flat" class="project-list" ref="projectList" @scroll="handleProjectListScroll">
             <v-list-item
               v-for="project in visibleProjectList"
+              ref="projectListItems"
               @click="onProjectClick($event, project)"
               class="project-list-tile"
               :class="{'highlighted-item' : isHighlightedProject(project)}"
@@ -119,8 +126,8 @@ SPDX-License-Identifier: Apache-2.0
           </v-list>
           <v-card-actions>
             <v-tooltip location="top" :disabled="canCreateProject" style="width: 100%">
-              <template v-slot:activator="{ on }">
-                <div v-on="on">
+              <template v-slot:activator="{ props }">
+                <div v-bind="{ props }">
                   <v-btn
                     variant="text"
                     block
@@ -142,7 +149,7 @@ SPDX-License-Identifier: Apache-2.0
     <v-list ref="mainMenu" class="main-menu" variant="flat">
       <v-list-item :to="{name: 'Home'}" exact v-if="hasNoProjects">
         <template v-slot:title>
-          <div class="text-subtitle-1 main-navigation-title--text">Home</div>
+          <div class="text-subtitle-1 text-main-navigation-title">Home</div>
         </template>
         <template v-slot:append>
           <v-icon size="small" color="main-navigation-title">mdi-home-outline</v-icon>
@@ -152,7 +159,7 @@ SPDX-License-Identifier: Apache-2.0
         <template v-for="(route, index) in routes">
           <v-list-item v-if="!route.meta.menu.hidden" :to="namespacedRoute(route)" :key="index" active-class="active-item">
             <template v-slot:title>
-              <div class="text-subtitle-1 main-navigation-title--text" >{{route.meta.menu.title}}</div>
+              <div class="text-subtitle-1 text-main-navigation-title" >{{route.meta.menu.title}}</div>
             </template>
             <template v-slot:append>
               <v-icon size="small" color="main-navigation-title">{{route.meta.menu.icon}}</v-icon>
@@ -405,12 +412,11 @@ export default {
       this.scrollHighlightedProjectIntoView()
     },
     scrollHighlightedProjectIntoView () {
-      const projectListChildren = get(this, '$refs.projectList.$children')
-      if (!projectListChildren) {
+      if (!this.$refs.projectListItems) {
         return
       }
-      const projectListItem = find(projectListChildren, child => {
-        return get(child, '$attrs.data-g-project-name') === this.highlightedProjectName
+      const projectListItem = this.$refs.projectListItems.find((child) => {
+        return child.$attrs['data-g-project-name'] === this.highlightedProjectName
       })
       if (!projectListItem) {
         return
@@ -424,13 +430,13 @@ export default {
     scrollIntoView (element, ...args) {
       element.scrollIntoView(...args)
     },
-    handleProjectListScroll (event) {
+    handleProjectListScroll () {
       const projectListElement = this.$refs.projectList.$el
       if (!projectListElement) {
         return
       }
       const projectListBottomPosY = projectListElement.getBoundingClientRect().top + projectListElement.getBoundingClientRect().height
-      const projectListChildren = get(this, '$refs.projectList.$children')
+      const projectListChildren = this.$refs.projectListItems
       if (!projectListChildren) {
         return
       }
