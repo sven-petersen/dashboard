@@ -21,12 +21,12 @@ import {
   getDateFormatted,
   isValidTerminationDate
 } from '@/utils'
-import Vue from 'vue'
 
-class Clock {
+class Clock extends EventTarget {
   constructor (updateInterval) {
+    super()
+
     this.interval = updateInterval
-    this.dateObj = new Date()
     this.intervalId = undefined
     this.run()
   }
@@ -34,7 +34,9 @@ class Clock {
   run () {
     if (!this.intervalId) {
       this.intervalId = setInterval(() => {
-        this.dateObj = new Date()
+        const event = new Event('tick')
+        event.date = new Date()
+        this.dispatchEvent(event)
       }, this.interval)
     }
   }
@@ -78,8 +80,7 @@ export default {
   },
   data () {
     return {
-      currentClockTimer: undefined,
-      nextClockTimer: undefined,
+      currentDate: new Date(),
       negativeRefDate: true
     }
   },
@@ -89,11 +90,19 @@ export default {
         return this.expiredText
       }
       let relDateTimeString = ''
-      if (this.dateTime && this.currentClockTimer) {
+      if (this.dateTime && this.currentDate) {
         if (this.negativeRefDate) {
-          relDateTimeString = getTimeStringFrom(new Date(this.dateTime), new Date(Math.max(new Date(this.dateTime), this.currentClockTimer.dateObj)), this.withoutPrefixOrSuffix)
+          relDateTimeString = getTimeStringFrom(
+            new Date(this.dateTime),
+            new Date(Math.max(new Date(this.dateTime), this.currentDate)),
+            this.withoutPrefixOrSuffix
+          )
         } else {
-          relDateTimeString = getTimeStringTo(new Date(Math.min(new Date(this.dateTime), this.currentClockTimer.dateObj)), new Date(this.dateTime), this.withoutPrefixOrSuffix)
+          relDateTimeString = getTimeStringTo(
+            new Date(Math.min(new Date(this.dateTime), this.currentDate)),
+            new Date(this.dateTime),
+            this.withoutPrefixOrSuffix
+          )
         }
       }
 
@@ -109,9 +118,11 @@ export default {
   },
   methods: {
     updateClockInstance (dateTimeValue) {
-      const currentDate = new Date().getTime()
+      const currentDate = Date.now()
       const refDate = new Date(dateTimeValue).getTime()
-      let diffInMilliseconds
+
+      const diffInMilliseconds = Math.abs(currentDate - refDate)
+
       if (this.mode === 'past') {
         this.negativeRefDate = true
       } else if (this.mode === 'future') {
@@ -121,22 +132,29 @@ export default {
       } else {
         this.negativeRefDate = false
       }
-      if (this.negativeRefDate) {
-        diffInMilliseconds = currentDate - refDate
-      } else {
-        diffInMilliseconds = refDate - currentDate
-      }
-      if (diffInMilliseconds <= 1000 * 60) {
+
+      if (diffInMilliseconds <= 60 * 1000) {
         this.setClock(clockSecondsAccuracy, clockHalfAMinuteAccuracy)
-      } else if (diffInMilliseconds <= 1000 * 60 * 60) {
+      } else if (diffInMilliseconds <= 60 * 60 * 1000) {
         this.setClock(clockHalfAMinuteAccuracy, clockHalfAnHourAccuracy)
       } else {
         this.setClock(clockHalfAnHourAccuracy, null)
       }
     },
-    setClock (currentTimer, nextTimer) {
-      Vue.set(this, 'currentClockTimer', currentTimer)
-      Vue.set(this, 'nextClockTimer', nextTimer)
+    setClock (currentClock, nextClock) {
+      this.currentClock?.removeEventListener('tick', this.handleTick)
+      this.nextClock?.removeEventListener('tick', this.handleNextTick)
+
+      this.currentClock =  currentClock
+      this.nextClock = nextClock
+      this.currentClock?.addEventListener('tick', this.handleTick)
+      this.nextClock?.addEventListener('tick', this.handleNextTick)
+    },
+    handleTick ({ date }) {
+      this.currentDate = date
+    },
+    handleNextTick () {
+      this.updateClockInstance(this.dateTime)
     }
   },
   mounted () {
@@ -144,17 +162,13 @@ export default {
       this.updateClockInstance(this.dateTime)
     }
   },
+  unmounted () {
+    this.setClock(null, null) // removes event listeners
+  },
   watch: {
     dateTime (dateTimeValue) {
       if (dateTimeValue) {
         this.updateClockInstance(dateTimeValue)
-      }
-    },
-    'nextClockTimer.dateObj': {
-      handler: function (newValue) {
-        if (newValue) {
-          this.updateClockInstance(this.dateTime)
-        }
       }
     }
   }
