@@ -30,10 +30,10 @@ SPDX-License-Identifier: Apache-2.0
 <script>
 import ActionButtonDialog from '@/components/dialogs/ActionButtonDialog.vue'
 import { addShootAnnotation } from '@/utils/api'
-import { SnotifyPosition } from 'vue-snotify'
 import get from 'lodash/get'
 import { shootItem } from '@/mixins/shootItem'
 import { errorDetailsFromError } from '@/utils/error'
+import { mapActions } from 'vuex'
 
 export default {
   components: {
@@ -77,6 +77,9 @@ export default {
     }
   },
   methods: {
+    ...mapActions([
+      'setAlert'
+    ]),
     async startDialogOpened () {
       const confirmed = await this.$refs.actionDialog.waitForDialogClosed()
       if (confirmed) {
@@ -116,12 +119,9 @@ export default {
         return
       }
 
-      const config = {
-        position: SnotifyPosition.rightBottom,
-        timeout: 5000,
-        showProgressBar: false
-      }
-      this.$snotify.success(`Reconcile triggered for ${this.shootName}`, config)
+      this.setAlert({
+        message: `Reconcile triggered for ${this.shootName}`
+      })
     }
   }
 }

@@ -7,7 +7,6 @@
 import './styles'
 // import vuelidate from './vuelidate'
 // import shortkey from './shortkey'
-// import snotify from './snotify'
 import cookie from './cookie'
 import bus from './bus'
 import localStorage from './localStorage'
@@ -31,7 +30,6 @@ export function registerPlugins (app) {
     .use(auth)
     .use(api)
     .use(store)
-    // .use(snotify) // requires compat GLOBAL_MOUNT and FILTERS
 
   app.use(createRouter({
     store: app.config.globalProperties.$store,

@@ -1546,7 +1546,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["vue-popperjs", "npm:2.3.0"],\
             ["vue-router", "virtual:8d919ffb8fd728f827df3f6a566e8e923223ffcec68f7450d83bbbc2dc25d6b8c987e111cbab484b209f253bdf2f2e00663b01a986262c44511128466462a76f#npm:4.1.6"],\
             ["vue-shortkey", "npm:3.1.7"],\
-            ["vue-snotify", "virtual:8d919ffb8fd728f827df3f6a566e8e923223ffcec68f7450d83bbbc2dc25d6b8c987e111cbab484b209f253bdf2f2e00663b01a986262c44511128466462a76f#npm:3.2.1"],\
             ["vuelidate", "npm:0.7.7"],\
             ["vuetify", "virtual:8d919ffb8fd728f827df3f6a566e8e923223ffcec68f7450d83bbbc2dc25d6b8c987e111cbab484b209f253bdf2f2e00663b01a986262c44511128466462a76f#npm:3.1.10"],\
             ["vuex", "virtual:8d919ffb8fd728f827df3f6a566e8e923223ffcec68f7450d83bbbc2dc25d6b8c987e111cbab484b209f253bdf2f2e00663b01a986262c44511128466462a76f#npm:4.1.0"],\
@@ -12578,28 +12577,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["vue-shortkey", "npm:3.1.7"],\
             ["custom-event-polyfill", "npm:1.0.7"],\
             ["element-matches", "npm:0.1.2"]\
-          ],\
-          "linkType": "HARD"\
-        }]\
-      ]],\
-      ["vue-snotify", [\
-        ["npm:3.2.1", {\
-          "packageLocation": "./.yarn/cache/vue-snotify-npm-3.2.1-516316ba2e-56eae25be6.zip/node_modules/vue-snotify/",\
-          "packageDependencies": [\
-            ["vue-snotify", "npm:3.2.1"]\
-          ],\
-          "linkType": "SOFT"\
-        }],\
-        ["virtual:8d919ffb8fd728f827df3f6a566e8e923223ffcec68f7450d83bbbc2dc25d6b8c987e111cbab484b209f253bdf2f2e00663b01a986262c44511128466462a76f#npm:3.2.1", {\
-          "packageLocation": "./.yarn/__virtual__/vue-snotify-virtual-bc079b52a3/0/cache/vue-snotify-npm-3.2.1-516316ba2e-56eae25be6.zip/node_modules/vue-snotify/",\
-          "packageDependencies": [\
-            ["vue-snotify", "virtual:8d919ffb8fd728f827df3f6a566e8e923223ffcec68f7450d83bbbc2dc25d6b8c987e111cbab484b209f253bdf2f2e00663b01a986262c44511128466462a76f#npm:3.2.1"],\
-            ["@types/vue", null],\
-            ["vue", "npm:3.2.47"]\
-          ],\
-          "packagePeers": [\
-            "@types/vue",\
-            "vue"\
           ],\
           "linkType": "HARD"\
         }]\

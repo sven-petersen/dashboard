@@ -994,7 +994,6 @@ __metadata:
     vue-popperjs: ^2.3.0
     vue-router: ^4
     vue-shortkey: ^3.1.7
-    vue-snotify: ^3.2.1
     vuelidate: ^0.7.7
     vuetify: ^3.1.10
     vuex: ^4.1.0
@@ -10401,15 +10400,6 @@ resolve@^1.20.0:
     custom-event-polyfill: ^1.0.7
     element-matches: ^0.1.2
   checksum: b718c1c27e326ecddf9ca91a72905e2b33000e626364deccb94de78f52a52c32f19dfcbedb849c1cffc7e7c48f44c2b4f0313e3a9ffeffcd60eb4a8afb6a0cb1
-  languageName: node
-  linkType: hard
-
-"vue-snotify@npm:^3.2.1":
-  version: 3.2.1
-  resolution: "vue-snotify@npm:3.2.1"
-  peerDependencies:
-    vue: ^2.4.2
-  checksum: 56eae25be67281126960ef5646fb96b281152a2f97767571cfff6777916d03058345b1613a8b8ce2bea2761f8f59fe225ca0d548ef5c5eda43026681ef1c0d8f
   languageName: node
   linkType: hard
 

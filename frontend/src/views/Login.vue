@@ -131,14 +131,12 @@ SPDX-License-Identifier: Apache-2.0
         >Gardener Landing Page</a></span>
       </div>
     </v-main>
-    <!-- FIXME: throws an error when included -->
     <g-snotify />
   </v-app>
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
-import { SnotifyPosition } from 'vue-snotify'
+import { mapGetters, mapActions } from 'vuex'
 import get from 'lodash/get'
 import head from 'lodash/head'
 import { setDelayedInputFocus } from '@/utils'
@@ -238,6 +236,9 @@ export default {
     this.loginType = this.primaryLoginType
   },
   methods: {
+    ...mapActions([
+      'setAlert'
+    ]),
     handleLogin () {
       switch (this.loginType) {
         case 'oidc':
@@ -264,21 +265,21 @@ export default {
         try {
           await this.$router.push(this.redirectPath)
         } catch (err) {
-          /* Catch and ignore navigation aborted errors. Redirection happens in navigation guards (see https://router.vuejs.org/guide/essentials/navigation.html#router-push-location-oncomplete-onabort). */
+          /* Catch and ignore navigation aborted errors. Redirection happens in navigation guards
+           * (see https://router.vuejs.org/guide/essentials/navigation.html#router-push-location-oncomplete-onabort).
+           */
         }
       } catch (err) {
         this.dialog = false
         this.showSnotifyLoginError(err.message)
       }
     },
-    // FIXME: snotify does not work (yet) under Vue3. If an error is displayed the Login view will not properly render
     showSnotifyLoginError (message) {
-      const config = {
-        position: SnotifyPosition.rightBottom,
-        timeout: 5000,
-        showProgressBar: false
-      }
-      this.$snotify.error(message, 'Login Error', config)
+      this.setAlert({
+        message,
+        title: 'Login Error',
+        type: 'error'
+      })
     }
   }
 }

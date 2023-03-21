@@ -905,11 +905,8 @@ const getters = {
     const user = state.user
     return user ? user.name || fullDisplayName(user.id) : ''
   },
-  alertMessage (state) {
-    return get(state, 'alert.message', '')
-  },
-  alertType (state) {
-    return get(state, 'alert.type', 'error')
+  alert (state) {
+    return state.alert || null
   },
   alertBannerMessage (state) {
     return get(state, 'cfg.alert.message')

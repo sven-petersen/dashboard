@@ -35,9 +35,9 @@ import ActionButtonDialog from '@/components/dialogs/ActionButtonDialog.vue'
 import MaintenanceComponents from '@/components/ShootMaintenance/MaintenanceComponents.vue'
 import { addShootAnnotation } from '@/utils/api'
 import { errorDetailsFromError } from '@/utils/error'
-import { SnotifyPosition } from 'vue-snotify'
 import get from 'lodash/get'
 import { shootItem } from '@/mixins/shootItem'
+import { mapActions } from 'vuex'
 
 export default {
   components: {
@@ -82,6 +82,9 @@ export default {
     }
   },
   methods: {
+    ...mapActions([
+      'setAlert'
+    ]),
     async startDialogVisible () {
       this.reset()
       const confirmed = await this.$refs.actionDialog.waitForDialogClosed()
@@ -121,12 +124,10 @@ export default {
       if (!this.shootName) { // ensure that notification is not triggered by shoot resource being cleared (e.g. during navigation)
         return
       }
-      const config = {
-        position: SnotifyPosition.rightBottom,
-        timeout: 5000,
-        showProgressBar: false
-      }
-      this.$snotify.success(`Maintenance scheduled for ${this.shootName}`, config)
+
+      this.setAlert({
+        message: `Maintenance scheduled for ${this.shootName}`
+      })
     }
   }
 }

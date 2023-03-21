@@ -389,7 +389,6 @@ import get from 'lodash/get'
 import set from 'lodash/set'
 import includes from 'lodash/includes'
 import isEmpty from 'lodash/isEmpty'
-import { SnotifyPosition } from 'vue-snotify'
 
 export default {
   name: 'administration',
@@ -538,7 +537,8 @@ export default {
   methods: {
     ...mapActions([
       'patchProject',
-      'deleteProject'
+      'deleteProject',
+      'setAlert'
     ]),
     ...mapActions('projectQuota', [
       'fetchProjectQuota'
@@ -631,12 +631,10 @@ export default {
         try {
           await this.fetchProjectQuota(this.project.metadata.namespace)
         } catch (err) {
-          const config = {
-            position: SnotifyPosition.rightBottom,
-            timeout: 5000,
-            showProgressBar: false
-          }
-          this.$snotify.error(`Failed to fetch project quota: ${err.message}`, config)
+          this.setAlert({
+            type: 'error',
+            message: `Failed to fetch project quota: ${err.message}`
+          })
         }
       },
       { immediate: true }

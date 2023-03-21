@@ -49,10 +49,9 @@ SPDX-License-Identifier: Apache-2.0
 <script>
 import ActionButtonDialog from '@/components/dialogs/ActionButtonDialog.vue'
 import { addShootAnnotation } from '@/utils/api'
-import { SnotifyPosition } from 'vue-snotify'
 import shootStatusCredentialRotation from '@/mixins/shootStatusCredentialRotation'
 import { errorDetailsFromError } from '@/utils/error'
-import { mapGetters } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 import includes from 'lodash/includes'
 import compact from 'lodash/compact'
 
@@ -356,6 +355,9 @@ export default {
     }
   },
   methods: {
+    ...mapActions([
+      'setAlert'
+    ]),
     async startDialogOpened () {
       const confirmed = await this.$refs.actionDialog.waitForDialogClosed()
       if (confirmed) {
@@ -398,12 +400,10 @@ export default {
       if (!this.shootName) { // ensure that notification is not triggered by shoot resource being cleared (e.g. during navigation)
         return
       }
-      const config = {
-        position: SnotifyPosition.rightBottom,
-        timeout: 5000,
-        showProgressBar: false
-      }
-      this.$snotify.success(this.componentTexts.successMessage, config)
+
+      this.setAlert({
+        message: this.componentTexts.successMessage
+      })
     }
   },
   mounted () {

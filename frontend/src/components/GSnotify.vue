@@ -4,25 +4,55 @@ SPDX-FileCopyrightText: 2021 SAP SE or an SAP affiliate company and Gardener con
 SPDX-License-Identifier: Apache-2.0
 -->
 
+<!-- TODO: previous implementation used vue-snotify which supported displaying multiple
+      toasts at once (stacked). This solution only displays the most recent one. While that is in
+      in line with the Material Design guidelines this might be sup-optimal.
+-->
+
 <template>
-  <vue-snotify class="snotify"></vue-snotify>
+  <div class="text-center ma-2">
+    <v-snackbar
+      v-model="active"
+      :color="color"
+      :timeout="timeout"
+      location="bottom right"
+    >
+      <div v-if="title" class="text-subtitle-1 pb-1">{{ title }}</div>
+      <p>{{ message }}</p>
+      <template v-slot:actions>
+        <v-btn
+          variant="text"
+          @click="active = false"
+        >
+          <v-icon>mdi-close</v-icon>
+        </v-btn>
+      </template>
+    </v-snackbar>
+  </div>
 </template>
 
 <script>
 import { mapGetters, mapActions } from 'vuex'
-import { SnotifyPosition } from 'vue-snotify'
 
 export default {
+  components: [],
+  data() {
+    return {
+      active: false,
+      color: null,
+      timeout: null,
+      message: null
+    }
+  },
   computed: {
     ...mapGetters([
-      'alertMessage',
-      'alertType'
+      'alert'
     ])
   },
   watch: {
-    alertMessage (value) {
+    alert (value) {
       if (value) {
-        this.showSnotifyToast(value, this.alertType)
+        this.showToast(value)
         this.setAlert(null)
       }
     }
@@ -31,87 +61,13 @@ export default {
     ...mapActions([
       'setAlert'
     ]),
-    showSnotifyToast (message, type) {
-      const config = {
-        position: SnotifyPosition.rightBottom,
-        timeout: 5000,
-        showProgressBar: false
-      }
-      switch (type) {
-        case 'success':
-          config.timeout = 3000
-          this.$snotify.success(message, config)
-          break
-        case 'warning':
-          this.$snotify.warning(message, config)
-          break
-        case 'info':
-          this.$snotify.info(message, config)
-          break
-        default:
-          this.$snotify.error(message, config)
-      }
+    showToast ({ message, type, title }) {
+      this.title = title
+      this.message = message
+      this.timeout = type === 'success' ? 3000 : 5000
+      this.color = ['success', 'warning', 'error'].includes(type) ? type : 'info'
+      this.active = true
     }
   }
 }
 </script>
-<style lang="scss">
-  @import "vue-snotify/styles/material.scss";
-
-  $error-color: var(--v-error-base);
-  $warning-color: var(--v-warning-base);
-  $success-color: var(--v-success-base);
-  $info-color: var(--v-info-base);
-  $dark-background: rgba(0, 0, 0, .9);
-
-  .snotify-rightTop {
-    top: 75px;
-  }
-
-  .snotify {
-    width: 400px;
-  }
-
-  .theme--dark .snotify {
-    .snotify-error {
-      background-color: $dark-background !important;
-      .snotifyToast__body {
-        color: $error-color;
-      }
-    }
-    .snotify-warning {
-      background-color: $dark-background !important;
-      .snotifyToast__body {
-        color: $warning-color;
-      }
-    }
-    .snotify-success {
-      background-color: $dark-background !important;
-      .snotifyToast__body {
-        color: $success-color;
-      }
-    }
-    .snotify-info {
-      background-color: $dark-background !important;
-      .snotifyToast__body {
-        color: $info-color;
-      }
-    }
-  }
-
-  .theme--light .snotify {
-    .snotify-error {
-      background-color: $error-color !important;
-    }
-    .snotify-warning {
-      background-color: $warning-color !important;
-    }
-    .snotify-success {
-      background-color: $success-color !important;
-    }
-    .snotify-info {
-      background-color: $info-color !important;
-    }
-  }
-
-</style>
