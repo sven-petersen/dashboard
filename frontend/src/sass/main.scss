@@ -14,16 +14,6 @@
   }
 }
 
-// FIXME: this variable - $material-theme - seems to no longer exist. Check if
-//   this overwrite is obsolete now or not. If not also consider using settings.scss
-//   instead to overwrite vuetify stuff.
-//
-// .v-list-item__action {
-//   .v-btn.v-btn--icon {
-//     color: map-deep-get(v.$material-theme, 'text', 'primary');
-//   }
-// }
-
 .secret-dialog {
   .help-content {
     a {
