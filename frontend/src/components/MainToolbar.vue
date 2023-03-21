@@ -71,7 +71,7 @@ SPDX-License-Identifier: Apache-2.0
         </template>
         <span v-if="isAdmin">
           {{avatarTitle}}
-          <v-chip small color="primary">
+          <v-chip small color="primary" variant="elevated">
             <v-avatar>
               <v-icon>mdi-account-supervisor</v-icon>
             </v-avatar>
