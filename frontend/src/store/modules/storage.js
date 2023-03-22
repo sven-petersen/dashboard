@@ -4,8 +4,6 @@
 // SPDX-License-Identifier: Apache-2.0
 //
 
-import Vue from 'vue'
-
 // initial state
 const state = {}
 
@@ -42,14 +40,14 @@ const actions = {
 const mutations = {
   CLEAR (state) {
     for (const key in state) {
-      Vue.delete(state, key)
+      delete state[key]
     }
   },
-  SET_ITEM (state, args) {
-    Vue.set(state, ...args)
+  SET_ITEM (state, [key, value]) {
+    state[key] = value
   },
   REMOVE_ITEM (state, key) {
-    Vue.delete(state, key)
+    delete state[key]
   }
 }
 

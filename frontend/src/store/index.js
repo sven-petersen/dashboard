@@ -1631,7 +1631,7 @@ export const createStore = (app) => {
   // plugins
   plugins.push(createSocketPlugin($auth, $logger))
   // localStorage can be undefined in some unit tests
-  if (localStorage) {
+  if ($localStorage) {
     plugins.push(createStoragePlugin($localStorage))
   }
   plugins.push(createMediaPlugin($vuetify))
