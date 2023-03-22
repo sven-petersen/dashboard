@@ -1287,7 +1287,7 @@ __metadata:
     vue-router: ^3.5.4
     vue-shortkey: ^3.1.7
     vue-snotify: ^3.2.1
-    vue-template-compiler: ^2.7.14
+    vue-template-compiler: ^2.6.14
     vuelidate: ^0.7.7
     vuetify: ^2.6.12
     vuetify-loader: ^1.7.3
@@ -11614,7 +11614,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vue-template-compiler@npm:^2.7.14":
+"vue-template-compiler@npm:^2.6.14":
   version: 2.7.14
   resolution: "vue-template-compiler@npm:2.7.14"
   dependencies:

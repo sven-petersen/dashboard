@@ -21,6 +21,7 @@ import openstackIcon from  '@/assets/openstack.svg'
 import alicloudIcon from  '@/assets/alicloud.svg'
 import vsphereIcon from  '@/assets/vsphere.svg'
 import metalIcon from  '@/assets/metal.svg'
+import onmetalIcon from  '@/assets/onmetal.svg'
 import awsRoute53Icon from  '@/assets/aws-route53.svg'
 import azureDnsIcon from  '@/assets/azure-dns.svg'
 import googleClouddnsIcon from  '@/assets/google-clouddns.svg'
@@ -67,7 +68,8 @@ export default {
           return vsphereIcon
         case 'metal':
           return metalIcon
-
+        case 'onmetal':
+          return onmetalIcon
         // dns
         case 'aws-route53':
           return awsRoute53Icon
