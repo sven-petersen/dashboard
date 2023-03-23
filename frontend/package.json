@@ -22,9 +22,9 @@
     "registry": "https://npm.pkg.github.com/"
   },
   "scripts": {
-    "dev": "vite",
+    "serve": "vite",
     "build": "vite build",
-    "serve": "vite preview",
+    "preview": "vite preview",
     "lint": "eslint --ext .js,.vue --ignore-path .gitignore",
     "test": "vitest run",
     "test-coverage": "vitest run --coverage"

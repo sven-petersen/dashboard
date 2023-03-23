@@ -1953,6 +1953,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["openapi-types", "npm:11.0.1"],\
             ["openid-client", "npm:5.1.6"],\
             ["p-event", "npm:4.2.0"],\
+            ["p-limit", "npm:3.1.0"],\
             ["p-retry", "npm:4.6.2"],\
             ["p-timeout", "npm:4.1.0"],\
             ["path-to-regexp", "npm:6.2.1"],\

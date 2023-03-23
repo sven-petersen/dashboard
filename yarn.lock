@@ -1195,6 +1195,7 @@ __metadata:
     object-hash: ^3.0.0
     openid-client: ^5.1.6
     p-event: ^4.2.0
+    p-limit: ^3.1.0
     p-retry: ^4.6.2
     p-timeout: ^4.1.0
     path-to-regexp: ^6.2.1
@@ -8908,7 +8909,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"p-limit@npm:^3.0.2":
+"p-limit@npm:^3.0.2, p-limit@npm:^3.1.0":
   version: 3.1.0
   resolution: "p-limit@npm:3.1.0"
   dependencies:
