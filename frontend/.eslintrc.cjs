@@ -9,6 +9,9 @@ module.exports = {
   env: {
     'jest/globals': true
   },
+  globals: {
+    vi: true
+  },
   extends: [
     'plugin:vue/essential',
     'plugin:vuetify/base',

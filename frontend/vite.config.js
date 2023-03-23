@@ -55,7 +55,6 @@ export default defineConfig(({ command }) => {
       globals: true,
       // include: ['tests/*'],
       coverage: {
-        enabled: true,
         provider: 'c8',
         branches: 42,
         functions: 27,
