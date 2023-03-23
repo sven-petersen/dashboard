@@ -4,7 +4,7 @@
 // SPDX-License-Identifier: Apache-2.0
 //
 
-'use strict'
+import createStorageWrapper from '@/utils/storage'
 
 const levels = {
   debug: 1,
@@ -72,6 +72,14 @@ export class Logger {
     }
   }
 }
+
+// TODO: check if we want to have a global logger or not. If yes it should be considered if createLogger below
+//   should be exported and/or if we still want to create a separate instance in plugins/logger to attach
+//   to the Vue app instance.
+//   "globalLogger" is currently one way to make the logger easily accessible outside of the context of
+//   a component/app creation such as the store (ex. store/modules/shoot/index.js)
+//
+export const globalLogger = createLogger(createStorageWrapper(window.localStorage))
 
 export default function createLogger (storage) {
   const logger = new Logger()

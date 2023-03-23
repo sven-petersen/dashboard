@@ -45,10 +45,15 @@ import {
   maintenanceWindowWithBeginAndTimezone,
   isTruthyValue
 } from '@/utils'
+import { globalLogger } from '@/utils/logger'
 import { isUserError, isTemporaryError, errorCodesFromArray } from '@/utils/errorCodes'
 
-const logger = Vue.logger
 const uriPattern = /^([^:/?#]+:)?(\/\/[^/?#]*)?([^?#]*)(\?[^#]*)?(#.*)?/
+// FIXME: Previously the logger was accessed through the global Vue.logger which was defined inside
+//   plugins. With Vue3 everything should be registered on the app instance.
+//   This was a simple fix but it should be checked if this is the actual "vue 3 way" of doing it.
+//   Also see the comment in src/utils/logger.js.
+const logger = globalLogger
 
 // initial state
 const state = {
@@ -229,7 +234,7 @@ const actions = {
     }
 
     if (!rootGetters.sortedCloudProviderKindList.length) {
-      Vue.logger.warn('Could not reset new shoot resource as there is no supported cloud profile')
+      logger.warn('Could not reset new shoot resource as there is no supported cloud profile')
       return
     }
 

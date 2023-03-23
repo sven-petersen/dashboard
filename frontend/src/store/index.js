@@ -85,11 +85,6 @@ import socket from './modules/socket'
 import semver from 'semver'
 import colors from 'vuetify/lib/util/colors'
 
-const localStorage = Vue.localStorage
-const userManager = Vue.auth
-const logger = Vue.logger
-const vuetify = Vue.vuetify
-
 // FIXME: re-enable strict mode!
 //  there seem to be places that modify state not using actions. Strict
 //  mode errors in that case causing the application not to start at all.
