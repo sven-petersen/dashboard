@@ -530,9 +530,9 @@ export default {
     position: relative !important;
   }
   :deep(.cm-tab) {
-     background: url('../assets/tab.png');
-     background-position: right;
-     background-repeat: no-repeat;
+    background: url('../assets/tab.png');
+    background-position: right;
+    background-repeat: no-repeat;
   }
   .font-style-italic {
     font-style: italic;
@@ -542,7 +542,7 @@ export default {
   }
 </style>
 <style lang="scss">
-  @import 'vuetify/src/styles/styles.sass';
+  @use '@/sass/main.scss' as *;
 
   .CodeMirror-hint {
 

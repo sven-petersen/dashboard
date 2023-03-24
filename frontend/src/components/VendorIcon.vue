@@ -122,7 +122,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  @import 'vuetify/src/styles/styles.sass';
+  @use '@/sass/main.scss' as *;
 
   $grey-darken-2: map-get($grey, 'darken-2');
 
