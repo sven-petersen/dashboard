@@ -17,15 +17,14 @@ SPDX-License-Identifier: Apache-2.0
         </v-toolbar-title>
         <v-spacer></v-spacer>
         <v-tooltip location="bottom">
-          <template v-slot:activator="{ on }">
-            <div v-on="on">
+          <template v-slot:activator="{ props }">
+            <div v-bind="props">
               <v-badge
                 class="mr-5"
                 bordered
                 color="primary-lighten-3"
                 :content="numberOfNewItemsSinceFreeze"
                 :value="numberOfNewItemsSinceFreeze > 0"
-                overlap
               >
                 <v-switch
                   v-model="focusModeInternal"
@@ -53,15 +52,14 @@ SPDX-License-Identifier: Apache-2.0
           </template>
         </v-tooltip>
         <v-tooltip location="top" v-if="shootSearch || items.length > 3">
-          <template v-slot:activator="{ on }">
+          <template v-slot:activator="{ props }">
             <v-text-field
-              v-on="on"
+              v-bind="props"
               prepend-inner-icon="mdi-magnify"
               color="primary"
               label="Search"
               clearable
               hide-details
-              flat
               variant="solo"
               @update:model-value="onInputSearch"
               @keyup.esc="shootSearch=''"
@@ -72,14 +70,14 @@ SPDX-License-Identifier: Apache-2.0
           <span class="font-weight-bold">Use quotes</span> for exact words or phrases: <v-chip label color="primary" small>"my-shoot"</v-chip> <v-chip label color="primary" small>"John Doe"</v-chip><br />
           <span class="font-weight-bold">Use minus sign</span> to exclude words that you don't want: <v-chip label color="primary" small>-myproject</v-chip> <v-chip label color="primary" small>-"Jane Doe"</v-chip><br />
         </v-tooltip>
-        <v-tooltip location="top" v-if="canCreateShoots && projectScope">
-          <template v-slot:activator="{ on }">
-             <v-btn v-on="on" icon :to="{ name: 'NewShoot', params: {  namespace } }">
-               <v-icon color="toolbar-title">mdi-plus</v-icon>
-             </v-btn>
+        <!--<v-tooltip location="top" v-if="canCreateShoots && projectScope">
+          <template v-slot:activator="{ props }">
+            <v-btn v-bind="props" icon :to="{ name: 'NewShoot', params: {  namespace } }">
+              <v-icon color="toolbar-title">mdi-plus</v-icon>
+            </v-btn>
           </template>
           <span>Create Cluster</span>
-        </v-tooltip>
+        </v-tooltip>-->
         <table-column-selection
           :headers="selectableHeaders"
           :filters="selectableFilters"
@@ -89,7 +87,7 @@ SPDX-License-Identifier: Apache-2.0
           @toggle-filter="toggleFilter"
         ></table-column-selection>
       </v-toolbar>
-      <v-data-table
+      <!-- <v-data-table
         :headers="visibleHeaders"
         :items="items"
         v-model:options="options"
@@ -113,12 +111,12 @@ SPDX-License-Identifier: Apache-2.0
             :key="item.metadata.uid"
           ></shoot-list-row>
         </template>
-      </v-data-table>
+      </v-data-table> -->
 
-      <v-dialog v-model="clusterAccessDialog" max-width="850">
+      <!-- <v-dialog v-model="clusterAccessDialog" max-width="850">
         <v-card>
           <v-card-title class="toolbar-background toolbar-title--text">
-            <div class="text-h5">Cluster Access <code class="toolbar-background lighten-1 toolbar-title--text">{{currentName}}</code></div>
+            <div class="text-h5">Cluster Access <code class="bg-toolbar-background bg-toolbar-background-lighten-1 text-toolbar-title">{{currentName}}</code></div>
             <v-spacer></v-spacer>
             <v-btn icon class="text-grey-lighten-4" @click="hideDialog">
               <v-icon color="toolbar-title">mdi-close</v-icon>
@@ -126,7 +124,7 @@ SPDX-License-Identifier: Apache-2.0
           </v-card-title>
           <shoot-access-card ref="clusterAccess" :shoot-item="shootItem" :hide-terminal-shortcuts="true"></shoot-access-card>
         </v-card>
-      </v-dialog>
+      </v-dialog> -->
     </v-card>
   </v-container>
 </template>
