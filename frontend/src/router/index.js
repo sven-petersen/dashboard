@@ -9,7 +9,7 @@ import { createRouter as createVueRouter, createWebHistory } from 'vue-router'
 import createRoutes from './routes'
 import createGuards from './guards'
 
-export default function createRouter ({ store, logger, auth }) {
+export default function createRouter ({ store, logger, auth, localStorage }) {
   const zeroPoint = { left: 0, top: 0 }
 
   const routerOptions = {
