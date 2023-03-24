@@ -4,7 +4,6 @@
 // SPDX-License-Identifier: Apache-2.0
 //
 
-import Vue from 'vue'
 import find from 'lodash/find'
 import includes from 'lodash/includes'
 import assign from 'lodash/assign'
@@ -21,14 +20,20 @@ export function putItem (state, newItem) {
   const item = findItem(state)(newItem.metadata)
   if (item) {
     if (item.metadata.resourceVersion !== newItem.metadata.resourceVersion) {
-      Vue.set(state.shoots, keyForShoot(item.metadata), assign(item, newItem))
+      // TODO: check if reactivity is broken when not using Vue.set
+      // Vue.set(state.shoots, keyForShoot(item.metadata), assign(item, newItem))
+      state.shoots[keyForShoot(item.metadata)] = assign(item, newItem)
     }
   } else {
     if (state.focusMode) {
-      Vue.delete(state.staleShoots, newItem.metadata.uid)
+      // TODO: check if reactivity is broken when not using Vue.delete
+      // Vue.delete(state.staleShoots, newItem.metadata.uid)
+      delete state.staleShoots[newItem.metadata.uid]
     }
     newItem.info = undefined // register property to ensure reactivity
-    Vue.set(state.shoots, keyForShoot(newItem.metadata), newItem)
+    // TODO: check if reactivity is broken when not using Vue.set
+    // Vue.set(state.shoots, keyForShoot(newItem.metadata), newItem)
+    state.shoots[keyForShoot(newItem.metadata)] = newItem
   }
 }
 export function deleteItem (state, deletedItem) {
@@ -36,9 +41,13 @@ export function deleteItem (state, deletedItem) {
 
   if (item) {
     if (state.focusMode) {
-      Vue.set(state.staleShoots, item.metadata.uid, item)
+      // TODO: check if reactivity is broken when not using Vue.set
+      // Vue.set(state.staleShoots, item.metadata.uid, item)
+      state.staleShoots[item.metadata.uid] = item
     }
-    Vue.delete(state.shoots, keyForShoot(item.metadata))
+    // TODO: check if reactivity is broken when not using Vue.delete
+    // Vue.delete(state.shoots, keyForShoot(item.metadata))
+    delete state.shoots[item.metadata]
   }
 }
 
