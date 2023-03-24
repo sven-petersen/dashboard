@@ -169,7 +169,7 @@ SPDX-License-Identifier: Apache-2.0
       </template>
     </v-list>
 
-    <project-create-dialog v-model="projectDialog"></project-create-dialog>
+    <project-create-dialog v-model:value="projectDialog"></project-create-dialog>
 
   </v-navigation-drawer>
 </template>
