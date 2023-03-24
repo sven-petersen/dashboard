@@ -9,12 +9,12 @@
 //   shootItemTabs
 // } from './tabs'
 
-// import {
-//   homeBreadcrumbs,
+import {
+  homeBreadcrumbs,
 //   newProjectBreadcrumbs,
 //   accountBreadcrumbs,
 //   settingsBreadcrumbs,
-//   shootListBreadcrumbs,
+  shootListBreadcrumbs,
 //   shootItemBreadcrumbs,
 //   shootItemTerminalBreadcrumbs,
 //   secretItemBreadcrumbs,
@@ -24,19 +24,19 @@
 //   administrationBreadcrumbs,
 //   membersBreadcrumbs,
 //   terminalBreadcrumbs,
-//   notFoundBreadcrumbs
-// } from './breadcrumbs'
+  notFoundBreadcrumbs
+} from './breadcrumbs'
 
 /* Layouts */
 import Login from '@/views/Login.vue'
-// import Default from '@/views/Default.vue'
+import Default from '@/views/Default.vue'
 
 /* Pages */
 
-// import NotFound from '@/views/NotFound.vue'
+import NotFound from '@/views/NotFound.vue'
 import Error from '@/views/Error.vue'
 
-// import ProjectPlaceholder from '@/views/ProjectPlaceholder.vue'
+import ProjectPlaceholder from '@/views/ProjectPlaceholder.vue'
 // import NewShootEditor from '@/views/NewShootEditor.vue'
 // import ShootItemPlaceholder from '@/views/ShootItemPlaceholder.vue'
 // import ShootItemEditor from '@/views/ShootItemEditor.vue'
@@ -44,12 +44,12 @@ import Error from '@/views/Error.vue'
 // import Settings from '@/views/Settings.vue'
 
 // const Members = () => import('@/views/Members.vue')
-// const Home = () => import('@/views/Home.vue')
+const Home = () => import('@/views/Home.vue')
 // const Secrets = () => import('@/views/Secrets.vue')
 // const Administration = () => import('@/views/Administration.vue')
 
 // const NewShoot = () => import('@/views/NewShoot.vue')
-// const ShootList = () => import('@/views/ShootList.vue')
+const ShootList = () => import('@/views/ShootList.vue')
 // const ShootItem = () => import('@/views/ShootItem.vue')
 // const ShootItemTerminal = () => import('@/views/ShootItemTerminal.vue')
 
@@ -59,74 +59,74 @@ export default function routes (context) {
   return [
     loginRoute(context, '/login'),
     errorRoute(context, '/error'),
-    // defaultHierarchy(context, '/')
+    defaultHierarchy(context, '/')
   ]
 }
 
 /* Default Hierachy "/" */
-// function defaultHierarchy (context, path) {
-//   const children = [
-//     homeRoute(context, ''),
-//     accountRoute(context, 'account'),
-//     settingsRoute(context, 'settings'),
-//     projectsRoute(context, 'namespace'),
-//     newProjectRoute(context, 'namespace/+'),
-//     projectHierarchy(context, 'namespace/:namespace'),
-//     {
-//       path: '*',
-//       component: NotFound,
-//       meta: {
-//         namespaced: false,
-//         projectScope: false,
-//         breadcrumbs: notFoundBreadcrumbs
-//       }
-//     }
-//   ]
-//   return {
-//     path,
-//     component: Default,
-//     children
-//   }
-// }
+function defaultHierarchy (context, path) {
+  const children = [
+    homeRoute(context, ''),
+    // accountRoute(context, 'account'),
+    // settingsRoute(context, 'settings'),
+    // projectsRoute(context, 'namespace'),
+    // newProjectRoute(context, 'namespace/+'),
+    projectHierarchy(context, 'namespace/:namespace'),
+    {
+      path: '*',
+      component: NotFound,
+      meta: {
+        namespaced: false,
+        projectScope: false,
+        breadcrumbs: notFoundBreadcrumbs
+      }
+    }
+  ]
+  return {
+    path,
+    component: Default,
+    children
+  }
+}
 
 /* Project Hierachy "/namespace/:namespace" */
-// function projectHierarchy (context, path) {
-//   return {
-//     path,
-//     component: ProjectPlaceholder,
-//     children: [
-//       { path: '', redirect: 'shoots' },
-//       shootListHierarchy(context, 'shoots'),
-//       secretListRoute(context, 'secrets'),
-//       secretItemRoute(context, 'secrets/:name'),
-//       membersRoute(context, 'members'),
-//       administrationRoute(context, 'administration'),
-//       { path: 'term', redirect: 'term/garden' },
-//       gardenTerminalRoute(context, 'term/garden'),
-//       {
-//         path: '*',
-//         component: NotFound,
-//         meta: {
-//           breadcrumbs: notFoundBreadcrumbs
-//         }
-//       }
-//     ]
-//   }
-// }
+function projectHierarchy (context, path) {
+  return {
+    path,
+    component: ProjectPlaceholder,
+    children: [
+      { path: '', redirect: 'shoots' },
+      shootListHierarchy(context, 'shoots'),
+      // secretListRoute(context, 'secrets'),
+      // secretItemRoute(context, 'secrets/:name'),
+      // membersRoute(context, 'members'),
+      // administrationRoute(context, 'administration'),
+      // { path: 'term', redirect: 'term/garden' },
+      // gardenTerminalRoute(context, 'term/garden'),
+      {
+        path: '*',
+        component: NotFound,
+        meta: {
+          breadcrumbs: notFoundBreadcrumbs
+        }
+      }
+    ]
+  }
+}
 
 /* Shoot List Hierachy "/namespace/:namespace/shoots" */
-// function shootListHierarchy (context, path) {
-//   return {
-//     path,
-//     component: PlaceholderComponent,
-//     children: [
-//       shootListRoute(context, ''),
-//       newShootRoute(context, '+'),
-//       newShootEditorRoute(context, '+/yaml'),
-//       shootItemHierarchy(context, ':name')
-//     ]
-//   }
-// }
+function shootListHierarchy (context, path) {
+  return {
+    path,
+    component: RouterView,
+    children: [
+      shootListRoute(context, ''),
+      // newShootRoute(context, '+'),
+      // newShootEditorRoute(context, '+/yaml'),
+      // shootItemHierarchy(context, ':name')
+    ]
+  }
+}
 
 /* Shoot Item Hierachy "/namespace/:namespace/shoots/:name" */
 // function shootItemHierarchy (context, path) {
@@ -184,28 +184,28 @@ function errorRoute (context, path) {
   }
 }
 
-// function homeRoute ({ getters, dispatch }, path) {
-//   return {
-//     path,
-//     name: 'Home',
-//     component: Home,
-//     meta: {
-//       namespaced: false,
-//       projectScope: false,
-//       breadcrumbs: homeBreadcrumbs
-//     },
-//     async beforeEnter (to, from, next) {
-//       const namespace = getters.defaultNamespace
-//       if (namespace) {
-//         return next({
-//           name: 'ShootList',
-//           params: { namespace }
-//         })
-//       }
-//       next()
-//     }
-//   }
-// }
+function homeRoute ({ getters }, path) {
+  return {
+    path,
+    name: 'Home',
+    component: Home,
+    meta: {
+      namespaced: false,
+      projectScope: false,
+      breadcrumbs: homeBreadcrumbs
+    },
+    async beforeEnter (to, from, next) {
+      const namespace = getters.defaultNamespace
+      if (namespace) {
+        return next({
+          name: 'ShootList',
+          params: { namespace }
+        })
+      }
+      next()
+    }
+  }
+}
 
 // function newProjectRoute ({ state, getters, commit }, path) {
 //   return {
@@ -289,21 +289,21 @@ function errorRoute (context, path) {
 //   }
 // }
 
-// function shootListRoute (context, path) {
-//   return {
-//     path,
-//     name: 'ShootList',
-//     component: ShootList,
-//     meta: {
-//       menu: {
-//         title: 'Clusters',
-//         icon: 'mdi-hexagon-multiple'
-//       },
-//       projectScope: false,
-//       breadcrumbs: shootListBreadcrumbs
-//     }
-//   }
-// }
+function shootListRoute (context, path) {
+  return {
+    path,
+    name: 'ShootList',
+    component: ShootList,
+    meta: {
+      menu: {
+        title: 'Clusters',
+        icon: 'mdi-hexagon-multiple'
+      },
+      projectScope: false,
+      breadcrumbs: shootListBreadcrumbs
+    }
+  }
+}
 
 // function newShootRoute (context, path) {
 //   return {

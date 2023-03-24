@@ -52,13 +52,15 @@ export default function createRouter ({ store, logger, auth, localStorage }) {
     router.afterEach(guard)
   }
 
+  // TODO: re-enable - but during migration it helps to keep this disabled to prevent redirects
+  //   while making a component work with Vue/Vuetify 3
   // router error
-  router.onError(err => {
-    logger.error('Router error:', err)
-    store.commit('SET_LOADING', false)
-    store.commit('SET_ALERT', { type: 'error', message: err.message })
-    router.push({ name: 'Error' })
-  })
+  // router.onError(err => {
+  //   logger.error('Router error:', err)
+  //   store.commit('SET_LOADING', false)
+  //   store.commit('SET_ALERT', { type: 'error', message: err.message })
+  //   router.push({ name: 'Error' })
+  // })
 
   return router
 }
