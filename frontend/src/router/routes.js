@@ -53,11 +53,7 @@ import Error from '@/views/Error.vue'
 // const ShootItem = () => import('@/views/ShootItem.vue')
 // const ShootItemTerminal = () => import('@/views/ShootItemTerminal.vue')
 
-// const PlaceholderComponent = {
-//   render (createElement) {
-//     return createElement('router-view')
-//   }
-// }
+import RouterView from '@/components/RouterView.vue'
 
 export default function routes (context) {
   return [

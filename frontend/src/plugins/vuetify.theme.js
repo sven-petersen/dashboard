@@ -37,7 +37,12 @@ const dark = {
 const theme = {
   themes: { light, dark },
   variations: {
-    colors: ['primary', 'secondary', 'main-background'],
+    colors: [
+      'primary',
+      'secondary',
+      'main-background',
+      'toolbar-background'
+    ],
     lighten: 2,
     darken: 2,
   }
