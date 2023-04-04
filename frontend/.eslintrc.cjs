@@ -13,45 +13,45 @@ module.exports = {
     'jest/globals': true,
   },
   parserOptions: {
-    ecmaVersion: '2022'
+    ecmaVersion: '2022',
   },
   globals: {
-    vi: true
+    vi: true,
   },
   extends: [
-    // 'plugin:vue/vue3-recommended',
-    'plugin:vue/vue3-essential',
+    'standard',
+    'plugin:vue/vue3-recommended',
     'plugin:vuetify/base',
-    'eslint:recommended'
   ],
   plugins: [
-    'jest'
+    'jest',
   ],
   rules: {
     'no-console': [development ? 'off' : 'error', { allow: ['error'] }],
     'no-debugger': development ? 'off' : 'error',
     'vue/multi-word-component-names': 'off',
-    'vue/no-mutating-props': 'off'
+    'vue/no-mutating-props': 'off',
+    'comma-dangle': ['error', 'always-multiline'],
   },
   overrides: [
     {
       files: [
         '**/__tests__/*.{j,t}s?(x)',
-        '**/tests/unit/**/*.spec.{j,t}s?(x)'
+        '**/tests/unit/**/*.spec.{j,t}s?(x)',
       ],
       env: {
-        jest: true
-      }
+        jest: true,
+      },
     },
     {
       files: [
         'vitest.setup.js',
         '**/__tests__/*.{j,t}s?(x)',
-        '**/tests/unit/**/*.spec.{j,t}s?(x)'
+        '**/tests/unit/**/*.spec.{j,t}s?(x)',
       ],
       globals: {
-        vi: 'readonly'
-      }
-    }
-  ]
+        vi: 'readonly',
+      },
+    },
+  ],
 }
