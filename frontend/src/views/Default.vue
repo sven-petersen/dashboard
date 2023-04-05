@@ -6,11 +6,11 @@ SPDX-License-Identifier: Apache-2.0
 
 <template>
   <v-app>
-    <loading/>
-    <main-navigation/>
-    <main-toolbar/>
-    <main-content ref="content"/>
-    <g-snotify/>
+    <loading />
+    <main-navigation />
+    <main-toolbar />
+    <main-content ref="content" />
+    <g-snotify />
   </v-app>
 </template>
 
@@ -39,12 +39,7 @@ export default {
     MainToolbar,
     MainContent,
     Loading,
-    GSnotify
-  },
-  methods: {
-    getWrapElement () {
-      return this.$el.querySelector(':scope > div[class$="wrap"]')
-    }
+    GSnotify,
   },
   beforeRouteUpdate (to, from, next) {
     this.$refs.content.setScrollTop(0)
@@ -54,6 +49,11 @@ export default {
     disableVerticalScrolling(this.$el)
     const element = this.getWrapElement()
     disableVerticalScrolling(element)
-  }
+  },
+  methods: {
+    getWrapElement () {
+      return this.$el.querySelector(':scope > div[class$="wrap"]')
+    },
+  },
 }
 </script>
