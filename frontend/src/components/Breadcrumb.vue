@@ -7,7 +7,7 @@ SPDX-License-Identifier: Apache-2.0
 <template>
   <v-breadcrumbs
     :items="breadcrumbItems"
-    class="pl-0"
+    class="pl-0 breadcrumbs"
   >
     <template #divider>
       <v-icon size="large">
@@ -15,15 +15,7 @@ SPDX-License-Identifier: Apache-2.0
       </v-icon>
     </template>
     <template #title="{ item }">
-      <router-link
-        v-if="item.to"
-        :to="item.to"
-        class="text-decoration-none"
-      >
-        {{ item.text }}
-      </router-link>
       <span
-        v-else
         class="text-h6"
       >
         {{ item.text }}
@@ -32,30 +24,33 @@ SPDX-License-Identifier: Apache-2.0
   </v-breadcrumbs>
 </template>
 
-<script>
-import { mapState } from 'vuex'
-import get from 'lodash/get'
+<script setup>
+import { computed } from 'vue'
+import { useRoute } from 'vue-router'
 
-export default {
-  name: 'Breadcrumb',
-  computed: {
-    ...mapState([
-      'namespace',
-    ]),
-    breadcrumbItems () {
-      let breadcrumbs = this.$route?.meta?.breadcrumbs ?? []
-      if (typeof breadcrumbs === 'function') {
-        breadcrumbs = breadcrumbs(this.$route)
-      }
-      if (breadcrumbs.length) {
-        const last = breadcrumbs.slice(-1)[0]
-        last.disabled ??= false
-      }
-      return breadcrumbs
-    },
-    routeParamName () {
-      return get(this.$route.params, 'name')
-    },
-  },
-}
+const route = useRoute()
+
+const breadcrumbItems = computed(() => {
+  let breadcrumbs = route?.meta?.breadcrumbs ?? []
+  if (typeof breadcrumbs === 'function') {
+    breadcrumbs = breadcrumbs(route)
+  }
+  // last one is disabled by default which we do not want (will be rendered greyed out)
+  // as we use it as some sort of page title.
+  breadcrumbs.forEach((b) => {
+    b.disabled = false
+  })
+  if (breadcrumbs.length) {
+    const last = breadcrumbs.slice(-1)[0]
+    last.disabled ??= false
+  }
+  return breadcrumbs
+})
+
 </script>
+
+<style lang="scss" scoped>
+.breadcrumbs :deep(a) {
+  color: rgb(var(--v-theme-anchor));
+}
+</style>

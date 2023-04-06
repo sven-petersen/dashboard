@@ -4,102 +4,99 @@
 // SPDX-License-Identifier: Apache-2.0
 //
 
-import get from 'lodash/get'
-import pick from 'lodash/pick'
-
 export function homeBreadcrumbs () {
   return [
     {
-      text: 'Home'
-    }
+      text: 'Home',
+    },
   ]
 }
 
 export function newProjectBreadcrumbs () {
   return [
     {
-      text: 'Create Project'
-    }
+      text: 'Create Project',
+    },
   ]
 }
 
 export function accountBreadcrumbs () {
   return [
     {
-      text: 'Account'
-    }
+      text: 'Account',
+    },
   ]
 }
 
 export function settingsBreadcrumbs () {
   return [
     {
-      text: 'Settings'
-    }
+      text: 'Settings',
+    },
   ]
 }
 
 export function membersBreadcrumbs () {
   return [
     {
-      text: 'Members'
-    }
+      text: 'Members',
+    },
   ]
 }
 
 export function administrationBreadcrumbs () {
   return [
     {
-      text: 'Administration'
-    }
+      text: 'Administration',
+    },
   ]
 }
 
 export function newShootBreadcrumbs () {
   return [
     {
-      text: 'Create Cluster'
-    }
+      text: 'Create Cluster',
+    },
   ]
 }
 
 export function newShootEditorBreadcrumbs () {
   return [
     {
-      text: 'Create Cluster Editor'
-    }
+      text: 'Create Cluster Editor',
+    },
   ]
 }
 
 export function terminalBreadcrumbs () {
   return [
     {
-      text: 'Garden Cluster Terminal'
-    }
+      text: 'Garden Cluster Terminal',
+    },
   ]
 }
 
 export function shootListBreadcrumbs () {
   return [
     {
-      text: 'Project Clusters'
-    }
+      text: 'Project Clusters',
+    },
   ]
 }
 
 export function secretsBreadcrumbs () {
   return [
     {
-      text: 'Secrets'
-    }
+      text: 'Secrets',
+    },
   ]
 }
 
 export function notFoundBreadcrumbs () {
   return [
     {
-      text: 'Oops …'
-    }
+      text: 'Oops …',
+    },
   ]
 }
 
@@ -110,15 +107,15 @@ export function shootItemBreadcrumbs ({ params }) {
       get to () {
         return {
           name: 'ShootList',
-          params: pick(params, ['namespace'])
+          params: { namespace: params.namespace },
         }
-      }
+      },
     },
     {
       get text () {
-        return get(params, 'name')
-      }
-    }
+        return params?.name
+      },
+    },
   ]
 }
 
@@ -129,15 +126,15 @@ export function secretItemBreadcrumbs ({ params }) {
       get to () {
         return {
           name: 'Secrets',
-          params: pick(params, ['namespace'])
+          params: { namespace: params.namespace },
         }
-      }
+      },
     },
     {
       get text () {
-        return get(params, 'name')
-      }
-    }
+        return params?.name
+      },
+    },
   ]
 }
 
@@ -148,23 +145,23 @@ export function shootItemTerminalBreadcrumbs ({ params }) {
       get to () {
         return {
           name: 'ShootList',
-          params: pick(params, ['namespace'])
+          params: { namespace: params.namespace },
         }
-      }
+      },
     },
     {
       get text () {
-        return get(params, 'name')
+        return params?.name
       },
       get to () {
         return {
           name: 'ShootItem',
-          params
+          params,
         }
-      }
+      },
     },
     {
-      text: 'Terminal'
-    }
+      text: 'Terminal',
+    },
   ]
 }
