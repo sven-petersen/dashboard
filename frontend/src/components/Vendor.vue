@@ -7,10 +7,20 @@ SPDX-License-Identifier: Apache-2.0
 <template>
   <span v-if="title">{{ titleText }}</span>
   <!-- we make the tooltip background transparent so that it does not conflict with the cards background -->
-  <v-tooltip v-else location="top" color="rgba(0, 0, 0, 1)" content-class="tooltip">
-    <template v-slot:activator="{ on }">
-      <div class="d-flex align-center" v-on="on">
-        <infra-icon :value="cloudProviderKind" class="mr-2"></infra-icon>
+  <v-tooltip
+    v-else
+    location="top"
+    content-class="tooltip"
+  >
+    <template #activator="{ props: p }">
+      <div
+        class="d-flex align-center"
+        v-bind="p"
+      >
+        <infra-icon
+          :value="cloudProviderKind"
+          class="mr-2"
+        />
         {{ description }}
       </div>
     </template>
@@ -19,7 +29,12 @@ SPDX-License-Identifier: Apache-2.0
         <v-list-item>
           <v-list-item-content class="pa-0">
             <v-list-item-subtitle>Provider</v-list-item-subtitle>
-            <v-list-item-title class="d-flex"><infra-icon :value="cloudProviderKind" class="mr-2"></infra-icon>{{ cloudProviderKind }}</v-list-item-title>
+            <v-list-item-title class="d-flex">
+              <infra-icon
+                :value="cloudProviderKind"
+                class="mr-2"
+              />{{ cloudProviderKind }}
+            </v-list-item-title>
           </v-list-item-content>
         </v-list-item>
         <v-list-item v-if="cloudProfileName">
@@ -36,8 +51,8 @@ SPDX-License-Identifier: Apache-2.0
         </v-list-item>
         <v-list-item v-if="zones.length">
           <v-list-item-content class="pa-0">
-            <v-list-item-subtitle>{{zoneTitle}}</v-list-item-subtitle>
-            <v-list-item-title>{{zoneText}}</v-list-item-title>
+            <v-list-item-subtitle>{{ zoneTitle }}</v-list-item-subtitle>
+            <v-list-item-title>{{ zoneText }}</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
       </v-list>
@@ -45,87 +60,77 @@ SPDX-License-Identifier: Apache-2.0
   </v-tooltip>
 </template>
 
-<script>
-import join from 'lodash/join'
+<script setup>
+import { computed } from 'vue'
 import InfraIcon from '@/components/VendorIcon.vue'
 
-export default {
-  components: {
-    InfraIcon
+const props = defineProps({
+  zones: {
+    type: Array,
+    default: () => [],
   },
-  props: {
-    zones: {
-      type: Array,
-      default: () => []
-    },
-    cloudProviderKind: {
-      type: String
-    },
-    cloudProfileName: {
-      type: String
-    },
-    region: {
-      type: String
-    },
-    title: {
-      type: Boolean,
-      default: false
-    },
-    extended: {
-      type: Boolean,
-      default: false
-    }
+  cloudProviderKind: {
+    type: String,
+    default: null,
   },
-  computed: {
-    zoneText () {
-      return join(this.zones, ', ')
-    },
-    zoneTitle () {
-      if (this.zones.length > 1) {
-        return 'Zones'
-      }
-      return 'Zone'
-    },
-    description () {
-      const description = []
-      if (this.extended && this.cloudProviderKind) {
-        description.push(this.cloudProviderKind)
-      }
-      if (this.cloudProfileName) {
-        description.push(this.cloudProfileName)
-      }
-      if (this.region) {
-        description.push(this.region)
-      }
-      if (this.extended && this.zones.length) {
-        description.push(this.zoneText)
-      }
+  cloudProfileName: {
+    type: String,
+    default: null,
+  },
+  region: {
+    type: String,
+    default: null,
+  },
+  title: {
+    type: Boolean,
+    default: false,
+  },
+  extended: {
+    type: Boolean,
+    default: false,
+  },
+})
 
-      return join(description, ' / ')
-    },
-    titleText () {
-      const titles = []
-      if (this.extended && this.cloudProviderKind) {
-        titles.push('Provider')
-      }
-      if (this.cloudProfileName) {
-        titles.push('Profile')
-      }
-      if (this.region) {
-        titles.push('Region')
-      }
-      if (this.extended && this.zones.length) {
-        titles.push(this.zoneTitle)
-      }
-      return join(titles, ' / ')
-    }
+const zoneText = computed(() => props.zones.join(', '))
+const zoneTitle = computed(() => props.zones.length > 1 ? 'Zones' : 'Zone')
+const description = computed(() => {
+  const description = []
+  if (props.extended && props.cloudProviderKind) {
+    description.push(props.cloudProviderKind)
   }
-}
+  if (props.cloudProfileName) {
+    description.push(props.cloudProfileName)
+  }
+  if (props.region) {
+    description.push(props.region)
+  }
+  if (props.extended && props.zones.length) {
+    description.push(zoneText.value)
+  }
+
+  return description.join(' / ')
+})
+const titleText = computed(() => {
+  const titles = []
+  if (props.extended && props.cloudProviderKind) {
+    titles.push('Provider')
+  }
+  if (props.cloudProfileName) {
+    titles.push('Profile')
+  }
+  if (props.region) {
+    titles.push('Region')
+  }
+  if (props.extended && props.zones.length) {
+    titles.push(zoneTitle.value)
+  }
+  return titles.join(' / ')
+})
+
 </script>
 
 <style lang="scss" scoped>
-  .tooltip {
-    opacity: 1 !important;
+  :deep(.tooltip) {
     padding: 0;
   }
 </style>
