@@ -3,28 +3,28 @@ SPDX-FileCopyrightText: 2021 SAP SE or an SAP affiliate company and Gardener con
 
 SPDX-License-Identifier: Apache-2.0
 -->
+<!-- eslint-disable vue/no-v-html -->
 
 <template>
-  <pre class="ansi-text" v-html="escapedAnsiHTML"></pre>
+  <pre
+    class="ansi-text"
+    v-html="escapedAnsiHTML"
+  />
 </template>
 
-<script>
+<script setup>
+import { computed } from 'vue'
 import ansiHTML from 'ansi-html'
 import escape from 'lodash/escape'
 
-export default {
-  props: {
-    text: {
-      type: String,
-      default: ''
-    }
+const props = defineProps({
+  text: {
+    type: String,
+    default: '',
   },
-  computed: {
-    escapedAnsiHTML () {
-      return ansiHTML(escape(this.text))
-    }
-  }
-}
+})
+
+const escapedAnsiHTML = computed(() => ansiHTML(escape(props.text)))
 </script>
 
 <style lang="scss" scoped>
