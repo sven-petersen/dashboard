@@ -11,56 +11,55 @@ SPDX-License-Identifier: Apache-2.0
     message="The page you are looking for is not available!"
     button-text="Get me out of here"
     @click="onClick"
-  ></g-error>
+  />
 </template>
 
-<script>
+<script setup>
+import { computed } from 'vue'
+import { useStore } from 'vuex'
+import { useRouter, useRoute } from 'vue-router'
 import GError from '@/components/GError.vue'
 import get from 'lodash/get'
 
-export default {
-  components: {
-    GError
-  },
-  computed: {
-    fallbackRoute () {
-      const defaultNamespace = this.$store.getters.defaultNamespace
-      const namespace = get(this.$route, 'params.namespace', defaultNamespace)
-      const name = get(this.$route, 'params.name')
-      if (namespace) {
-        if (name) {
-          return {
-            name: 'ShootItem',
-            params: {
-              namespace,
-              name
-            }
-          }
-        }
-        return {
-          name: 'ShootList',
-          params: {
-            namespace
-          }
-        }
-      }
+const store = useStore()
+const route = useRoute()
+const router = useRouter()
+
+const fallbackRoute = computed(() => {
+  const defaultNamespace = store.getters.defaultNamespace
+  const namespace = get(route, 'params.namespace', defaultNamespace)
+  const name = get(route, 'params.name')
+  if (namespace) {
+    if (name) {
       return {
-        name: 'Home'
+        name: 'ShootItem',
+        params: {
+          namespace,
+          name,
+        },
       }
     }
-  },
-  methods: {
-    async onClick ({ name } = {}) {
-      if (!name) {
-        try {
-          await this.$router.push(this.fallbackRoute)
-        } catch (err) {
-          /* Catch and ignore navigation aborted errors. Redirection happens in navigation guards (see https://router.vuejs.org/guide/essentials/navigation.html#router-push-location-oncomplete-onabort). */
-        }
-      } else {
-        this.$router.back()
-      }
+    return {
+      name: 'ShootList',
+      params: {
+        namespace,
+      },
     }
+  }
+  return {
+    name: 'Home',
+  }
+})
+
+const onClick = async ({ name } = {}) => {
+  if (!name) {
+    try {
+      await router.push(fallbackRoute)
+    } catch (err) {
+      /* Catch and ignore navigation aborted errors. Redirection happens in navigation guards (see https://router.vuejs.org/guide/essentials/navigation.html#router-push-location-oncomplete-onabort). */
+    }
+  } else {
+    router.back()
   }
 }
 </script>
