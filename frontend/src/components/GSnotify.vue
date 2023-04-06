@@ -12,17 +12,22 @@ SPDX-License-Identifier: Apache-2.0
 <template>
   <div class="text-center ma-2">
     <v-snackbar
-      v-model="active"
-      :color="color"
-      :timeout="timeout"
+      v-model="state.active"
+      :color="state.color"
+      :timeout="state.timeout"
       location="bottom right"
     >
-      <div v-if="title" class="text-subtitle-1 pb-1">{{ title }}</div>
-      <p>{{ message }}</p>
-      <template v-slot:actions>
+      <div
+        v-if="title"
+        class="text-subtitle-1 pb-1"
+      >
+        {{ state.title }}
+      </div>
+      <p>{{ state.message }}</p>
+      <template #actions>
         <v-btn
           variant="text"
-          @click="active = false"
+          @click="state.active = false"
         >
           <v-icon>mdi-close</v-icon>
         </v-btn>
@@ -31,43 +36,35 @@ SPDX-License-Identifier: Apache-2.0
   </div>
 </template>
 
-<script>
-import { mapGetters, mapActions } from 'vuex'
+<script setup>
+import { reactive, computed, watch } from 'vue'
+import { useStore } from 'vuex'
 
-export default {
-  components: [],
-  data() {
-    return {
-      active: false,
-      color: null,
-      timeout: null,
-      message: null
-    }
-  },
-  computed: {
-    ...mapGetters([
-      'alert'
-    ])
-  },
-  watch: {
-    alert (value) {
-      if (value) {
-        this.showToast(value)
-        this.setAlert(null)
-      }
-    }
-  },
-  methods: {
-    ...mapActions([
-      'setAlert'
-    ]),
-    showToast ({ message, type, title }) {
-      this.title = title
-      this.message = message
-      this.timeout = type === 'success' ? 3000 : 5000
-      this.color = ['success', 'warning', 'error'].includes(type) ? type : 'info'
-      this.active = true
-    }
-  }
+const state = reactive({
+  active: false,
+  color: null,
+  timeout: null,
+  message: null,
+  title: null,
+})
+
+const store = useStore()
+
+const alert = computed(() => store.getters.alert)
+const unsetAlert = () => store.dispatch('setAlert', null)
+
+const showToast = ({ message, type, title }) => {
+  state.title = title
+  state.message = message
+  state.timeout = type === 'success' ? 3000 : 5000
+  state.color = ['success', 'warning', 'error'].includes(type) ? type : 'info'
+  state.active = true
 }
+
+watch(alert, (value) => {
+  if (value) {
+    showToast(value)
+    unsetAlert()
+  }
+})
 </script>
