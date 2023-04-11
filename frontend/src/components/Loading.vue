@@ -6,19 +6,18 @@ SPDX-License-Identifier: Apache-2.0
 
 <template>
   <v-overlay :model-value="loading">
-    <v-progress-circular indeterminate size="64"></v-progress-circular>
+    <v-progress-circular
+      indeterminate
+      :size="64"
+    />
   </v-overlay>
 </template>
 
-<script>
-import { mapState } from 'vuex'
+<script setup>
+import { computed } from 'vue'
+import { useStore } from 'vuex'
 
-export default {
-  name: 'loading',
-  computed: {
-    ...mapState([
-      'loading'
-    ])
-  }
-}
+// TODO: migrate to Pinia (useAppStore from @/store/app)
+const store = useStore()
+const loading = computed(() => store.state.loading)
 </script>
