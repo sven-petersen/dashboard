@@ -5,56 +5,81 @@ SPDX-License-Identifier: Apache-2.0
 -->
 
 <template>
-  <v-tooltip location="top" v-if="canRetry">
-    <template v-slot:activator="{ on }">
-      <v-btn v-on="on" icon variant="text" class="text-primary retryButton" @click="onRetryOperation">
+  <v-tooltip
+    v-if="canRetry"
+    location="top"
+  >
+    <template #activator="{ props: tooltipProps }">
+      <v-btn
+        icon
+        variant="text"
+        class="text-primary"
+        v-bind="tooltipProps"
+        @click="onRetryOperation"
+      >
         <v-icon>mdi-reload</v-icon>
       </v-btn>
+      <div>
+        shootGenerationValue: {{ shootGenerationValue }}
+        shootName: {{ shootName }}
+      </div>
     </template>
     Retry Operation
   </v-tooltip>
 </template>
 
-<script>
-import get from 'lodash/get'
+<script setup>
+import { computed, toRef } from 'vue'
+import { useStore } from 'vuex'
 import { addShootAnnotation } from '@/utils/api'
-import { shootItem } from '@/mixins/shootItem'
+import useShootItem from '@/composables/useShootItem'
 
-export default {
-  data () {
-    return {
-      retryingOperation: false
-    }
+const props = defineProps({
+  retryingOperation: {
+    type: Boolean,
+    default: false,
   },
-  mixins: [shootItem],
-  computed: {
-    canRetry () {
-      const reconcileScheduled = this.shootGenerationValue !== this.shootObservedGeneration && !!this.shootObservedGeneration
-
-      return get(this.shootLastOperation, 'state') === 'Failed' &&
-          !this.isShootReconciliationDeactivated &&
-          !this.retryingOperation &&
-          !reconcileScheduled
-    }
+  shootItem: {
+    type: Object,
+    required: true,
   },
-  methods: {
-    async onRetryOperation () {
-      this.retryingOperation = true
+})
 
-      const namespace = this.shootNamespace
-      const name = this.shootName
+const store = useStore()
 
-      const retryAnnotation = { 'gardener.cloud/operation': 'retry' }
-      try {
-        await addShootAnnotation({ namespace, name, data: retryAnnotation })
-      } catch (err) {
-        // eslint-disable-next-line no-console
-        console.log('failed to retry operation', err)
+const {
+  shootGenerationValue,
+  shootObservedGeneration,
+  shootLastOperation,
+  isShootReconciliationDeactivated,
+  shootNamespace,
+  shootName,
+} = useShootItem(toRef(props, 'shootItem'))
 
-        this.$store.dispatch('setError', err)
-      }
-      this.retryingOperation = false
-    }
+const canRetry = computed(() => {
+  const reconcileScheduled = shootGenerationValue.value !== shootObservedGeneration.value && !!shootObservedGeneration.value
+  return shootLastOperation.value?.state === 'Failed' &&
+    !isShootReconciliationDeactivated.value &&
+    !props.retryingOperation &&
+    !reconcileScheduled
+})
+
+const onRetryOperation = async () => {
+  props.retryingOperation = true
+
+  const retryAnnotation = { 'gardener.cloud/operation': 'retry' }
+  try {
+    await addShootAnnotation({
+      namespace: shootNamespace.value,
+      name: shootName.value,
+      data: retryAnnotation,
+    })
+  } catch (err) {
+    // eslint-disable-next-line no-console
+    console.log('failed to retry operation', err)
+
+    store.dispatch('setError', err)
   }
+  props.retryingOperation = false
 }
 </script>
