@@ -4,8 +4,12 @@
  *  SPDX-License-Identifier: Apache-2.0
  */
 
-@forward 'vuetify/lib/styles/main.sass';
-
+// TODO: should just be @forward 'vuetify'. See https://github.com/vuetifyjs/vuetify/issues/16593
+//  so should be fixed with vite 4.2 (currently using vite 4.1)
+@forward 'vuetify/lib/styles/main.sass' with (
+  $color-pack: true,
+);
+@forward '@/sass/variables.scss';
 
 /** Gardener Styles */
 [data-app] {

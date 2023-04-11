@@ -5,25 +5,37 @@ SPDX-License-Identifier: Apache-2.0
 -->
 
 <template>
-  <div class="code-block" :data-lang="lang">
-    <div class="code-block-wrapper" :style="{ 'max-height': height }">
-      <pre><code :class="lang" ref="block"></code></pre>
-      <span class="copied" :class="{ 'active': showMessage }">Copied!</span>
+  <div
+    class="code-block"
+    :data-lang="lang"
+  >
+    <div
+      class="code-block-wrapper"
+      :style="{ 'max-height': height }"
+    >
+      <!-- Do not add any space between <pre> and <code> tags as it will be visible in the rendered code block -->
+      <pre><code
+        ref="block"
+        :class="lang"
+      /></pre>
+      <span
+        class="copied"
+        :class="{ 'active': showMessage }"
+      >Copied!</span>
     </div>
     <copy-btn
       v-if="showCopyButton"
       class="copy-button"
       :clipboard-text="clipboardText"
-      @copy="onCopy"
       :user-feedback="false"
-    ></copy-btn>
+      @copy="onCopy"
+    />
   </div>
 </template>
 
-<script>
+<script setup>
+import { ref, computed, onMounted, watch } from 'vue'
 import CopyBtn from '@/components/CopyBtn.vue'
-import trim from 'lodash/trim'
-import split from 'lodash/split'
 import replace from 'lodash/replace'
 import hljs from 'highlight.js/lib/core'
 
@@ -41,86 +53,74 @@ hljs.registerLanguage('json', json)
 hljs.registerLanguage('javascript', javascript)
 hljs.registerLanguage('yaml', yaml)
 
-export default {
-  components: {
-    CopyBtn
+const props = defineProps({
+  lang: {
+    type: String,
+    default: '',
   },
-  props: {
-    lang: String,
-    height: {
-      type: [Number, String],
-      default: '450px'
-    },
-    content: {
-      type: String,
-      default: ''
-    },
-    clipboard: {
-      type: String,
-      default: ''
-    },
-    showCopyButton: {
-      type: Boolean,
-      default: true
-    }
+  height: {
+    type: [Number, String],
+    default: '450px',
+  },
+  content: {
+    type: String,
+    default: '',
+  },
+  clipboard: {
+    type: String,
+    default: '',
+  },
+  showCopyButton: {
+    type: Boolean,
+    default: true,
+  },
+})
 
-  },
-  data: () => ({
-    showMessage: false
-  }),
-  computed: {
-    clipboardText () {
-      return this.clipboard ? this.clipboard : this.content
-    }
-  },
-  methods: {
-    prettyPrint (textContent) {
-      const block = this.$refs.block
-      if (textContent) {
-        block.textContent = textContent
-      }
-      let lines = split(block.textContent, '\n')
-      let matches
-      if (lines[0] === '') {
-        lines.shift()
-      }
-      const indentation = (matches = (/^[\s\t]+/).exec(lines[0])) !== null ? matches[0] : null
-      if (indentation) {
-        lines = lines.map(line => {
-          line = replace(line, indentation, '')
-          line = replace(line, /\t/g, '  ')
-          return line
-        })
-        block.textContent = trim(lines.join('\n'))
-      }
-      hljs.highlightElement(block)
-      this.$emit('highlight-block')
-    },
-    onCopy () {
-      this.showMessage = true
-      window.setTimeout(() => {
-        this.showMessage = false
-      }, 2000)
-    }
-  },
-  mounted () {
-    this.prettyPrint(this.content)
-  },
-  watch: {
-    content (textContent) {
-      this.prettyPrint(textContent)
-    }
+const emits = defineEmits(['highlight-block'])
+
+const showMessage = ref(false)
+const block = ref()
+
+const clipboardText = computed(() => props.clipboard ?? props.content)
+
+const prettyPrint = (textContent) => {
+  if (textContent) {
+    block.value.textContent = textContent
   }
+  let lines = block.value.textContent.split('\n')
+  let matches
+  if (lines[0] === '') {
+    lines.shift()
+  }
+  const indentation = (matches = (/^[\s\t]+/).exec(lines[0])) !== null ? matches[0] : null
+  if (indentation) {
+    lines = lines.map(line => {
+      line = replace(line, indentation, '')
+      line = replace(line, /\t/g, '  ')
+      return line
+    })
+    block.value.textContent = lines.join('\n').trim()
+  }
+  hljs.highlightElement(block.value)
+  emits('highlight-block')
 }
+
+const onCopy = () => {
+  showMessage.value = true
+  window.setTimeout(() => {
+    showMessage.value = false
+  }, 2000)
+}
+
+watch(() => props.content, (textContent) => prettyPrint(textContent))
+
+onMounted(() => {
+  prettyPrint(props.content)
+})
 </script>
 
 <style lang="scss" scoped>
-  /* @use 'vuetify/src/styles/styles.sass' as *; */
-  /* @use 'vuetify/lib/styles/main.sass' as * with (
-    $color-pack: true,
-    $utilities: false,
-  ); */
-  @use '@/sass/settings.scss' as *;
+  @use '@/sass/main.scss' as *;
 
   $grey-lighten-4: map-get($grey, 'lighten-4');
 
