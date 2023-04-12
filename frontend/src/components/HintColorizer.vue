@@ -5,55 +5,45 @@ SPDX-License-Identifier: Apache-2.0
 -->
 
 <template>
-  <div>
-    <slot></slot>
+  <div ref="root">
+    <slot ref="children" />
   </div>
 </template>
 
-<script>
-import get from 'lodash/get'
+<script setup>
+import { computed, watch, onMounted, onUpdated, ref, inject } from 'vue'
 
-export default {
-  name: 'hint-colorizer',
-  props: {
-    hintColor: {
-      type: String
-    }
+const props = defineProps({
+  hintColor: {
+    type: String,
+    default: '',
   },
-  computed: {
-    isSelectErrorColor () {
-      const color = get(this, '$children[0].$children[0].color')
-      return color === 'error'
-    }
-  },
-  watch: {
-    hintColor (hintColor) {
-      this.applyHintColor(hintColor)
-    }
-  },
-  methods: {
-    applyHintColor (hintColor) {
-      if (!this.$el) {
-        return
-      }
-      const hintElement = this.$el.querySelector('.v-messages__message')
-      if (!hintElement) {
-        return
-      }
+})
 
-      const colorCode = this.$vuetify.theme.currentTheme[hintColor]
-      if (!this.isSelectErrorColor && hintColor !== 'default') {
-        hintElement.style = `color: ${colorCode}`
-      } else {
-        hintElement.style = ''
-      }
-    }
-  },
-  mounted () {
-    this.applyHintColor(this.hintColor)
-  },
-  updated () {
-    this.applyHintColor(this.hintColor)
+const vuetify = inject('vuetify')
+const root = ref()
+const children = ref()
+
+const applyHintColor = () => {
+  if (!root.value) {
+    return
+  }
+  const hintElement = root.value?.querySelector('.v-messages__message')
+  if (!hintElement) {
+    return
+  }
+
+  const colorCode = vuetify.theme.current.value.colors[props.hintColor]
+  if (!isSelectErrorColor.value && props.hintColor !== 'default') {
+    hintElement.style = `color: ${colorCode}`
+  } else {
+    hintElement.style = ''
   }
 }
+
+const isSelectErrorColor = computed(() => !!root.value?.querySelector('div.v-input.v-input--error'))
+watch(() => props.hintColor, applyHintColor)
+
+onMounted(applyHintColor)
+onUpdated(applyHintColor)
 </script>
