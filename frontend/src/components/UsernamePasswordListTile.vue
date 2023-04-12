@@ -7,60 +7,75 @@ SPDX-License-Identifier: Apache-2.0
 <template>
   <div v-if="showCredentials || showNotAvailablePlaceholder">
     <template v-if="showCredentials">
-      <v-list-item v-if="username">
-        <v-list-item-icon>
-          <v-icon color="primary">{{icon}}</v-icon>
-        </v-list-item-icon>
-        <v-list-item-content>
-          <v-list-item-subtitle>{{usernameTitle}}</v-list-item-subtitle>
-          <v-list-item-title class="pt-1">{{username}}</v-list-item-title>
-        </v-list-item-content>
-        <v-list-item-action>
-          <copy-btn :clipboard-text="username"></copy-btn>
-        </v-list-item-action>
+      <v-list-item
+        v-if="username"
+        :title="username"
+        :subtitle="usernameTitle"
+      >
+        <template #prepend>
+          <v-icon color="primary">
+            {{ icon }}
+          </v-icon>
+        </template>
+        <template #append>
+          <copy-btn :clipboard-text="username" />
+        </template>
       </v-list-item>
-      <v-list-item v-if="email">
-        <v-list-item-icon>
-          <v-icon v-if="!username" color="primary">{{icon}}</v-icon>
-        </v-list-item-icon>
-        <v-list-item-content class="pt-0">
-          <v-list-item-subtitle>{{emailTitle}}</v-list-item-subtitle>
-          <v-list-item-title class="pt-1">{{email}}</v-list-item-title>
-        </v-list-item-content>
-        <v-list-item-action>
-          <copy-btn :clipboard-text="email"></copy-btn>
-        </v-list-item-action>
+
+      <v-list-item
+        v-if="email"
+        :title="email"
+        :subtitle="emailTitle"
+      >
+        <template #prepend>
+          <v-icon color="primary">
+            {{ username ? 'blank' : icon }}
+          </v-icon>
+        </template>
+        <template #append>
+          <copy-btn :clipboard-text="email" />
+        </template>
       </v-list-item>
-      <v-list-item>
-        <v-list-item-icon/>
-        <v-list-item-content class="pt-0">
-          <v-list-item-subtitle>{{passwordTitle}}</v-list-item-subtitle>
-          <v-list-item-title class="pt-1">{{passwordText}}</v-list-item-title>
-        </v-list-item-content>
-        <v-list-item-action class="mx-0">
-          <copy-btn :clipboard-text="password"></copy-btn>
-        </v-list-item-action>
-        <v-list-item-action class="mx-0">
+
+      <v-list-item
+        :title="passwordText"
+        :subtitle="passwordTitle"
+      >
+        <template #prepend>
+          <v-icon>blank</v-icon>
+        </template>
+        <template #append>
+          <copy-btn :clipboard-text="password" />
           <v-tooltip location="top">
-            <template v-slot:activator="{ on }">
-              <v-btn v-on="on" icon @click.stop="showPassword = !showPassword" color="action-button">
-                <v-icon>{{visibilityIcon}}</v-icon>
+            <template #activator="slotProps">
+              <v-btn
+                icon
+                variant="text"
+                color="action-button"
+                v-bind="slotProps.props"
+                @click.stop="showPassword = !showPassword"
+              >
+                <v-icon>{{ visibilityIcon }}</v-icon>
               </v-btn>
             </template>
-            <span>{{passwordVisibilityTitle}}</span>
+            <span>{{ passwordVisibilityTitle }}</span>
           </v-tooltip>
-        </v-list-item-action>
+        </template>
       </v-list-item>
     </template>
     <v-list-item v-else-if="showNotAvailablePlaceholder">
       <v-list-item-icon>
-        <v-icon color="primary">{{icon}}</v-icon>
+        <v-icon color="primary">
+          {{ icon }}
+        </v-icon>
       </v-list-item-icon>
       <slot name="notAvailablePlaceholder">
         <v-list-item-content>
           <v-list-item-subtitle>Credentials</v-list-item-subtitle>
           <v-list-item-title class="pt-1">
-            <v-icon color="primary">mdi-alert-circle-outline</v-icon>
+            <v-icon color="primary">
+              mdi-alert-circle-outline
+            </v-icon>
             Currently not available
           </v-list-item-title>
         </v-list-item-content>
@@ -69,72 +84,59 @@ SPDX-License-Identifier: Apache-2.0
   </div>
 </template>
 
-<script>
+<script setup>
+import { computed, ref, watch } from 'vue'
 import CopyBtn from '@/components/CopyBtn.vue'
 
-export default {
-  components: {
-    CopyBtn
+const props = defineProps({
+  icon: {
+    type: String,
+    default: 'mdi-account-outline',
   },
-  props: {
-    icon: {
-      type: String,
-      default: 'mdi-account-outline'
-    },
-    usernameTitle: {
-      type: String,
-      default: 'User'
-    },
-    passwordTitle: {
-      type: String,
-      default: 'Password'
-    },
-    emailTitle: {
-      type: String,
-      default: 'Email'
-    },
-    username: {
-      type: String
-    },
-    email: {
-      type: String
-    },
-    password: {
-      type: String
-    },
-    showNotAvailablePlaceholder: {
-      type: Boolean,
-      default: true
-    }
+  usernameTitle: {
+    type: String,
+    default: 'User',
   },
-  data () {
-    return {
-      showPassword: false
-    }
+  passwordTitle: {
+    type: String,
+    default: 'Password',
   },
-  methods: {
-    reset () {
-      this.showPassword = false
-    }
+  emailTitle: {
+    type: String,
+    default: 'Email',
   },
-  computed: {
-    passwordText () {
-      return this.showPassword ? this.password : '****************'
-    },
-    passwordVisibilityTitle () {
-      return this.showPassword ? 'Hide password' : 'Show password'
-    },
-    visibilityIcon () {
-      return this.showPassword ? 'mdi-eye-off' : 'mdi-eye'
-    },
-    showCredentials () {
-      return (!!this.username || !!this.email) && !!this.password
-    }
+  username: {
+    type: String,
+    required: true,
   },
-  watch: {
-    password (value) {
-      this.reset()
-    }
-  }
-}
+  email: {
+    type: String,
+    required: true,
+  },
+  password: {
+    type: String,
+    required: true,
+  },
+  showNotAvailablePlaceholder: {
+    type: Boolean,
+    default: true,
+  },
+})
+
+const showPassword = ref(false)
+
+const passwordText = computed(() => showPassword.value ? props.password : '****************')
+const passwordVisibilityTitle = computed(() => showPassword.value ? 'Hide password' : 'Show password')
+const visibilityIcon = computed(() => showPassword.value ? 'mdi-eye-off' : 'mdi-eye')
+const showCredentials = computed(() => {
+  return (!!props.username || !!props.email) && !!props.password
+})
+
+const reset = () => { showPassword.value = false }
+
+watch(
+  () => props.password,
+  () => reset(),
+)
+
 </script>
