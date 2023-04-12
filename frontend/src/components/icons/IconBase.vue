@@ -6,56 +6,57 @@ SPDX-License-Identifier: Apache-2.0
 
 <template>
   <!-- do not use kebab case for viewBox SVG attribute -->
-  <svg xmlns="http://www.w3.org/2000/svg"
-    :width="width"
-    :height="height"
-    :viewBox="viewBox"
-    :aria-labelledby="iconName"
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    :width="props.width"
+    :height="props.height"
+    :viewBox="props.viewBox"
+    :aria-labelledby="props.iconName"
   >
     <title
-      :id="iconName"
+      :id="props.iconName"
       lang="en"
-    >{{ iconName }} icon</title>
+    >{{ props.iconName }} icon</title>
     <g :fill="iconColorCode">
       <slot />
     </g>
   </svg>
 </template>
 
-<script>
+<script setup>
+import { computed, inject } from 'vue'
 import { isHtmlColorCode } from '@/utils'
 
-export default {
-  props: {
-    iconName: {
-      type: String,
-      default: 'box'
-    },
-    width: {
-      type: [Number, String],
-      default: 24
-    },
-    height: {
-      type: [Number, String],
-      default: 24
-    },
-    viewBox: {
-      type: [Array, String],
-      default: '0 0 25 25'
-    },
-    iconColor: {
-      type: String,
-      default: '#FFF'
-    }
+const vuetify = inject('vuetify')
+
+const props = defineProps({
+  iconName: {
+    type: String,
+    default: 'box',
   },
-  computed: {
-    iconColorCode () {
-      const iconColor = this.iconColor
-      if (isHtmlColorCode(iconColor)) {
-        return iconColor
-      }
-      return this.$vuetify.theme.current.colors[iconColor]
-    }
+  width: {
+    type: [Number, String],
+    default: 24,
+  },
+  height: {
+    type: [Number, String],
+    default: 24,
+  },
+  viewBox: {
+    type: [Array, String],
+    default: '0 0 25 25',
+  },
+  iconColor: {
+    type: String,
+    default: '#FFF',
+  },
+})
+
+const iconColorCode = computed(() => {
+  if (isHtmlColorCode(props.iconColor)) {
+    return props.iconColor
   }
-}
+  return vuetify.theme.current.value.colors[props.iconColor]
+})
+
 </script>
