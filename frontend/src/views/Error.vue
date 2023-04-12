@@ -15,29 +15,22 @@ SPDX-License-Identifier: Apache-2.0
   </v-app>
 </template>
 
-<script>
+<script setup>
 import GError from '@/components/GError.vue'
-import get from 'lodash/get'
+import { computed } from 'vue'
+import { useStore } from 'vuex'
 
-export default {
-  components: {
-    GError
-  },
-  computed: {
-    message () {
-      return get(this.$store.state, 'alert.message')
-    }
-  },
-  methods: {
-    async goHome () {
-      try {
-        await this.$router.push({
-          name: 'Home'
-        })
-      } catch (err) {
-        /* Catch and ignore navigation aborted errors. Redirection happens in navigation guards (see https://router.vuejs.org/guide/essentials/navigation.html#router-push-location-oncomplete-onabort). */
-      }
-    }
+// TODO: make sure to check this after migrating to Pinia
+const store = useStore()
+
+const message = computed(() => store.state.alert?.message)
+
+const goHome = async () => {
+  try {
+    await this.$router.push({ name: 'Home' })
+  } catch (err) {
+    // Catch and ignore navigation aborted errors. Redirection happens in navigation guards
+    // (see https://router.vuejs.org/guide/essentials/navigation.html#router-push-location-oncomplete-onabort).
   }
 }
 </script>
