@@ -7,27 +7,24 @@ SPDX-License-Identifier: Apache-2.0
 <template>
   <div class="d-flex align-center justify-start flex-nowrap fill-height auto-hide-wrapper">
     <div class="auto-hide-slot">
-      <slot v-if="left"></slot>
+      <slot v-if="props.left" />
     </div>
-    <slot name="activator"></slot>
+    <slot name="activator" />
     <div class="auto-hide-slot">
-      <slot v-if="right"></slot>
+      <slot v-if="props.right" />
     </div>
   </div>
 </template>
 
-<script>
-
-export default {
-  props: {
-    left: {
-      type: Boolean
-    },
-    right: {
-      type: Boolean
-    }
-  }
-}
+<script setup>
+const props = defineProps({
+  left: {
+    type: Boolean,
+  },
+  right: {
+    type: Boolean,
+  },
+})
 </script>
 
 <style lang="scss" scoped>
