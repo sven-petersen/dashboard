@@ -5,7 +5,7 @@ SPDX-License-Identifier: Apache-2.0
 -->
 
 <template>
-  <v-app>
+  <v-app ref="root">
     <loading />
     <main-navigation />
     <main-toolbar />
@@ -14,7 +14,9 @@ SPDX-License-Identifier: Apache-2.0
   </v-app>
 </template>
 
-<script>
+<script setup>
+import { onMounted, computed, ref } from 'vue'
+import { onBeforeRouteUpdate } from 'vue-router'
 import MainNavigation from '@/components/MainNavigation.vue'
 import MainToolbar from '@/components/MainToolbar.vue'
 import MainContent from '@/components/MainContent.vue'
@@ -32,28 +34,19 @@ function disableVerticalScrolling (element) {
   setElementStyle(element, 'overflowY', 'hidden')
 }
 
-export default {
-  name: 'Default',
-  components: {
-    MainNavigation,
-    MainToolbar,
-    MainContent,
-    Loading,
-    GSnotify,
-  },
-  beforeRouteUpdate (to, from, next) {
-    this.$refs.content.setScrollTop(0)
-    next()
-  },
-  mounted () {
-    disableVerticalScrolling(this.$el)
-    const element = this.getWrapElement()
-    disableVerticalScrolling(element)
-  },
-  methods: {
-    getWrapElement () {
-      return this.$el.querySelector(':scope > div[class$="wrap"]')
-    },
-  },
-}
+const root = ref()
+const content = ref()
+
+const rootEl = computed(() => root.value?.$el)
+const getWrapElement = computed(() => rootEl.value.querySelector(':scope > div[class$="wrap"]'))
+
+onMounted(() => {
+  disableVerticalScrolling(rootEl.value)
+  disableVerticalScrolling(getWrapElement.value)
+})
+
+onBeforeRouteUpdate(() => {
+  content.value.setScrollTop(0)
+})
+
 </script>
