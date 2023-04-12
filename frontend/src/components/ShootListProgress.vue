@@ -6,31 +6,27 @@ SPDX-License-Identifier: Apache-2.0
 
 <template>
   <v-progress-linear
-    absolute
     :indeterminate="indeterminate"
     :color="color"
     :model-value="value"
     :striped="striped"
-  >
-  </v-progress-linear>
+  />
 </template>
 
-<script>
-import { shootSubscription } from '@/mixins/shootSubscription'
+<script setup>
+import { computed } from 'vue'
+import useShootSubscription from '@/composables/useShootSubscription'
 
-export default {
-  name: 'shoot-list-progess',
-  mixins: [shootSubscription],
-  computed: {
-    indeterminate () {
-      return this.kind.startsWith('progress')
-    },
-    striped () {
-      return this.kind === 'alert-connect'
-    },
-    value () {
-      return this.kind === 'alert-connect' ? 100 : 0
-    }
-  }
-}
+defineProps({
+  color: {
+    type: String,
+    default: 'primary',
+  },
+})
+
+const { kind } = useShootSubscription()
+
+const indeterminate = computed(() => kind.value.startsWith('progress'))
+const striped = computed(() => kind.value === 'alert-connect')
+const value = computed(() => kind.value === 'alert-connect' ? 100 : 0)
 </script>
