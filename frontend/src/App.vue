@@ -11,16 +11,16 @@ SPDX-License-Identifier: Apache-2.0
 </template>
 
 <script setup>
-  import { onMounted, inject } from 'vue'
-  const bus = inject('bus')
+import { onMounted, inject } from 'vue'
+const bus = inject('bus')
 
-  onMounted(() => {
-    window.addEventListener('keyup', ({ key }) => {
-      if (key === 'Escape' || key === 'Esc') {
-        bus.emit('esc-pressed')
-      }
-    })
+onMounted(() => {
+  window.addEventListener('keyup', ({ key }) => {
+    if (key === 'Escape' || key === 'Esc') {
+      bus.emit('esc-pressed')
+    }
   })
+})
 </script>
 
 <style scoped>
