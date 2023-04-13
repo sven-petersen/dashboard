@@ -6,177 +6,196 @@ SPDX-License-Identifier: Apache-2.0
 
 <template>
   <div v-if="canPatchShoots">
-    <v-tooltip location="top" max-width="600px" :disabled="disableToolTip">
-      <template v-slot:activator="{ on }">
-        <div v-on="on">
+    <v-tooltip
+      location="top"
+      max-width="600px"
+      :disabled="disableToolTip"
+    >
+      <template #activator="slotProps">
+        <div v-bind="slotProps.props">
           <v-btn
             :icon="isIconButton"
-            :variant="isTextButton && 'text'"
-            :size="smallIcon && 'small'"
+            :variant="buttonVariant"
+            :size="smallIcon ? 'small' : undefined"
             :color="iconColor"
             :loading="loading"
             :disabled="isShootMarkedForDeletion || isShootActionsDisabledForPurpose || disabled"
-            @click="showDialog"
             :width="buttonWidth"
             class="text-none font-weight-regular pa-0"
+            @click="showDialog"
           >
             <div>
-              <v-icon :size="!smallIcon && 'medium'">{{icon}}</v-icon>
+              <v-icon>
+                {{ icon }}
+              </v-icon>
             </div>
-            <div v-if="isTextButton" class="ml-3 d-flex flex-grow-1">
-              {{buttonText}}
+            <div
+              v-if="isTextButton"
+              class="ml-3 d-flex flex-grow-1"
+            >
+              {{ buttonText }}
             </div>
           </v-btn>
         </div>
       </template>
-      {{actionToolTip}}
+      {{ actionToolTip }}
     </v-tooltip>
-    <g-dialog
-      :confirm-button-text="confirmButtonText"
-      :confirm-disabled="!valid"
+    <GDialog
+      ref="gDialog"
       v-model:error-message="errorMessage"
       v-model:detailed-error-message="detailedErrorMessage"
+      :confirm-button-text="confirmButtonText"
+      :confirm-disabled="!valid"
       :width="width"
       :max-height="maxHeight"
       :confirm-value="confirmValue"
       :disable-confirm-input-focus="disableConfirmInputFocus"
-      ref="gDialog"
     >
-      <template v-slot:caption>{{caption}}</template>
-      <template v-slot:affectedObjectName>{{shootName}}</template>
-      <template v-slot:top><slot name="top"></slot></template>
-      <template v-slot:card><slot name="card"></slot></template>
-      <template v-slot:message><slot name="actionComponent"></slot></template>
-      <template v-slot:errorMessage><slot name="errorMessage"></slot></template>
-    </g-dialog>
+      <template #caption>
+        {{ caption }}
+      </template>
+      <template #affectedObjectName>
+        {{ shootName }}
+      </template>
+      <template #top>
+        <slot name="top" />
+      </template>
+      <template #card>
+        <slot name="card" />
+      </template>
+      <template #message>
+        <slot name="actionComponent" />
+      </template>
+      <template #errorMessage>
+        <slot name="errorMessage" />
+      </template>
+    </GDialog>
   </div>
-  <div v-else style="width: 36px"></div>
+  <div
+    v-else
+    style="width: 36px"
+  />
 </template>
 
-<script>
+<script setup>
+import { ref, toRef, computed, nextTick } from 'vue'
+import { useStore } from 'vuex'
+import useShootItem from '@/composables/useShootItem'
 import GDialog from '@/components/dialogs/GDialog.vue'
-import { shootItem } from '@/mixins/shootItem'
-import { mapGetters } from 'vuex'
 
-export default {
-  name: 'action-button-dialog',
-  components: {
-    GDialog
-  },
-  data () {
-    return {
-      errorMessage: undefined,
-      detailedErrorMessage: undefined
-    }
-  },
-  props: {
-    icon: {
-      type: String,
-      default: 'mdi-cog-outline'
-    },
-    caption: {
-      type: String
-    },
-    tooltip: {
-      type: String
-    },
-    confirmButtonText: {
-      type: String,
-      default: 'Save'
-    },
-    confirmRequired: {
-      type: Boolean,
-      default: false
-    },
-    valid: {
-      type: Boolean,
-      default: true
-    },
-    width: {
-      type: String
-    },
-    maxHeight: {
-      type: String,
-      default: '50vh'
-    },
-    loading: {
-      type: Boolean
-    },
-    iconColor: {
-      type: String,
-      default: 'action-button'
-    },
-    smallIcon: {
-      type: Boolean,
-      default: false
-    },
-    disabled: {
-      type: Boolean,
-      default: false
-    },
-    disableConfirmInputFocus: {
-      type: Boolean
-    },
-    buttonText: {
-      type: String
-    }
-  },
-  mixins: [shootItem],
-  computed: {
-    ...mapGetters([
-      'canPatchShoots'
-    ]),
-    confirmValue () {
-      return this.confirmRequired ? this.shootName : undefined
-    },
-    isIconButton () {
-      return !this.buttonText
-    },
-    isTextButton () {
-      return !!this.buttonText
-    },
-    buttonWidth () {
-      return this.buttonText ? '100%' : undefined
-    },
-    actionToolTip () {
-      if (this.tooltip) {
-        return this.tooltip
-      }
-      return this.shootActionToolTip(this.caption)
-    },
-    disableToolTip () {
-      if (this.buttonText === this.actionToolTip) {
-        return true
-      }
-      return false
-    }
-  },
-  methods: {
-    showDialog (resetError = true) {
-      if (resetError) {
-        this.errorMessage = undefined
-        this.detailedErrorMessage = undefined
-      }
-      this.$refs.gDialog.showDialog()
-      this.$nextTick(() => {
-        // need to defer event until dialog has been rendered
-        this.$emit('dialog-opened')
-      })
-    },
-    async waitForDialogClosed () {
-      return this.$refs.gDialog.confirmWithDialog()
-    },
-    setError ({ errorMessage, detailedErrorMessage }) {
-      this.errorMessage = errorMessage
-      this.detailedErrorMessage = detailedErrorMessage
+const store = useStore()
 
-      this.showDialog(false)
-    },
-    hideDialog () {
-      if (this.$refs.gDialog) {
-        this.$refs.gDialog.hideDialog()
-      }
-    }
+const props = defineProps({
+  icon: {
+    type: String,
+    default: 'mdi-cog-outline',
+  },
+  caption: {
+    type: String,
+    default: null,
+  },
+  tooltip: {
+    type: String,
+    default: null,
+  },
+  confirmButtonText: {
+    type: String,
+    default: 'Save',
+  },
+  confirmRequired: {
+    type: Boolean,
+    default: false,
+  },
+  valid: {
+    type: Boolean,
+    default: true,
+  },
+  width: {
+    type: String,
+    default: null,
+  },
+  maxHeight: {
+    type: String,
+    default: '50vh',
+  },
+  loading: {
+    type: Boolean,
+  },
+  iconColor: {
+    type: String,
+    default: 'action-button',
+  },
+  smallIcon: {
+    type: Boolean,
+    default: false,
+  },
+  disabled: {
+    type: Boolean,
+    default: false,
+  },
+  disableConfirmInputFocus: {
+    type: Boolean,
+  },
+  buttonText: {
+    type: String,
+    default: null,
+  },
+  buttonVariant: {
+    type: String,
+    default: 'text',
+  },
+  shootItem: {
+    type: Object,
+    required: true,
+  },
+})
+
+const emits = defineEmits(['dialog-opened'])
+
+const errorMessage = ref()
+const detailedErrorMessage = ref()
+const gDialog = ref()
+const {
+  shootName,
+  shootActionToolTip,
+} = useShootItem(toRef(props, 'shootItem'))
+
+const confirmValue = computed(() => props.confirmRequired ? shootName.value : undefined)
+const isIconButton = computed(() => !props.buttonText)
+const isTextButton = computed(() => !!props.buttonText)
+const buttonWidth = computed(() => props.buttonText ? '100%' : undefined)
+const actionToolTip = computed(() => props.tooltip || shootActionToolTip(props.caption))
+const disableToolTip = computed(() => props.buttonText === actionToolTip.value)
+const canPatchShoots = computed(() => store.getters.canPatchShoots)
+
+const showDialog = (resetError = true) => {
+  if (resetError) {
+    errorMessage.value = undefined
+    detailedErrorMessage.value = undefined
   }
+  gDialog.value.showDialog()
+  nextTick(() => {
+    // need to defer event until dialog has been rendered
+    emits('dialog-opened')
+  })
 }
+const waitForDialogClosed = async () => {
+  return gDialog.value.confirmWithDialog()
+}
+const hideDialog = () => {
+  gDialog.value?.hideDialog()
+}
+const setError = (err) => {
+  errorMessage.value = err.errorMessage
+  detailedErrorMessage.value = err.detailedErrorMessage
+
+  showDialog(false)
+}
+
+defineExpose({
+  waitForDialogClosed,
+  showDialog,
+  hideDialog,
+  setError,
+})
 </script>
