@@ -5,50 +5,85 @@ SPDX-License-Identifier: Apache-2.0
  -->
 
 <template>
-  <v-dialog v-model="visible" scrollable persistent :width="width" max-width="90vw">
+  <v-dialog
+    v-model="visible"
+    scrollable
+    persistent
+    :width="width"
+    max-width="90vw"
+  >
     <v-card>
-      <v-toolbar flat class="toolbar-background toolbar-title--text">
+      <v-toolbar
+        flat
+        color="primary"
+        class="toolbar-background toolbar-title--text"
+      >
         <v-toolbar-title class="dialog-title align-center justify-start">
           <slot name="caption">
             Confirm Dialog
           </slot>
           <template v-if="$slots.affectedObjectName">
             &nbsp;
-            <span class="font-family-monospace font-weight-bold"><slot name="affectedObjectName"></slot></span>
+            <span class="font-family-monospace font-weight-bold"><slot name="affectedObjectName" /></span>
           </template>
         </v-toolbar-title>
       </v-toolbar>
-      <slot name="top"></slot>
-      <div :style="{ 'max-height': maxHeight }" ref="cardContent" class="card-content">
-        <slot name="card"></slot>
+      <slot name="top" />
+      <div
+        ref="cardContent"
+        :style="{ 'max-height': maxHeight }"
+        class="card-content"
+      >
+        <slot name="card" />
         <v-card-text v-if="$slots.message">
-          <slot name="message"></slot>
+          <slot name="message" />
         </v-card-text>
       </div>
-      <slot name="errorMessage"></slot>
-      <g-message color="error" class="mt-4" v-model:message="message" v-model:detailed-message="detailedMessage"></g-message>
-      <v-divider></v-divider>
+      <slot name="errorMessage" />
+      <g-message
+        v-model:message="message"
+        v-model:detailed-message="detailedMessage"
+        color="error"
+        class="mt-4"
+      />
+      <v-divider />
       <v-card-actions>
-        <v-spacer></v-spacer>
+        <v-spacer />
         <v-text-field
           v-if="confirmValue && !confirmDisabled"
-          class="mr-2 confirm-input"
-          @keyup.enter="resolveAction(true)"
           ref="deleteDialogInput"
+          v-model="userInput"
+          class="mr-2 confirm-input"
           :label="hint"
           :error="notConfirmed && userInput.length > 0"
           hide-details
-          v-model="userInput"
           type="text"
           variant="outlined"
           color="primary"
-          dense>
-        </v-text-field>
-        <v-btn variant="text" @click="resolveAction(false)" v-if="cancelButtonText.length">{{cancelButtonText}}</v-btn>
-        <v-tooltip location="top" :disabled="valid">
-          <template v-slot:activator="{ on }">
-            <div v-on="on">
-              <v-btn variant="text" @click="resolveAction(true)" :disabled="!valid" class="toolbar-background--text">{{confirmButtonText}}</v-btn>
+          dense
+          @keyup.enter="resolveAction(true)"
+        />
+        <v-btn
+          v-if="cancelButtonText.length"
+          variant="text"
+          @click="resolveAction(false)"
+        >
+          {{ cancelButtonText }}
+        </v-btn>
+        <v-tooltip
+          location="top"
+          :disabled="valid"
+        >
+          <template #activator="slotProps">
+            <div v-bind="slotProps.props">
+              <v-btn
+                variant="text"
+                :disabled="!valid"
+                class="toolbar-background--text"
+                @click="resolveAction(true)"
+              >
+                {{ confirmButtonText }}
+              </v-btn>
             </div>
           </template>
           <span v-if="confirmDisabled">There are input errors that you need to resolve</span>
@@ -59,157 +94,165 @@ SPDX-License-Identifier: Apache-2.0
   </v-dialog>
 </template>
 
-<script>
+<script setup>
+import { ref, computed, watch, nextTick } from 'vue'
 import { setDelayedInputFocus } from '@/utils'
 import GMessage from '@/components/GMessage.vue'
 import noop from 'lodash/noop'
 import isFunction from 'lodash/isFunction'
 
-export default {
-  name: 'gdialog',
-  components: {
-    GMessage
+const props = defineProps({
+  confirmValue: {
+    type: String,
+    default: null,
   },
-  props: {
-    confirmValue: {
-      type: String
-    },
-    confirmDisabled: {
-      type: Boolean,
-      default: false
-    },
-    errorMessage: {
-      type: String
-    },
-    detailedErrorMessage: {
-      type: String
-    },
-    confirmButtonText: {
-      type: String,
-      default: 'Confirm'
-    },
-    cancelButtonText: {
-      type: String,
-      default: 'Cancel'
-    },
-    width: {
-      type: String,
-      default: '500'
-    },
-    maxHeight: {
-      type: String,
-      default: '50vh'
-    },
-    disableConfirmInputFocus: {
-      type: Boolean
-    }
+  confirmDisabled: {
+    type: Boolean,
+    default: false,
   },
-  data () {
-    return {
-      userInput: '',
-      visible: false,
-      resolve: noop
-    }
+  errorMessage: {
+    type: String,
+    default: null,
   },
-  computed: {
-    notConfirmed () {
-      return this.confirmValue && this.confirmValue !== this.userInput
-    },
-    hint () {
-      if (this.userInput.length === 0) {
-        return `Type ${this.confirmValue} to confirm`
-      } else if (this.userInput !== this.confirmValue) {
-        return `Input does not match ${this.confirmValue}`
-      }
-      return ''
-    },
-    message: {
-      get () {
-        return this.errorMessage
-      },
-      set (value) {
-        this.$emit('update:error-message', value)
-      }
-    },
-    detailedMessage: {
-      get () {
-        return this.detailedErrorMessage
-      },
-      set (value) {
-        this.$emit('update:detailed-error-message', value)
-      }
-    },
-    valid () {
-      return !this.confirmDisabled && !this.notConfirmed
-    }
+  detailedErrorMessage: {
+    type: String,
+    default: null,
   },
-  methods: {
-    confirmWithDialog (confirmationInterceptor) {
-      this.showDialog()
-      this.userInput = ''
-      this.confirmationInterceptor = confirmationInterceptor
+  confirmButtonText: {
+    type: String,
+    default: 'Confirm',
+  },
+  cancelButtonText: {
+    type: String,
+    default: 'Cancel',
+  },
+  width: {
+    type: String,
+    default: '500',
+  },
+  maxHeight: {
+    type: String,
+    default: '50vh',
+  },
+  disableConfirmInputFocus: {
+    type: Boolean,
+  },
+})
 
-      // we must delay the "focus" handling because the dialog.open is animated
-      // and the 'autofocus' property didn't work in this case.
-      if (!this.disableConfirmInputFocus) {
-        setDelayedInputFocus(this, 'deleteDialogInput')
-      }
+const emits = defineEmits([
+  'dialog-closed',
+  'update:error-message',
+  'update:detailed-error-message',
+])
 
-      return new Promise(resolve => {
-        this.resolve = resolve
-      })
-    },
-    hideDialog () {
-      this.visible = false
-    },
-    showDialog () {
-      this.visible = true
-    },
-    async resolveAction (value) {
-      if (value && !this.valid) {
-        return
-      }
+const userInput = ref('')
+const visible = ref(false)
+const resolve = ref(noop)
+const cardContent = ref()
+const deleteDialogInput = ref()
 
-      if (isFunction(this.resolve)) {
-        if (value) {
-          if (this.confirmationInterceptor) {
-            const confirmed = await this.confirmationInterceptor()
-            if (!confirmed) {
-              // cancel resolve action
-              return
-            }
-          }
-        }
-        const resolve = this.resolve
-        this.resolve = undefined
-        resolve(value)
-      }
-      this.$emit('dialog-closed', value)
-      this.visible = false
-    },
-    showScrollBar (retryCount = 0) {
-      if (!this.visible || retryCount > 10) {
-        // circuit breaker
-        return
-      }
-      const cardContentRef = this.$refs.cardContent
-      if (!cardContentRef || !cardContentRef.clientHeight) {
-        this.$nextTick(() => this.showScrollBar(retryCount + 1))
-        return
-      }
-      const scrollTopVal = cardContentRef.scrollTop
-      cardContentRef.scrollTop = scrollTopVal + 10
-      cardContentRef.scrollTop = scrollTopVal - 10
-    }
-  },
-  watch: {
-    visible (value) {
-      if (value) {
-        this.showScrollBar()
-      }
-    }
+const notConfirmed = computed(() => {
+  return props.confirmValue && props.confirmValue !== userInput.value
+})
+const hint = computed(() => {
+  if (userInput.value.length === 0) {
+    return `Type ${props.confirmValue} to confirm`
+  } else if (userInput.value !== props.confirmValue) {
+    return `Input does not match ${props.confirmValue}`
   }
+  return ''
+})
+const message = computed({
+  get () {
+    return props.errorMessage
+  },
+  set (value) {
+    emits('update:error-message', value)
+  },
+})
+const detailedMessage = computed({
+  get () {
+    return props.detailedErrorMessage
+  },
+  set (value) {
+    emits('update:detailed-error-message', value)
+  },
+})
+const valid = computed(() => {
+  return !props.confirmDisabled && !notConfirmed.value
+})
+
+watch(() => visible.value, (value) => {
+  if (value) {
+    showScrollBar()
+  }
+})
+
+let confirmationInterceptor
+
+const confirmWithDialog = (newConfirmationInterceptor) => {
+  showDialog()
+  userInput.value = ''
+  confirmationInterceptor = newConfirmationInterceptor
+
+  // we must delay the "focus" handling because the dialog.open is animated
+  // and the 'autofocus' property didn't work in this case.
+  if (!props.disableConfirmInputFocus) {
+    setDelayedInputFocus(deleteDialogInput)
+  }
+
+  // eslint-disable-next-line promise/param-names
+  return new Promise(r => {
+    resolve.value = r
+  })
 }
+const hideDialog = () => {
+  visible.value = false
+}
+const showDialog = () => {
+  visible.value = true
+}
+const resolveAction = async (value) => {
+  if (value && !valid.value) {
+    return
+  }
+
+  if (isFunction(resolve.value)) {
+    if (value) {
+      if (confirmationInterceptor) {
+        const confirmed = await confirmationInterceptor()
+        if (!confirmed) {
+          // cancel resolve action
+          return
+        }
+      }
+    }
+    const r = resolve.value
+    resolve.value = undefined
+    r(value)
+  }
+  emits('dialog-closed', value)
+  visible.value = false
+}
+const showScrollBar = (retryCount = 0) => {
+  if (!visible.value || retryCount > 10) {
+    // circuit breaker
+    return
+  }
+  if (!cardContent.value?.clientHeight) {
+    nextTick(() => showScrollBar(retryCount + 1))
+    return
+  }
+  const scrollTopVal = cardContent.value.scrollTop
+  cardContent.value.scrollTop = scrollTopVal + 10
+  cardContent.value.scrollTop = scrollTopVal - 10
+}
+
+defineExpose({
+  confirmWithDialog,
+  showDialog,
+  hideDialog,
+})
 </script>
 
 <style lang="scss" scoped>

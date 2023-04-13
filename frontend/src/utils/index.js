@@ -6,6 +6,7 @@
 
 'use strict'
 
+import { isRef, nextTick } from 'vue'
 import semver from 'semver'
 import capitalize from 'lodash/capitalize'
 import replace from 'lodash/replace'
@@ -102,20 +103,37 @@ export function getValidationErrors (vm, field) {
   return errors
 }
 
-export function setDelayedInputFocus (vm, fieldName, { delay = 200, ...options } = {}) {
+export function setDelayedInputFocus (vmOrRef, ...args) {
+  // FIXME: clean setInputFocus and setDelayedInputFocus up. Now kinda hackfixed to work with
+  //  components that have access to "vm" which has $refs as property and can pass it as reference
+  //  as well as composition API components which usually do not have access to "vm"/"this"
+  let options
+  let fieldName = null
+  if (isRef(vmOrRef)) {
+    [options] = args
+  } else {
+    [fieldName, options] = args
+  }
+  options ??= {}
+  options.delay ??= 200
+
   setTimeout(() => {
-    setInputFocus(vm, fieldName, options)
-  }, delay)
+    setInputFocus(vmOrRef, fieldName, options)
+  }, options.delay)
 }
 
-export function setInputFocus (vm, fieldName, { noSelect = false } = {}) {
-  const fieldRef = vm.$refs[fieldName]
+export function setInputFocus (vmOrRef, fieldName = null, { noSelect = false } = {}) {
+  // FIXME: clean setInputFocus and setDelayedInputFocus up. Now kinda hackfixed to work with
+  //  components that have access to "vm" which has $refs as property and can pass it as reference
+  //  as well as composition API components which usually do not have access to "vm"/"this"
+  const getFieldRef = () => isRef(vmOrRef) ? vmOrRef.value : vmOrRef.$refs[fieldName]
+  const fieldRef = getFieldRef()
   if (fieldRef) {
     if (noSelect) {
       fieldRef.focus()
     } else {
-      vm.$nextTick(() => {
-        const ref = vm.$refs[fieldName]
+      nextTick(() => {
+        const ref = getFieldRef()
         // Ensure that the input field has been rendered
         ref.focus()
         ref.select()
@@ -228,8 +246,8 @@ export function namespacedRoute (route, namespace) {
   return {
     name: routeName(route),
     params: {
-      namespace
-    }
+      namespace,
+    },
   }
 }
 
@@ -331,7 +349,7 @@ export function getProjectDetails (project) {
     purpose,
     staleSinceTimestamp,
     staleAutoDeleteTimestamp,
-    phase
+    phase,
   }
 }
 
@@ -441,15 +459,15 @@ export const shootAddonList = [
     title: 'Dashboard',
     description: 'General-purpose web UI for Kubernetes clusters. Several high-profile attacks have shown weaknesses, so installation is not recommend, especially not for production clusters.',
     visible: true,
-    enabled: false
+    enabled: false,
   },
   {
     name: 'nginxIngress',
     title: 'Nginx Ingress',
     description: 'Default ingress-controller with static configuration and conservatively sized (cannot be changed). Therefore, it is not recommended for production clusters. We recommend alternatively to install an ingress-controller of your liking, which you can freely configure, program, and scale to your production needs.',
     visible: true,
-    enabled: false
-  }
+    enabled: false,
+  },
 ]
 
 function htmlToDocumentFragment (html) {
@@ -543,26 +561,26 @@ export function isZonedCluster ({ cloudProviderKind, shootSpec, isNewCluster }) 
 export const MEMBER_ROLE_DESCRIPTORS = [
   {
     name: 'admin',
-    displayName: 'Admin'
+    displayName: 'Admin',
   },
   {
     name: 'viewer',
-    displayName: 'Viewer'
+    displayName: 'Viewer',
   },
   {
     name: 'uam',
-    displayName: 'UAM'
+    displayName: 'UAM',
   },
   {
     name: 'serviceaccountmanager',
-    displayName: 'Service Account Manager'
+    displayName: 'Service Account Manager',
   },
   {
     name: 'owner',
     displayName: 'Owner',
     notEditable: true,
-    tooltip: 'You can change the project owner on the administration page'
-  }
+    tooltip: 'You can change the project owner on the administration page',
+  },
 ]
 
 function includesNameOrAll (list, name) {
@@ -585,7 +603,7 @@ export function canI ({ resourceRules } = {}, verb, apiGroup, resouce, resourceN
 export const TargetEnum = {
   GARDEN: 'garden',
   CONTROL_PLANE: 'cp',
-  SHOOT: 'shoot'
+  SHOOT: 'shoot',
 }
 
 export function targetText (target) {
