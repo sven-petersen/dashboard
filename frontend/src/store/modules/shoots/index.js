@@ -474,7 +474,7 @@ const mutations = {
   RECEIVE_INFO (state, { namespace, name, info }) {
     const item = findItem(state)({ namespace, name })
     if (item !== undefined) {
-      Vue.set(item, 'info', info)
+      item.info = info
     }
   },
   SET_SELECTION (state, metadata) {

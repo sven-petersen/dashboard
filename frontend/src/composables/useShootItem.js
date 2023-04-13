@@ -44,7 +44,7 @@ export default function useShootItem (shootItemRef) {
   const shootCreatedAt = computed(() => getTimestampFormatted(shootMetadata.value.creationTimestamp))
   const isShootReconciliationDeactivated = computed(() => isReconciliationDeactivated(shootMetadata.value))
   const shootGenerationValue = computed(() => shootMetadata.value.generation)
-  const shootProjectName = computed(() => projectNameByNamespace(this.shootMetadata.value))
+  const shootProjectName = computed(() => projectNameByNamespace.value(shootMetadata.value))
   const shootGardenOperation = computed(() => shootAnnotations.value['gardener.cloud/operation'])
   const shootSpec = computed(() => shootItemRef.value?.spec ?? {})
   const shootPurpose = computed(() => shootSpec.value?.purpose)
@@ -119,7 +119,7 @@ export default function useShootItem (shootItemRef) {
   const shootObservedGeneration = computed(() => shootItemRef.value?.status?.observedGeneration)
   const shootTechnicalId = computed(() => shootItemRef.value?.status?.technicalID)
   const shootSeedName = computed(() => shootSpec.value?.seedName)
-  const isSeedUnreachable = computed(() => isSeedUnreachableByName(shootSeedName.value))
+  const isSeedUnreachable = computed(() => isSeedUnreachableByName.value(shootSeedName.value))
   const shootSelectedAccessRestrictions = computed(() => {
     return selectedAccessRestrictionsForShootByCloudProfileNameAndRegion({
       shootResource: shootItemRef.value,
