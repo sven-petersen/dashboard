@@ -85,7 +85,7 @@ export default function useShootItem (shootItemRef) {
   const shootControlPlaneHighAvailabilityFailureTolerance = computed(() => {
     return shootSpec.value?.controlPlane?.highAvailability?.failureTolerance?.type
   })
-  const shootInfo = computed(() => shootSpec.value?.info ?? {})
+  const shootInfo = computed(() => shootItemRef.value?.info ?? {})
   const seedShootIngressDomain = computed(() => shootInfo.value.seedShootIngressDomain || '')
   const canLinkToSeed = computed(() => shootItemRef.value?.info?.canLinkToSeed ?? false)
   const isShootLastOperationTypeDelete = computed(() => isTypeDelete(shootLastOperation.value))
