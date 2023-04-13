@@ -11,35 +11,32 @@ SPDX-License-Identifier: Apache-2.0
       label="Enable static token kubeconfig (not recommended)"
       color="primary"
       hide-details
-    ></v-checkbox>
-    <div class="text-caption mt-1">There are more <external-link class="text-caption" url="https://github.com/gardener/gardener/blob/master/docs/usage/shoot_access.md">secure alternatives</external-link> to access the Shoot cluster.</div>
+    />
+    <div class="text-caption mt-1">
+      There are more <external-link
+        class="text-caption"
+        url="https://github.com/gardener/gardener/blob/master/docs/usage/shoot_access.md"
+      >
+        secure alternatives
+      </external-link> to access the Shoot cluster.
+    </div>
   </div>
 </template>
-<script>
-
+<script setup>
+import { computed } from 'vue'
 import ExternalLink from '@/components/ExternalLink.vue'
 
-export default {
-  name: 'static-token-kubeconfig-switch',
-  components: {
-    ExternalLink
+const props = defineProps({
+  modelValue: {
+    type: Boolean,
+    default: false,
   },
-  props: {
-    value: {
-      type: Boolean,
-      default: false
-    }
-  },
-  computed: {
-    enableStaticTokenKubeconfig: {
-      get () {
-        return this.value
-      },
-      set (val) {
-        this.$emit('input', val)
-      }
-    }
-  }
+})
 
-}
+const emits = defineEmits(['update:modelValue'])
+
+const enableStaticTokenKubeconfig = computed({
+  get () { return props.modelValue },
+  set (val) { emits('update:modelValue', val) },
+})
 </script>
