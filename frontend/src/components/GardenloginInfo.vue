@@ -8,7 +8,7 @@ SPDX-License-Identifier: Apache-2.0
   <g-popper
     title="Gardenlogin Info"
     placement="bottom"
-    :toolbar-color="primary"
+    toolbar-color="primary"
   >
     <template #activator="{ on }">
       <v-btn

@@ -66,8 +66,8 @@ const {
 const to = computed(() => ({
   name: 'ShootItemTerminal',
   params: {
-    namespace: shootNamespace,
-    name: shootName,
+    namespace: shootNamespace.value,
+    name: shootName.value,
   },
 }
 ))

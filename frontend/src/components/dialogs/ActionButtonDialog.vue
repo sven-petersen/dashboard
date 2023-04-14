@@ -158,6 +158,8 @@ const gDialog = ref()
 const {
   shootName,
   shootActionToolTip,
+  isShootMarkedForDeletion,
+  isShootActionsDisabledForPurpose,
 } = useShootItem(toRef(props, 'shootItem'))
 
 const confirmValue = computed(() => props.confirmRequired ? shootName.value : undefined)
