@@ -1390,6 +1390,53 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD"\
         }]\
       ]],\
+      ["@floating-ui/core", [\
+        ["npm:1.2.6", {\
+          "packageLocation": "./.yarn/cache/@floating-ui-core-npm-1.2.6-083bec342c-e4aa96c435.zip/node_modules/@floating-ui/core/",\
+          "packageDependencies": [\
+            ["@floating-ui/core", "npm:1.2.6"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["@floating-ui/dom", [\
+        ["npm:1.2.6", {\
+          "packageLocation": "./.yarn/cache/@floating-ui-dom-npm-1.2.6-9d4be07ec3-2226c6c244.zip/node_modules/@floating-ui/dom/",\
+          "packageDependencies": [\
+            ["@floating-ui/dom", "npm:1.2.6"],\
+            ["@floating-ui/core", "npm:1.2.6"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["@floating-ui/vue", [\
+        ["npm:0.2.1", {\
+          "packageLocation": "./.yarn/cache/@floating-ui-vue-npm-0.2.1-cdd57d78d2-7af868ae47.zip/node_modules/@floating-ui/vue/",\
+          "packageDependencies": [\
+            ["@floating-ui/vue", "npm:0.2.1"]\
+          ],\
+          "linkType": "SOFT"\
+        }],\
+        ["virtual:8d919ffb8fd728f827df3f6a566e8e923223ffcec68f7450d83bbbc2dc25d6b8c987e111cbab484b209f253bdf2f2e00663b01a986262c44511128466462a76f#npm:0.2.1", {\
+          "packageLocation": "./.yarn/__virtual__/@floating-ui-vue-virtual-c256433359/0/cache/@floating-ui-vue-npm-0.2.1-cdd57d78d2-7af868ae47.zip/node_modules/@floating-ui/vue/",\
+          "packageDependencies": [\
+            ["@floating-ui/vue", "virtual:8d919ffb8fd728f827df3f6a566e8e923223ffcec68f7450d83bbbc2dc25d6b8c987e111cbab484b209f253bdf2f2e00663b01a986262c44511128466462a76f#npm:0.2.1"],\
+            ["@floating-ui/dom", "npm:1.2.6"],\
+            ["@types/vue", null],\
+            ["@types/vue__composition-api", null],\
+            ["@vue/composition-api", null],\
+            ["vue", "npm:3.2.47"],\
+            ["vue-demi", "virtual:c256433359e8e85a3752cf6740a3e99e017ee6d44e82b5ef1c44872393366a46d6b72413c9d20cdbc556abd12decfde06c9bd466c010971023740a0d045022b6#npm:0.13.11"]\
+          ],\
+          "packagePeers": [\
+            "@types/vue",\
+            "@types/vue__composition-api",\
+            "@vue/composition-api",\
+            "vue"\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
       ["@fontsource/roboto", [\
         ["npm:4.5.8", {\
           "packageLocation": "./.yarn/cache/@fontsource-roboto-npm-4.5.8-4299bebd5b-460b6de2c9.zip/node_modules/@fontsource/roboto/",\
@@ -1493,6 +1540,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageDependencies": [\
             ["@gardener-dashboard/frontend", "workspace:frontend"],\
             ["@braintree/sanitize-url", "npm:6.0.2"],\
+            ["@floating-ui/vue", "virtual:8d919ffb8fd728f827df3f6a566e8e923223ffcec68f7450d83bbbc2dc25d6b8c987e111cbab484b209f253bdf2f2e00663b01a986262c44511128466462a76f#npm:0.2.1"],\
             ["@fontsource/roboto", "npm:4.5.8"],\
             ["@mdi/font", "npm:5.9.55"],\
             ["@vitejs/plugin-vue", "virtual:8d919ffb8fd728f827df3f6a566e8e923223ffcec68f7450d83bbbc2dc25d6b8c987e111cbab484b209f253bdf2f2e00663b01a986262c44511128466462a76f#npm:3.2.0"],\
@@ -1544,7 +1592,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["vite-plugin-vuetify", "virtual:8d919ffb8fd728f827df3f6a566e8e923223ffcec68f7450d83bbbc2dc25d6b8c987e111cbab484b209f253bdf2f2e00663b01a986262c44511128466462a76f#npm:1.0.2"],\
             ["vitest", "virtual:8d919ffb8fd728f827df3f6a566e8e923223ffcec68f7450d83bbbc2dc25d6b8c987e111cbab484b209f253bdf2f2e00663b01a986262c44511128466462a76f#npm:0.28.4"],\
             ["vue", "npm:3.2.47"],\
-            ["vue-popperjs", "npm:2.3.0"],\
             ["vue-router", "virtual:8d919ffb8fd728f827df3f6a566e8e923223ffcec68f7450d83bbbc2dc25d6b8c987e111cbab484b209f253bdf2f2e00663b01a986262c44511128466462a76f#npm:4.1.6"],\
             ["vue-shortkey", "npm:3.1.7"],\
             ["vuelidate", "npm:0.7.7"],\
@@ -9700,15 +9747,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD"\
         }]\
       ]],\
-      ["opencollective-postinstall", [\
-        ["npm:2.0.3", {\
-          "packageLocation": "./.yarn/cache/opencollective-postinstall-npm-2.0.3-954643c36b-0a68c5cef1.zip/node_modules/opencollective-postinstall/",\
-          "packageDependencies": [\
-            ["opencollective-postinstall", "npm:2.0.3"]\
-          ],\
-          "linkType": "HARD"\
-        }]\
-      ]],\
       ["openid-client", [\
         ["npm:5.4.0", {\
           "packageLocation": "./.yarn/cache/openid-client-npm-5.4.0-13b7e14713-d198dbcaf0.zip/node_modules/openid-client/",\
@@ -10082,15 +10120,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["jsonc-parser", "npm:3.2.0"],\
             ["mlly", "npm:1.1.0"],\
             ["pathe", "npm:1.1.0"]\
-          ],\
-          "linkType": "HARD"\
-        }]\
-      ]],\
-      ["popper.js", [\
-        ["npm:1.16.1", {\
-          "packageLocation": "./.yarn/cache/popper.js-npm-1.16.1-a99192bd83-c56ae5001e.zip/node_modules/popper.js/",\
-          "packageDependencies": [\
-            ["popper.js", "npm:1.16.1"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -12508,6 +12537,32 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD"\
         }]\
       ]],\
+      ["vue-demi", [\
+        ["npm:0.13.11", {\
+          "packageLocation": "./.yarn/unplugged/vue-demi-virtual-50e7d1a906/node_modules/vue-demi/",\
+          "packageDependencies": [\
+            ["vue-demi", "npm:0.13.11"]\
+          ],\
+          "linkType": "SOFT"\
+        }],\
+        ["virtual:c256433359e8e85a3752cf6740a3e99e017ee6d44e82b5ef1c44872393366a46d6b72413c9d20cdbc556abd12decfde06c9bd466c010971023740a0d045022b6#npm:0.13.11", {\
+          "packageLocation": "./.yarn/unplugged/vue-demi-virtual-50e7d1a906/node_modules/vue-demi/",\
+          "packageDependencies": [\
+            ["vue-demi", "virtual:c256433359e8e85a3752cf6740a3e99e017ee6d44e82b5ef1c44872393366a46d6b72413c9d20cdbc556abd12decfde06c9bd466c010971023740a0d045022b6#npm:0.13.11"],\
+            ["@types/vue", null],\
+            ["@types/vue__composition-api", null],\
+            ["@vue/composition-api", null],\
+            ["vue", "npm:3.2.47"]\
+          ],\
+          "packagePeers": [\
+            "@types/vue",\
+            "@types/vue__composition-api",\
+            "@vue/composition-api",\
+            "vue"\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
       ["vue-eslint-parser", [\
         ["npm:9.1.0", {\
           "packageLocation": "./.yarn/cache/vue-eslint-parser-npm-9.1.0-db5a00096d-e2e6b05989.zip/node_modules/vue-eslint-parser/",\
@@ -12533,17 +12588,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packagePeers": [\
             "@types/eslint",\
             "eslint"\
-          ],\
-          "linkType": "HARD"\
-        }]\
-      ]],\
-      ["vue-popperjs", [\
-        ["npm:2.3.0", {\
-          "packageLocation": "./.yarn/unplugged/vue-popperjs-npm-2.3.0-027b922fce/node_modules/vue-popperjs/",\
-          "packageDependencies": [\
-            ["vue-popperjs", "npm:2.3.0"],\
-            ["opencollective-postinstall", "npm:2.0.3"],\
-            ["popper.js", "npm:1.16.1"]\
           ],\
           "linkType": "HARD"\
         }]\

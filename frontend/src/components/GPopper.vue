@@ -5,148 +5,271 @@ SPDX-License-Identifier: Apache-2.0
 -->
 
 <template>
-  <popper
-    :key="popperKey"
-    ref="popper"
-    trigger="click"
-    :options="popperOptions"
-    :boundaries-selector="boundariesSelector"
-    :disabled="disabled"
-    @show="onPopperShow"
-    @hide="onPopperHide"
-    >
-    <div class="popper">
-      <v-card class="inner-card">
-        <v-toolbar ref="toolbar" :height="30" :color="toolbarColor" flat>
-          <v-toolbar-title class="text-subtitle-1 toolbar-title--text">{{title}}</v-toolbar-title>
-          <v-spacer></v-spacer>
-          <v-btn size="small" icon @click.stop="closePopper">
-            <v-icon color="toolbar-title" class="text-subtitle-1">mdi-close</v-icon>
-          </v-btn>
-        </v-toolbar>
-        <slot name="card"></slot>
-        <v-card-text v-if="$slots.default">
-          <slot></slot>
-        </v-card-text>
-      </v-card>
-    </div>
-    <!-- Using old slot syntax. Corresponding issue: https://github.com/RobinCK/vue-popper/issues/88 -->
-    <template v-slot:reference>
-      <slot name="popperRef"></slot>
-    </template>
-  </popper>
+  <span ref="reference">
+    <slot
+      name="activator"
+      :on="{
+        'click': togglePopper
+      }"
+    />
+  </span>
+  <div
+    ref="floating"
+    :class="{
+      floating: true,
+      hidden: !isOpen,
+    }"
+    :style="floatingStyle"
+  >
+    <div
+      ref="floatingArrow"
+      :class="{
+        floatingArrow: true,
+        hidden: !isOpen,
+      }"
+      :style="floatingArrowStyle"
+    />
+    <v-card class="inner-card">
+      <v-toolbar
+        ref="toolbar"
+        :height="30"
+        :color="props.toolbarColor"
+        flat
+      >
+        <v-toolbar-title class="text-subtitle-1 toolbar-title--text">
+          {{ props.title }}
+        </v-toolbar-title>
+        <v-spacer />
+        <v-btn
+          size="small"
+          icon
+          @click.stop="closePopper"
+        >
+          <v-icon
+            color="toolbar-title"
+            class="text-subtitle-1"
+          >
+            mdi-close
+          </v-icon>
+        </v-btn>
+      </v-toolbar>
+      <slot name="card" />
+      <v-card-text v-if="$slots.default">
+        <slot />
+      </v-card-text>
+    </v-card>
+  </div>
 </template>
 
-<script>
-import Popper from 'vue-popperjs'
-import 'vue-popperjs/dist/vue-popper.css'
+<script setup>
+import { toRef, ref, unref, onBeforeUnmount, onMounted, inject, computed } from 'vue'
+import { useFloating, autoUpdate, arrow, shift, autoPlacement, size, offset } from '@floating-ui/vue'
+import useOnOutsidePress from '@/composables/useOnOutsidePress'
 
-export default {
-  components: {
-    Popper
-  },
-  props: {
-    popperKey: {
-      type: String,
-      required: true
-    },
-    toolbarColor: {
-      type: String,
-      default: 'primary'
-    },
-    title: {
-      type: String,
-      required: true
-    },
-    placement: {
-      type: String,
-      default: 'top'
-    },
-    disabled: {
-      type: Boolean
-    },
-    boundariesSelector: {
-      type: String,
-      default: '.v-main__wrap'
-    }
-  },
-  computed: {
-    popperOptions () {
-      const options = {
-        placement: this.placement,
-        modifiers: {
-          customArrowStyles: {
-            enabled: true,
-            fn: this.customArrowStyles,
-            order: 875 // needs to run beofre applyStyle modifier
-          }
-        },
-        positionFixed: true
-      }
-      return options
-    }
-  },
-  methods: {
-    closePopper () {
-      if (this.$refs.popper) {
-        this.$refs.popper.doClose()
-      }
-    },
-    customArrowStyles (data) {
-      if (data.placement === 'bottom') {
-        const toolbar = this.$refs.toolbar
-        const content = toolbar.$el
-        const css = getComputedStyle(content, null)
-        const toolbarColor = css['background-color']
+const ARROW_SIZE = 10 // px
+const bus = inject('bus')
 
-        const borderColor = `transparent transparent ${toolbarColor} transparent`
-        data.arrowStyles = Object.assign(data.arrowStyles, { borderColor })
-      }
-      return data
-    },
-    emitRendered () {
-      this.$emit('rendered')
-    },
-    onPopperShow () {
-      this.$emit('input', true)
-    },
-    onPopperHide () {
-      this.$emit('input', false)
-    }
+const props = defineProps({
+  toolbarColor: {
+    type: String,
+    default: 'primary',
   },
-  created () {
-    /*
-     * listen on the global "esc-key" event to close all tooltips.
-     * shorthand instead of click outside of the tooltip.
-     */
-    this.$bus.on('esc-pressed', this.closePopper)
+  title: {
+    type: String,
+    required: true,
   },
-  beforeUnmount () {
-    this.$bus.off('esc-pressed', this.closePopper)
-  }
+  placement: {
+    type: String,
+    default: 'top',
+  },
+  boundariesSelector: {
+    type: [String, Object],
+    default: 'main',
+  },
+})
+
+const emits = defineEmits([
+  'input',
+])
+
+const reference = ref(null)
+const floating = ref(null)
+const floatingArrow = ref(null)
+const toolbar = ref(null)
+const isOpen = ref(false)
+const maxWidth = ref(null)
+const maxHeight = ref(null)
+
+const closePopper = () => {
+  isOpen.value = false
+  emits('input', false)
 }
+
+const togglePopper = () => {
+  isOpen.value = !isOpen.value
+  emits('input', isOpen.value)
+}
+
+const clippingBoundaryEl = computed(() => {
+  if (typeof props.boundariesSelector === 'string') {
+    return document.querySelector(props.boundariesSelector)
+  }
+  return unref(props.boundariesSelector)
+})
+
+// The floating uis "size"-middleware does not accept a ref for the boundary.
+// Attempt to make it reactive by providing a Proxy that returns the current computed value
+// when it is accessed inside of the floating-ui library.
+const sizeOptions = new Proxy({
+  boundary: clippingBoundaryEl.value,
+  apply ({ availableWidth, availableHeight }) {
+    maxWidth.value = availableWidth
+    maxHeight.value = availableHeight
+  },
+}, {
+  get (target, prop) {
+    return prop === 'boundary' ? clippingBoundaryEl.value : target[prop]
+  },
+})
+
+const autoPlacementOptions = new Proxy({
+  boundary: clippingBoundaryEl.value,
+}, {
+  get (target, prop) {
+    return prop === 'boundary' ? clippingBoundaryEl.value : target[prop]
+  },
+})
+
+const {
+  x,
+  y,
+  strategy,
+  middlewareData,
+  placement: finalPlacement,
+} = useFloating(reference, floating, {
+  placement: toRef(props.placement), // preferred placement (if space available)
+  strategy: 'fixed',
+  open: isOpen,
+  whileElementsMounted (...args) {
+    return autoUpdate(...args, { animationFrame: true })
+  },
+  middleware: [
+    offset(ARROW_SIZE + 5),
+    shift(),
+    autoPlacement(autoPlacementOptions),
+    size(sizeOptions),
+    arrow({
+      element: floatingArrow,
+    }),
+  ],
+})
+
+const removeOnOutsidePress = useOnOutsidePress([floating, reference], () => {
+  if (isOpen.value) {
+    closePopper()
+  }
+})
+
+const overflowOffsetVariables = computed(() => {
+  const overflows = middlewareData.value?.autoPlacement?.overflows || []
+  const overflow = overflows.find((o) => o.placement === finalPlacement.value)?.overflows
+  const overflowStyles = {
+    '--left-offset': '0px',
+    '--top-offset': '0px',
+  }
+  if (overflow?.[1] && overflow[1] > 0) {
+    if (['top', 'bottom'].includes(finalPlacement.value)) {
+      overflowStyles['--left-offset'] = `${overflow[1]}px`
+    } else {
+      overflowStyles['--top-offset'] = `${overflow[1]}px`
+    }
+  }
+  return overflowStyles
+})
+
+const floatingStyle = computed(() => {
+  return {
+    ...overflowOffsetVariables.value,
+    position: strategy.value,
+    left: `calc(${x.value ?? 0}px + var(--left-offset))`,
+    top: `calc(${y.value ?? 0}px + var(--top-offset))`,
+    maxWidth: maxWidth.value ? `${maxWidth.value}px` : '100vw',
+    maxHeight: maxHeight.value ? `${maxHeight.value}px` : '100vh',
+  }
+})
+
+const floatingArrowStyle = computed(() => {
+  // examples on arrow positioning: https://codesandbox.io/s/mystifying-kare-ee3hmh?file=/index.html
+  const { x, y } = {
+    x: null,
+    y: null,
+    ...middlewareData.value.arrow,
+  }
+
+  const side = finalPlacement.value.split('-')[0]
+
+  const staticSide = {
+    top: 'bottom',
+    right: 'left',
+    bottom: 'top',
+    left: 'right',
+  }[side]
+  let backgroundColor
+  if (finalPlacement.value === 'bottom' && toolbar.value?.$el) {
+    const css = getComputedStyle(toolbar.value.$el, null)
+    backgroundColor = css['background-color']
+  }
+
+  return {
+    ...overflowOffsetVariables.value,
+    '--size': `${ARROW_SIZE}px`,
+    backgroundColor,
+    left: x != null ? `calc(${x}px - var(--left-offset))` : null,
+    top: y != null ? `calc(${y}px - var(--top-offset))` : null,
+    [staticSide]: 'calc(var(--size) / -2)',
+  }
+})
+
+onBeforeUnmount(() => {
+  bus.off('esc-pressed', closePopper)
+  removeOnOutsidePress()
+})
+
+onMounted(() => {
+  bus.on('esc-pressed', closePopper)
+})
 </script>
 
 <style lang="scss" scoped>
-
-  .popper {
+  .floating {
+    width: 'max-content';
+    top: 0;
+    left: 0;
     padding: 0px;
     border-radius: 0px;
-    z-index: 7;
+    box-sizing: border-box;
+    z-index: 1007;
     border: 0px !important;
     background-color: transparent !important;
     -webkit-box-shadow: 0 5px 5px -3px rgba(0,0,0,0.2), 0 8px 10px 1px rgba(0,0,0,0.14), 0 3px 14px 2px rgba(0,0,0,0.12);
     box-shadow: 0 5px 5px -3px rgba(0,0,0,0.2), 0 8px 10px 1px rgba(0,0,0,0.14), 0 3px 14px 2px rgba(0,0,0,0.12);
   }
 
+  .floatingArrow {
+    position: absolute;
+    width: var(--size);
+    height: var(--size);
+    z-index: -1;
+    pointer-events: none;
+    transform: rotate(45deg);
+  }
+
+  .hidden {
+    display: none;
+  }
+
   .inner-card {
     max-width: 1000px;
-    max-height: 85vh;
     overflow-y: auto;
   }
-
-  :deep(.v-toolbar__content) {
-    padding: 0px 16px;
-  }
-
 </style>

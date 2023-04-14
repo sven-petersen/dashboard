@@ -848,6 +848,38 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@floating-ui/core@npm:^1.2.6":
+  version: 1.2.6
+  resolution: "@floating-ui/core@npm:1.2.6"
+  checksum: e4aa96c435277f1720d4bc939e17a79b1e1eebd589c20b622d3c646a5273590ff889b8c6e126f7be61873cf8c4d7db7d418895986ea19b8b0d0530de32504c3a
+  languageName: node
+  linkType: hard
+
+"@floating-ui/dom@npm:^1.2.1":
+  version: 1.2.6
+  resolution: "@floating-ui/dom@npm:1.2.6"
+  dependencies:
+    "@floating-ui/core": ^1.2.6
+  checksum: 2226c6c244b96ae75ab14cc35bb119c8d7b83a85e2ff04e9d9800cffdb17faf4a7cf82db741dd045242ced56e31c8a08e33c8c512c972309a934d83b1f410441
+  languageName: node
+  linkType: hard
+
+"@floating-ui/vue@npm:^0.2.1":
+  version: 0.2.1
+  resolution: "@floating-ui/vue@npm:0.2.1"
+  dependencies:
+    "@floating-ui/dom": ^1.2.1
+    vue-demi: ^0.13.11
+  peerDependencies:
+    "@vue/composition-api": ^1.0.0-rc.1
+    vue: ^2.0.0 || >=3.0.0
+  peerDependenciesMeta:
+    "@vue/composition-api":
+      optional: true
+  checksum: 7af868ae47a4ddcc88428b751dfeca757ed86065c33ac51805955a2af7b33e5d0fdc364cf55efef6d4e4afca09a803be2eaf4103510d863bc0a01e7418cf0cae
+  languageName: node
+  linkType: hard
+
 "@fontsource/roboto@npm:4.5.8":
   version: 4.5.8
   resolution: "@fontsource/roboto@npm:4.5.8"
@@ -941,6 +973,7 @@ __metadata:
   resolution: "@gardener-dashboard/frontend@workspace:frontend"
   dependencies:
     "@braintree/sanitize-url": ^6.0.2
+    "@floating-ui/vue": ^0.2.1
     "@fontsource/roboto": 4.5.8
     "@mdi/font": ^5.9.55
     "@vitejs/plugin-vue": ^3.0.3
@@ -992,7 +1025,6 @@ __metadata:
     vite-plugin-vuetify: ^1.0.2
     vitest: ^0.28.4
     vue: 3.2.47
-    vue-popperjs: ^2.3.0
     vue-router: ^4
     vue-shortkey: ^3.1.7
     vuelidate: ^0.7.7
@@ -7983,15 +8015,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"opencollective-postinstall@npm:^2.0.2":
-  version: 2.0.3
-  resolution: "opencollective-postinstall@npm:2.0.3"
-  bin:
-    opencollective-postinstall: index.js
-  checksum: 0a68c5cef135e46d11e665d5077398285d1ce5311c948e8327b435791c409744d4a6bb9c55bd6507fb5f2ef34b0ad920565adcdaf974cbdae701aead6f32b396
-  languageName: node
-  linkType: hard
-
 "openid-client@npm:^5.4.0":
   version: 5.4.0
   resolution: "openid-client@npm:5.4.0"
@@ -8325,13 +8348,6 @@ __metadata:
     mlly: ^1.0.0
     pathe: ^1.0.0
   checksum: fe73cc22fb72ddb09227e2837a7b2ed1e0706a18e69a58a6ce13cde2b7eab122cb98de44d5c54fca5715d203ef3d2eb004b3ec84a3c05decb11e7c49a80fe2f9
-  languageName: node
-  linkType: hard
-
-"popper.js@npm:^1.15.0":
-  version: 1.16.1
-  resolution: "popper.js@npm:1.16.1"
-  checksum: c56ae5001ec50a77ee297a8061a0221d99d25c7348d2e6bcd3e45a0d0f32a1fd81bca29d46cb0d4bdf13efb77685bd6a0ce93f9eb3c608311a461f945fffedbe
   languageName: node
   linkType: hard
 
@@ -10356,6 +10372,22 @@ resolve@^1.20.0:
   languageName: node
   linkType: hard
 
+"vue-demi@npm:^0.13.11":
+  version: 0.13.11
+  resolution: "vue-demi@npm:0.13.11"
+  peerDependencies:
+    "@vue/composition-api": ^1.0.0-rc.1
+    vue: ^3.0.0-0 || ^2.6.0
+  peerDependenciesMeta:
+    "@vue/composition-api":
+      optional: true
+  bin:
+    vue-demi-fix: bin/vue-demi-fix.js
+    vue-demi-switch: bin/vue-demi-switch.js
+  checksum: 0fbe9bf8ab7fe498ffa2bbd0cfc8f6f43a6bbaa5eda3e20ef1b70dca7c8b0ddb216a7ff2f632b694fe0735805638975abb441c621ec0bd2e6d4656353f316c15
+  languageName: node
+  linkType: hard
+
 "vue-eslint-parser@npm:^9.0.1":
   version: 9.1.0
   resolution: "vue-eslint-parser@npm:9.1.0"
@@ -10370,16 +10402,6 @@ resolve@^1.20.0:
   peerDependencies:
     eslint: ">=6.0.0"
   checksum: e2e6b05989294c4439d91283a78a0cb444cfba30f2715a5be1950d7815cadb5c8f449d9362a92bdd163cb8944abaac73bb076ce3c27b27586eaa4560002e6dfd
-  languageName: node
-  linkType: hard
-
-"vue-popperjs@npm:^2.3.0":
-  version: 2.3.0
-  resolution: "vue-popperjs@npm:2.3.0"
-  dependencies:
-    opencollective-postinstall: ^2.0.2
-    popper.js: ^1.15.0
-  checksum: 613ff537ac60fbcdc6911f4f5414e70907ee7049d87c9027d94abb5cdcab82faeda6cd2ce2dbf3d4539ec199466d529a51b4f6d3d354c4637db536d26a52c649
   languageName: node
   linkType: hard
 
