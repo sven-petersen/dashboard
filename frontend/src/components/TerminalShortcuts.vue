@@ -7,31 +7,36 @@ SPDX-License-Identifier: Apache-2.0
 <template>
   <div>
     <template v-if="projectShortcuts.length || shortcuts.length">
-      <template v-for="shortcut in projectShortcuts" :key="`project-shortcut-${shortcut.id}`">
+      <template
+        v-for="shortcut in projectShortcuts"
+        :key="`project-shortcut-${shortcut.id}`"
+      >
         <terminal-shortcut
           :shoot-item="shootItem"
           :shortcut="shortcut"
           :popper-boundaries-selector="popperBoundariesSelector"
           @add-terminal-shortcut="onAddTerminalShortcut"
         >
-          <template v-slot:icon>
+          <template #icon>
             <v-tooltip location="top">
-              <template v-slot:activator="{ on: tooltip }">
-                <span v-on="tooltip" >
+              <template #activator="slotProps">
+                <span v-bind="slotProps.props">
                   <v-badge
-                    avatar
-                    overlap
-                    bordered
+                    :bordered="false"
                     bottom
-                    color="transparent"
+                    variant="flat"
+                    color="primary"
                   >
-                    <template v-slot:badge>
-                      <v-avatar>
-                        <v-icon color="primary">mdi-grid-large</v-icon>
-                      </v-avatar>
+                    <template #badge>
+                      <v-icon>mdi-grid-large</v-icon>
                     </template>
-                    <icon-base width="24" height="23" icon-color="primary" view-box="-4 0 56 54">
-                      <terminal-shortcut-icon></terminal-shortcut-icon>
+                    <icon-base
+                      width="24"
+                      height="23"
+                      icon-color="primary"
+                      view-box="-4 0 56 54"
+                    >
+                      <terminal-shortcut-icon />
                     </icon-base>
                   </v-badge>
                 </span>
@@ -41,19 +46,27 @@ SPDX-License-Identifier: Apache-2.0
           </template>
         </terminal-shortcut>
       </template>
-      <template v-for="shortcut in shortcuts" :key="`g-shortcut-${shortcut.id}`">
+      <template
+        v-for="shortcut in shortcuts"
+        :key="`g-shortcut-${shortcut.id}`"
+      >
         <terminal-shortcut
           :shoot-item="shootItem"
           :shortcut="shortcut"
           :popper-boundaries-selector="popperBoundariesSelector"
           @add-terminal-shortcut="onAddTerminalShortcut"
         >
-          <template v-slot:icon>
+          <template #icon>
             <v-tooltip location="top">
-              <template v-slot:activator="{ on: tooltip }">
-                <span v-on="tooltip" >
-                  <icon-base width="24" height="23" icon-color="primary" view-box="-4 0 56 54">
-                    <terminal-shortcut-icon></terminal-shortcut-icon>
+              <template #activator="slotProps">
+                <span v-bind="slotProps.props">
+                  <icon-base
+                    width="24"
+                    height="23"
+                    icon-color="primary"
+                    view-box="-4 0 56 54"
+                  >
+                    <terminal-shortcut-icon />
                   </icon-base>
                 </span>
               </template>
@@ -63,10 +76,12 @@ SPDX-License-Identifier: Apache-2.0
         </terminal-shortcut>
       </template>
     </template>
-    <v-list-item v-else disabled><!-- should not be selectable -->
-      <v-list-item-content>
-        <v-list-item-title>No terminal shortcuts available</v-list-item-title>
-      </v-list-item-content>
+    <v-list-item
+      v-else
+      disabled
+      title="No terminal shortcuts available"
+    >
+      <!-- should not be selectable -->
     </v-list-item>
   </div>
 </template>
@@ -94,23 +109,23 @@ function shootSelectorFilter (shortcuts, shootItem) {
 }
 
 export default {
-  props: {
-    shootItem: {
-      type: Object
-    },
-    popperBoundariesSelector: {
-      type: String
-    }
-  },
   components: {
     TerminalShortcut,
     IconBase,
-    TerminalShortcutIcon
+    TerminalShortcutIcon,
+  },
+  props: {
+    shootItem: {
+      type: Object,
+    },
+    popperBoundariesSelector: {
+      type: String,
+    },
   },
   computed: {
     ...mapGetters([
       'projectTerminalShortcutsByTargetsFilter',
-      'terminalShortcutsByTargetsFilter'
+      'terminalShortcutsByTargetsFilter',
     ]),
     allPossibleTargets () {
       const targetsFilter = [TargetEnum.GARDEN]
@@ -126,12 +141,12 @@ export default {
     shortcuts () {
       const shortcuts = this.terminalShortcutsByTargetsFilter(this.allPossibleTargets)
       return shootSelectorFilter(shortcuts, this.shootItem)
-    }
+    },
   },
   methods: {
     onAddTerminalShortcut (shortcut) {
       this.$emit('add-terminal-shortcut', shortcut)
-    }
-  }
+    },
+  },
 }
 </script>
