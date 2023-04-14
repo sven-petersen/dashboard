@@ -6,148 +6,153 @@ SPDX-License-Identifier: Apache-2.0
 
 <template>
   <v-list>
-    <template v-for="({ title, subtitle, value, displayValue }, index) in commands" :key="title">
+    <template
+      v-for="({ title, subtitle, value, displayValue }, index) in commands"
+      :key="title"
+    >
       <v-list-item>
-        <v-list-item-icon>
-          <v-icon v-if="index === 0" color="primary">mdi-console-line</v-icon>
-        </v-list-item-icon>
-        <v-list-item-content>
-          <v-list-item-title>{{title}}</v-list-item-title>
-          <v-list-item-subtitle>
-            {{subtitle}}
-          </v-list-item-subtitle>
-        </v-list-item-content>
-        <v-list-item-action class="mx-0">
-          <gardenctl-info></gardenctl-info>
-        </v-list-item-action>
-        <v-list-item-action>
-          <copy-btn :clipboard-text="value"></copy-btn>
-        </v-list-item-action>
-        <v-list-item-action class="mx-0">
+        <template #prepend>
+          <v-icon
+            color="primary"
+          >
+            {{ index === 0 ? 'mdi-console-line' : 'blank' }}
+          </v-icon>
+        </template>
+        <v-list-item-title>{{ title }}</v-list-item-title>
+        <v-list-item-subtitle>
+          {{ subtitle }}
+        </v-list-item-subtitle>
+
+        <template #append>
+          <gardenctl-info />
+          <copy-btn :clipboard-text="value" />
           <v-tooltip location="top">
-            <template v-slot:activator="{ on }">
-              <v-btn v-on="on" icon @click.stop="toggle(index)" color="action-button">
-                <v-icon>{{visibilityIcon(index)}}</v-icon>
+            <template #activator="slotProps">
+              <v-btn
+                icon
+                variant="text"
+                color="action-button"
+                v-bind="slotProps.props"
+                @click.stop="toggle(index)"
+              >
+                <v-icon>{{ visibilityIcon(index) }}</v-icon>
               </v-btn>
             </template>
-            <span>{{visibilityTitle(index)}}</span>
+            <span>{{ visibilityTitle(index) }}</span>
           </v-tooltip>
-        </v-list-item-action>
+        </template>
       </v-list-item>
-      <v-list-item v-if="expansionPanel[index]" :key="'expansion-' + title">
-        <v-list-item-icon></v-list-item-icon>
-        <v-list-item-content class="pt-0">
-          <code-block
-            lang="shell"
-            :content="displayValue"
-            :show-copy-button="false"
-          ></code-block>
-        </v-list-item-content>
+      <v-list-item
+        v-if="expansionPanel[index]"
+        :key="'expansion-' + title"
+      >
+        <template #prepend>
+          <v-icon>
+            blank
+          </v-icon>
+        </template>
+        <code-block
+          lang="shell"
+          :content="displayValue"
+          :show-copy-button="false"
+        />
       </v-list-item>
     </template>
   </v-list>
 </template>
 
-<script>
+<script setup>
+import { toRef, ref, computed } from 'vue'
 import CopyBtn from '@/components/CopyBtn.vue'
 import CodeBlock from '@/components/CodeBlock.vue'
 import GardenctlInfo from '@/components/GardenctlInfo.vue'
-import { shootItem } from '@/mixins/shootItem'
-import { mapState, mapGetters } from 'vuex'
-import get from 'lodash/get'
-import Vue from 'vue'
+import { useStore } from 'vuex'
+import useShootItem from '@/composables/useShootItem'
 
-export default {
-  components: {
-    CopyBtn,
-    CodeBlock,
-    GardenctlInfo
+const store = useStore()
+
+const props = defineProps({
+  shootItem: {
+    type: Object,
+    required: true,
   },
-  mixins: [shootItem],
-  data () {
-    return {
-      expansionPanel: []
-    }
-  },
-  computed: {
-    ...mapState([
-      'cfg'
-    ]),
-    ...mapGetters([
-      'isAdmin',
-      'projectFromProjectList'
-    ]),
-    projectName () {
-      const project = this.projectFromProjectList
-      return get(project, 'metadata.name')
-    },
-    commands () {
-      const displayValue = command => {
-        return '$ ' + command
-          .replace(/ --/g, ' \\\n    --')
-      }
+})
 
-      const cmds = [
-        {
-          title: 'Target Cluster',
-          subtitle: 'Gardenctl command to target the shoot cluster',
-          value: this.targetShootCommand,
-          displayValue: displayValue(this.targetShootCommand)
-        }
-      ]
+const {
+  shootName,
+} = useShootItem(toRef(props, 'shootItem'))
+const expansionPanel = ref([])
+const cfg = computed(() => store.state.cfg)
+const isAdmin = computed(() => store.getters.isAdmin)
+const projectFromProjectList = computed(() => store.getters.projectFromProjectList)
 
-      if (this.isAdmin) {
-        cmds.unshift({
-          title: 'Target Control Plane',
-          subtitle: 'Gardenctl command to target the control plane of the shoot cluster',
-          value: this.targetControlPlaneCommand,
-          displayValue: displayValue(this.targetControlPlaneCommand)
-        })
-      }
-      return cmds
-    },
-    targetControlPlaneCommand () {
-      const args = []
-      if (this.cfg.clusterIdentity) {
-        args.push(`--garden ${this.cfg.clusterIdentity}`)
-      }
-      if (this.projectName) {
-        args.push(`--project ${this.projectName}`)
-      }
-      if (this.shootName) {
-        args.push(`--shoot ${this.shootName}`)
-      }
-
-      args.push('--control-plane')
-
-      return `gardenctl target ${args.join(' ')}`
-    },
-    targetShootCommand () {
-      const args = []
-      if (this.cfg.clusterIdentity) {
-        args.push(`--garden ${this.cfg.clusterIdentity}`)
-      }
-      if (this.projectName) {
-        args.push(`--project ${this.projectName}`)
-      }
-      if (this.shootName) {
-        args.push(`--shoot ${this.shootName}`)
-      }
-
-      return `gardenctl target ${args.join(' ')}`
-    }
-  },
-  methods: {
-    visibilityIcon (index) {
-      return this.expansionPanel[index] ? 'mdi-eye-off' : 'mdi-eye'
-    },
-    visibilityTitle (index) {
-      return this.expansionPanel[index] ? 'Hide Command' : 'Show Command'
-    },
-    toggle (index) {
-      Vue.set(this.expansionPanel, index, !this.expansionPanel[index])
-    }
+const projectName = computed(() => {
+  return projectFromProjectList.value?.metadata?.name
+})
+const commands = computed(() => {
+  const displayValue = command => {
+    return '$ ' + command
+      .replace(/ --/g, ' \\\n    --')
   }
+
+  const cmds = [
+    {
+      title: 'Target Cluster',
+      subtitle: 'Gardenctl command to target the shoot cluster',
+      value: targetShootCommand.value,
+      displayValue: displayValue(targetShootCommand.value),
+    },
+  ]
+
+  if (isAdmin.value) {
+    cmds.unshift({
+      title: 'Target Control Plane',
+      subtitle: 'Gardenctl command to target the control plane of the shoot cluster',
+      value: targetControlPlaneCommand.value,
+      displayValue: displayValue(targetControlPlaneCommand.value),
+    })
+  }
+  return cmds
+})
+const targetControlPlaneCommand = computed(() => {
+  const args = []
+  if (cfg.value.clusterIdentity) {
+    args.push(`--garden ${cfg.value.clusterIdentity}`)
+  }
+  if (projectName.value) {
+    args.push(`--project ${projectName.value}`)
+  }
+  if (shootName.value) {
+    args.push(`--shoot ${shootName.value}`)
+  }
+
+  args.push('--control-plane')
+
+  return `gardenctl target ${args.join(' ')}`
+})
+const targetShootCommand = computed(() => {
+  const args = []
+  if (cfg.value.clusterIdentity) {
+    args.push(`--garden ${cfg.value.clusterIdentity}`)
+  }
+  if (projectName.value) {
+    args.push(`--project ${projectName.value}`)
+  }
+  if (shootName.value) {
+    args.push(`--shoot ${shootName.value}`)
+  }
+
+  return `gardenctl target ${args.join(' ')}`
+})
+
+const visibilityIcon = (index) => {
+  return expansionPanel.value[index] ? 'mdi-eye-off' : 'mdi-eye'
+}
+const visibilityTitle = (index) => {
+  return expansionPanel.value[index] ? 'Hide Command' : 'Show Command'
+}
+const toggle = (index) => {
+  expansionPanel.value[index] = !expansionPanel.value[index]
 }
 </script>
 
